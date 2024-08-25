@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3  # v3に更新
+        uses: actions/checkout@v3  # v3を使用
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # v3に更新
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'  # 最新のNode.jsバージョンに更新
+          node-version: '20'  # 最新のNode.jsバージョンを指定
 
       - name: Install dependencies
         run: npm install
@@ -33,5 +33,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # デフォルトのGITHUB_TOKENを使用
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          npm run deploy
+          npx gh-pages -d build --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
