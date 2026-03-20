@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 
@@ -118,12 +118,12 @@ const ContactSection = () => {
       <ContactWrapper>
         <Form ref={form} onSubmit={handleSubmit}>
           <FormGroup>
-            <Label htmlFor="to_name">お名前</Label>
-            <Input type="text" id="to_name" name="to_name" required />
+            <Label htmlFor="from_name">お名前</Label>
+            <Input type="text" id="from_name" name="from_name" required />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="from_name">メールアドレス</Label>
-            <Input type="email" id="from_name" name="from_name" required />
+            <Label htmlFor="reply_to">メールアドレス</Label>
+            <Input type="email" id="reply_to" name="reply_to" required />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="message">メッセージ</Label>
