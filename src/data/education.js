@@ -23,6 +23,14 @@ const education = [
     period: '2017年4月〜2020年3月',
     description: '',
   },
+  {
+    id: 'edu-04',
+    school: '本郷中学校',
+    faculty: '',
+    degree: '',
+    period: '2014年4月〜2017年3月',
+    description: '',
+  },
 ];
 
 export default education;
