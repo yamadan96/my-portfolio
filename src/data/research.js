@@ -7,7 +7,7 @@ const research = [
     type: '学会発表（口頭）',
     description: '地震・津波などの大規模災害直後の被災建物損傷度分類の自動化。ResNet・ConvNeXt・ViTの比較検証に加え、LoRA（Low-Rank Adaptation）を導入し、少数データ環境での高精度ファインチューニングを実現。従来手法を上回る精度と軽量性を両立。',
     tags: ['Deep Learning', 'LoRA', 'CNN', 'ViT', 'Disaster Assessment'],
-    link: 'https://www.ipsj.or.jp/event/fit/fit2025/index.html',
+    link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
   },
   {
     id: 'research-02',
