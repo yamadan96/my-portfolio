@@ -55,6 +55,19 @@ const Tags = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
 `;
 
+const ResearchLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.primary};
+  margin-top: ${({ theme }) => theme.spacing.md};
+  text-decoration: none;
+  &:hover {
+    color: ${({ theme }) => theme.colors.primaryLight};
+  }
+`;
+
 const ResearchSection = () => (
   <Section id="research">
     <SectionTitle title="Research" subtitle="研究実績" />
@@ -70,6 +83,11 @@ const ResearchSection = () => (
               <Tag key={tag}>{tag}</Tag>
             ))}
           </Tags>
+          {item.link && (
+            <ResearchLink href={item.link} target="_blank" rel="noopener noreferrer">
+              論文・詳細 →
+            </ResearchLink>
+          )}
         </Card>
       ))}
     </ResearchGrid>

@@ -72,6 +72,26 @@ const Tags = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
 `;
 
+const LinksWrapper = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing.xs};
+`;
+
+const ExternalLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primaryLight};
+  }
+`;
+
 const DetailLink = styled(motion.a)`
   display: inline-flex;
   align-items: center;
@@ -98,6 +118,20 @@ const Timeline = ({ items, onDetailClick }) => (
       >
         <Period>{item.period}</Period>
         <Company>{item.company}</Company>
+        {(item.url || item.blogUrl) && (
+          <LinksWrapper>
+            {item.url && (
+              <ExternalLink href={item.url} target="_blank" rel="noopener noreferrer">
+                🔗 企業サイト
+              </ExternalLink>
+            )}
+            {item.blogUrl && (
+              <ExternalLink href={item.blogUrl} target="_blank" rel="noopener noreferrer">
+                📝 ブログ記事
+              </ExternalLink>
+            )}
+          </LinksWrapper>
+        )}
         <Role>{item.role}</Role>
         {item.description && <Description>{item.description}</Description>}
         {item.tags && (
