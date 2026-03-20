@@ -34,11 +34,13 @@ const profile = {
       title: '学会発表 2件',
       icon: '📄',
       description: 'FIT2025（口頭）、IEICE2026総合大会（口頭）',
+      link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
     },
     {
       title: 'DECC 2025 ファイナリスト',
       icon: '🏆',
       description: 'DISCOプログラミングコンテスト本戦出場',
+      link: 'https://news.mynavi.jp/techplus/kikaku/disco_decc-2/',
     },
     {
       title: '資格・認定',
