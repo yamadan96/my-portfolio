@@ -1,28 +1,40 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Header from './components/Header';
-import Home from './pages/Home';
-import About from './pages/About';
-import Portfolio from './pages/Portfolio';
-import Contact from './pages/Contact';
-import Footer from './components/Footer';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './theme/theme';
 import GlobalStyles from './styles/GlobalStyles';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import MainPage from './pages/MainPage';
+import ExperienceDetail from './pages/ExperienceDetail';
 
 function App() {
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    return saved ? saved === 'dark' : true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  const toggleTheme = () => setIsDark((prev) => !prev);
+
   return (
-    <Router>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyles />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/contact" element={<Contact />} />
-        {/* 未定義のパスにアクセスした場合、ホームにリダイレクト */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      <Footer />
-    </Router>
+      <Router>
+        <Header isDark={isDark} onThemeToggle={toggleTheme} />
+        <main>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/experience/:id" element={<ExperienceDetail />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   );
 }
 

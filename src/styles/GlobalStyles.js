@@ -1,40 +1,70 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-  * {
+  *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #ffffff; /* 背景を白に設定 */
-    color: #333333; /* テキストを濃いグレーに設定 */
-    line-height: 1.6;
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 
-  h1, h2, h3 {
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 1rem;
+  body {
+    font-family: ${({ theme }) => theme.fonts.body};
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
+    line-height: 1.7;
+    transition: background-color ${({ theme }) => theme.transitions.normal},
+                color ${({ theme }) => theme.transitions.normal};
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: ${({ theme }) => theme.fonts.heading};
+    font-weight: 700;
+    line-height: 1.3;
+    color: ${({ theme }) => theme.colors.text};
   }
 
   a {
+    color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
-    color: #FFD700; /* リンクやボタンに黄色を使用 */
-    transition: color 0.3s ease;
+    transition: color ${({ theme }) => theme.transitions.fast};
 
     &:hover {
-      color: #ffa500; /* ホバー時に少し濃い黄色に */
+      color: ${({ theme }) => theme.colors.primaryLight};
     }
   }
 
-  section {
-    padding: 2rem 1rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ::selection {
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.background};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.textMuted};
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.colors.textSecondary};
   }
 `;
 

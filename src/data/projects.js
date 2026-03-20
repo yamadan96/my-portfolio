@@ -1,0 +1,58 @@
+const projects = [
+  {
+    id: 'project-01',
+    title: 'AI画像生成Webアプリ',
+    description: 'Stable Diffusionを活用した画像生成Webアプリケーション。プロンプトのテンプレート機能やギャラリー機能を実装。',
+    tags: ['React', 'Python', 'FastAPI', 'Stable Diffusion', 'Docker'],
+    github: 'https://github.com/yamadan96',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-02',
+    title: 'リアルタイム感情分析ダッシュボード',
+    description: 'Twitter APIからリアルタイムにツイートを取得し、感情分析を行うダッシュボード。BERTベースの日本語感情分析モデルを使用。',
+    tags: ['Python', 'BERT', 'Streamlit', 'Twitter API', 'NLP'],
+    github: 'https://github.com/yamadan96',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-03',
+    title: 'ポートフォリオサイト',
+    description: 'React + styled-components + framer-motionで構築したポートフォリオサイト。ダーク/ライトテーマ対応。',
+    tags: ['React', 'styled-components', 'framer-motion', 'GitHub Pages'],
+    github: 'https://github.com/yamadan96/yamadan96.github.io',
+    demo: 'https://yamadan96.github.io',
+    image: null,
+  },
+  {
+    id: 'project-04',
+    title: '機械学習パイプラインフレームワーク',
+    description: 'データ前処理から学習、評価、デプロイまでを自動化するMLパイプラインフレームワーク。設定ファイルベースで柔軟にカスタマイズ可能。',
+    tags: ['Python', 'MLflow', 'Docker', 'scikit-learn', 'CLI'],
+    github: 'https://github.com/yamadan96',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-05',
+    title: 'チャットアプリ（WebSocket）',
+    description: 'リアルタイムチャットアプリケーション。WebSocketによる双方向通信、ルーム機能、メッセージ履歴を実装。',
+    tags: ['Node.js', 'Socket.io', 'React', 'MongoDB', 'Express'],
+    github: 'https://github.com/yamadan96',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-06',
+    title: '論文要約ツール',
+    description: 'arXivの論文を自動で要約するCLIツール。GPT APIを活用し、日本語での要約と重要ポイントの抽出を行う。',
+    tags: ['Python', 'OpenAI API', 'arXiv API', 'CLI', 'NLP'],
+    github: 'https://github.com/yamadan96',
+    demo: null,
+    image: null,
+  },
+];
+
+export default projects;
