@@ -40,18 +40,22 @@ const CategoryName = styled.h3`
   font-weight: 700;
 `;
 
-const SkillItem = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+const SkillList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
 `;
 
-const SkillHeader = styled.div`
+const SkillItem = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const SkillInfo = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  align-items: center;
 `;
 
 const SkillName = styled.span`
@@ -61,19 +65,21 @@ const SkillName = styled.span`
 
 const SkillLevel = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.textMuted};
+  color: ${({ theme }) => theme.colors.textMuted || theme.colors.textSecondary};
+  opacity: 0.7;
 `;
 
-const ProgressBar = styled.div`
+const BarBackground = styled.div`
+  width: 100%;
   height: 6px;
   background: ${({ theme }) => theme.colors.surface};
   border-radius: ${({ theme }) => theme.borderRadius.full};
   overflow: hidden;
 `;
 
-const ProgressFill = styled(motion.div)`
+const BarFill = styled(motion.div)`
   height: 100%;
-  background: ${({ theme }) => theme.colors.gradient};
+  background: ${({ theme }) => theme.colors.primary};
   border-radius: ${({ theme }) => theme.borderRadius.full};
 `;
 
@@ -93,22 +99,30 @@ const SkillsSection = () => (
             <CategoryIcon>{category.icon}</CategoryIcon>
             <CategoryName>{category.category}</CategoryName>
           </CategoryHeader>
-          {category.items.map((skill) => (
-            <SkillItem key={skill.name}>
-              <SkillHeader>
-                <SkillName>{skill.name}</SkillName>
-                <SkillLevel>{skill.level}%</SkillLevel>
-              </SkillHeader>
-              <ProgressBar>
-                <ProgressFill
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                />
-              </ProgressBar>
-            </SkillItem>
-          ))}
+          <SkillList>
+            {category.items.map((skill, index) => (
+              <SkillItem
+                key={skill.name}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: catIndex * 0.1 + index * 0.05 }}
+              >
+                <SkillInfo>
+                  <SkillName>{skill.name}</SkillName>
+                  <SkillLevel>{skill.level}%</SkillLevel>
+                </SkillInfo>
+                <BarBackground>
+                  <BarFill
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: catIndex * 0.1 + index * 0.05, ease: 'easeOut' }}
+                  />
+                </BarBackground>
+              </SkillItem>
+            ))}
+          </SkillList>
         </CategoryCard>
       ))}
     </SkillsGrid>
