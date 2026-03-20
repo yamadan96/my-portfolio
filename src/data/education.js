@@ -17,6 +17,14 @@ const education = [
   },
   {
     id: 'edu-03',
+    school: 'カナダ バンクーバー 語学留学',
+    faculty: '',
+    degree: '',
+    period: '2017年7月（3週間）',
+    description: '',
+  },
+  {
+    id: 'edu-04',
     school: '本郷高等学校',
     faculty: '普通科',
     degree: '',
@@ -24,7 +32,7 @@ const education = [
     description: '',
   },
   {
-    id: 'edu-04',
+    id: 'edu-05',
     school: '本郷中学校',
     faculty: '',
     degree: '',

@@ -55,6 +55,15 @@ const projects = [
   },
   {
     id: 'project-07',
+    title: 'ホームページ',
+    description: '個人ホームページ。HTML/CSS/JavaScriptで構築。',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    github: 'https://github.com/yamadan96',
+    demo: 'https://yamadan96.github.io/homepage/',
+    image: null,
+  },
+  {
+    id: 'project-08',
     title: 'テニスコート予約自動化スクリプト',
     description: 'テニスコートの予約を自動化するスクリプト。Webスクレイピングで空き状況を確認し自動予約。',
     tags: ['Python', 'Web Scraping', 'Automation'],
