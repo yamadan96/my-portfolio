@@ -47,6 +47,17 @@ const AchievementDescription = styled.p`
   line-height: 1.6;
 `;
 
+const AchievementLink = styled.a`
+  display: inline-block;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.primary};
+  margin-top: ${({ theme }) => theme.spacing.xs};
+  text-decoration: none;
+  &:hover {
+    color: ${({ theme }) => theme.colors.primaryLight};
+  }
+`;
+
 const AchievementsSection = () => (
   <Section id="achievements">
     <SectionTitle title="Achievements" subtitle="実績・資格" />
@@ -63,6 +74,11 @@ const AchievementsSection = () => (
           <AchievementContent>
             <AchievementTitle>{item.title}</AchievementTitle>
             <AchievementDescription>{item.description}</AchievementDescription>
+            {item.link && (
+              <AchievementLink href={item.link} target="_blank" rel="noopener noreferrer">
+                詳細を見る →
+              </AchievementLink>
+            )}
           </AchievementContent>
         </AchievementCard>
       ))}

@@ -4,11 +4,11 @@ const profile = {
   title: 'AI Engineer',
   roles: ['AI Engineer', 'ML Researcher', 'Full-Stack Developer'],
   affiliation: '東京理科大学大学院 創域理工学研究科 電気電子情報工学専攻 M1',
-  bio:
-    '機械学習・深層学習を専門とするAIエンジニア。' +
-    '松尾研究所やMIXI、LegalOn Technologies等、16社以上でのインターン経験を持つ。' +
-    '学会発表2件（FIT2025、IEICE2026）。' +
-    '被災建物画像の損傷度分類AIなど、研究から実装まで一貫して手がける。',
+  bio: [
+    '機械学習・深層学習を専門とするAIエンジニア。',
+    '松尾研究所やMIXI、LegalOn Technologies等、16社以上でのインターン経験を持つ。',
+    '学会発表2件（FIT2025、IEICE2026）。被災建物画像の損傷度分類AIなど、研究から実装まで一貫して手がける。',
+  ],
   stats: [
     { label: 'インターン経験', value: '16社+' },
     { label: '学会発表', value: '2件' },
@@ -54,6 +54,7 @@ const profile = {
       title: 'トヨタイムズ掲載',
       icon: '📺',
       description: 'Airionでの音声合成AI開発の成果がトヨタイムズニュースに掲載',
+      link: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html',
     },
     {
       title: 'ギネス世界記録イベント参加',
