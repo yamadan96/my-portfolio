@@ -8,6 +8,7 @@ const research = [
     description: '地震・津波などの大規模災害直後の被災建物損傷度分類の自動化。ResNet・ConvNeXt・ViTの比較検証に加え、LoRA（Low-Rank Adaptation）を導入し、少数データ環境での高精度ファインチューニングを実現。従来手法を上回る精度と軽量性を両立。',
     tags: ['Deep Learning', 'LoRA', 'CNN', 'ViT', 'Disaster Assessment'],
     link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
+    citation: '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 柏田 仁, 二瓶泰雄: 「ファインチューニング手法に基づく被災建物画像の多クラス損傷度分類の精度改善」, 第24回情報科学技術フォーラム(FIT 2025)講演論文集, Vol.3, No.I-029, pp.339-340, (2025年9月).',
   },
   {
     id: 'research-02',
@@ -18,6 +19,7 @@ const research = [
     description: 'クラス不均衡問題に対し、補助タスク（タイプ/重症度）を導入したマルチタスク学習を提案。DINOv2＋LoRAを用い、少数クラス性能を改善しMacro F1を向上。コスト行列導入とMTL損失設計で汎化性能と安定性を実現。',
     tags: ['Multi-task Learning', 'DINOv2', 'LoRA', 'Class Imbalance'],
     link: null,
+    citation: '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 二瓶泰雄, 柏田 仁: 「被災建物画像の多クラス損傷度分類におけるマルチタスク学習の有効性」, 2026年電子情報通信学会総合大会講演論文集, 2026年3月13日.',
   },
   {
     id: 'research-03',

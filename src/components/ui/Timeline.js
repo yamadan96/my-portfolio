@@ -133,7 +133,7 @@ const Timeline = ({ items, onDetailClick }) => (
       >
         <Period>{item.period}</Period>
         <Company>{item.company}</Company>
-        {(item.url || item.blogUrl) && (
+        {(item.url || item.blogUrl || item.mediaLinks) && (
           <LinksWrapper>
             {item.url && (
               <ExternalLink href={item.url} target="_blank" rel="noopener noreferrer">
@@ -145,6 +145,11 @@ const Timeline = ({ items, onDetailClick }) => (
                 📝 ブログ記事
               </ExternalLink>
             )}
+            {item.mediaLinks && item.mediaLinks.map((ml) => (
+              <ExternalLink key={ml.label} href={ml.url} target="_blank" rel="noopener noreferrer">
+                📰 {ml.label}
+              </ExternalLink>
+            ))}
           </LinksWrapper>
         )}
         <Role>{item.role}</Role>

@@ -80,13 +80,13 @@ const experiences = [
         'みてね事業本部 Data Engineeringグループにて、Vision-Language Modelによる画像処理システムの高速化とコスト削減を実現。' +
         'データ駆動型アプローチでNew Relic・Grafana分析を活用。',
       responsibilities: [
-        'Image Captioning高速化: Vision Encoderベクトル再利用で全体処理時間42.8%短縮、画像処理部分3.2秒→0.001秒（99.97%削減）',
-        'MLパイプラインリファクタリング: 重複処理をPydanticベースに刷新しコード量約130行削減（約50%）、テストコード約40%削減',
-        'SQS Visibility Timeout最適化: New Relicで30日間のデータ収集・統計分析、900秒→65秒（92.8%短縮）、エラー復旧15分→1分強',
-        'S3アップロード並列化: ThreadPoolExecutorで30.7%高速化、グリーティングカードで約1万円/回のコスト削減',
+        'Image Captioning高速化: Vision Encoderベクトル再利用で全体処理時間42.8%短縮（2Bモデル）/28.1%短縮（4Bモデル）。画像処理部分3.2秒→0.001秒（99.97%削減）。CPUでも15.4倍高速（ベクトル再利用時）。Gradioデモアプリで効果を検証',
+        'MLパイプラインリファクタリング: 顔抽出・感情推定・頭部姿勢推定の重複処理をPydanticベースに刷新しコード量約130行削減（約50%）、テストコード約40%削減。本番環境で18時間監視しエラー・挙動変化なしを確認',
+        'SQS Visibility Timeout最適化: New Relicで30日間のデータ収集・統計分析（平均0.35秒、99%ile 1秒以下、最大60秒、エラー率0.01%未満）。900秒→65秒（92.8%短縮）でエラー復旧15分→1分強。段階的短縮計画（65→40→25→20秒）を策定しTerraformでIaC管理',
+        'S3アップロード並列化: ThreadPoolExecutorで高解像度画像（6.5MB）0.789→0.547秒（30.7%短縮）、通常サイズ（331KB）0.305→0.267秒（12.5%短縮）。グリーティングカードで約1万円/回、将来的にステッカーで約10万円/回の削減見込み',
       ],
       achievements:
-        '処理速度42.8%向上、コスト1万円/回削減、エラー復旧時間92.8%短縮、コード130行削減',
+        '処理速度42.8%向上（2B）/28.1%（4B）、コスト1万円/回削減（将来10万円/回見込み）、エラー復旧時間92.8%短縮、コード130行削減、本番18h監視で問題なし',
       techStack: [
         'Python',
         'PyTorch',
@@ -100,6 +100,7 @@ const experiences = [
         'Grafana',
         'Pydantic',
         'pytest',
+        'Gradio',
       ],
     },
   },
@@ -373,7 +374,12 @@ const experiences = [
       'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。',
     tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM'],
     url: 'https://airion.co.jp/',
-    blogUrl: null,
+    mediaLinks: [
+      { label: 'GENIAC PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000011.000118893.html' },
+      { label: 'トヨタイムズ YouTube', url: 'https://www.youtube.com/watch?v=xsmQ9Slnvds' },
+      { label: '音声合成 PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html' },
+      { label: '経産省 GENIAC', url: 'https://www.meti.go.jp/policy/mono_info_service/geniac/geniac_magazine/kickoffevents_3.html' },
+    ],
     hasDetail: true,
     details: {
       overview:

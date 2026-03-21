@@ -55,6 +55,14 @@ const Tags = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
 `;
 
+const Citation = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  line-height: 1.6;
+  margin-top: ${({ theme }) => theme.spacing.sm};
+  font-style: italic;
+`;
+
 const ResearchLink = styled.a`
   display: inline-flex;
   align-items: center;
@@ -83,6 +91,7 @@ const ResearchSection = () => (
               <Tag key={tag}>{tag}</Tag>
             ))}
           </Tags>
+          {item.citation && <Citation>{item.citation}</Citation>}
           {item.link && (
             <ResearchLink href={item.link} target="_blank" rel="noopener noreferrer">
               論文・詳細 →
