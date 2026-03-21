@@ -64,6 +64,16 @@ const projects = [
   },
   {
     id: 'project-08',
+    title: '温泉温度管理自動化システム',
+    description: '温泉ハッカソン（PlayGround主催, 2021年12月）にて開発。Raspberry Piと温度センサーで水温取得・電磁弁制御を実装し、Flutter+WebSocketで遠隔操作可能なプロトタイプを構築。',
+    tags: ['Python', 'Raspberry Pi', 'Flutter', 'WebSocket', 'IoT'],
+    github: null,
+    demo: null,
+    blog: 'https://blog.shinonome.io/shibu2021-10/',
+    image: null,
+  },
+  {
+    id: 'project-09',
     title: 'テニスコート予約自動化スクリプト',
     description: 'テニスコートの予約を自動化するスクリプト。Webスクレイピングで空き状況を確認し自動予約。',
     tags: ['Python', 'Web Scraping', 'Automation'],

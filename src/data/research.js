@@ -49,6 +49,16 @@ const research = [
     tags: ['Diffusion Model', 'Transformer', 'Generative Model', 'NFDM'],
     link: null,
   },
+  {
+    id: 'research-06',
+    title: 'International Workshop on Advanced Image Technology (IWAIT)',
+    venue: 'IWAIT',
+    year: 2026,
+    type: 'ショートペーパー（執筆中）',
+    description: '国際ワークショップ IWAIT にてショートペーパーを執筆中。',
+    tags: ['Image Processing', 'Deep Learning', 'International Workshop'],
+    link: null,
+  },
 ];
 
 export default research;

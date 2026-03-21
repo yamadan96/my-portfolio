@@ -46,6 +46,7 @@ const profile = {
       title: '資格・認定',
       icon: '📜',
       description: "Harvard CS50x修了、JDLA ディープラーニング基礎講座修了、Data Science Education Program Level 3、日商簿記検定3級、普通自動車免許（MT）",
+      link: 'https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/aHBkNHNWLzhrWmpNVlJVSDZVQTdIZz09',
     },
     {
       title: '松尾研 LLMATCHプログラム',
