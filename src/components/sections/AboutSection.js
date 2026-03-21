@@ -93,6 +93,16 @@ const AboutSection = () => (
             {profile.career}
           </CareerBadge>
         )}
+        {profile.studyAbroad && (
+          <CareerBadge
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ marginLeft: '0.5rem' }}
+          >
+            {profile.studyAbroad}
+          </CareerBadge>
+        )}
         {profile.bio.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
