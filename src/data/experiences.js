@@ -66,19 +66,15 @@ const experiences = [
         'ML vs LLM比較評価: 同一評価データで従来MLモデルとの精度・コスト・レイテンシを多角的に比較分析し、導入判断の根拠を提供',
       ],
       achievements:
-        '日本語・英語ともに従来MLモデルを大幅に上回る分類精度を達成（日本語で+10pt以上の改善）。' +
+        '日本語契約書で従来MLモデル比+14pt、英語契約書で+5ptの精度改善を達成。' +
         'Few-shot学習により最小限のコスト増で精度を効果的に改善。' +
-        'LLMベース分類システムの本番導入基盤を構築',
+        'PoCから本番導入可能なマイクロサービスまで一貫して構築',
       techStack: [
         'Python',
         'LLM (Gemini)',
         'Google Cloud (Vertex AI)',
         'Pydantic',
         'pytest',
-        'ruff',
-        'pyright',
-        'Prompt Engineering',
-        'Few-shot Learning',
       ],
     },
   },
