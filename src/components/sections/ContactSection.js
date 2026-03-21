@@ -95,6 +95,36 @@ const StatusMessage = styled.p`
   color: ${({ $success, theme }) => ($success ? theme.colors.success : theme.colors.error)};
 `;
 
+const ContactIntro = styled.div`
+  text-align: center;
+  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
+`;
+
+const IntroText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.8;
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+`;
+
+const ExampleList = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.sm};
+  justify-content: center;
+`;
+
+const ExampleItem = styled.li`
+  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 const ContactSection = () => {
   const form = useRef();
   const [status, setStatus] = useState({ message: '', success: false });
@@ -120,6 +150,18 @@ const ContactSection = () => {
     <Section id="contact">
       <SectionTitle title="Contact" subtitle="お問い合わせ" />
       <ContactWrapper>
+        <ContactIntro>
+          <IntroText>
+            お気軽にご連絡ください。以下のようなご相談をお待ちしています。
+          </IntroText>
+          <ExampleList>
+            <ExampleItem>カジュアル面談</ExampleItem>
+            <ExampleItem>共同研究・プロジェクトの相談</ExampleItem>
+            <ExampleItem>登壇・執筆の依頼</ExampleItem>
+            <ExampleItem>技術的な質問・相談</ExampleItem>
+            <ExampleItem>その他お問い合わせ</ExampleItem>
+          </ExampleList>
+        </ContactIntro>
         <Form ref={form} onSubmit={handleSubmit}>
           <FormGroup>
             <Label htmlFor="from_name">お名前</Label>

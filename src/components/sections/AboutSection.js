@@ -56,6 +56,20 @@ const StatLabel = styled.span`
   color: ${({ theme }) => theme.colors.textMuted};
 `;
 
+const CareerBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
+  background: ${({ theme }) => `${theme.colors.primary}15`};
+  border: 1px solid ${({ theme }) => `${theme.colors.primary}30`};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.primary};
+  font-weight: 600;
+`;
+
 const StatValue = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: 800;
@@ -70,6 +84,15 @@ const AboutSection = () => (
     <SectionTitle title="About" subtitle="私について" />
     <AboutGrid>
       <AboutText>
+        {profile.career && (
+          <CareerBadge
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {profile.career}
+          </CareerBadge>
+        )}
         {profile.bio.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
