@@ -4,43 +4,103 @@ const experiences = [
     company: '株式会社松尾研究所',
     role: 'AIエンジニア（LLM / Reasoning研究開発）',
     period: '2026年2月〜現在',
-    description: '製造業向けパーソナルLLMの研究開発。LLMの事後学習・内部解析・評価指標設計を担当。',
-    tags: ['Python', 'LLM', 'Reasoning', 'MLOps'],
+    description:
+      'LLMにBig Five性格特性を獲得させる研究開発。強化学習（GRPO）による報酬モデル設計・実験・評価を担当。',
+    tags: ['Python', 'PyTorch', 'GRPO', 'LoRA', 'vLLM', 'WandB'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        'LLMに心理学的性格特性（Big Five）を獲得させる研究プロジェクトに従事。' +
+        'GRPO（Group Relative Preference Optimization）を用いた強化学習で8Bパラメータモデルの性格制御手法を研究し、' +
+        '報酬モデルの設計・複数条件での実験・定量評価・報酬ハック分析まで一貫して担当。',
+      responsibilities: [
+        '複数の報酬関数パターン（Listwise/Pointwise×評価粒度）を比較検証し、最適な報酬設計を選定',
+        '評価粒度・プロンプト形式を変えた複数条件の実験を設計・実施し、性格獲得度と応答品質のトレードオフを定量分析',
+        'Judge LLMを用いた性格ファセット評価プロンプトの設計・反復的な改善',
+        '学習済みモデルの報酬ハック（Reward Hacking）兆候を定性・定量の両面から分析し、安全なモデル選定基準を策定',
+        'Big Five性格検査（IPIP）および日本語知識ベンチマーク（JMMLU）によるモデル評価の実行・分析',
+      ],
+      achievements:
+        '目標水準の性格特性スコアを達成するモデルの学習に成功。' +
+        '報酬ハック分析により信頼性の高いモデル選定基準を確立し、チームの最終モデル選定に貢献',
+      techStack: [
+        'Python',
+        'PyTorch',
+        'Unsloth',
+        'GRPO',
+        'LoRA',
+        'vLLM',
+        'WandB',
+        'TRL',
+        'HuggingFace',
+        'NVIDIA H200',
+      ],
+    },
   },
   {
     id: 'legalon',
-    company: 'LegalOn Technologies',
+    company: '株式会社LegalOn Technologies',
     role: 'AIエンジニア',
-    period: '2026年2月〜現在',
-    description: '自然言語処理・機械学習を中心としたAI機能の開発。字句解析、構文解析、テキスト生成等。',
+    period: '2026年2月〜3月',
+    description:
+      '自然言語処理・機械学習を中心としたAI機能の開発。字句解析、構文解析、テキスト生成等。',
     tags: ['Python', 'NLP', 'MLOps', 'DevOps'],
     url: 'https://legalontech.jp/',
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        '自然言語処理・機械学習を中心としたAI機能の開発業務を遂行。' +
+        'コンピュータサイエンスの知見に基づいた課題解決に取り組んだ。',
+      responsibilities: [
+        '自然言語処理: 字句解析、構文解析、テキスト生成、意味解析、固有表現・関係性の抽出',
+        '形式言語、文字列解析、アルゴリズム・データ構造の応用',
+        'インフラストラクチャ: DevOps、MLOps関連業務',
+      ],
+      achievements:
+        'NLP・機械学習を活用したAI機能の開発に貢献',
+      techStack: ['Python', 'NLP', 'MLOps', 'DevOps'],
+    },
   },
   {
     id: 'mixi',
     company: '株式会社MIXI',
     role: '機械学習エンジニア',
     period: '2025年10月〜11月（2ヶ月）',
-    description: '家族アルバム「みてね」のMLグループにて、機械学習パイプラインの最適化とAWSインフラ効率化に従事。',
+    description:
+      '家族アルバム「みてね」のMLグループにて、機械学習パイプラインの最適化とAWSインフラ効率化に従事。',
     tags: ['Python', 'PyTorch', 'AWS', 'Kubernetes', 'Docker'],
     url: 'https://mixi.co.jp/',
     blogUrl: null,
     hasDetail: true,
     details: {
-      overview: 'Vision-Language Modelによる画像処理システムの高速化とコスト削減を実現。データ駆動型アプローチでNew Relic・Grafana分析を活用。',
+      overview:
+        'みてね事業本部 Data Engineeringグループにて、Vision-Language Modelによる画像処理システムの高速化とコスト削減を実現。' +
+        'データ駆動型アプローチでNew Relic・Grafana分析を活用。',
       responsibilities: [
-        'Image Captioning高速化: Vision Encoderベクトル再利用で推論速度42.8%向上（0.47秒→0.27秒）',
-        'MLパイプラインリファクタリング: Pydanticベースに刷新し130行削減、DRY原則適用',
-        'SQS Visibility Timeout最適化: 統計分析により900秒→65秒（92.8%短縮）、エラー復旧15分→1分強',
-        'S3アップロード並列化: ThreadPoolExecutorで30.7%高速化、1回あたり約1万円のコスト削減',
+        'Image Captioning高速化: Vision Encoderベクトル再利用で全体処理時間42.8%短縮、画像処理部分3.2秒→0.001秒（99.97%削減）',
+        'MLパイプラインリファクタリング: 重複処理をPydanticベースに刷新しコード量約130行削減（約50%）、テストコード約40%削減',
+        'SQS Visibility Timeout最適化: New Relicで30日間のデータ収集・統計分析、900秒→65秒（92.8%短縮）、エラー復旧15分→1分強',
+        'S3アップロード並列化: ThreadPoolExecutorで30.7%高速化、グリーティングカードで約1万円/回のコスト削減',
       ],
-      achievements: '処理速度42.8%向上、コスト1万円/回削減、エラー復旧時間92.8%短縮',
-      techStack: ['Python', 'PyTorch', 'Transformers', 'AWS (SQS, S3, EC2)', 'Kubernetes', 'Docker', 'New Relic', 'Grafana'],
+      achievements:
+        '処理速度42.8%向上、コスト1万円/回削減、エラー復旧時間92.8%短縮、コード130行削減',
+      techStack: [
+        'Python',
+        'PyTorch',
+        'Transformers',
+        'Qwen3-VL',
+        'AWS (SQS, S3, EC2, ECS)',
+        'Kubernetes',
+        'Docker',
+        'Terraform',
+        'New Relic',
+        'Grafana',
+        'Pydantic',
+        'pytest',
+      ],
     },
   },
   {
@@ -48,32 +108,67 @@ const experiences = [
     company: 'エン・ジャパン株式会社',
     role: 'フルスタックエンジニア',
     period: '2025年9月（4日間）',
-    description: '求人サイトを題材としたモダンWebアプリケーション開発。Next.js/React + Django。',
+    description:
+      '求人サイトを題材としたモダンWebアプリケーション開発。Next.js/React + Django。',
     tags: ['Python', 'Next.js', 'React', 'Docker', 'GitHub Flow'],
     url: 'https://corp.en-japan.com/',
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        'デジタルプロダクト開発本部にて、求人サイトを題材にしたモダンWeb開発（フロント・バック分離／Next.js-React SPA／MVC+S+Rアーキテクチャ）を4日間で実装・検証。',
+      responsibilities: [
+        'Docker／devcontainerで環境構築し、API仕様に沿ったサーバーサイド機能を実装',
+        'GitHub Flowに基づくfeatureブランチ運用・PR作成・レビュー対応の反復',
+        '検索機能における部分一致の可用性 vs DB負荷などの設計トレードオフの検討',
+        '認証・認可、エラーハンドリング、例外時のUX改善提案',
+      ],
+      achievements:
+        'バックエンド課題を完了し、フロントエンドも一部実装。「小さく実装→早めにPR→指摘を都度反映」の開発サイクルを実践',
+      techStack: [
+        'Python',
+        'Django',
+        'Next.js',
+        'React',
+        'Docker',
+        'devcontainer',
+        'GitHub Flow',
+      ],
+    },
   },
   {
     id: 'exawizards',
     company: '株式会社エクサウィザーズ',
     role: '機械学習エンジニア',
     period: '2025年8月〜9月（1.5ヶ月）',
-    description: 'オフィス環境向けAIエージェント開発。カメラ×VLM×Arduino制御で「見て→判断→動く」自律システムを構築。',
+    description:
+      'オフィス環境向けAIエージェント開発。カメラ×VLM×Arduino制御で「見て→判断→動く」自律システムを構築。',
     tags: ['Python', 'VLM', 'Arduino', 'Computer Vision', 'AI Agent'],
     url: 'https://exawizards.com/',
     blogUrl: null,
     hasDetail: true,
     details: {
-      overview: 'エッジデバイス上でマルチモーダルLLMを活用した画像処理AIのPoC開発。危険物検知の3段階推論（検出→優先度判断→対応提案）を実現。',
+      overview:
+        'オフィス環境を対象としたAIエージェント開発プロジェクトに参画。' +
+        '自律エージェント×ワークフロー型制御を組み合わせ、環境入力に応じて「見て→判断して→動く」プロセスを実現。' +
+        'エッジデバイス上でマルチモーダルLLMを活用し、100%ローカル実行可能なデモシステムを開発。',
       responsibilities: [
-        '自律エージェント×ワークフロー型制御の設計・実装',
-        'プラグイン構造でArduino+RealSense+VLMを統合',
-        '3段階推論による説明可能なAIシステムの構築',
-        '安全インフラとしての実用可能性検証',
+        'プラグイン構造によるArduino＋RealSense＋VLMの統合設計・実装',
+        '危険物・異常（刃物・転倒リスク物・通路障害物等）の検知タスク設計',
+        '3段階推論（検出→優先度判断→対応提案）による説明可能なAIシステムの構築',
+        'リアルタイム環境認識・解析・制御が可能なプロトタイプの開発・検証',
       ],
-      achievements: 'リアルタイム環境認識・解析・制御が可能なプロトタイプAIエージェントを開発',
-      techStack: ['Python', 'Vision-Language Model', 'Arduino', 'RealSense', 'Semantic Kernel'],
+      achievements:
+        'プロトタイプAIエージェントを開発し、見落としの削減・説明の一貫性向上を確認。ローカルモデル化・分散処理・ロボット統合の方向性を提案',
+      techStack: [
+        'Python',
+        'Vision-Language Model',
+        'Arduino',
+        'Intel RealSense',
+        'Semantic Kernel',
+        'Computer Vision',
+        'Explainable AI',
+      ],
     },
   },
   {
@@ -81,54 +176,97 @@ const experiences = [
     company: '株式会社ログラス',
     role: 'ソフトウェアエンジニア',
     period: '2025年8月（5日間）',
-    description: 'DDD×スクラム開発で損益計算書・貸借対照表（PL/BS）生成システムを開発。',
+    description:
+      'DDD×スクラム開発で損益計算書・貸借対照表（PL/BS）生成システムを開発。',
     tags: ['Kotlin', 'Spring Boot', 'MySQL', 'Docker', 'DDD'],
     url: 'https://www.loglass.co.jp/',
     blogUrl: 'https://qiita.com/yamadan96/items/6b48c0ff270c02878943',
     hasDetail: true,
     details: {
-      overview: 'ドメイン駆動設計とスクラム開発を実践し、会計システムの設計・実装を担当。VPoE・CTOからのフィードバックを受けて事業視点での開発を学習。',
+      overview:
+        'ドメイン駆動設計（DDD）とスクラム開発を実践し、会計システム（損益計算書・貸借対照表作成）の設計・実装を担当。' +
+        'ユーザー課題の発見から仕様設計・実装・発表までを一貫して行い、経営陣（VPoE・CTO）からのフィードバックを受けて事業視点での開発思考を強化。',
       responsibilities: [
-        'DDD×スクラムでPL/BS生成システムを設計・実装',
-        'UMLモデリング（システム関連図・ユースケース図・ドメインモデル図）',
-        'レイヤードアーキテクチャ＋DIPの適用',
-        '2.5日×2スプリントのスクラム実施',
+        'DDDとスクラム開発手法を用いたPL/BS生成システムの設計・実装',
+        'システム関連図・ユースケース図・オブジェクト図・ドメインモデル図の作成',
+        'レイヤードアーキテクチャと依存性逆転の原則（DIP）の適用',
+        '2スプリント（2.5日×2）のスクラム実施（プランニング、デイリースクラム、レビュー、KPT）',
+        'ペアプログラミング・モブプログラミング、AI支援による開発効率向上',
       ],
-      achievements: '5日間でPL/BS生成プロトタイプを完成',
-      techStack: ['Kotlin', 'Spring Boot', 'MySQL', 'Docker', 'DDD', 'UML'],
+      achievements:
+        '5日間で損益計算書・貸借対照表生成の動作可能なプロトタイプを完成。モデリングとコードの整合性を維持し保守性・拡張性を強化',
+      techStack: [
+        'Kotlin',
+        'Spring Boot',
+        'MySQL',
+        'Docker',
+        'DDD',
+        'UML',
+        'Scrum',
+      ],
     },
   },
   {
     id: 'goldman-sachs',
-    company: 'Goldman Sachs',
+    company: 'ゴールドマン・サックス証券株式会社',
     role: 'エンジニアリング部門 ワークショップ',
     period: '2025年8月（1日）',
-    description: '金融×テクノロジーのワークショップ。模擬FXトレードシステムの設計・実装・発表。',
+    description:
+      '金融×テクノロジーのワークショップ。模擬FXトレードシステムの設計・実装・発表。',
     tags: ['Finance', 'Algorithm', 'Trading System'],
     url: null,
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        '金融×テクノロジーの最前線におけるエンジニアの役割・実務を体感。' +
+        '模擬FXトレードシステムの設計・実装・発表を通じて、アルゴリズム構築から成果検証までを実践。',
+      responsibilities: [
+        '模擬FXトレードシステムの設計・アルゴリズム構築',
+        'トレードシステムの実装と成果検証・発表',
+        '現役エンジニア社員との交流によるグローバル開発環境の理解',
+      ],
+      achievements:
+        '即応性・論理的思考が求められる開発姿勢を体感。技術力に加えてビジネス視点・意思決定力の重要性を学習',
+      techStack: ['Algorithm', 'Trading System', 'Finance'],
+    },
   },
   {
     id: 'gmo-media',
     company: 'GMOメディア株式会社',
     role: '機械学習エンジニア',
-    period: '2025年7月〜8月（2ヶ月）',
-    description: 'アフィリエイトマーケティングの承認売上予測・承認月予測モデルを構築。',
+    period: '2025年7月〜8月（1ヶ月）',
+    description:
+      'ポイントサイトにおける承認売上予測・承認月予測モデルを構築。',
     tags: ['Python', 'LightGBM', 'BigQuery', 'GCP'],
     url: 'https://www.gmo.media/',
     blogUrl: 'https://qiita.com/yamadan96/items/99c0e6757a6da8786626',
     hasDetail: true,
     details: {
-      overview: 'AIデータ推進チームにて、ポイントサイトにおける予測モデル構築。特徴量エンジニアリングと信頼度スコアによるモデル切替で高精度を実現。',
+      overview:
+        'AIデータ推進チームにて、ポイントサイトにおける承認売上予測・承認月予測モデルを構築。' +
+        'BigQueryによる大規模データ抽出、特徴量エンジニアリング、信頼度スコアによるモデル切替で高精度を実現。',
       responsibilities: [
         '承認/否認予測モデルの構築（精度96.1%、AUC 0.965、F1 0.978）',
-        '承認時期予測モデルの開発（MAE 1.3日、高信頼度で月予測99%以上）',
+        '承認時期予測モデルの開発（MAE 1.3日、高信頼度で月予測正解率99%以上）',
         '時間・金額・テキスト・カテゴリ・交互作用の特徴量エンジニアリング',
+        '信頼度スコアを導入し、高・中・低信頼に分類してモデル切替による精度改善',
         'BigQuery→Googleスプレッドシートへの週次自動反映パイプライン構築',
+        '最終日の成果発表会にて業務導入に向けた提案を実施',
       ],
-      achievements: '精度96.1%の承認予測モデル、業務工数削減とキャッシュフロー計画精度向上に貢献',
-      techStack: ['Python', 'LightGBM', 'scikit-learn', 'pandas', 'BigQuery', 'GCP', 'matplotlib', 'seaborn'],
+      achievements:
+        '精度96.1%の承認予測モデルを構築。業務工数削減とキャッシュフロー計画精度の向上に貢献',
+      techStack: [
+        'Python',
+        'LightGBM',
+        'scikit-learn',
+        'pandas',
+        'numpy',
+        'BigQuery',
+        'GCP',
+        'matplotlib',
+        'seaborn',
+      ],
     },
   },
   {
@@ -136,54 +274,139 @@ const experiences = [
     company: 'スタンバイ株式会社',
     role: 'MLエンジニア',
     period: '2025年7月（4日間）',
-    description: 'LINEヤフー×ビズリーチ合弁。実務課題の要因分析→解決策立案→ML実装→CTO成果発表。インターンシップ優秀者受賞。',
+    description:
+      'LINEヤフー×ビズリーチ合弁。実務課題の要因分析→解決策立案→ML実装→CTO成果発表。',
     tags: ['Python', 'Machine Learning', 'Data Analysis'],
     url: null,
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        'LINEヤフー×ビズリーチの合弁企業にて、実プロダクトの課題をもとにした実務課題型インターンに参加。' +
+        '要因分析→解決策立案→ML実装→CTOへの成果発表までを一貫して担当。',
+      responsibilities: [
+        '実務データに基づく課題の要因分析',
+        'ML手法を用いた解決策の立案・実装',
+        'CTOへの成果発表・プレゼンテーション',
+      ],
+      achievements:
+        'インターンシップ優秀者受賞。MLによる課題解決力とエンジニア視点での企画力を体得',
+      techStack: ['Python', 'Machine Learning', 'Data Analysis'],
+    },
   },
   {
     id: 'geniee',
-    company: 'Geniee International Pte.Ltd',
+    company: '株式会社ジーニー',
     role: 'バックエンドエンジニア',
     period: '2025年7月（1日）',
-    description: '広告配信DSPの高速化。N+1解消、TTLキャッシュ、並列処理、Prometheus+Grafana可視化。',
+    description:
+      '広告配信DSPの高速化。N+1解消、TTLキャッシュ、並列処理、Prometheus+Grafana可視化。',
     tags: ['Python', 'MySQL', 'Prometheus', 'Grafana', 'Docker'],
     url: null,
     blogUrl: 'https://qiita.com/yamadan96/items/8018a6e5cab074737cb2',
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        '広告配信（DSP）システムの高速化を目的としたインターン。' +
+        '処理のボトルネックを特定し、複数の最適化施策を実装・検証。',
+      responsibilities: [
+        'N+1問題の解消: 一括取得によるDBアクセスの削減（O(n)→O(1)）',
+        'TTLキャッシュ導入: 頻出データをローカルキャッシュしレスポンス高速化',
+        '並列処理: 特徴量マッチングをデータサイズに応じて動的にスレッド並列化',
+        'GIL対策: multiprocessing＋プリフォーク構成による真の並列処理実現',
+        'Prometheus + Grafanaによるメトリクス監視・パフォーマンス分析の可視化',
+      ],
+      achievements:
+        '処理時間を大幅に短縮。実運用を想定した負荷条件下での最適化設計・実装・可視化を一貫して体験',
+      techStack: [
+        'Python 3.12',
+        'MySQL',
+        'Prometheus',
+        'Grafana',
+        'Docker',
+        'multiprocessing',
+      ],
+    },
   },
   {
     id: 'cyberagent',
-    company: 'サイバーエージェント',
+    company: '株式会社サイバーエージェント',
     role: 'Architecture Challenge',
     period: '2025年6月（1日）',
-    description: 'マルチテナンシープラットフォームのアーキテクチャ設計。ECS Fargate、API Gateway等。',
+    description:
+      'マルチテナンシープラットフォームのアーキテクチャ設計。ECS Fargate、API Gateway等。',
     tags: ['AWS', 'ECS Fargate', 'API Gateway', 'Microservices'],
     url: null,
     blogUrl: 'https://qiita.com/yamadan96/items/790b4a5e5b7f12543c21',
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        '選考制の対面ワークショップにて、マルチテナンシーなプラットフォームのアーキテクチャ設計に取り組む。' +
+        'ECS FargateやAPI Gatewayなどを用いたスケーラブルなマイクロサービス構成を設計し、社員エンジニアからレビューを受けた。',
+      responsibilities: [
+        'マルチAZ構成・オートスケーリングによる高可用性設計',
+        'WAF・JWT認証・RBACによるセキュリティ設計',
+        'CloudFront・SQS・ElastiCacheによるスケーラビリティ設計',
+        'CloudWatch・X-Rayによる可観測性の設計',
+      ],
+      achievements:
+        'マルチテナント設計における分離・共通化のバランスやノイジーネイバー問題の対策を学び、構成力と説明力を強化',
+      techStack: [
+        'AWS',
+        'ECS Fargate',
+        'API Gateway',
+        'CloudFront',
+        'SQS',
+        'ElastiCache',
+        'WAF',
+        'CloudWatch',
+        'X-Ray',
+      ],
+    },
   },
   {
     id: 'airion',
     company: '株式会社Airion（東大発スタートアップ）',
     role: 'AI開発事業部 AIエンジニア',
     period: '2024年4月〜現在',
-    description: 'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。',
+    description:
+      'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。',
     tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM'],
     url: 'https://airion.co.jp/',
     blogUrl: null,
     hasDetail: true,
     details: {
-      overview: 'AI開発事業部にて音声合成・画像処理・物体検出・最適化・3Dデータ解析・業務自動化など多数のプロジェクトに従事。GENIACプロジェクトでのLLM研究開発にも参画。',
+      overview:
+        'AI開発事業部に所属し、音声合成・画像処理・物体検出・最適化・3Dデータ解析・業務自動化などの領域で多数のプロジェクトに従事。' +
+        'AI技術の開発・実装・最適化に加え、報告書作成・プレゼンテーションを通じて技術成果を社内外に伝達。' +
+        '経済産業省・NEDOが主導する国家プロジェクト「GENIAC」でのLLM研究開発にも参画。',
       responsibilities: [
-        'GENIAC: ラダープログラム向けLLM研究開発、LLM-as-a-Judge評価スクリプト開発',
-        'VITS2を用いたリアルタイム音声合成システム開発（トヨタイムズに掲載）',
-        'YOLOv8ベースの鉄パイプ自動計数AI開発（束単位精度100%、テックリード担当）',
-        '建築パース画像補正、内視鏡画像最適化、3Dセグメンテーション等',
+        '【GENIAC】製造業のPLC制御に特化したラダープログラム自動要約生成LLMの研究開発。現場提供データ（実機ラダーコード、仕様書、図面）を用いた前処理・アノテーション、ラダー特有の記法や制約に最適化したトークナイザ・デコーダーのカスタム設計、LLM-as-a-Judgeによる自動要約評価スクリプトの開発（正確性・簡潔性・可読性・一貫性の4軸評価）',
+        '【音声合成】次世代ロボット向けリアルタイム音声合成システム開発（VITS2）。自然な音質と1秒以内の低遅延を両立。固有名詞の辞書拡張、感情・抑揚の自然な再現のための音声データ前処理を担当。モデル選定から実装・検証・精度改善まで一貫して遂行。成果はトヨタイムズニュース・PR TIMESに掲載',
+        '【鉄パイプ自動計数AI】製造現場における鉄パイプの画像自動計数AIをテックリードとして開発（PoC）。YOLOv8ベースの物体検出を中心に、ヒートマップ系（CenterNet/FCOS）やセグメンテーション系（YOLOv8-seg）との比較検証を実施。三段階学習・データ拡張・TTA・NMSを活用し、200〜300本で束単位精度100%、600本で正解率99%以上、推論0.2秒/枚を達成',
+        '【建築パース画像補正】建築設計における画像処理技術を活用し、パース画像の補正を自動化。手作業を削減し画像編集プロセスを効率化',
+        '【内視鏡画像最適化】医療画像の画質向上を目的とした最適化アルゴリズムを開発。顧客環境での再現性を考慮した堅牢なシステム設計と手順書を作成し、現場導入を支援',
+        '【3Dセグメンテーション】3D形状解析技術を活用し、工業部品の穴検出・形状認識・異常検出を自動化。品質管理の精度向上に貢献',
+        '【仕様書自動生成】文書処理技術（PDF解析・テーブル抽出・OCR）を活用し、校正仕様書作成の業務を自動化。業務フローの効率化と作業時間の短縮を実現',
       ],
-      achievements: '鉄パイプ計数で束単位精度100%達成、音声合成がトヨタイムズに掲載',
-      techStack: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'Roboflow', 'CVAT', 'LoRA', 'ControlNet', 'Optuna'],
+      achievements:
+        '鉄パイプ計数で束単位精度100%・推論0.2秒/枚達成（テックリード）、音声合成がトヨタイムズ・PR TIMESに掲載、GENIACプロジェクトでLLM研究開発に参画、7つのプロジェクトを並行して推進',
+      techStack: [
+        'Python',
+        'PyTorch',
+        'YOLOv8',
+        'OpenCV',
+        'VITS2',
+        'LoRA',
+        'ControlNet',
+        'Optuna',
+        'SMAC3',
+        'Roboflow',
+        'CVAT',
+        'Pandas',
+        'NumPy',
+        'Matplotlib',
+      ],
     },
   },
   {
@@ -191,21 +414,40 @@ const experiences = [
     company: '株式会社ソリューション・アンド・テクノロジー',
     role: 'システムエンジニア / DX統括部',
     period: '2023年7月〜現在',
-    description: '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
+    description:
+      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
     tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
     url: 'https://www.solty.co.jp/',
     blogUrl: null,
     hasDetail: true,
     details: {
-      overview: '人事・会計・業務管理領域の業務システム企業にて、DX統括部でAI開発・自動化支援・業務効率化を担当。',
+      overview:
+        '人事・会計などの業務システム企業にて、DX統括部でAI開発を担当。' +
+        '退職予測、文章類似度調査、感情分析、RAGシステム構築など幅広いAIソリューションを開発。',
       responsibilities: [
-        '退職リスク予測モデルの構築',
-        'Azure OpenAIによるメール感情分析・誤送信検出システム',
-        'Azure AI Search + LLMでRAG型社内ドキュメント検索システム構築',
-        'Django×ReactによるTo-Doアプリ開発、Webスクレイピング自動化',
+        '退職予測モデルの開発: 社内人材データを活用したリスクスコア算出モデルの構築',
+        'Azure OpenAIによるメール感情分析・誤送信検出システムの構築',
+        'Azure AI Search + LLMによるRAG型社内ドキュメント検索システムの構築',
+        '自然言語処理による文書間の類似性評価ロジックの実装',
+        'Webスクレイピングによる勤務実績データの自動取得・CSV出力自動化',
+        'OCR精度改善（レシート読取の画像処理・OCRチューニング）',
+        'Django×ReactによるTo-Doリストアプリの開発',
       ],
-      achievements: 'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
-      techStack: ['Python', 'Java', 'SQL', 'Django', 'React', 'Next.js', 'Azure OpenAI', 'Azure AI Search', 'OCR'],
+      achievements:
+        'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
+      techStack: [
+        'Python',
+        'Java',
+        'SQL',
+        'Django',
+        'React',
+        'Next.js',
+        'Redux Toolkit',
+        'Tailwind CSS',
+        'Azure OpenAI',
+        'Azure AI Search',
+        'OCR',
+      ],
     },
   },
   {
@@ -213,44 +455,120 @@ const experiences = [
     company: '楽天グループ株式会社',
     role: 'アプリケーションエンジニア インターン',
     period: '2023年8月（1週間）',
-    description: 'FlutterとDartを用いたクロスプラットフォームモバイルアプリのプロトタイプ開発。',
+    description:
+      'Flutterを用いたクロスプラットフォームモバイルアプリのプロトタイプ開発。',
     tags: ['Flutter', 'Dart', 'Mobile', 'UI/UX'],
     url: 'https://corp.rakuten.co.jp/',
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        '新規プロトタイプ開発コースに参加。テーマに沿って、Flutterを用いたモバイルアプリのデザイン、企画、開発をチームで担当。',
+      responsibilities: [
+        'Flutterを用いたモバイルアプリのUI設計・機能実装・デバッグ',
+        'チームでの要件定義から開発・検証までのプロセスを経験',
+        'クロスプラットフォーム開発の実践',
+      ],
+      achievements:
+        '短期間で要件定義から開発・検証までを完了。Flutterによる効率的なクロスプラットフォーム開発を実践',
+      techStack: ['Flutter', 'Dart'],
+    },
   },
   {
     id: 'matsuo-institute-1',
     company: '株式会社松尾研究所',
-    role: 'AI Engineer / Strategy Consulting',
+    role: 'AI Engineer / 戦略コンサルティング補佐',
     period: '2023年1月〜5月（5ヶ月）',
-    description: '大手食品企業のDX推進プロジェクト。戦略コンサルティング補佐として市場規模推定・競合分析。',
+    description:
+      '大手食品企業のDX推進プロジェクト。戦略コンサルティング補佐として市場規模推定・競合分析。',
     tags: ['Market Research', 'Fermi Estimation', 'Strategy', 'DX'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        '日本トップの食品企業のDX推進プロジェクトに参画。' +
+        'AIエンジニアとしての立場で参加しつつ、主に戦略コンサルタントとしての役割を担った。' +
+        '数千万円規模のDX案件における実務を経験。',
+      responsibilities: [
+        '市場規模推定（フェルミ推定）: DX化による市場拡大・影響予測、リソース配分の意思決定支援',
+        '市場調査・競合リサーチに基づく戦略立案の基礎データ提供、経営陣向け資料作成',
+        '週1回の経営陣ミーティングに出席し、意思決定プロセスやビジョン形成に関する洞察を獲得',
+        '議事録・プロジェクト推進管理、意思決定の透明性確保',
+      ],
+      achievements:
+        '数千万円規模のDX案件での実務経験。経営陣との直接的な議論を通じた戦略視点の習得',
+      techStack: [
+        'Market Research',
+        'Fermi Estimation',
+        'Strategy Consulting',
+        'DX',
+      ],
+    },
   },
   {
     id: 'shinonome',
     company: '株式会社Shinonome',
     role: 'データサイエンティスト',
     period: '2021年4月〜2023年6月（2年3ヶ月）',
-    description: '日記生成AI開発（NLP）、銀行太陽光ブロックチェーンプロジェクトのテスト設計。',
+    description:
+      '日記生成AI開発（NLP）、銀行太陽光ブロックチェーンプロジェクトのテスト設計。',
     tags: ['Python', 'NLP', 'Blockchain', 'Testing'],
     url: 'https://shinonome.com/',
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        'データサイエンティストとして、NLPを活用した受託開発プロジェクトやブロックチェーン関連プロジェクトに参画。' +
+        '後輩エンジニアへのコードレビュー・教育も担当。',
+      responsibilities: [
+        '日記生成AI（受託開発）: Paraphrase手法の論文調査・実装・評価、プロンプトエンジニアリングによる出力品質向上',
+        '銀行太陽光システムプロジェクト: 太陽光発電データに基づくブロックチェーン取引のテスト設計・検証',
+        '単体テスト・統合テストのテストケース作成・実行、バグ検出・報告',
+        '後輩エンジニアへのコードレビュー支援、品質向上への貢献',
+      ],
+      achievements:
+        'NLP活用の受託開発を完遂。コードレビューを通じたチーム品質向上に貢献',
+      techStack: [
+        'Python',
+        'NLP',
+        'Prompt Engineering',
+        'Blockchain',
+        'Testing',
+      ],
+    },
   },
   {
     id: 'infratop',
     company: '株式会社インフラトップ',
     role: 'プログラミングスクール メンター',
     period: '2022年6月〜2023年1月（8ヶ月）',
-    description: 'DMM WebCampにて受講生の学習支援。Ruby/Rails, HTML/CSS/Gitの質問対応・レビュー。',
+    description:
+      'DMM WebCampにて受講生の学習支援。Ruby/Rails, HTML/CSS/Gitの質問対応・レビュー。',
     tags: ['Ruby', 'Ruby on Rails', 'HTML/CSS', 'Git', 'Mentoring'],
     url: 'https://infratop.jp/',
     blogUrl: null,
-    hasDetail: false,
+    hasDetail: true,
+    details: {
+      overview:
+        'DMMのプログラミングスクール「DMM WebCamp」にて、完全フルリモートで受講生の学習支援を担当。' +
+        'プログラミングスキルの向上だけでなく、指導力やコミュニケーション力も向上。',
+      responsibilities: [
+        'カリキュラムに基づく質問対応・課題レビュー',
+        '受講生との個別指導・メンタリング',
+        '先輩メンターとのロールプレイを通じた指導スキルの向上',
+        'コーディングスタンダード・ベストプラクティスに基づいたコードレビュー',
+      ],
+      achievements:
+        '的確な言語化能力と指導力・共感力を習得。学習者一人ひとりの課題に寄り添った教育的支援を実践',
+      techStack: [
+        'Ruby',
+        'Ruby on Rails',
+        'HTML',
+        'CSS',
+        'Git',
+      ],
+    },
   },
 ];
 
