@@ -166,8 +166,8 @@ const HeroSection = () => {
           <SocialIcons links={profile.social} />
         </SocialWrapper>
         <ButtonGroup variants={itemVariants}>
-          <Button onClick={() => scrollToSection('projects')} href="#projects">
-            プロジェクトを見る
+          <Button onClick={() => scrollToSection('experience')} href="#experience">
+            経歴を見る
           </Button>
           <Button variant="outline" onClick={() => scrollToSection('contact')} href="#contact">
             お問い合わせ
