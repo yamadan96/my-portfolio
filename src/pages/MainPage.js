@@ -7,6 +7,7 @@ import SkillsSection from '../components/sections/SkillsSection';
 import EducationSection from '../components/sections/EducationSection';
 import ProjectsSection from '../components/sections/ProjectsSection';
 import AchievementsSection from '../components/sections/AchievementsSection';
+import CertificationsSection from '../components/sections/CertificationsSection';
 import ContactSection from '../components/sections/ContactSection';
 
 const MainPage = () => (
@@ -18,6 +19,7 @@ const MainPage = () => (
     <SkillsSection />
     <EducationSection />
     <ProjectsSection />
+    <CertificationsSection />
     <AchievementsSection />
     <ContactSection />
   </>

@@ -40,6 +40,97 @@ const experiences = [
     },
   },
   {
+    id: 'airion',
+    company: '株式会社Airion（東大発スタートアップ）',
+    role: 'AI開発事業部 AIエンジニア',
+    period: '2024年4月〜現在',
+    description:
+      'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。',
+    tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM'],
+    url: 'https://airion.co.jp/',
+    mediaLinks: [
+      { label: 'GENIAC PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000011.000118893.html' },
+      { label: 'トヨタイムズ YouTube', url: 'https://www.youtube.com/watch?v=xsmQ9Slnvds' },
+      { label: '音声合成 PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html' },
+      { label: '経産省 GENIAC', url: 'https://www.meti.go.jp/policy/mono_info_service/geniac/geniac_magazine/kickoffevents_3.html' },
+    ],
+    hasDetail: true,
+    details: {
+      overview:
+        'AI開発事業部に所属し、音声合成・画像処理・物体検出・最適化・3Dデータ解析・業務自動化などの領域で多数のプロジェクトに従事。' +
+        'AI技術の開発・実装・最適化に加え、報告書作成・プレゼンテーションを通じて技術成果を社内外に伝達。' +
+        '経済産業省・NEDOが主導する国家プロジェクト「GENIAC」でのLLM研究開発にも参画。',
+      responsibilities: [
+        '【GENIAC】製造業のPLC制御に特化したラダープログラム自動要約生成LLMの研究開発。現場提供データ（実機ラダーコード、仕様書、図面）を用いた前処理・アノテーション、ラダー特有の記法や制約に最適化したトークナイザ・デコーダーのカスタム設計、LLM-as-a-Judgeによる自動要約評価スクリプトの開発（正確性・簡潔性・可読性・一貫性の4軸評価）',
+        '【音声合成】次世代ロボット向けリアルタイム音声合成システム開発（VITS2）。自然な音質と1秒以内の低遅延を両立。固有名詞の辞書拡張、感情・抑揚の自然な再現のための音声データ前処理を担当。モデル選定から実装・検証・精度改善まで一貫して遂行。成果はトヨタイムズニュース・PR TIMESに掲載',
+        '【鉄パイプ自動計数AI】製造現場における鉄パイプの画像自動計数AIをテックリードとして開発（PoC）。YOLOv8ベースの物体検出を中心に、ヒートマップ系（CenterNet/FCOS）やセグメンテーション系（YOLOv8-seg）との比較検証を実施。三段階学習・データ拡張・TTA・NMSを活用し、200〜300本で束単位精度100%、600本で正解率99%以上、推論0.2秒/枚を達成',
+        '【建築パース画像補正】建築設計における画像処理技術を活用し、パース画像の補正を自動化。手作業を削減し画像編集プロセスを効率化',
+        '【内視鏡画像最適化】医療画像の画質向上を目的とした最適化アルゴリズムを開発。顧客環境での再現性を考慮した堅牢なシステム設計と手順書を作成し、現場導入を支援',
+        '【3Dセグメンテーション】3D形状解析技術を活用し、工業部品の穴検出・形状認識・異常検出を自動化。品質管理の精度向上に貢献',
+        '【仕様書自動生成】文書処理技術（PDF解析・テーブル抽出・OCR）を活用し、校正仕様書作成の業務を自動化。業務フローの効率化と作業時間の短縮を実現',
+      ],
+      achievements:
+        '鉄パイプ計数で束単位精度100%・推論0.2秒/枚達成（テックリード）、音声合成がトヨタイムズ・PR TIMESに掲載、GENIACプロジェクトでLLM研究開発に参画',
+      techStack: [
+        'Python',
+        'PyTorch',
+        'YOLOv8',
+        'OpenCV',
+        'VITS2',
+        'LoRA',
+        'ControlNet',
+        'Optuna',
+        'SMAC3',
+        'Roboflow',
+        'CVAT',
+        'Pandas',
+        'NumPy',
+        'Matplotlib',
+      ],
+    },
+  },
+  {
+    id: 'solty',
+    company: '株式会社ソリューション・アンド・テクノロジー',
+    role: 'システムエンジニア / DX統括部',
+    period: '2023年7月〜現在',
+    description:
+      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
+    tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
+    url: 'https://www.solty.co.jp/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '人事・会計などの業務システム企業にて、DX統括部でAI開発を担当。' +
+        '退職予測、文章類似度調査、感情分析、RAGシステム構築など幅広いAIソリューションを開発。',
+      responsibilities: [
+        '退職予測モデルの開発: 社内人材データを活用したリスクスコア算出モデルの構築',
+        'Azure OpenAIによるメール感情分析・誤送信検出システムの構築',
+        'Azure AI Search + LLMによるRAG型社内ドキュメント検索システムの構築',
+        '自然言語処理による文書間の類似性評価ロジックの実装',
+        'Webスクレイピングによる勤務実績データの自動取得・CSV出力自動化',
+        'OCR精度改善（レシート読取の画像処理・OCRチューニング）',
+        'Django×ReactによるTo-Doリストアプリの開発',
+      ],
+      achievements:
+        'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
+      techStack: [
+        'Python',
+        'Java',
+        'SQL',
+        'Django',
+        'React',
+        'Next.js',
+        'Redux Toolkit',
+        'Tailwind CSS',
+        'Azure OpenAI',
+        'Azure AI Search',
+        'OCR',
+      ],
+    },
+  },
+  {
     id: 'legalon',
     company: '株式会社LegalOn Technologies',
     role: 'AIエンジニア（NLP / LLM）',
@@ -119,6 +210,41 @@ const experiences = [
     },
   },
   {
+    id: 'exawizards',
+    company: '株式会社エクサウィザーズ',
+    role: '機械学習エンジニア',
+    period: '2025年8月〜9月（1.5ヶ月）',
+    description:
+      'オフィス環境向けAIエージェント開発。カメラ×VLM×Arduino制御で「見て→判断→動く」自律システムを構築。',
+    tags: ['Python', 'VLM', 'Arduino', 'Computer Vision', 'AI Agent'],
+    url: 'https://exawizards.com/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        'オフィス環境を対象としたAIエージェント開発プロジェクトに参画。' +
+        '自律エージェント×ワークフロー型制御を組み合わせ、環境入力に応じて「見て→判断して→動く」プロセスを実現。' +
+        'エッジデバイス上でマルチモーダルLLMを活用し、100%ローカル実行可能なデモシステムを開発。',
+      responsibilities: [
+        'プラグイン構造によるArduino＋RealSense＋VLMの統合設計・実装',
+        '危険物・異常（刃物・転倒リスク物・通路障害物等）の検知タスク設計',
+        '3段階推論（検出→優先度判断→対応提案）による説明可能なAIシステムの構築',
+        'リアルタイム環境認識・解析・制御が可能なプロトタイプの開発・検証',
+      ],
+      achievements:
+        'プロトタイプAIエージェントを開発し、見落としの削減・説明の一貫性向上を確認。ローカルモデル化・分散処理・ロボット統合の方向性を提案',
+      techStack: [
+        'Python',
+        'Vision-Language Model',
+        'Arduino',
+        'Intel RealSense',
+        'Semantic Kernel',
+        'Computer Vision',
+        'Explainable AI',
+      ],
+    },
+  },
+  {
     id: 'en-japan',
     company: 'エン・ジャパン株式会社',
     role: 'フルスタックエンジニア',
@@ -152,37 +278,40 @@ const experiences = [
     },
   },
   {
-    id: 'exawizards',
-    company: '株式会社エクサウィザーズ',
+    id: 'gmo-media',
+    company: 'GMOメディア株式会社',
     role: '機械学習エンジニア',
-    period: '2025年8月〜9月（1.5ヶ月）',
+    period: '2025年7月〜8月（1ヶ月）',
     description:
-      'オフィス環境向けAIエージェント開発。カメラ×VLM×Arduino制御で「見て→判断→動く」自律システムを構築。',
-    tags: ['Python', 'VLM', 'Arduino', 'Computer Vision', 'AI Agent'],
-    url: 'https://exawizards.com/',
-    blogUrl: null,
+      'ポイントサイトにおける承認売上予測・承認月予測モデルを構築。',
+    tags: ['Python', 'LightGBM', 'BigQuery', 'GCP'],
+    url: 'https://www.gmo.media/',
+    blogUrl: 'https://qiita.com/yamadan96/items/99c0e6757a6da8786626',
     hasDetail: true,
     details: {
       overview:
-        'オフィス環境を対象としたAIエージェント開発プロジェクトに参画。' +
-        '自律エージェント×ワークフロー型制御を組み合わせ、環境入力に応じて「見て→判断して→動く」プロセスを実現。' +
-        'エッジデバイス上でマルチモーダルLLMを活用し、100%ローカル実行可能なデモシステムを開発。',
+        'AIデータ推進チームにて、ポイントサイトにおける承認売上予測・承認月予測モデルを構築。' +
+        'BigQueryによる大規模データ抽出、特徴量エンジニアリング、信頼度スコアによるモデル切替で高精度を実現。',
       responsibilities: [
-        'プラグイン構造によるArduino＋RealSense＋VLMの統合設計・実装',
-        '危険物・異常（刃物・転倒リスク物・通路障害物等）の検知タスク設計',
-        '3段階推論（検出→優先度判断→対応提案）による説明可能なAIシステムの構築',
-        'リアルタイム環境認識・解析・制御が可能なプロトタイプの開発・検証',
+        '承認/否認予測モデルの構築（精度96.1%、AUC 0.965、F1 0.978）',
+        '承認時期予測モデルの開発（MAE 1.3日、高信頼度で月予測正解率99%以上）',
+        '時間・金額・テキスト・カテゴリ・交互作用の特徴量エンジニアリング',
+        '信頼度スコアを導入し、高・中・低信頼に分類してモデル切替による精度改善',
+        'BigQuery→Googleスプレッドシートへの週次自動反映パイプライン構築',
+        '最終日の成果発表会にて業務導入に向けた提案を実施',
       ],
       achievements:
-        'プロトタイプAIエージェントを開発し、見落としの削減・説明の一貫性向上を確認。ローカルモデル化・分散処理・ロボット統合の方向性を提案',
+        '精度96.1%の承認予測モデルを構築。業務工数削減とキャッシュフロー計画精度の向上に貢献',
       techStack: [
         'Python',
-        'Vision-Language Model',
-        'Arduino',
-        'Intel RealSense',
-        'Semantic Kernel',
-        'Computer Vision',
-        'Explainable AI',
+        'LightGBM',
+        'scikit-learn',
+        'pandas',
+        'numpy',
+        'BigQuery',
+        'GCP',
+        'matplotlib',
+        'seaborn',
       ],
     },
   },
@@ -229,7 +358,7 @@ const experiences = [
     description:
       '金融×テクノロジーのワークショップ。模擬FXトレードシステムの設計・実装・発表。',
     tags: ['Finance', 'Algorithm', 'Trading System'],
-    url: null,
+    url: 'https://www.goldmansachs.com/japan/',
     blogUrl: null,
     hasDetail: true,
     details: {
@@ -247,44 +376,6 @@ const experiences = [
     },
   },
   {
-    id: 'gmo-media',
-    company: 'GMOメディア株式会社',
-    role: '機械学習エンジニア',
-    period: '2025年7月〜8月（1ヶ月）',
-    description:
-      'ポイントサイトにおける承認売上予測・承認月予測モデルを構築。',
-    tags: ['Python', 'LightGBM', 'BigQuery', 'GCP'],
-    url: 'https://www.gmo.media/',
-    blogUrl: 'https://qiita.com/yamadan96/items/99c0e6757a6da8786626',
-    hasDetail: true,
-    details: {
-      overview:
-        'AIデータ推進チームにて、ポイントサイトにおける承認売上予測・承認月予測モデルを構築。' +
-        'BigQueryによる大規模データ抽出、特徴量エンジニアリング、信頼度スコアによるモデル切替で高精度を実現。',
-      responsibilities: [
-        '承認/否認予測モデルの構築（精度96.1%、AUC 0.965、F1 0.978）',
-        '承認時期予測モデルの開発（MAE 1.3日、高信頼度で月予測正解率99%以上）',
-        '時間・金額・テキスト・カテゴリ・交互作用の特徴量エンジニアリング',
-        '信頼度スコアを導入し、高・中・低信頼に分類してモデル切替による精度改善',
-        'BigQuery→Googleスプレッドシートへの週次自動反映パイプライン構築',
-        '最終日の成果発表会にて業務導入に向けた提案を実施',
-      ],
-      achievements:
-        '精度96.1%の承認予測モデルを構築。業務工数削減とキャッシュフロー計画精度の向上に貢献',
-      techStack: [
-        'Python',
-        'LightGBM',
-        'scikit-learn',
-        'pandas',
-        'numpy',
-        'BigQuery',
-        'GCP',
-        'matplotlib',
-        'seaborn',
-      ],
-    },
-  },
-  {
     id: 'standby',
     company: 'スタンバイ株式会社',
     role: 'MLエンジニア',
@@ -292,7 +383,7 @@ const experiences = [
     description:
       'LINEヤフー×ビズリーチ合弁。実務課題の要因分析→解決策立案→ML実装→CTO成果発表。',
     tags: ['Python', 'Machine Learning', 'Data Analysis'],
-    url: null,
+    url: 'https://jp.stanby.com/',
     blogUrl: null,
     hasDetail: true,
     details: {
@@ -317,7 +408,7 @@ const experiences = [
     description:
       '広告配信DSPの高速化。N+1解消、TTLキャッシュ、並列処理、Prometheus+Grafana可視化。',
     tags: ['Python', 'MySQL', 'Prometheus', 'Grafana', 'Docker'],
-    url: null,
+    url: 'https://geniee.co.jp/',
     blogUrl: 'https://qiita.com/yamadan96/items/8018a6e5cab074737cb2',
     hasDetail: true,
     details: {
@@ -351,7 +442,7 @@ const experiences = [
     description:
       'マルチテナンシープラットフォームのアーキテクチャ設計。ECS Fargate、API Gateway等。',
     tags: ['AWS', 'ECS Fargate', 'API Gateway', 'Microservices'],
-    url: null,
+    url: 'https://www.cyberagent.co.jp/',
     blogUrl: 'https://qiita.com/yamadan96/items/790b4a5e5b7f12543c21',
     hasDetail: true,
     details: {
@@ -380,97 +471,6 @@ const experiences = [
     },
   },
   {
-    id: 'airion',
-    company: '株式会社Airion（東大発スタートアップ）',
-    role: 'AI開発事業部 AIエンジニア',
-    period: '2024年4月〜現在',
-    description:
-      'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。',
-    tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM'],
-    url: 'https://airion.co.jp/',
-    mediaLinks: [
-      { label: 'GENIAC PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000011.000118893.html' },
-      { label: 'トヨタイムズ YouTube', url: 'https://www.youtube.com/watch?v=xsmQ9Slnvds' },
-      { label: '音声合成 PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html' },
-      { label: '経産省 GENIAC', url: 'https://www.meti.go.jp/policy/mono_info_service/geniac/geniac_magazine/kickoffevents_3.html' },
-    ],
-    hasDetail: true,
-    details: {
-      overview:
-        'AI開発事業部に所属し、音声合成・画像処理・物体検出・最適化・3Dデータ解析・業務自動化などの領域で多数のプロジェクトに従事。' +
-        'AI技術の開発・実装・最適化に加え、報告書作成・プレゼンテーションを通じて技術成果を社内外に伝達。' +
-        '経済産業省・NEDOが主導する国家プロジェクト「GENIAC」でのLLM研究開発にも参画。',
-      responsibilities: [
-        '【GENIAC】製造業のPLC制御に特化したラダープログラム自動要約生成LLMの研究開発。現場提供データ（実機ラダーコード、仕様書、図面）を用いた前処理・アノテーション、ラダー特有の記法や制約に最適化したトークナイザ・デコーダーのカスタム設計、LLM-as-a-Judgeによる自動要約評価スクリプトの開発（正確性・簡潔性・可読性・一貫性の4軸評価）',
-        '【音声合成】次世代ロボット向けリアルタイム音声合成システム開発（VITS2）。自然な音質と1秒以内の低遅延を両立。固有名詞の辞書拡張、感情・抑揚の自然な再現のための音声データ前処理を担当。モデル選定から実装・検証・精度改善まで一貫して遂行。成果はトヨタイムズニュース・PR TIMESに掲載',
-        '【鉄パイプ自動計数AI】製造現場における鉄パイプの画像自動計数AIをテックリードとして開発（PoC）。YOLOv8ベースの物体検出を中心に、ヒートマップ系（CenterNet/FCOS）やセグメンテーション系（YOLOv8-seg）との比較検証を実施。三段階学習・データ拡張・TTA・NMSを活用し、200〜300本で束単位精度100%、600本で正解率99%以上、推論0.2秒/枚を達成',
-        '【建築パース画像補正】建築設計における画像処理技術を活用し、パース画像の補正を自動化。手作業を削減し画像編集プロセスを効率化',
-        '【内視鏡画像最適化】医療画像の画質向上を目的とした最適化アルゴリズムを開発。顧客環境での再現性を考慮した堅牢なシステム設計と手順書を作成し、現場導入を支援',
-        '【3Dセグメンテーション】3D形状解析技術を活用し、工業部品の穴検出・形状認識・異常検出を自動化。品質管理の精度向上に貢献',
-        '【仕様書自動生成】文書処理技術（PDF解析・テーブル抽出・OCR）を活用し、校正仕様書作成の業務を自動化。業務フローの効率化と作業時間の短縮を実現',
-      ],
-      achievements:
-        '鉄パイプ計数で束単位精度100%・推論0.2秒/枚達成（テックリード）、音声合成がトヨタイムズ・PR TIMESに掲載、GENIACプロジェクトでLLM研究開発に参画、7つのプロジェクトを並行して推進',
-      techStack: [
-        'Python',
-        'PyTorch',
-        'YOLOv8',
-        'OpenCV',
-        'VITS2',
-        'LoRA',
-        'ControlNet',
-        'Optuna',
-        'SMAC3',
-        'Roboflow',
-        'CVAT',
-        'Pandas',
-        'NumPy',
-        'Matplotlib',
-      ],
-    },
-  },
-  {
-    id: 'solty',
-    company: '株式会社ソリューション・アンド・テクノロジー',
-    role: 'システムエンジニア / DX統括部',
-    period: '2023年7月〜現在',
-    description:
-      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
-    tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
-    url: 'https://www.solty.co.jp/',
-    blogUrl: null,
-    hasDetail: true,
-    details: {
-      overview:
-        '人事・会計などの業務システム企業にて、DX統括部でAI開発を担当。' +
-        '退職予測、文章類似度調査、感情分析、RAGシステム構築など幅広いAIソリューションを開発。',
-      responsibilities: [
-        '退職予測モデルの開発: 社内人材データを活用したリスクスコア算出モデルの構築',
-        'Azure OpenAIによるメール感情分析・誤送信検出システムの構築',
-        'Azure AI Search + LLMによるRAG型社内ドキュメント検索システムの構築',
-        '自然言語処理による文書間の類似性評価ロジックの実装',
-        'Webスクレイピングによる勤務実績データの自動取得・CSV出力自動化',
-        'OCR精度改善（レシート読取の画像処理・OCRチューニング）',
-        'Django×ReactによるTo-Doリストアプリの開発',
-      ],
-      achievements:
-        'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
-      techStack: [
-        'Python',
-        'Java',
-        'SQL',
-        'Django',
-        'React',
-        'Next.js',
-        'Redux Toolkit',
-        'Tailwind CSS',
-        'Azure OpenAI',
-        'Azure AI Search',
-        'OCR',
-      ],
-    },
-  },
-  {
     id: 'rakuten',
     company: '楽天グループ株式会社',
     role: 'アプリケーションエンジニア インターン',
@@ -492,38 +492,6 @@ const experiences = [
       achievements:
         '短期間で要件定義から開発・検証までを完了。Flutterによる効率的なクロスプラットフォーム開発を実践',
       techStack: ['Flutter', 'Dart'],
-    },
-  },
-  {
-    id: 'matsuo-institute-1',
-    company: '株式会社松尾研究所',
-    role: 'AI Engineer / 戦略コンサルティング補佐',
-    period: '2023年1月〜5月（5ヶ月）',
-    description:
-      '大手食品企業のDX推進プロジェクト。戦略コンサルティング補佐として市場規模推定・競合分析。',
-    tags: ['Market Research', 'Fermi Estimation', 'Strategy', 'DX'],
-    url: 'https://matsuo-institute.com/',
-    blogUrl: null,
-    hasDetail: true,
-    details: {
-      overview:
-        '日本トップの食品企業のDX推進プロジェクトに参画。' +
-        'AIエンジニアとしての立場で参加しつつ、主に戦略コンサルタントとしての役割を担った。' +
-        '数千万円規模のDX案件における実務を経験。',
-      responsibilities: [
-        '市場規模推定（フェルミ推定）: DX化による市場拡大・影響予測、リソース配分の意思決定支援',
-        '市場調査・競合リサーチに基づく戦略立案の基礎データ提供、経営陣向け資料作成',
-        '週1回の経営陣ミーティングに出席し、意思決定プロセスやビジョン形成に関する洞察を獲得',
-        '議事録・プロジェクト推進管理、意思決定の透明性確保',
-      ],
-      achievements:
-        '数千万円規模のDX案件での実務経験。経営陣との直接的な議論を通じた戦略視点の習得',
-      techStack: [
-        'Market Research',
-        'Fermi Estimation',
-        'Strategy Consulting',
-        'DX',
-      ],
     },
   },
   {
@@ -555,6 +523,38 @@ const experiences = [
         'Prompt Engineering',
         'Blockchain',
         'Testing',
+      ],
+    },
+  },
+  {
+    id: 'matsuo-institute-1',
+    company: '株式会社松尾研究所',
+    role: 'AI Engineer / 戦略コンサルティング補佐',
+    period: '2023年1月〜5月（5ヶ月）',
+    description:
+      '大手食品企業のDX推進プロジェクト。戦略コンサルティング補佐として市場規模推定・競合分析。',
+    tags: ['Market Research', 'Fermi Estimation', 'Strategy', 'DX'],
+    url: 'https://matsuo-institute.com/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '日本トップの食品企業のDX推進プロジェクトに参画。' +
+        'AIエンジニアとしての立場で参加しつつ、主に戦略コンサルタントとしての役割を担った。' +
+        '数千万円規模のDX案件における実務を経験。',
+      responsibilities: [
+        '市場規模推定（フェルミ推定）: DX化による市場拡大・影響予測、リソース配分の意思決定支援',
+        '市場調査・競合リサーチに基づく戦略立案の基礎データ提供、経営陣向け資料作成',
+        '週1回の経営陣ミーティングに出席し、意思決定プロセスやビジョン形成に関する洞察を獲得',
+        '議事録・プロジェクト推進管理、意思決定の透明性確保',
+      ],
+      achievements:
+        '数千万円規模のDX案件での実務経験。経営陣との直接的な議論を通じた戦略視点の習得',
+      techStack: [
+        'Market Research',
+        'Fermi Estimation',
+        'Strategy Consulting',
+        'DX',
       ],
     },
   },

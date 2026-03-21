@@ -21,7 +21,7 @@ const education = [
     faculty: '普通科',
     degree: '',
     period: '2017年4月〜2020年3月',
-    description: '',
+    description: '2017年7月 カナダ・バンクーバー 語学留学（3週間）',
   },
   {
     id: 'edu-04',

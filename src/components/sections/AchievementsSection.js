@@ -64,7 +64,7 @@ const AchievementLink = styled.a`
 
 const AchievementsSection = () => (
   <Section id="achievements">
-    <SectionTitle title="Achievements" subtitle="実績・資格" />
+    <SectionTitle title="Achievements" subtitle="実績" />
     <AchievementsGrid>
       {profile.achievements.map((item, index) => (
         <AchievementCard

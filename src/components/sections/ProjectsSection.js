@@ -17,10 +17,28 @@ const ProjectsGrid = styled.div`
   }
 `;
 
+const ProjectHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+`;
+
 const ProjectTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: 700;
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+`;
+
+const CategoryBadge = styled.span`
+  display: inline-block;
+  padding: ${({ theme }) => `2px ${theme.spacing.sm}`};
+  background: ${({ theme }) => `${theme.colors.primary}15`};
+  border: 1px solid ${({ theme }) => `${theme.colors.primary}30`};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.primary};
+  font-weight: 600;
+  white-space: nowrap;
 `;
 
 const ProjectDescription = styled.p`
@@ -62,11 +80,16 @@ const ProjectLink = styled(motion.a)`
 
 const ProjectsSection = () => (
   <Section id="projects">
-    <SectionTitle title="Projects" subtitle="個人開発" />
+    <SectionTitle title="Projects" subtitle="個人開発・ハッカソン" />
     <ProjectsGrid>
       {projects.map((project) => (
         <Card key={project.id}>
-          <ProjectTitle>{project.title}</ProjectTitle>
+          <ProjectHeader>
+            <ProjectTitle>{project.title}</ProjectTitle>
+            {project.category === 'hackathon' && (
+              <CategoryBadge>Hackathon</CategoryBadge>
+            )}
+          </ProjectHeader>
           <ProjectDescription>{project.description}</ProjectDescription>
           <Tags>
             {project.tags.map((tag) => (

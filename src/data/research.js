@@ -24,12 +24,16 @@ const research = [
   {
     id: 'research-03',
     title: '長期文脈を活用したフレーム外挿モデルによる動画異常検知',
-    venue: '研究プロジェクト',
+    venue: '東京理科大学 創域理工学部 2024年度 卒業論文',
     year: 2024,
-    type: '研究プロジェクト',
-    description: 'Clockwork Variational Autoencoder（CW-VAE）を活用し、動画から異常を検知する手法を提案。OOPS!データセットを用いてConvLSTMとの定量比較を実施し、AUC・F1で優れた結果を達成。時間スケール分離の有効性を示した。',
-    tags: ['VAE', 'Anomaly Detection', 'Video Analysis', 'ConvLSTM'],
-    link: null,
+    type: '卒業論文',
+    description:
+      '事故などの異常を動画から検知するタスクにおいて、従来手法が苦手とする長期的な背景変化や動作パターンの抽出を目的に、' +
+      'Clockwork Variational Autoencoder（CW-VAE）を活用した手法を提案。' +
+      'OOPS!データセットを用いてConvLSTMとの定量比較を実施し、AUC・F1など複数指標で優れた結果を達成。' +
+      'CW-VAEの時間的抽象化機構により、短期・長期双方の変化を捉え、動画異常検知における時間スケール分離の有効性を示した。',
+    tags: ['VAE', 'CW-VAE', 'Anomaly Detection', 'Video Analysis', 'ConvLSTM', 'OOPS!'],
+    link: 'https://github.com/yamadan96/cwvae-anomaly-detection-thesis',
   },
   {
     id: 'research-04',

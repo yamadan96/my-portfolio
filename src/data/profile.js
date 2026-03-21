@@ -5,7 +5,6 @@ const profile = {
   roles: ['AI Engineer', 'ML Researcher', 'Full-Stack Developer'],
   affiliation: '東京理科大学大学院 創域理工学研究科 電気電子情報工学専攻 M1',
   career: '2027年4月〜 外資系コンサルティングファーム AIアーキテクト職 入社予定',
-  studyAbroad: '2017年7月 カナダ・バンクーバー 語学留学（3週間）',
   bio: [
     '機械学習・深層学習を専門とするAIエンジニア。',
     '松尾研究所やMIXI、LegalOn Technologies等、16社以上でのインターン経験を持つ。',
@@ -44,12 +43,6 @@ const profile = {
       icon: '🏆',
       description: 'DISCOプログラミングコンテスト本戦出場',
       link: 'https://news.mynavi.jp/techplus/kikaku/disco_decc-2/',
-    },
-    {
-      title: '資格・認定',
-      icon: '📜',
-      description: "Harvard CS50x修了、JDLA ディープラーニング基礎講座修了、Data Science Education Program Level 3、日商簿記検定3級、普通自動車免許（MT）",
-      link: 'https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/aHBkNHNWLzhrWmpNVlJVSDZVQTdIZz09',
     },
     {
       title: '松尾研 LLMATCHプログラム',
