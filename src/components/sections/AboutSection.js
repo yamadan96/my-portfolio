@@ -93,21 +93,11 @@ const AboutSection = () => (
             {profile.career}
           </CareerBadge>
         )}
-        {profile.studyAbroad && (
-          <CareerBadge
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ marginLeft: '0.5rem' }}
-          >
-            {profile.studyAbroad}
-          </CareerBadge>
-        )}
         {profile.bio.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
         <p>
-          研究では深層学習と自然言語処理を中心に取り組み、学会発表の経験もあります。
+          研究では深層学習と画像処理を中心に取り組み、学会発表の経験もあります。
           インターンでは大手企業からスタートアップまで幅広い環境で開発経験を積み、
           チーム開発やプロダクト志向の考え方を身につけました。
         </p>
