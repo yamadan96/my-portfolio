@@ -80,13 +80,13 @@ const experiences = [
         'みてね事業本部 Data Engineeringグループにて、Vision-Language Modelによる画像処理システムの高速化とコスト削減を実現。' +
         'データ駆動型アプローチでNew Relic・Grafana分析を活用。',
       responsibilities: [
-        'Image Captioning高速化: Vision Encoderのベクトル再利用により推論速度42.8%向上',
-        'MLパイプラインのリファクタリング: コード130行削減（50%）、DRY原則・Pydantic導入',
-        'SQS Visibility Timeout最適化: データ駆動で900秒→65秒に短縮、エラー復旧15分→1分強',
-        'S3アップロード並列化: ThreadPoolExecutorで30.7%高速化、約1万円/回のコスト削減',
+        'Image Captioning高速化: Vision Encoderベクトル再利用で全体処理時間42.8%短縮（2Bモデル）/28.1%短縮（4Bモデル）。画像処理部分3.2秒→0.001秒（99.97%削減）。CPUでも15.4倍高速（ベクトル再利用時）。Gradioデモアプリで効果を検証',
+        'MLパイプラインリファクタリング: 顔抽出・感情推定・頭部姿勢推定の重複処理をPydanticベースに刷新しコード量約130行削減（約50%）、テストコード約40%削減。本番環境で18時間監視しエラー・挙動変化なしを確認',
+        'SQS Visibility Timeout最適化: New Relicで30日間のデータ収集・統計分析（平均0.35秒、99%ile 1秒以下、最大60秒、エラー率0.01%未満）。900秒→65秒（92.8%短縮）でエラー復旧15分→1分強。段階的短縮計画（65→40→25→20秒）を策定しTerraformでIaC管理',
+        'S3アップロード並列化: ThreadPoolExecutorで高解像度画像（6.5MB）0.789→0.547秒（30.7%短縮）、通常サイズ（331KB）0.305→0.267秒（12.5%短縮）。グリーティングカードで約1万円/回、将来的にステッカーで約10万円/回の削減見込み',
       ],
       achievements:
-        '処理速度42.8%向上、エラー復旧92.8%短縮、コスト削減、コード50%削減',
+        '処理速度42.8%向上（2B）/28.1%（4B）、コスト1万円/回削減（将来10万円/回見込み）、エラー復旧時間92.8%短縮、コード130行削減、本番18h監視で問題なし',
       techStack: [
         'Python',
         'PyTorch',
@@ -371,8 +371,8 @@ const experiences = [
     role: 'AI開発事業部 AIエンジニア',
     period: '2024年4月〜現在',
     description:
-      'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。大手製造業・医療機器メーカーとの直接取引。',
-    tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM', 'IEC 61131'],
+      'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。',
+    tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM'],
     url: 'https://airion.co.jp/',
     mediaLinks: [
       { label: 'GENIAC PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000011.000118893.html' },
@@ -383,9 +383,8 @@ const experiences = [
     hasDetail: true,
     details: {
       overview:
-        'AI開発事業部に所属し、設備メーカー・トヨタ・医療機器メーカー・重工業メーカー業など大手製造業・医療機器メーカーとの直接取引で、' +
-        '音声合成・PLC制御・画像処理・物体検出・内視鏡画像最適化・3Dデータ解析・業務自動化など多岐にわたるAIプロジェクトに従事。' +
-        'AI技術の研究開発・実装・最適化に加え、報告書作成・プレゼンテーションを通じて技術成果を社内外に伝達。' +
+        'AI開発事業部に所属し、音声合成・画像処理・物体検出・最適化・3Dデータ解析・業務自動化などの領域で多数のプロジェクトに従事。' +
+        'AI技術の開発・実装・最適化に加え、報告書作成・プレゼンテーションを通じて技術成果を社内外に伝達。' +
         '経済産業省・NEDOが主導する国家プロジェクト「GENIAC」でのLLM研究開発にも参画。',
       responsibilities: [
         '【GENIAC】製造業のPLC制御に特化したラダープログラム自動要約生成LLMの研究開発。現場提供データ（実機ラダーコード、仕様書、図面）を用いた前処理・アノテーション、ラダー特有の記法や制約に最適化したトークナイザ・デコーダーのカスタム設計、LLM-as-a-Judgeによる自動要約評価スクリプトの開発（正確性・簡潔性・可読性・一貫性の4軸評価）',
@@ -413,135 +412,6 @@ const experiences = [
         'Pandas',
         'NumPy',
         'Matplotlib',
-      ],
-      projects: [
-        {
-          name: 'GENIAC ― PLC制御LLM研究開発',
-          client: '設備メーカー',
-          icon: '🏭',
-          category: 'LLM / 製造業DX',
-          period: '2024年10月〜現在',
-          summary:
-            '経済産業省・NEDO主導の国家プロジェクト「GENIAC」にて、製造業のPLC（プログラマブルロジックコントローラ）制御に特化したLLMの研究開発を推進。',
-          details: [
-            'IEC 61131-10 XML（ラダー図）→ IEC 61131-3 IL（命令リスト）への自動変換エンジンを開発。65万行超の大規模PLCファイルを処理可能',
-            '現場提供の実機ラダーコード・仕様書・図面を用いた前処理パイプライン・アノテーション基盤を構築',
-            'ラダー特有の記法・制約に最適化したカスタムトークナイザ・デコーダーを設計',
-            'LLM-as-a-Judgeによる自動要約評価（正確性・簡潔性・可読性・一貫性の4軸）を開発',
-            'ニーモニック自動生成・サジェスト生成・検証基盤など、複数のサブシステムをPython + Conda環境で構築',
-            'フロントエンド + バックエンドによるデモアプリケーションを開発し、CI/CDパイプライン（Claude API・OpenAI API連携）を構築',
-          ],
-          techStack: ['Python', 'PyTorch', 'LLM', 'Claude API', 'OpenAI API', 'IEC 61131-10/3', 'XML', 'CI/CD', 'Conda'],
-          impact: '国家プロジェクトとして製造業のDX推進に貢献。PLC制御の自動化・効率化の基盤技術を確立',
-        },
-        {
-          name: 'リアルタイム音声合成AI',
-          client: 'トヨタ自動車株式会社',
-          icon: '🎙️',
-          category: '音声合成 / ロボティクス',
-          period: '2024年4月〜2024年12月',
-          summary:
-            '次世代ロボット向けリアルタイム音声合成システムを開発。Style-Bert-VITS2・OpenJTalkを活用し、自然な日本語音声をリアルタイムで生成。',
-          details: [
-            'VITS2（Variational Inference Text-to-Speech 2）をベースに、Style-Bert-VITS2で感情・話者スタイルを制御',
-            'OpenJTalk（日本語テキスト→音声エンジン）と連携し、固有名詞辞書の拡張・アクセント制御を実装',
-            '1秒以内の低遅延を維持しつつ、自然な音質・感情表現・抑揚を実現',
-            '音声データの前処理パイプライン（ノイズ除去・正規化・セグメンテーション）を構築',
-            'CycleGANを用いた音声変換や、Stable Diffusionによる関連画像生成も並行して検証',
-            '成果はトヨタイムズニュースYouTubeおよびPR TIMESに掲載',
-          ],
-          techStack: ['Python', 'VITS2', 'Style-Bert-VITS2', 'OpenJTalk', 'PyTorch', 'CycleGAN', 'TensorFlow'],
-          impact: 'トヨタイムズニュース・PR TIMESに掲載。次世代ロボットの音声インタフェース基盤を確立',
-        },
-        {
-          name: '鉄パイプ自動計数AI',
-          client: '製造業の顧客',
-          icon: '🔧',
-          category: '物体検出 / 製造業',
-          period: '2024年10月〜2025年5月',
-          summary:
-            '製造現場における鉄パイプの画像自動計数AIをテックリードとしてPoC開発。束単位精度100%を達成。',
-          details: [
-            'YOLOv8ベースの物体検出モデルを中心に、CenterNet・FCOSなどヒートマップ系手法、YOLOv8-segなどセグメンテーション系手法との比較検証を実施',
-            '三段階学習戦略（事前学習→ファインチューニング→テスト時拡張）により精度を段階的に向上',
-            'データ拡張（回転・反転・色調変化・モザイク等）とTTA（Test-Time Augmentation）・NMS（Non-Maximum Suppression）を活用',
-            'COCO形式でのアノテーション管理、ヒートマップによる検出精度の可視化・評価',
-            '複数のシグマパラメータでの比較実験を行い、最適なモデル構成を選定',
-            '200〜300本の束で精度100%、600本でも正解率99%以上、推論速度0.2秒/枚を達成',
-          ],
-          techStack: ['Python', 'YOLOv8', 'CenterNet', 'FCOS', 'OpenCV', 'COCO', 'Roboflow', 'CVAT'],
-          impact: 'テックリードとしてPoC完遂。束単位精度100%を達成し、製造現場の計数作業自動化の実現可能性を実証',
-        },
-        {
-          name: '内視鏡画像フォーカス最適化',
-          client: '医療機器メーカー',
-          icon: '🏥',
-          category: '医療画像処理 / 画質評価',
-          period: '2024年7月〜2025年3月',
-          summary:
-            '医療内視鏡画像の自動フォーカス最適化システム（IPF Optimizer）を開発。複数の撮像モードに対応した画質評価基盤を構築。',
-          details: [
-            'IPF Optimizer（Image Focus Optimizer）を開発し、内視鏡画像のフォーカス品質を自動最適化',
-            'IQA-PyTorch（Image Quality Assessment）ライブラリを活用した定量的な画質評価パイプラインを構築',
-            'WLI（White Light Imaging）、NBI（Narrow Band Imaging）、RDI（Red Dichromatic Imaging）など複数の撮像モードに対応',
-            'リファレンス画像データセットを用いたAGC（Auto Gain Control）最大値での評価・キャリブレーションを実施',
-            'IPFシミュレーターの開発・納品。口腔内視鏡のサンプル動画を用いた検証環境を構築',
-            '顧客環境での再現性を考慮した堅牢なシステム設計と詳細な導入手順書を作成し、現場導入を支援',
-          ],
-          techStack: ['Python', 'PyTorch', 'IQA-PyTorch', 'OpenCV', 'NumPy', 'Optuna', 'SMAC3'],
-          impact: '医療機器メーカーへの納品を完了。複数撮像モード対応の画質最適化基盤を確立',
-        },
-        {
-          name: '3D形状解析・セグメンテーション',
-          client: '重工業メーカー',
-          icon: '⚙️',
-          category: '3D解析 / CAD / 品質管理',
-          period: '2024年9月〜2025年1月',
-          summary:
-            '工業部品の3D形状解析・セグメンテーションシステムを開発。OpenCASCADE・STEPファイル処理による穴検出・形状認識・異常検出を自動化。',
-          details: [
-            'OpenCASCADE（3D CAD/幾何学計算ライブラリ）を用いた3D形状解析基盤を構築',
-            'ISO 10303-21標準（STEP形式）のCADデータ読み込み・解析パイプラインを実装',
-            '工業部品の穴検出・形状認識・表面異常検出を3Dデータから自動的に実行',
-            'Python OpenCASCADE環境（pyocc_env）でのプロトタイプ開発・検証',
-            '3Dモデルデータの前処理・正規化・特徴量抽出のワークフローを確立',
-          ],
-          techStack: ['Python', 'OpenCASCADE', 'STEP (ISO 10303)', '3D Segmentation', 'CAD'],
-          impact: '重工業における品質管理の自動化に貢献。3D形状解析による検査工程の効率化を実現',
-        },
-        {
-          name: '建築パース画像補正',
-          client: '非公開',
-          icon: '🏗️',
-          category: '画像処理 / 建築',
-          period: '2024年6月〜2024年9月',
-          summary:
-            '建築設計におけるパース画像の自動補正システムを開発。ControlNet・LoRAを活用した高品質な画像補正を実現。',
-          details: [
-            'ControlNetを活用した建築パース画像の構図・パース補正の自動化',
-            'LoRA（Low-Rank Adaptation）によるドメイン特化型の画像生成モデルのファインチューニング',
-            '手作業での画像編集プロセスを大幅に効率化し、設計ワークフローを改善',
-          ],
-          techStack: ['Python', 'ControlNet', 'LoRA', 'Stable Diffusion', 'OpenCV'],
-          impact: '建築設計における画像編集の工数を削減。AIによるクリエイティブ業務支援を実現',
-        },
-        {
-          name: '仕様書自動生成',
-          client: '非公開',
-          icon: '📄',
-          category: '文書処理 / 業務自動化',
-          period: '2024年5月〜2024年8月',
-          summary:
-            '校正仕様書作成の自動化システムを開発。PDF解析・テーブル抽出・OCRを活用し、業務フローを効率化。',
-          details: [
-            'PDF解析エンジンによる文書構造の自動認識・テーブルデータの抽出',
-            'OCR技術を活用したスキャン文書からのテキスト・図表の自動読み取り',
-            '抽出データから校正仕様書のテンプレートへの自動マッピング・出力',
-            '業務フローの効率化と作業時間の大幅短縮を実現',
-          ],
-          techStack: ['Python', 'PDF解析', 'OCR', 'Pandas', 'テーブル抽出'],
-          impact: '仕様書作成の業務工数を削減。文書処理の自動化基盤を確立',
-        },
       ],
     },
   },
