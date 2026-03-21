@@ -9,6 +9,10 @@ const SkillsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: ${({ theme }) => theme.spacing.xl};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const CategoryCard = styled(motion.div)`
@@ -40,47 +44,26 @@ const CategoryName = styled.h3`
   font-weight: 700;
 `;
 
-const SkillList = styled.div`
+const TagList = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.sm};
 `;
 
-const SkillItem = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const SkillInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SkillName = styled.span`
+const Tag = styled(motion.span)`
+  display: inline-block;
+  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textSecondary};
-`;
+  transition: all ${({ theme }) => theme.transitions.normal};
 
-const SkillLevel = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.textMuted || theme.colors.textSecondary};
-  opacity: 0.7;
-`;
-
-const BarBackground = styled.div`
-  width: 100%;
-  height: 6px;
-  background: ${({ theme }) => theme.colors.surface};
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  overflow: hidden;
-`;
-
-const BarFill = styled(motion.div)`
-  height: 100%;
-  background: ${({ theme }) => theme.colors.primary};
-  border-radius: ${({ theme }) => theme.borderRadius.full};
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 const SkillsSection = () => (
@@ -99,30 +82,19 @@ const SkillsSection = () => (
             <CategoryIcon>{category.icon}</CategoryIcon>
             <CategoryName>{category.category}</CategoryName>
           </CategoryHeader>
-          <SkillList>
+          <TagList>
             {category.items.map((skill, index) => (
-              <SkillItem
-                key={skill.name}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
+              <Tag
+                key={skill}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: catIndex * 0.1 + index * 0.05 }}
               >
-                <SkillInfo>
-                  <SkillName>{skill.name}</SkillName>
-                  <SkillLevel>{skill.level}%</SkillLevel>
-                </SkillInfo>
-                <BarBackground>
-                  <BarFill
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: catIndex * 0.1 + index * 0.05, ease: 'easeOut' }}
-                  />
-                </BarBackground>
-              </SkillItem>
+                {skill}
+              </Tag>
             ))}
-          </SkillList>
+          </TagList>
         </CategoryCard>
       ))}
     </SkillsGrid>

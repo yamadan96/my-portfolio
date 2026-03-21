@@ -12,7 +12,7 @@ const ProjectsGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: ${({ theme }) => theme.spacing.xl};
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
   }
 `;

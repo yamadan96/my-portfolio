@@ -24,6 +24,10 @@ const NavInner = styled.div`
   margin: 0 auto;
   padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
   display: flex;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 0.5rem 1rem;
+  }
   align-items: center;
   justify-content: space-between;
 `;

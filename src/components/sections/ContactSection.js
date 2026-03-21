@@ -7,6 +7,10 @@ import SectionTitle from '../ui/SectionTitle';
 const ContactWrapper = styled.div`
   max-width: 600px;
   margin: 0 auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    max-width: 100%;
+  }
 `;
 
 const Form = styled.form`

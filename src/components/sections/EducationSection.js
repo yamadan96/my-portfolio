@@ -18,6 +18,10 @@ const TimelineWrapper = styled.div`
     width: 2px;
     background: ${({ theme }) => theme.colors.border};
   }
+
+  @media (max-width: 768px) {
+    padding-left: 1.5rem;
+  }
 `;
 
 const TimelineItem = styled(motion.div)`
@@ -40,6 +44,12 @@ const TimelineItem = styled(motion.div)`
     border: 3px solid ${({ theme }) => theme.colors.background};
     z-index: 1;
     margin-left: 0px;
+
+    @media (max-width: 768px) {
+      left: -1.5rem;
+      width: 12px;
+      height: 12px;
+    }
   }
 `;
 

@@ -30,33 +30,39 @@ const StatsGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: ${({ theme }) => theme.spacing.lg};
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
   }
 `;
 
 const StatCard = styled(motion.div)`
-  text-align: center;
-  padding: ${({ theme }) => theme.spacing.xl};
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.cardBg};
   backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.xl};
+  justify-content: center;
 `;
 
-const StatValue = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes['4xl']};
+const StatLabel = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textMuted};
+`;
+
+const StatValue = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: 800;
   background: ${({ theme }) => theme.colors.gradient};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
-`;
-
-const StatLabel = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
 `;
 
 const AboutSection = () => (
@@ -64,7 +70,9 @@ const AboutSection = () => (
     <SectionTitle title="About" subtitle="私について" />
     <AboutGrid>
       <AboutText>
-        <p>{profile.bio}</p>
+        {profile.bio.map((line, i) => (
+          <p key={i}>{line}</p>
+        ))}
         <p>
           研究では深層学習と自然言語処理を中心に取り組み、学会発表の経験もあります。
           インターンでは大手企業からスタートアップまで幅広い環境で開発経験を積み、
@@ -80,8 +88,8 @@ const AboutSection = () => (
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
           >
-            <StatValue>{stat.value}</StatValue>
             <StatLabel>{stat.label}</StatLabel>
+            <StatValue>{stat.value}</StatValue>
           </StatCard>
         ))}
       </StatsGrid>
