@@ -4,12 +4,12 @@ const profile = {
   title: 'AI Engineer',
   roles: ['AI Engineer', 'ML Researcher', 'Full-Stack Developer'],
   affiliation: '東京理科大学大学院 創域理工学研究科 電気電子情報工学専攻 M1',
-  career: '2027年4月〜 外資系コンサルティングファーム AIアーキテクト職 入社予定',
+  career: '2027年4月〜 外資系IT企業 AIアーキテクト職 入社予定',
   bio: [
     '機械学習・深層学習を専門とするAIエンジニア。',
     '松尾研究所やMIXI、LegalOn Technologies等、16社以上でのインターン経験を持つ。',
     '学会発表2件（FIT2025、IEICE2026）。被災建物画像の損傷度分類AIなど、研究から実装まで一貫して手がける。',
-    '2027年4月より外資系コンサルティングファームにAIアーキテクトとして入社予定。',
+    '2027年4月より外資系IT企業にAIアーキテクトとして入社予定。',
   ],
   stats: [
     { label: 'インターン経験', value: '16社+' },
