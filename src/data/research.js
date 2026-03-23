@@ -9,6 +9,10 @@ const research = [
     tags: ['Deep Learning', 'LoRA', 'CNN', 'ViT', 'Disaster Assessment'],
     link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
     citation: '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 柏田 仁, 二瓶泰雄: 「ファインチューニング手法に基づく被災建物画像の多クラス損傷度分類の精度改善」, 第24回情報科学技術フォーラム(FIT 2025)講演論文集, Vol.3, No.I-029, pp.339-340, (2025年9月).',
+    materials: [
+      { label: '原稿PDF', url: '/papers/fit2025-paper.pdf' },
+      { label: 'スライドPDF', url: '/papers/fit2025-slides.pdf' },
+    ],
   },
   {
     id: 'research-02',
@@ -20,6 +24,10 @@ const research = [
     tags: ['Multi-task Learning', 'DINOv2', 'LoRA', 'Class Imbalance'],
     link: null,
     citation: '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 二瓶泰雄, 柏田 仁: 「被災建物画像の多クラス損傷度分類におけるマルチタスク学習の有効性」, 2026年電子情報通信学会総合大会講演論文集, 2026年3月13日.',
+    materials: [
+      { label: '原稿PDF', url: '/papers/ieice2026-paper.pdf' },
+      { label: 'スライドPDF', url: '/papers/ieice2026-slides.pdf' },
+    ],
   },
   {
     id: 'research-03',

@@ -76,6 +76,32 @@ const ResearchLink = styled.a`
   }
 `;
 
+const MaterialsRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-top: ${({ theme }) => theme.spacing.md};
+`;
+
+const MaterialLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => `${theme.colors.primary}10`};
+  border: 1px solid ${({ theme }) => `${theme.colors.primary}30`};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  text-decoration: none;
+  transition: all 0.2s ease;
+  &:hover {
+    background: ${({ theme }) => `${theme.colors.primary}20`};
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
 const ResearchSection = () => (
   <Section id="research">
     <SectionTitle title="Research" subtitle="研究実績" />
@@ -96,6 +122,20 @@ const ResearchSection = () => (
             <ResearchLink href={item.link} target="_blank" rel="noopener noreferrer">
               論文・詳細 →
             </ResearchLink>
+          )}
+          {item.materials && item.materials.length > 0 && (
+            <MaterialsRow>
+              {item.materials.map((mat) => (
+                <MaterialLink
+                  key={mat.url}
+                  href={mat.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  📄 {mat.label}
+                </MaterialLink>
+              ))}
+            </MaterialsRow>
           )}
         </Card>
       ))}
