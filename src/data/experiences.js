@@ -93,7 +93,7 @@ const experiences = [
     id: 'solty',
     company: '株式会社ソリューション・アンド・テクノロジー',
     role: 'システムエンジニア / DX統括部',
-    period: '2023年7月〜現在',
+    period: '2023年7月〜2025年7月（2年）',
     description:
       '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
     tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
