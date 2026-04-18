@@ -90,47 +90,6 @@ const experiences = [
     },
   },
   {
-    id: 'solty',
-    company: '株式会社ソリューション・アンド・テクノロジー',
-    role: 'システムエンジニア / DX統括部',
-    period: '2023年7月〜2025年7月（2年）',
-    description:
-      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
-    tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
-    url: 'https://www.solty.co.jp/',
-    blogUrl: null,
-    hasDetail: true,
-    details: {
-      overview:
-        '人事・会計などの業務システム企業にて、DX統括部でAI開発を担当。' +
-        '退職予測、文章類似度調査、感情分析、RAGシステム構築など幅広いAIソリューションを開発。',
-      responsibilities: [
-        '退職予測モデルの開発: 社内人材データを活用したリスクスコア算出モデルの構築',
-        'Azure OpenAIによるメール感情分析・誤送信検出システムの構築',
-        'Azure AI Search + LLMによるRAG型社内ドキュメント検索システムの構築',
-        '自然言語処理による文書間の類似性評価ロジックの実装',
-        'Webスクレイピングによる勤務実績データの自動取得・CSV出力自動化',
-        'OCR精度改善（レシート読取の画像処理・OCRチューニング）',
-        'Django×ReactによるTo-Doリストアプリの開発',
-      ],
-      achievements:
-        'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
-      techStack: [
-        'Python',
-        'Java',
-        'SQL',
-        'Django',
-        'React',
-        'Next.js',
-        'Redux Toolkit',
-        'Tailwind CSS',
-        'Azure OpenAI',
-        'Azure AI Search',
-        'OCR',
-      ],
-    },
-  },
-  {
     id: 'legalon',
     company: '株式会社LegalOn Technologies',
     role: 'AIエンジニア（NLP / LLM）',
@@ -373,6 +332,47 @@ const experiences = [
       achievements:
         '即応性・論理的思考が求められる開発姿勢を体感。技術力に加えてビジネス視点・意思決定力の重要性を学習',
       techStack: ['Algorithm', 'Trading System', 'Finance'],
+    },
+  },
+  {
+    id: 'solty',
+    company: '株式会社ソリューション・アンド・テクノロジー',
+    role: 'システムエンジニア / DX統括部',
+    period: '2023年7月〜2025年7月（2年）',
+    description:
+      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
+    tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
+    url: 'https://www.solty.co.jp/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '人事・会計などの業務システム企業にて、DX統括部でAI開発を担当。' +
+        '退職予測、文章類似度調査、感情分析、RAGシステム構築など幅広いAIソリューションを開発。',
+      responsibilities: [
+        '退職予測モデルの開発: 社内人材データを活用したリスクスコア算出モデルの構築',
+        'Azure OpenAIによるメール感情分析・誤送信検出システムの構築',
+        'Azure AI Search + LLMによるRAG型社内ドキュメント検索システムの構築',
+        '自然言語処理による文書間の類似性評価ロジックの実装',
+        'Webスクレイピングによる勤務実績データの自動取得・CSV出力自動化',
+        'OCR精度改善（レシート読取の画像処理・OCRチューニング）',
+        'Django×ReactによるTo-Doリストアプリの開発',
+      ],
+      achievements:
+        'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
+      techStack: [
+        'Python',
+        'Java',
+        'SQL',
+        'Django',
+        'React',
+        'Next.js',
+        'Redux Toolkit',
+        'Tailwind CSS',
+        'Azure OpenAI',
+        'Azure AI Search',
+        'OCR',
+      ],
     },
   },
   {
