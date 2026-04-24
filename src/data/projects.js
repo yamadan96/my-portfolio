@@ -1,5 +1,14 @@
 const projects = [
   {
+    id: 'project-paper-survey',
+    title: 'Paper Survey',
+    description: 'LLM / VLM / MLOpsを中心とした論文サーベイの個人ノート。Quartz v4でMarkdownをグラフビュー付きのサイトに変換し、GitHub Pagesで公開。',
+    tags: ['Quartz', 'Markdown', 'LLM', 'VLM', 'GitHub Pages'],
+    github: 'https://github.com/yamadan96/paper-survey',
+    demo: 'https://yamadan96.github.io/paper-survey/',
+    image: null,
+  },
+  {
     id: 'project-01',
     title: 'LINE風AI彼女チャットアプリ',
     description: 'LLMを活用したAIチャットアプリケーション。LINE風UIで自然な対話を実現。',
