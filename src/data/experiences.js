@@ -90,6 +90,47 @@ const experiences = [
     },
   },
   {
+    id: 'solty',
+    company: '株式会社ソリューション・アンド・テクノロジー',
+    role: 'システムエンジニア / DX統括部',
+    period: '2023年7月〜2026年5月（2年10ヶ月）',
+    description:
+      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
+    tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
+    url: 'https://www.solty.co.jp/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '人事・会計などの業務システム企業にて、DX統括部でAI開発を担当。' +
+        '退職予測、文章類似度調査、感情分析、RAGシステム構築など幅広いAIソリューションを開発。',
+      responsibilities: [
+        '退職予測モデルの開発: 社内人材データを活用したリスクスコア算出モデルの構築',
+        'Azure OpenAIによるメール感情分析・誤送信検出システムの構築',
+        'Azure AI Search + LLMによるRAG型社内ドキュメント検索システムの構築',
+        '自然言語処理による文書間の類似性評価ロジックの実装',
+        'Webスクレイピングによる勤務実績データの自動取得・CSV出力自動化',
+        'OCR精度改善（レシート読取の画像処理・OCRチューニング）',
+        'Django×ReactによるTo-Doリストアプリの開発',
+      ],
+      achievements:
+        'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
+      techStack: [
+        'Python',
+        'Java',
+        'SQL',
+        'Django',
+        'React',
+        'Next.js',
+        'Redux Toolkit',
+        'Tailwind CSS',
+        'Azure OpenAI',
+        'Azure AI Search',
+        'OCR',
+      ],
+    },
+  },
+  {
     id: 'legalon',
     company: '株式会社LegalOn Technologies',
     role: 'AIエンジニア（NLP / LLM）',
@@ -169,6 +210,39 @@ const experiences = [
     },
   },
   {
+    id: 'en-japan',
+    company: 'エン・ジャパン株式会社',
+    role: 'フルスタックエンジニア',
+    period: '2025年9月（4日間）',
+    description:
+      '求人サイトを題材としたモダンWebアプリケーション開発。Next.js/React + Django。',
+    tags: ['Python', 'Next.js', 'React', 'Docker', 'GitHub Flow'],
+    url: 'https://corp.en-japan.com/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        'デジタルプロダクト開発本部にて、求人サイトを題材にしたモダンWeb開発（フロント・バック分離／Next.js-React SPA／MVC+S+Rアーキテクチャ）を4日間で実装・検証。',
+      responsibilities: [
+        'Docker／devcontainerで環境構築し、API仕様に沿ったサーバーサイド機能を実装',
+        'GitHub Flowに基づくfeatureブランチ運用・PR作成・レビュー対応の反復',
+        '検索機能における部分一致の可用性 vs DB負荷などの設計トレードオフの検討',
+        '認証・認可、エラーハンドリング、例外時のUX改善提案',
+      ],
+      achievements:
+        'バックエンド課題を完了し、フロントエンドも一部実装。「小さく実装→早めにPR→指摘を都度反映」の開発サイクルを実践',
+      techStack: [
+        'Python',
+        'Django',
+        'Next.js',
+        'React',
+        'Docker',
+        'devcontainer',
+        'GitHub Flow',
+      ],
+    },
+  },
+  {
     id: 'exawizards',
     company: '株式会社エクサウィザーズ',
     role: '機械学習エンジニア',
@@ -200,39 +274,6 @@ const experiences = [
         'Semantic Kernel',
         'Computer Vision',
         'Explainable AI',
-      ],
-    },
-  },
-  {
-    id: 'en-japan',
-    company: 'エン・ジャパン株式会社',
-    role: 'フルスタックエンジニア',
-    period: '2025年9月（4日間）',
-    description:
-      '求人サイトを題材としたモダンWebアプリケーション開発。Next.js/React + Django。',
-    tags: ['Python', 'Next.js', 'React', 'Docker', 'GitHub Flow'],
-    url: 'https://corp.en-japan.com/',
-    blogUrl: null,
-    hasDetail: true,
-    details: {
-      overview:
-        'デジタルプロダクト開発本部にて、求人サイトを題材にしたモダンWeb開発（フロント・バック分離／Next.js-React SPA／MVC+S+Rアーキテクチャ）を4日間で実装・検証。',
-      responsibilities: [
-        'Docker／devcontainerで環境構築し、API仕様に沿ったサーバーサイド機能を実装',
-        'GitHub Flowに基づくfeatureブランチ運用・PR作成・レビュー対応の反復',
-        '検索機能における部分一致の可用性 vs DB負荷などの設計トレードオフの検討',
-        '認証・認可、エラーハンドリング、例外時のUX改善提案',
-      ],
-      achievements:
-        'バックエンド課題を完了し、フロントエンドも一部実装。「小さく実装→早めにPR→指摘を都度反映」の開発サイクルを実践',
-      techStack: [
-        'Python',
-        'Django',
-        'Next.js',
-        'React',
-        'Docker',
-        'devcontainer',
-        'GitHub Flow',
       ],
     },
   },
@@ -332,47 +373,6 @@ const experiences = [
       achievements:
         '即応性・論理的思考が求められる開発姿勢を体感。技術力に加えてビジネス視点・意思決定力の重要性を学習',
       techStack: ['Algorithm', 'Trading System', 'Finance'],
-    },
-  },
-  {
-    id: 'solty',
-    company: '株式会社ソリューション・アンド・テクノロジー',
-    role: 'システムエンジニア / DX統括部',
-    period: '2023年7月〜2025年7月（2年）',
-    description:
-      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
-    tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
-    url: 'https://www.solty.co.jp/',
-    blogUrl: null,
-    hasDetail: true,
-    details: {
-      overview:
-        '人事・会計などの業務システム企業にて、DX統括部でAI開発を担当。' +
-        '退職予測、文章類似度調査、感情分析、RAGシステム構築など幅広いAIソリューションを開発。',
-      responsibilities: [
-        '退職予測モデルの開発: 社内人材データを活用したリスクスコア算出モデルの構築',
-        'Azure OpenAIによるメール感情分析・誤送信検出システムの構築',
-        'Azure AI Search + LLMによるRAG型社内ドキュメント検索システムの構築',
-        '自然言語処理による文書間の類似性評価ロジックの実装',
-        'Webスクレイピングによる勤務実績データの自動取得・CSV出力自動化',
-        'OCR精度改善（レシート読取の画像処理・OCRチューニング）',
-        'Django×ReactによるTo-Doリストアプリの開発',
-      ],
-      achievements:
-        'RAG型検索システム・感情分析システム等複数のAIソリューションを実用化',
-      techStack: [
-        'Python',
-        'Java',
-        'SQL',
-        'Django',
-        'React',
-        'Next.js',
-        'Redux Toolkit',
-        'Tailwind CSS',
-        'Azure OpenAI',
-        'Azure AI Search',
-        'OCR',
-      ],
     },
   },
   {
