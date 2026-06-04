@@ -7,7 +7,7 @@ const certifications = [
     link: null,
   },
   {
-    name: '普通自動二輪免許',
+    name: '普通自動二輪免許（MT）',
     category: 'その他',
     year: '2026年6月',
     description: '',
