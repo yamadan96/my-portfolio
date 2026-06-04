@@ -7,6 +7,13 @@ const certifications = [
     link: null,
   },
   {
+    name: '普通自動二輪免許',
+    category: 'その他',
+    year: '2026年6月',
+    description: '',
+    link: null,
+  },
+  {
     name: "Harvard CS50x: Introduction to Computer Science",
     category: 'CS',
     year: '2022年2月',

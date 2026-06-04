@@ -22,9 +22,10 @@ const research = [
     type: '学会発表（口頭）',
     description: 'クラス不均衡問題に対し、補助タスク（タイプ/重症度）を導入したマルチタスク学習を提案。DINOv2＋LoRAを用い、少数クラス性能を改善しMacro F1を向上。コスト行列導入とMTL損失設計で汎化性能と安定性を実現。',
     tags: ['Multi-task Learning', 'DINOv2', 'LoRA', 'Class Imbalance'],
-    link: null,
+    link: 'https://pub.confit.atlas.jp/ja/event/general2026/presentation/D-12-80',
     citation: '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 二瓶泰雄, 柏田 仁: 「被災建物画像の多クラス損傷度分類におけるマルチタスク学習の有効性」, 2026年電子情報通信学会総合大会講演論文集, 2026年3月13日.',
     materials: [
+      { label: '東理大研究業績DB', url: 'https://www.tus.ac.jp/ridai/doc/ji/RIJIA01User.php?kin=soc&diu=18e8' },
       { label: '原稿PDF', url: '/papers/ieice2026-paper.pdf' },
       { label: 'スライドPDF', url: '/papers/ieice2026-slides.pdf' },
     ],
