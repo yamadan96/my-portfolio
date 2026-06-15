@@ -40,6 +40,42 @@ const experiences = [
     },
   },
   {
+    id: 'legaltech-freelance',
+    company: 'リーガルテックスタートアップ',
+    role: 'フリーランスエンジニア（Python / FastAPI / React）',
+    period: '2026年6月（1ヶ月）',
+    description:
+      '法律事務所向けナレッジMCPサーバーの開発支援。AI契約書チェックOSSリリース前品質検証・公開貢献、大規模チェックリストAI読込最適化スクリプト開発。',
+    tags: ['Python', 'FastAPI', 'React', 'TypeScript', 'MCP', 'PostgreSQL'],
+    url: '[removed]',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '法律事務所向けリーガルテックスタートアップにて、ナレッジ共有MCPサーバーの開発・運用支援にフリーランスとして従事。' +
+        'AI契約書チェックOSSの品質検証・リリース準備から、大規模チェックリストのAI読込最適化スクリプト開発、管理画面ダッシュボード実装まで担当。',
+      responsibilities: [
+        'AI契約書チェックOSS（AI契約書チェックOSS）のv0.1.0リリース前品質検証: NDA・業務委託・システム開発・売買の4契約類型で仕込み問題点22件を100%検出し、OSSのPublic公開・v0.1.0リリースに貢献',
+        '大規模チェックリストのAI読込最適化スクリプト開発（Python）: Excel→シート別Markdown変換・大型ドキュメントのセクション分割・SHA256ハッシュによるstale検知の3スクリプトを実装。Python 3.9互換・CI通過・PRマージ済み',
+      ],
+      achievements:
+        'AI契約書チェックOSS（AI契約書チェックOSS）v0.1.0公開に貢献、チェックリスト変換スクリプトPRマージ',
+      techStack: [
+        'Python',
+        'FastAPI',
+        'SQLAlchemy',
+        'PostgreSQL',
+        'Pydantic',
+        'React',
+        'TypeScript',
+        'Mantine v8',
+        'TanStack Router',
+        'MCP (Model Context Protocol)',
+        'GitHub Actions',
+      ],
+    },
+  },
+  {
     id: 'airion',
     company: '株式会社Airion（東大発スタートアップ）',
     role: 'AI開発事業部 AIエンジニア',
