@@ -32,6 +32,20 @@ const research = [
   },
   {
     id: 'research-03',
+    title: '視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較',
+    venue: '映像情報メディア学会 2026年年次大会',
+    year: 2026,
+    type: '学会発表（口頭・予定）',
+    description:
+      '被災建物の損傷度分類において、視覚基盤モデルの選択と適応戦略を4種の災害画像データセット（PHI-Net／AIDERv2／MEDIC／能登半島地震）で系統的に比較。' +
+      'より大規模に事前学習されたDINOv3が小規模データではDINOv2を下回る一方、中規模では差が消失する反直感的な現象を報告。' +
+      'LoRAがFull Fine-Tuningを上回る暗黙的正則化効果を示し、3つの公開ベンチマークで一貫してSoTAを更新。',
+    tags: ['Vision Foundation Model', 'DINOv2', 'DINOv3', 'LoRA', 'Disaster Assessment'],
+    link: 'https://www.ite.or.jp/annual/2026/',
+    citation: '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 柏田 仁, 二瓶泰雄: 「視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較」, 映像情報メディア学会2026年年次大会講演予稿集 (発表予定), 2026年8月.',
+  },
+  {
+    id: 'research-04',
     title: '長期文脈を活用したフレーム外挿モデルによる動画異常検知',
     venue: '東京理科大学 創域理工学部 2024年度 卒業論文',
     year: 2024,
@@ -45,7 +59,7 @@ const research = [
     link: 'https://github.com/yamadan96/cwvae-anomaly-detection-thesis',
   },
   {
-    id: 'research-04',
+    id: 'research-05',
     title: 'マルチモーダルRAGによる日本語専門文書の要約・分析システム開発',
     venue: '東京大学 松尾・岩澤研究室 LLMATCHプログラム',
     year: 2025,
@@ -55,7 +69,7 @@ const research = [
     link: null,
   },
   {
-    id: 'research-05',
+    id: 'research-06',
     title: '連続変換生成モデルNFDMのTransformerベース簡略化に関する基礎検討',
     venue: '研究プロジェクト',
     year: 2025,

@@ -8,12 +8,12 @@ const profile = {
   bio: [
     '機械学習・深層学習を専門とするAIエンジニア。',
     '松尾研究所やMIXI、LegalOn Technologies等、16社以上でのインターン経験を持つ。',
-    '学会発表2件（FIT2025、IEICE2026）。被災建物画像の損傷度分類AIなど、研究から実装まで一貫して手がける。',
+    '学会発表3件（FIT2025、IEICE2026、映像情報メディア学会2026）。被災建物画像の損傷度分類AIなど、研究から実装まで一貫して手がける。',
     '2027年4月より外資系IT企業にAIアーキテクトとして入社予定。',
   ],
   stats: [
     { label: 'インターン経験', value: '16社+' },
-    { label: '学会発表', value: '2件' },
+    { label: '学会発表', value: '3件' },
     { label: '長期インターン', value: '3社' },
   ],
   social: [
@@ -33,9 +33,9 @@ const profile = {
       description: '松尾研究所、LegalOn Technologies、MIXI、エクサウィザーズ、GMOメディア、ログラス等',
     },
     {
-      title: '学会発表 2件',
+      title: '学会発表 3件',
       icon: '📄',
-      description: 'FIT2025（口頭）、IEICE2026総合大会（口頭）',
+      description: 'FIT2025（口頭）、IEICE2026総合大会（口頭）、映像情報メディア学会2026年年次大会（口頭・予定）',
       link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
     },
     {
