@@ -41,6 +41,34 @@ const certifications = [
     description: 'データサイエンス教育プログラム修了',
     link: 'https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/aHBkNHNWLzhrWmpNVlJVSDZVQTdIZz09',
   },
+  {
+    name: '東京大学松尾研究室 集中講義「画像認識」修了証',
+    category: 'AI',
+    year: '2022年4月',
+    description: '画像認識のための先端的機械学習モデルの設計と開発に関する所定のプログラムを修了',
+    link: '/certificates/matsuoken-image-recognition-2022.png',
+  },
+  {
+    name: '東京大学 グローバル消費インテリジェンス寄附講座 修了証',
+    category: 'AI',
+    year: '2023年3月',
+    description: 'データ分析およびマーケティングに関する所定のプログラムを修了（2022 Winter）',
+    link: '/certificates/matsuoken-global-consumer-intelligence-2022winter.png',
+  },
+  {
+    name: '東京大学松尾研究室 集中講義「深層生成モデル」修了証',
+    category: 'AI',
+    year: '2024年4月',
+    description: '深層生成モデルの設計と開発に関する所定のプログラムを修了（2024 Spring）',
+    link: '/certificates/matsuoken-deep-generative-model-2024spring.png',
+  },
+  {
+    name: '東京大学 AI経営講座「AI Business Insights 2025」修了証',
+    category: 'AI',
+    year: '2025年4月',
+    description: '組織戦略へのAI技術利活用、基礎知識・応用事例・組織の在り方等を学習し修了',
+    link: '/certificates/matsuoken-ai-business-insights-2025.pdf',
+  },
 ];
 
 export default certifications;
