@@ -121,56 +121,97 @@ const DetailLink = styled(motion.a)`
   }
 `;
 
+const ProjectBlock = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.md};
+  padding-left: ${({ theme }) => theme.spacing.md};
+  border-left: 2px solid ${({ theme }) => theme.colors.border};
+`;
+
+// Merge consecutive items from the same company into one card
+const groupByCompany = (items) => {
+  const groups = [];
+  items.forEach((item) => {
+    const last = groups[groups.length - 1];
+    if (last && last.company === item.company) {
+      last.items.push(item);
+    } else {
+      groups.push({ company: item.company, items: [item] });
+    }
+  });
+  return groups;
+};
+
+const ItemBody = ({ item, onDetailClick }) => (
+  <>
+    <Role>{item.role}</Role>
+    {item.description && <Description>{item.description}</Description>}
+    {item.tags && (
+      <Tags>
+        {item.tags.map((tag) => (
+          <Tag key={tag}>{tag}</Tag>
+        ))}
+      </Tags>
+    )}
+    {item.hasDetail && onDetailClick && (
+      <DetailLink
+        onClick={() => onDetailClick(item.id)}
+        whileHover={{ x: 4 }}
+      >
+        詳細を見る →
+      </DetailLink>
+    )}
+  </>
+);
+
+const ItemLinks = ({ item }) =>
+  (item.url || item.blogUrl || item.mediaLinks) ? (
+    <LinksWrapper>
+      {item.url && (
+        <ExternalLink href={item.url} target="_blank" rel="noopener noreferrer">
+          🔗 企業サイト
+        </ExternalLink>
+      )}
+      {item.blogUrl && (
+        <ExternalLink href={item.blogUrl} target="_blank" rel="noopener noreferrer">
+          📝 ブログ記事
+        </ExternalLink>
+      )}
+      {item.mediaLinks && item.mediaLinks.map((ml) => (
+        <ExternalLink key={ml.label} href={ml.url} target="_blank" rel="noopener noreferrer">
+          📰 {ml.label}
+        </ExternalLink>
+      ))}
+    </LinksWrapper>
+  ) : null;
+
 const Timeline = ({ items, onDetailClick }) => (
   <TimelineWrapper>
-    {items.map((item, index) => (
-      <TimelineItem
-        key={item.id || index}
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4, delay: index * 0.1 }}
-      >
-        <Period>{item.period}</Period>
-        <Company>{item.company}</Company>
-        {(item.url || item.blogUrl || item.mediaLinks) && (
-          <LinksWrapper>
-            {item.url && (
-              <ExternalLink href={item.url} target="_blank" rel="noopener noreferrer">
-                🔗 企業サイト
-              </ExternalLink>
-            )}
-            {item.blogUrl && (
-              <ExternalLink href={item.blogUrl} target="_blank" rel="noopener noreferrer">
-                📝 ブログ記事
-              </ExternalLink>
-            )}
-            {item.mediaLinks && item.mediaLinks.map((ml) => (
-              <ExternalLink key={ml.label} href={ml.url} target="_blank" rel="noopener noreferrer">
-                📰 {ml.label}
-              </ExternalLink>
-            ))}
-          </LinksWrapper>
-        )}
-        <Role>{item.role}</Role>
-        {item.description && <Description>{item.description}</Description>}
-        {item.tags && (
-          <Tags>
-            {item.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </Tags>
-        )}
-        {item.hasDetail && onDetailClick && (
-          <DetailLink
-            onClick={() => onDetailClick(item.id)}
-            whileHover={{ x: 4 }}
-          >
-            詳細を見る →
-          </DetailLink>
-        )}
-      </TimelineItem>
-    ))}
+    {groupByCompany(items).map((group, index) => {
+      const first = group.items[0];
+      return (
+        <TimelineItem
+          key={first.id || index}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: index * 0.1 }}
+        >
+          {group.items.length === 1 && <Period>{first.period}</Period>}
+          <Company>{group.company}</Company>
+          <ItemLinks item={first} />
+          {group.items.length === 1 ? (
+            <ItemBody item={first} onDetailClick={onDetailClick} />
+          ) : (
+            group.items.map((item) => (
+              <ProjectBlock key={item.id}>
+                <Period>{item.period}</Period>
+                <ItemBody item={item} onDetailClick={onDetailClick} />
+              </ProjectBlock>
+            ))
+          )}
+        </TimelineItem>
+      );
+    })}
   </TimelineWrapper>
 );
 
