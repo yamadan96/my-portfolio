@@ -1,35 +1,59 @@
 const experiences = [
   {
-    id: 'matsuo-institute',
+    id: 'matsuo-institute-gui-rag',
     company: '株式会社松尾研究所',
-    role: 'AIエンジニア（LLM / AIエージェント研究開発・戦略コンサルティング補佐）',
-    period: '2023年1月〜5月、2026年2月〜現在',
+    role: 'AIエンジニア（GUI自律探索エージェント×RAG 研究開発）',
+    period: '2026年7月〜現在',
     description:
-      '3プロジェクトに従事。①GUI自律探索エージェント×RAGの研究開発、②LLM性格制御（GRPO）の研究開発、③大手食品企業DX推進の戦略コンサルティング補佐。',
-    tags: ['Python', 'LLM Agent', 'RAG', 'GRPO', 'PyTorch', 'Strategy'],
+      '業務Webシステムを自律操作するGUIエージェントへのRAG知識注入機構の設計・実装と、無人A/B検証による定量評価を担当。',
+    tags: ['Python', 'LLM Agent', 'RAG', 'OpenAI API', 'Prompt Engineering'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
     hasDetail: true,
     details: {
       overview:
-        '株式会社松尾研究所にて、時期の異なる3プロジェクトに従事。' +
-        '【GUI自律探索エージェント×RAG】（2026年7月〜現在）業務Webシステムを自律操作するエージェントへのRAG知識注入機構の実装と、A/B検証による定量評価。' +
-        '【LLM性格制御（GRPO）】（2026年2月〜現在）強化学習でLLMにBig Five性格特性を獲得させる研究開発。' +
-        '【食品企業DX戦略コンサル】（2023年1月〜5月）大手食品企業のDX推進プロジェクトにおける戦略コンサルティング補佐。',
+        '株式会社松尾研究所にて、業務Webシステムを自律操作するGUI探索エージェントの研究開発に従事。' +
+        'エージェントへのRAG知識注入機構の実装と、A/B検証による効果の定量評価を担当。',
       responsibilities: [
-        '【GUI自律探索エージェント×RAG】RAG知識注入機構の設計・実装: タスク文からLLMが検索クエリを自動生成し、vector store（業務文書群）を検索、要点を「探索ヒント集」に統合してエージェントの指示文へ注入するパイプラインを実装。コードレビュー指摘への対応まで完了',
-        '【GUI自律探索エージェント×RAG】無人A/B検証と多層の定量評価: 複数業務フロー×RAG有無の比較実験を実行条件固定・実行前ゲートチェック付きで無人実行し、完遂率（プロセス完遂と実登録成功の2レイヤー）・項目単位の入力精度・実行時間・コストを定量評価',
-        '【GUI自律探索エージェント×RAG】失敗原因のフォレンジック分析とPM向け報告: ステップログから超過ステップを作業フェーズ別に帰属させて根本原因を特定し、恒久対策の比較資料と報告資料（結論と検証結果の1対1対応表・読み順ガイド）を整備',
-        '【LLM性格制御（GRPO）】複数の報酬関数パターン（Listwise/Pointwise×評価粒度）を比較検証し、最適な報酬設計を選定',
-        '【LLM性格制御（GRPO）】評価粒度・プロンプト形式を変えた複数条件の実験を設計・実施し、性格獲得度と応答品質のトレードオフを定量分析。Judge LLMによる性格ファセット評価プロンプトも設計・改善',
-        '【LLM性格制御（GRPO）】報酬ハック（Reward Hacking）兆候を定性・定量の両面から分析して安全なモデル選定基準を策定し、IPIP・JMMLUによるモデル評価を実行',
-        '【食品企業DX戦略コンサル】市場規模推定（フェルミ推定）による市場拡大・影響予測、リソース配分の意思決定支援',
-        '【食品企業DX戦略コンサル】市場調査・競合リサーチに基づく戦略立案の基礎データ提供、経営陣向け資料作成、週1回の経営陣ミーティング出席',
+        'RAG知識注入機構の設計・実装: タスク文からLLMが検索クエリを自動生成し、vector store（業務文書群）を検索、要点を「探索ヒント集」に統合してエージェントの指示文へ注入するパイプラインを実装。コードレビュー指摘への対応まで完了',
+        '無人A/B検証と多層の定量評価: 複数業務フロー×RAG有無の比較実験を実行条件固定・実行前ゲートチェック付きで無人実行し、完遂率（プロセス完遂と実登録成功の2レイヤー）・項目単位の入力精度・実行時間・コストを定量評価',
+        '失敗原因のフォレンジック分析とPM向け報告: ステップログから超過ステップを作業フェーズ別に帰属させて根本原因を特定し、恒久対策の比較資料と報告資料（結論と検証結果の1対1対応表・読み順ガイド）を整備',
       ],
       achievements:
-        '【GUI自律探索エージェント×RAG】RAG知識注入により対象業務フロー全てで完遂率・入力精度・実行時間・コストが改善することを定量実証。' +
-        '【LLM性格制御（GRPO）】目標水準の性格特性スコアを達成するモデルの学習に成功し、報酬ハック分析でチームの最終モデル選定に貢献。' +
-        '【食品企業DX戦略コンサル】数千万円規模のDX案件での実務経験、経営陣との直接議論を通じた戦略視点の習得',
+        'RAG知識注入により対象業務フロー全てで完遂率・入力精度・実行時間・コストが改善することを定量実証',
+      techStack: [
+        'Python',
+        'OpenAI API',
+        'LLM Agents',
+        'RAG (Vector Store / File Search)',
+        'Prompt Engineering',
+        'pytest',
+        'uv',
+      ],
+    },
+  },
+  {
+    id: 'matsuo-institute-grpo',
+    company: '株式会社松尾研究所',
+    role: 'AIエンジニア（LLM性格制御・強化学習 研究開発）',
+    period: '2026年2月〜現在',
+    description:
+      '強化学習（GRPO）でLLMにBig Five性格特性を獲得させる研究開発。報酬設計の比較検証、報酬ハック分析、モデル評価を担当。',
+    tags: ['Python', 'GRPO', 'PyTorch', 'LoRA', 'vLLM'],
+    url: 'https://matsuo-institute.com/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '株式会社松尾研究所にて、強化学習（GRPO）でLLMにBig Five性格特性を獲得させる研究開発に従事。' +
+        '報酬関数の設計比較から報酬ハック分析・モデル評価まで、学習パイプラインの検証を幅広く担当。',
+      responsibilities: [
+        '複数の報酬関数パターン（Listwise/Pointwise×評価粒度）を比較検証し、最適な報酬設計を選定',
+        '評価粒度・プロンプト形式を変えた複数条件の実験を設計・実施し、性格獲得度と応答品質のトレードオフを定量分析。Judge LLMによる性格ファセット評価プロンプトも設計・改善',
+        '報酬ハック（Reward Hacking）兆候を定性・定量の両面から分析して安全なモデル選定基準を策定し、IPIP・JMMLUによるモデル評価を実行',
+      ],
+      achievements:
+        '目標水準の性格特性スコアを達成するモデルの学習に成功し、報酬ハック分析でチームの最終モデル選定に貢献',
       techStack: [
         'Python',
         'PyTorch',
@@ -41,14 +65,6 @@ const experiences = [
         'TRL',
         'HuggingFace',
         'NVIDIA H200',
-        'OpenAI API',
-        'LLM Agents',
-        'RAG (Vector Store / File Search)',
-        'Prompt Engineering',
-        'pytest',
-        'uv',
-        'Market Research',
-        'Strategy Consulting',
       ],
     },
   },
@@ -582,6 +598,34 @@ const experiences = [
         'Prompt Engineering',
         'Blockchain',
         'Testing',
+      ],
+    },
+  },
+  {
+    id: 'matsuo-institute-dx',
+    company: '株式会社松尾研究所',
+    role: '戦略コンサルティング補佐（大手食品企業DX推進）',
+    period: '2023年1月〜5月（5ヶ月）',
+    description:
+      '大手食品企業のDX推進プロジェクトにて戦略コンサルティング補佐を担当。市場規模推定・競合リサーチ・経営陣向け資料作成。',
+    tags: ['Strategy', 'Market Research', 'DX'],
+    url: 'https://matsuo-institute.com/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '株式会社松尾研究所にて、大手食品企業のDX推進プロジェクトにおける戦略コンサルティング補佐として従事。' +
+        '市場分析からリソース配分の意思決定支援まで、経営陣に近い立場で戦略立案を支援。',
+      responsibilities: [
+        '市場規模推定（フェルミ推定）による市場拡大・影響予測、リソース配分の意思決定支援',
+        '市場調査・競合リサーチに基づく戦略立案の基礎データ提供',
+        '経営陣向け資料作成、週1回の経営陣ミーティング出席',
+      ],
+      achievements:
+        '数千万円規模のDX案件での実務経験、経営陣との直接議論を通じた戦略視点の習得',
+      techStack: [
+        'Market Research',
+        'Strategy Consulting',
       ],
     },
   },
