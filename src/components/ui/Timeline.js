@@ -147,9 +147,10 @@ const ItemBody = ({ item, onDetailClick }) => (
     {item.description && <Description>{item.description}</Description>}
     {item.tags && (
       <Tags>
-        {item.tags.map((tag) => (
+        {item.tags.slice(0, 4).map((tag) => (
           <Tag key={tag}>{tag}</Tag>
         ))}
+        {item.tags.length > 4 && <Tag>+{item.tags.length - 4}</Tag>}
       </Tags>
     )}
     {item.hasDetail && onDetailClick && (

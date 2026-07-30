@@ -466,6 +466,11 @@ const ExperienceDetail = () => {
         </Header>
 
         <SectionBlock variants={itemVariants}>
+          <SectionLabel>成果</SectionLabel>
+          <Achievement>{details.achievements}</Achievement>
+        </SectionBlock>
+
+        <SectionBlock variants={itemVariants}>
           <SectionLabel>概要</SectionLabel>
           <Overview>{details.overview}</Overview>
         </SectionBlock>
@@ -512,11 +517,6 @@ const ExperienceDetail = () => {
               <ListItem key={i}>{item}</ListItem>
             ))}
           </List>
-        </SectionBlock>
-
-        <SectionBlock variants={itemVariants}>
-          <SectionLabel>成果</SectionLabel>
-          <Achievement>{details.achievements}</Achievement>
         </SectionBlock>
 
         <SectionBlock variants={itemVariants}>
