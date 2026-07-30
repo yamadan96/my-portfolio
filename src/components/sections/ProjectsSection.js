@@ -78,11 +78,42 @@ const ProjectLink = styled(motion.a)`
   }
 `;
 
+const SubHeading = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: 700;
+  margin: ${({ theme }) => theme.spacing['2xl']} 0 ${({ theme }) => theme.spacing.lg};
+`;
+
+const OtherList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: ${({ theme }) => theme.spacing.md};
+`;
+
+const OtherCard = styled.div`
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  padding: ${({ theme }) => theme.spacing.md};
+`;
+
+const OtherTitle = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: 700;
+  margin-bottom: 4px;
+`;
+
+const OtherDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textMuted};
+  line-height: 1.6;
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+`;
+
 const ProjectsSection = () => (
   <Section id="projects">
     <SectionTitle title="Projects" subtitle="個人開発・ハッカソン" />
     <ProjectsGrid>
-      {projects.map((project) => (
+      {projects.filter((p) => p.featured).map((project) => (
         <Card key={project.id}>
           <ProjectHeader>
             <ProjectTitle>{project.title}</ProjectTitle>
@@ -140,6 +171,27 @@ const ProjectsSection = () => (
         </Card>
       ))}
     </ProjectsGrid>
+    <SubHeading>その他のプロジェクト</SubHeading>
+    <OtherList>
+      {projects.filter((p) => !p.featured).map((project) => (
+        <OtherCard key={project.id}>
+          <OtherTitle>{project.title}</OtherTitle>
+          <OtherDescription>{project.description}</OtherDescription>
+          <Links>
+            {project.github && (
+              <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </ProjectLink>
+            )}
+            {project.demo && (
+              <ProjectLink href={project.demo} target="_blank" rel="noopener noreferrer">
+                Demo
+              </ProjectLink>
+            )}
+          </Links>
+        </OtherCard>
+      ))}
+    </OtherList>
   </Section>
 );
 

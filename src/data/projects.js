@@ -1,8 +1,9 @@
 const projects = [
   {
     id: 'project-paper-survey',
+    featured: true,
     title: 'Paper Survey',
-    description: 'LLM / VLM / MLOpsを中心とした論文サーベイの個人ノート。Quartz v4でMarkdownをグラフビュー付きのサイトに変換し、GitHub Pagesで公開。',
+    description: 'AI分野の最新論文を読んで整理した個人ノートを、ノート同士のつながりが見えるWebサイトとして公開。継続的に更新中。',
     tags: ['Quartz', 'Markdown', 'LLM', 'VLM', 'GitHub Pages'],
     github: 'https://github.com/yamadan96/paper-survey',
     demo: 'https://yamadan96.github.io/paper-survey/',
@@ -10,6 +11,7 @@ const projects = [
   },
   {
     id: 'project-01',
+    featured: true,
     title: 'LINE風AI彼女チャットアプリ',
     description: 'LLMを活用したAIチャットアプリケーション。LINE風UIで自然な対話を実現。',
     tags: ['React', 'Next.js', 'LLM', 'Vercel'],
@@ -19,8 +21,9 @@ const projects = [
   },
   {
     id: 'project-10',
+    featured: true,
     title: 'GapLess Reply',
-    description: 'マッチングアプリのチャットスクショをアップロードすると、Gemini 2.5 Flashで3パターン（無難・ウケ狙い・デート誘い）の返信案を生成するAIアシスタント。5つの性格プリセット、PWA対応、iOSショートカット対応。',
+    description: 'チャット画面のスクリーンショットを読み込むと、AIが3パターンの返信案（無難・ウケ狙い・デート誘い）を提案してくれるアプリ。スマホのホーム画面から使える設計。',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Gemini AI', 'PWA', 'Vercel'],
     github: null,
     demo: 'https://gapless-reply.vercel.app/',
@@ -28,8 +31,9 @@ const projects = [
   },
   {
     id: 'project-02',
+    featured: true,
     title: 'OCR to Markdown変換アプリ',
-    description: '完全ローカル処理のOCR to Markdown変換アプリケーション。プライバシーに配慮した設計。',
+    description: '画像内の文字を読み取ってテキスト化するアプリ。データを外部に送らず端末内だけで処理する、プライバシー重視の設計。',
     tags: ['Python', 'OCR', 'Next.js', 'Vercel'],
     github: 'https://github.com/yamadan96/private-ocr-markdown',
     demo: 'https://private-ocr-markdown.vercel.app/',
@@ -82,9 +86,10 @@ const projects = [
   },
   {
     id: 'project-08',
+    featured: true,
     title: '温泉温度管理自動化システム',
     category: 'hackathon',
-    description: '温泉ハッカソン（PlayGround主催, 2021年12月）にて開発。Raspberry Piと温度センサーで水温取得・電磁弁制御を実装し、Flutter+WebSocketで遠隔操作可能なプロトタイプを構築。',
+    description: '温泉ハッカソンにて開発。センサーで湯温を測り、スマホから遠隔で湯量を調節できる装置の試作機を、小型コンピュータとアプリで作り上げた。',
     tags: ['Python', 'Raspberry Pi', 'Flutter', 'WebSocket', 'IoT'],
     github: null,
     demo: null,
@@ -93,8 +98,9 @@ const projects = [
   },
   {
     id: 'project-09',
+    featured: true,
     title: 'テニスコート予約自動化スクリプト',
-    description: 'テニスコートの予約を自動化するスクリプト。Webスクレイピングで空き状況を確認し自動予約。',
+    description: '市営テニスコートの空き状況を毎日自動チェックし、条件に合う枠を自動で予約・通知する仕組み。家族が実際に利用中。',
     tags: ['Python', 'Web Scraping', 'Automation'],
     github: 'https://github.com/yamadan96/Tennis-Court-Availability-Notification-System',
     demo: null,

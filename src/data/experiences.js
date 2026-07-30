@@ -5,7 +5,7 @@ const experiences = [
     role: 'AIエンジニア（GUI自律探索エージェント×RAG 研究開発）',
     period: '2026年7月〜現在',
     description:
-      '業務Webシステムを自律操作するGUIエージェントへのRAG知識注入機構の設計・実装と、無人A/B検証による定量評価を担当。',
+      '業務システムを人の代わりに自動操作するAIエージェントの研究開発。社内文書の知識をAIに参照させて操作の成功率を高める仕組みを設計・実装し、比較実験で効果を数値で実証。',
     tags: ['Python', 'LLM Agent', 'RAG', 'OpenAI API', 'Prompt Engineering'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
@@ -38,7 +38,7 @@ const experiences = [
     role: 'AIエンジニア（LLM性格制御・強化学習 研究開発）',
     period: '2026年2月〜現在',
     description:
-      '強化学習（GRPO）でLLMにBig Five性格特性を獲得させる研究開発。報酬設計の比較検証、報酬ハック分析、モデル評価を担当。',
+      'AIチャットボットに狙った「性格」を持たせる研究開発。強化学習を用いた学習方法の比較検証と、性能・安全性の評価を担当。',
     tags: ['Python', 'GRPO', 'PyTorch', 'LoRA', 'vLLM'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
@@ -74,7 +74,7 @@ const experiences = [
     role: 'フリーランスエンジニア（Python / FastAPI / React）',
     period: '2026年6月（1ヶ月）',
     description:
-      'リーガルテックスタートアップにて、専門職向けAIプラットフォームの機能開発・運用支援をフリーランスで担当。OSS品質検証・公開貢献、ドキュメント変換スクリプト開発、管理画面ダッシュボード実装、週次レポート自動生成など複数機能を実装しPRをマージ。',
+      '法務専門職向けAIサービスの機能開発をフリーランスとして担当。利用状況が一目で分かる管理画面や、週次レポートの自動生成など複数の機能を、1ヶ月で設計から本番リリースまで完遂。',
     tags: ['Python', 'FastAPI', 'React', 'TypeScript', 'MCP', 'PostgreSQL'],
     url: null,
     blogUrl: null,
@@ -120,7 +120,7 @@ const experiences = [
     role: 'AI開発事業部 AIエンジニア',
     period: '2024年4月〜現在',
     description:
-      'GENIACプロジェクト参画、音声合成、画像処理、物体検出、3D解析等の多数AIプロジェクトに従事。',
+      '音声合成・画像認識・文書処理の自動化など、10件近いAI開発プロジェクトに従事。ロボット向け音声合成の成果はトヨタイムズに掲載。国のAI開発プロジェクト「GENIAC」にも参画。',
     tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM'],
     url: 'https://airion.co.jp/',
     mediaLinks: [
@@ -170,7 +170,7 @@ const experiences = [
     role: 'システムエンジニア / DX統括部',
     period: '2023年7月〜2026年5月（2年10ヶ月）',
     description:
-      '社内向けAI開発・業務効率化。退職予測モデル、RAGシステム、感情分析・誤送信検出等。',
+      '業務システム企業の社内AI開発を担当。社員の退職リスク予測、メール誤送信の自動検出、社内文書をAIで検索できる仕組みなど、複数のシステムを実用化。',
     tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
     url: 'https://www.solty.co.jp/',
     blogUrl: null,
@@ -211,7 +211,7 @@ const experiences = [
     role: 'AIエンジニア（NLP / LLM）',
     period: '2026年2月〜3月（2ヶ月）',
     description:
-      'LLMを活用した契約書の自動分類システムを研究開発。プロンプト設計・Few-shot学習・評価実験を主導し、従来MLモデルを大幅に上回る精度を達成。',
+      '契約書の種類をAIで自動判別するシステムを研究開発。従来の仕組みから精度を大幅に改善（日本語契約書で+14pt）し、試作から本番サービスへの組み込みまで一貫して担当。',
     tags: ['Python', 'LLM', 'GCP', 'Prompt Engineering', 'Pydantic'],
     url: 'https://legalontech.jp/',
     blogUrl: null,
@@ -250,7 +250,7 @@ const experiences = [
     role: '機械学習エンジニア',
     period: '2025年10月〜11月（2ヶ月）',
     description:
-      '家族アルバム「みてね」のMLグループにて、機械学習パイプラインの最適化とAWSインフラ効率化に従事。',
+      '家族アルバムアプリ「みてね」にて、画像を扱うAIシステムの高速化とコスト削減を担当。処理速度を最大42.8%改善。',
     tags: ['Python', 'PyTorch', 'AWS', 'Kubernetes', 'Docker'],
     url: 'https://mixi.co.jp/',
     blogUrl: null,
@@ -286,11 +286,12 @@ const experiences = [
   },
   {
     id: 'en-japan',
+    short: true,
     company: 'エン・ジャパン株式会社',
     role: 'フルスタックエンジニア',
     period: '2025年9月（4日間）',
     description:
-      '求人サイトを題材としたモダンWebアプリケーション開発。Next.js/React + Django。',
+      '求人サイトを題材にした4日間のWebアプリ開発プログラム。画面からサーバーまで一通り実装。',
     tags: ['Python', 'Next.js', 'React', 'Docker', 'GitHub Flow'],
     url: 'https://corp.en-japan.com/',
     blogUrl: null,
@@ -323,7 +324,7 @@ const experiences = [
     role: '機械学習エンジニア',
     period: '2025年8月〜9月（1.5ヶ月）',
     description:
-      'オフィス環境向けAIエージェント開発。カメラ×VLM×Arduino制御で「見て→判断→動く」自律システムを構築。',
+      'カメラで周囲を「見て」状況を判断し、ロボットを動かす自律型AIシステムを開発。インターネット接続なしで完結するデモまで作り上げた。',
     tags: ['Python', 'VLM', 'Arduino', 'Computer Vision', 'AI Agent'],
     url: 'https://exawizards.com/',
     blogUrl: null,
@@ -358,7 +359,7 @@ const experiences = [
     role: '機械学習エンジニア',
     period: '2025年7月〜8月（1ヶ月）',
     description:
-      'ポイントサイトにおける承認売上予測・承認月予測モデルを構築。',
+      'ポイントサイトの売上を予測するAIモデルを構築し、精度96.1%を達成。経理業務の効率化に貢献。',
     tags: ['Python', 'LightGBM', 'BigQuery', 'GCP'],
     url: 'https://www.gmo.media/',
     blogUrl: 'https://qiita.com/yamadan96/items/99c0e6757a6da8786626',
@@ -392,11 +393,12 @@ const experiences = [
   },
   {
     id: 'loglass',
+    short: true,
     company: '株式会社ログラス',
     role: 'ソフトウェアエンジニア',
     period: '2025年8月（5日間）',
     description:
-      'DDD×スクラム開発で損益計算書・貸借対照表（PL/BS）生成システムを開発。',
+      '経営管理クラウド企業にて、決算書類（損益計算書・貸借対照表）を自動生成するシステムを5日間で設計・実装。',
     tags: ['Kotlin', 'Spring Boot', 'MySQL', 'Docker', 'DDD'],
     url: 'https://www.loglass.co.jp/',
     blogUrl: 'https://qiita.com/yamadan96/items/6b48c0ff270c02878943',
@@ -427,11 +429,12 @@ const experiences = [
   },
   {
     id: 'goldman-sachs',
+    short: true,
     company: 'ゴールドマン・サックス証券株式会社',
     role: 'エンジニアリング部門 ワークショップ',
     period: '2025年8月（1日）',
     description:
-      '金融×テクノロジーのワークショップ。模擬FXトレードシステムの設計・実装・発表。',
+      '金融×テクノロジーの1日ワークショップ。模擬の為替取引システムを設計・実装し発表。',
     tags: ['Finance', 'Algorithm', 'Trading System'],
     url: 'https://www.goldmansachs.com/japan/',
     blogUrl: null,
@@ -452,11 +455,12 @@ const experiences = [
   },
   {
     id: 'standby',
+    short: true,
     company: 'スタンバイ株式会社',
     role: 'MLエンジニア',
     period: '2025年7月（4日間）',
     description:
-      'LINEヤフー×ビズリーチ合弁。実務課題の要因分析→解決策立案→ML実装→CTO成果発表。',
+      '求人検索サービスの実データを使い、課題の分析からAIによる解決策の実装、CTOへの発表までを4日間で実施。優秀者に選出。',
     tags: ['Python', 'Machine Learning', 'Data Analysis'],
     url: 'https://jp.stanby.com/',
     blogUrl: null,
@@ -477,11 +481,12 @@ const experiences = [
   },
   {
     id: 'geniee',
+    short: true,
     company: '株式会社ジーニー',
     role: 'バックエンドエンジニア',
     period: '2025年7月（1日）',
     description:
-      '広告配信DSPの高速化。N+1解消、TTLキャッシュ、並列処理、Prometheus+Grafana可視化。',
+      '広告配信システムの高速化に挑戦。処理のボトルネックを特定して改善し、応答速度を大幅に短縮。',
     tags: ['Python', 'MySQL', 'Prometheus', 'Grafana', 'Docker'],
     url: 'https://geniee.co.jp/',
     blogUrl: 'https://qiita.com/yamadan96/items/8018a6e5cab074737cb2',
@@ -511,11 +516,12 @@ const experiences = [
   },
   {
     id: 'cyberagent',
+    short: true,
     company: '株式会社サイバーエージェント',
     role: 'Architecture Challenge',
     period: '2025年6月（1日）',
     description:
-      'マルチテナンシープラットフォームのアーキテクチャ設計。ECS Fargate、API Gateway等。',
+      '大規模Webサービスを支えるクラウド基盤の設計演習に参加。',
     tags: ['AWS', 'ECS Fargate', 'API Gateway', 'Microservices'],
     url: 'https://www.cyberagent.co.jp/',
     blogUrl: 'https://qiita.com/yamadan96/items/790b4a5e5b7f12543c21',
@@ -547,11 +553,12 @@ const experiences = [
   },
   {
     id: 'rakuten',
+    short: true,
     company: '楽天グループ株式会社',
     role: 'アプリケーションエンジニア インターン',
     period: '2023年8月（1週間）',
     description:
-      'Flutterを用いたクロスプラットフォームモバイルアプリのプロトタイプ開発。',
+      'iOS/Android両対応のスマホアプリのプロトタイプを1週間で開発。',
     tags: ['Flutter', 'Dart', 'Mobile', 'UI/UX'],
     url: 'https://corp.rakuten.co.jp/',
     blogUrl: null,
@@ -575,7 +582,7 @@ const experiences = [
     role: 'データサイエンティスト',
     period: '2021年4月〜2023年6月（2年3ヶ月）',
     description:
-      '日記生成AI開発（NLP）、銀行太陽光ブロックチェーンプロジェクトのテスト設計。',
+      '日記の文章を自動生成するAIの開発や、銀行系ブロックチェーンプロジェクトのテスト設計を担当。後輩エンジニアの育成も経験。',
     tags: ['Python', 'NLP', 'Blockchain', 'Testing'],
     url: 'https://shinonome.com/',
     blogUrl: null,
@@ -607,7 +614,7 @@ const experiences = [
     role: '戦略コンサルティング補佐（大手食品企業DX推進）',
     period: '2023年1月〜5月（5ヶ月）',
     description:
-      '大手食品企業のDX推進プロジェクトにて戦略コンサルティング補佐を担当。市場規模推定・競合リサーチ・経営陣向け資料作成。',
+      '大手食品企業のデジタル変革プロジェクトを戦略面から支援。市場規模の試算や競合調査、経営陣向け資料の作成を担当。',
     tags: ['Strategy', 'Market Research', 'DX'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
@@ -635,7 +642,7 @@ const experiences = [
     role: 'プログラミングスクール メンター',
     period: '2022年6月〜2023年1月（8ヶ月）',
     description:
-      'DMM WebCampにて受講生の学習支援。Ruby/Rails, HTML/CSS/Gitの質問対応・レビュー。',
+      'プログラミングスクール「DMM WebCamp」で受講生の学習をサポート。質問対応とコードレビューを担当。',
     tags: ['Ruby', 'Ruby on Rails', 'HTML/CSS', 'Git', 'Mentoring'],
     url: 'https://infratop.jp/',
     blogUrl: null,
