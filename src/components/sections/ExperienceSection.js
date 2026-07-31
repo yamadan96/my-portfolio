@@ -71,37 +71,51 @@ const ExperienceSection = () => {
     navigate(`/experience/${id}`);
   };
 
-  const major = experiences.filter((e) => !e.short);
+  const major = experiences.filter((e) => !e.short && !e.secondary);
+  const secondary = experiences.filter((e) => e.secondary);
   const short = experiences.filter((e) => e.short);
+
+  const renderCompactGrid = (items) => (
+    <CompactGrid>
+      {items.map((item, index) => (
+        <CompactCard
+          key={item.id}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: index * 0.05 }}
+        >
+          <CompactCompany>{item.company}</CompactCompany>
+          <CompactPeriod>{item.period}</CompactPeriod>
+          <CompactDescription>{item.description}</CompactDescription>
+          {item.hasDetail && (
+            <CompactDetailLink onClick={() => handleDetailClick(item.id)}>
+              詳細を見る →
+            </CompactDetailLink>
+          )}
+        </CompactCard>
+      ))}
+    </CompactGrid>
+  );
 
   return (
     <Section id="experience">
       <SectionTitle title="Experience" subtitle="インターン・実務経験（16社）" />
+      <SubHeading>主要な経験</SubHeading>
+      <SubNote>長期・現職を中心とした実務経験</SubNote>
       <Timeline items={major} onDetailClick={handleDetailClick} />
+      {secondary.length > 0 && (
+        <>
+          <SubHeading>その他の実務経験</SubHeading>
+          <SubNote>インターン・メンター等（{secondary.length}件）</SubNote>
+          {renderCompactGrid(secondary)}
+        </>
+      )}
       {short.length > 0 && (
         <>
           <SubHeading>短期インターン・ワークショップ</SubHeading>
           <SubNote>1日〜1週間の選抜型プログラム（{short.length}社）</SubNote>
-          <CompactGrid>
-            {short.map((item, index) => (
-              <CompactCard
-                key={item.id}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-              >
-                <CompactCompany>{item.company}</CompactCompany>
-                <CompactPeriod>{item.period}</CompactPeriod>
-                <CompactDescription>{item.description}</CompactDescription>
-                {item.hasDetail && (
-                  <CompactDetailLink onClick={() => handleDetailClick(item.id)}>
-                    詳細を見る →
-                  </CompactDetailLink>
-                )}
-              </CompactCard>
-            ))}
-          </CompactGrid>
+          {renderCompactGrid(short)}
         </>
       )}
     </Section>

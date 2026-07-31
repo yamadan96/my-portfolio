@@ -320,6 +320,7 @@ const experiences = [
   },
   {
     id: 'exawizards',
+    secondary: true,
     company: '株式会社エクサウィザーズ',
     role: '機械学習エンジニア',
     period: '2025年8月〜9月（1.5ヶ月）',
@@ -355,6 +356,7 @@ const experiences = [
   },
   {
     id: 'gmo-media',
+    secondary: true,
     company: 'GMOメディア株式会社',
     role: '機械学習エンジニア',
     period: '2025年7月〜8月（1ヶ月）',
@@ -578,6 +580,7 @@ const experiences = [
   },
   {
     id: 'shinonome',
+    secondary: true,
     company: '株式会社Shinonome',
     role: 'データサイエンティスト',
     period: '2021年4月〜2023年6月（2年3ヶ月）',
@@ -610,6 +613,7 @@ const experiences = [
   },
   {
     id: 'matsuo-institute-dx',
+    secondary: true,
     company: '株式会社松尾研究所',
     role: '戦略コンサルティング補佐（大手食品企業DX推進）',
     period: '2023年1月〜5月（5ヶ月）',
@@ -638,6 +642,7 @@ const experiences = [
   },
   {
     id: 'infratop',
+    secondary: true,
     company: '株式会社インフラトップ',
     role: 'プログラミングスクール メンター',
     period: '2022年6月〜2023年1月（8ヶ月）',
