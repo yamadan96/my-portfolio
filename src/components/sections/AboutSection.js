@@ -25,6 +25,17 @@ const AboutText = styled.div`
   }
 `;
 
+const BioEn = styled.p`
+  && {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    color: ${({ theme }) => theme.colors.textMuted};
+    font-style: italic;
+    line-height: 1.7;
+    border-left: 2px solid ${({ theme }) => theme.colors.border};
+    padding-left: ${({ theme }) => theme.spacing.md};
+  }
+`;
+
 const StatsGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -91,6 +102,7 @@ const AboutSection = () => (
         {profile.bio.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
+        {profile.bioEn && <BioEn>{profile.bioEn}</BioEn>}
         <p>
           研究では深層学習・画像処理・自然言語処理を中心に取り組み、学会発表の経験もあります。
           インターンでは大手企業からスタートアップまで幅広い環境で開発経験を積み、

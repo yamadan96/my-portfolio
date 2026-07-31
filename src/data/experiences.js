@@ -6,6 +6,8 @@ const experiences = [
     period: '2026年7月〜現在',
     description:
       '業務システムを人の代わりに自動操作するAIエージェントの研究開発。社内文書の知識をAIに参照させて操作の成功率を高める仕組みを設計・実装し、比較実験で効果を数値で実証。',
+    descriptionEn:
+      'R&D on autonomous GUI agents — designed a RAG-based knowledge injection pipeline and proved its impact through unattended A/B evaluation.',
     tags: ['Python', 'LLM Agent', 'RAG', 'OpenAI API', 'Prompt Engineering'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
@@ -39,6 +41,8 @@ const experiences = [
     period: '2026年2月〜現在',
     description:
       'AIチャットボットに狙った「性格」を持たせる研究開発。強化学習を用いた学習方法の比較検証と、性能・安全性の評価を担当。',
+    descriptionEn:
+      'Taught an LLM to express targeted personality traits via reinforcement learning (GRPO), covering reward design and safety evaluation.',
     tags: ['Python', 'GRPO', 'PyTorch', 'LoRA', 'vLLM'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
@@ -75,6 +79,8 @@ const experiences = [
     period: '2026年6月（1ヶ月）',
     description:
       '法務専門職向けAIサービスの機能開発をフリーランスとして担当。利用状況が一目で分かる管理画面や、週次レポートの自動生成など複数の機能を、1ヶ月で設計から本番リリースまで完遂。',
+    descriptionEn:
+      'Freelance full-stack development for a legal-tech AI platform — shipped usage dashboards and automated weekly reporting, from design to production in one month.',
     tags: ['Python', 'FastAPI', 'React', 'TypeScript', 'MCP', 'PostgreSQL'],
     url: null,
     blogUrl: null,
@@ -121,6 +127,8 @@ const experiences = [
     period: '2024年4月〜現在',
     description:
       '音声合成・画像認識・文書処理の自動化など、10件近いAI開発プロジェクトに従事。ロボット向け音声合成の成果はトヨタイムズに掲載。国のAI開発プロジェクト「GENIAC」にも参画。',
+    descriptionEn:
+      'Built AI systems across voice synthesis (featured on Toyota Times), computer vision, and document automation; joined Japan\'s national GENIAC LLM project.',
     tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM'],
     url: 'https://airion.co.jp/',
     mediaLinks: [
@@ -171,6 +179,8 @@ const experiences = [
     period: '2023年7月〜2026年5月（2年10ヶ月）',
     description:
       '業務システム企業の社内AI開発を担当。社員の退職リスク予測、メール誤送信の自動検出、社内文書をAIで検索できる仕組みなど、複数のシステムを実用化。',
+    descriptionEn:
+      'In-house AI development: employee attrition prediction, email misdelivery detection, and RAG-based document search — multiple systems shipped to production.',
     tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
     url: 'https://www.solty.co.jp/',
     blogUrl: null,
@@ -212,6 +222,8 @@ const experiences = [
     period: '2026年2月〜3月（2ヶ月）',
     description:
       '契約書の種類をAIで自動判別するシステムを研究開発。従来の仕組みから精度を大幅に改善（日本語契約書で+14pt）し、試作から本番サービスへの組み込みまで一貫して担当。',
+    descriptionEn:
+      'LLM-based contract classification R&D — improved accuracy by +14pt over the legacy ML model and shipped it as a production microservice.',
     tags: ['Python', 'LLM', 'GCP', 'Prompt Engineering', 'Pydantic'],
     url: 'https://legalontech.jp/',
     blogUrl: null,
@@ -251,6 +263,8 @@ const experiences = [
     period: '2025年10月〜11月（2ヶ月）',
     description:
       '家族アルバムアプリ「みてね」にて、画像を扱うAIシステムの高速化とコスト削減を担当。処理速度を最大42.8%改善。',
+    descriptionEn:
+      'Optimized the image-processing AI pipeline for the FamilyAlbum app — up to 42.8% faster processing with lower infrastructure cost.',
     tags: ['Python', 'PyTorch', 'AWS', 'Kubernetes', 'Docker'],
     url: 'https://mixi.co.jp/',
     blogUrl: null,

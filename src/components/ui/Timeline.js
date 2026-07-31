@@ -141,10 +141,20 @@ const groupByCompany = (items) => {
   return groups;
 };
 
+const DescriptionEn = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  font-style: italic;
+  line-height: 1.6;
+  margin: -${({ theme }) => theme.spacing.xs} 0 ${({ theme }) => theme.spacing.sm};
+  opacity: 0.85;
+`;
+
 const ItemBody = ({ item, onDetailClick }) => (
   <>
     <Role>{item.role}</Role>
     {item.description && <Description>{item.description}</Description>}
+    {item.descriptionEn && <DescriptionEn>{item.descriptionEn}</DescriptionEn>}
     {item.tags && (
       <Tags>
         {item.tags.slice(0, 4).map((tag) => (

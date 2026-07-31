@@ -10,6 +10,8 @@ const profile = {
     '松尾研究所やMIXI、LegalOn Technologies等、16社以上での実務・インターン経験。学会発表3件。',
     '2027年4月より外資系IT企業にAIアーキテクトとして入社予定。',
   ],
+  bioEn:
+    'AI engineer specializing in machine learning — from research (3 conference talks) to production systems, with hands-on experience at 16+ companies. Joining a global IT firm as an AI architect in April 2027.',
   stats: [
     { label: 'インターン経験', value: '16社+' },
     { label: '学会発表', value: '3件' },
