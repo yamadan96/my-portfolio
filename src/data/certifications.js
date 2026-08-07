@@ -76,6 +76,14 @@ const certifications = [
     description: '組織戦略へのAI技術利活用、基礎知識・応用事例・組織の在り方等を学習し修了',
     link: '/certificates/matsuoken-ai-business-insights-2025.pdf',
   },
+  {
+    name: 'G検定（JDLA Deep Learning for GENERAL 2026 #4）',
+    category: 'AI',
+    year: '2026年8月',
+    description:
+      '日本ディープラーニング協会主催。ディープラーニングの基礎知識と事業活用能力を認定（2026年7月実施回 合格）',
+    link: null,
+  },
 ];
 
 export default certifications;
