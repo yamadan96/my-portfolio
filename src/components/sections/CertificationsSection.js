@@ -65,6 +65,12 @@ const CertCategory = styled.span`
   flex-shrink: 0;
 `;
 
+const CertLinks = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.sm};
+`;
+
 const CertLink = styled.a`
   font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
@@ -92,14 +98,27 @@ const CertificationsSection = () => (
             {cert.year && (
               <CertDescription>{cert.year} 取得</CertDescription>
             )}
-            {cert.link && (
-              <CertLink
-                href={cert.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                証明を見る →
-              </CertLink>
+            {(cert.link || cert.pdfLink) && (
+              <CertLinks>
+                {cert.link && (
+                  <CertLink
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    証明を見る →
+                  </CertLink>
+                )}
+                {cert.pdfLink && (
+                  <CertLink
+                    href={cert.pdfLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    認定証PDF →
+                  </CertLink>
+                )}
+              </CertLinks>
             )}
           </CertInfo>
           <CertCategory>{cert.category}</CertCategory>
