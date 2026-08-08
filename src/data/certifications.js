@@ -82,7 +82,7 @@ const certifications = [
     year: '2026年8月',
     description:
       '日本ディープラーニング協会主催。ディープラーニングの基礎知識と事業活用能力を認定（2026年7月実施回 合格）',
-    link: null,
+    link: 'https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/bldidkE4U3JwaVR0QUdvOUhiYzV5QT09',
   },
 ];
 
