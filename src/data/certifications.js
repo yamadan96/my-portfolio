@@ -47,6 +47,7 @@ const certifications = [
     year: '2025年3月',
     description: 'データサイエンス教育プログラム修了',
     link: 'https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/aHBkNHNWLzhrWmpNVlJVSDZVQTdIZz09',
+    pdfLink: '/certificates/tus-data-science-level3-2025.pdf',
   },
   {
     name: '東京大学松尾研究室 集中講義「画像認識」修了証',
