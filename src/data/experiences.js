@@ -37,7 +37,7 @@ const experiences = [
   {
     id: 'matsuo-institute-grpo',
     company: '株式会社松尾研究所',
-    role: 'AIエンジニア（LLM性格制御・強化学習 研究開発）',
+    role: 'Research Engineer（LLM性格制御・強化学習 研究開発）',
     period: '2026年2月〜2026年6月（5ヶ月）',
     description:
       'AIチャットボットに狙った「性格」を持たせる研究開発。強化学習を用いた学習方法の比較検証と、性能・安全性の評価を担当。',
