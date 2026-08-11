@@ -43,6 +43,9 @@ const research = [
     tags: ['Vision Foundation Model', 'DINOv2', 'DINOv3', 'LoRA', 'Disaster Assessment'],
     link: 'https://www.ite.or.jp/annual/2026/',
     citation: '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 柏田 仁, 二瓶泰雄: 「視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較」, 映像情報メディア学会2026年年次大会講演予稿集 (発表予定), 2026年8月.',
+    materials: [
+      { label: '原稿PDF', url: '/papers/ite2026-paper.pdf' },
+    ],
   },
   {
     id: 'research-04',
