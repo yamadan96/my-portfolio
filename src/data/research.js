@@ -48,6 +48,18 @@ const research = [
     ],
   },
   {
+    id: 'research-07',
+    title: '被災建物画像の損傷度分類に関する研究（演題準備中）',
+    venue: 'IWAIT 2027 International Workshop on Advanced Image Technology（韓国・ソウル）',
+    year: 2027,
+    type: '国際会議（投稿予定）',
+    description:
+      '画像技術分野の国際ワークショップ IWAIT 2027（2027年1月10〜12日、韓国・ソウル 梨花女子大学）への投稿を予定。' +
+      '国内学会で継続してきた被災建物の損傷度分類研究を、国際会議向けにまとめる。',
+    tags: ['Disaster Assessment', 'International Conference'],
+    link: 'https://iwait.online/',
+  },
+  {
     id: 'research-04',
     title: '長期文脈を活用したフレーム外挿モデルによる動画異常検知',
     venue: '東京理科大学 創域理工学部 2024年度 卒業論文',
