@@ -34,16 +34,28 @@ const profile = {
       description: '松尾研究所、LegalOn Technologies、MIXI、エクサウィザーズ、GMOメディア、ログラス等',
     },
     {
-      title: '学会発表 3件',
+      title: '学会発表 4件（＋国際会議1件 投稿予定）',
       icon: '📄',
-      description: 'FIT2025（口頭）、IEICE2026総合大会（口頭）、映像情報メディア学会2026年年次大会（口頭・予定）',
-      link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
+      description:
+        'FIT2025（口頭）、IEICE2026総合大会（口頭）、映像情報メディア学会2026年年次大会（口頭・予定）、第1回 知覚AIフォーラム（ポスター・予定）。' +
+        'IWAIT 2027（国際会議・韓国ソウル）へ投稿予定',
+      links: [
+        {
+          label: 'FIT2025',
+          url: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
+        },
+        { label: 'IEICE2026', url: 'https://pub.confit.atlas.jp/ja/event/general2026/presentation/D-12-80' },
+        { label: '知覚AIフォーラム', url: 'https://www.rs.tus.ac.jp/perceptual-ai/#workshop-1' },
+      ],
     },
     {
       title: 'DECC 2025 ファイナリスト',
       icon: '🏆',
-      description: 'DISCOプログラミングコンテスト本戦出場',
-      link: 'https://news.mynavi.jp/techplus/kikaku/disco_decc-2/',
+      description: 'DISCOプログラミングコンテスト本戦出場。実機の半導体製造装置をプログラムで制御し、動作の正確さと効率性を競う競技',
+      links: [
+        { label: 'マイナビ記事', url: 'https://news.mynavi.jp/techplus/kikaku/disco_decc-2/' },
+        { label: '本戦参加レポート', url: 'https://qiita.com/yamadan96/items/fadd4ba4749fff97899f' },
+      ],
     },
     {
       title: '松尾研 LLMATCHプログラム',

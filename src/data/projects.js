@@ -1,5 +1,126 @@
 const projects = [
   {
+    id: 'project-sdxl-lora',
+    featured: true,
+    title: 'SDXL + LoRA 画像生成',
+    description:
+      'Stable Diffusion XL をLoRAでファインチューニングし、被写体画像5〜20枚から任意のシーンでの1024×1024画像を生成（DreamBooth方式）。UNetのto_q/k/vにLoRAを適用し、VAEエンコード→DDPMノイズ付加→ノイズ予測のMSE損失でLoRAパラメータのみを更新する学習パイプラインを実装。',
+    tags: ['Stable Diffusion XL', 'LoRA', 'DreamBooth', 'Diffusers', 'Python'],
+    github: 'https://github.com/yamadan96/sdxl-lora',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-llm-finetune',
+    featured: true,
+    title: 'LoRAスクラッチ実装によるLLMファインチューニング',
+    description:
+      'PEFT等のライブラリを使わずLoRA（LoRALinear / apply_lora）を自前実装し、Qwen2.5-7B-Instruct を日本語instruction tuning。h = Wx + BAx×(α/r) の定式に沿ってAをkaiming初期化・Bをゼロ初期化し、学習開始時ΔW=0を保証。全パラメータの約0.1%のみを学習対象とした。',
+    tags: ['LoRA (from scratch)', 'Qwen2.5-7B', 'PyTorch', 'Instruction Tuning', 'uv'],
+    github: 'https://github.com/yamadan96/llm-finetune',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-vit-scratch',
+    featured: true,
+    title: 'Vision Transformer スクラッチ実装',
+    description:
+      '"An Image is Worth 16x16 Words"（Dosovitskiy et al., ICLR 2021）をPyTorchでゼロから再現。Patch Embedding・学習可能な位置埋め込み・Multi-Head Attention・MLPブロックの全コンポーネントを論文の式と対応付けて自作し、CIFAR-10で学習（ViT-Small構成、d_model=256・8ヘッド・6層）。',
+    tags: ['Vision Transformer', 'PyTorch', 'Paper Reproduction', 'CIFAR-10'],
+    github: 'https://github.com/yamadan96/vit-from-scratch',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-disaster-app',
+    featured: true,
+    title: '被災建物損傷度分類 WebApp',
+    description:
+      '学会発表した研究成果（DINOv2 + LoRA）を、画像をアップロードすると地震・津波による建物の損傷度を判定するWebアプリとして実装。Selective Classificationを組み込み、確信度が低い入力については判定を棄却する設計とした。',
+    tags: ['DINOv2', 'LoRA', 'Gradio', 'Selective Classification', 'Python'],
+    github: 'https://github.com/yamadan96/disaster-app',
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-arxiv-ingest',
+    featured: true,
+    title: 'arxiv-ingest（PyPI公開）',
+    description:
+      'arXivの新着論文をキーワードで自動収集し、構造化された研究ノートへ変換するCLIツール。sources（メタデータ）/ evidence（主張）/ wiki（統合）の3層構成、記入済みファイルを上書きしない安全な再実行、LLMによる自動要約、GitHub Actionsでの平日自動実行に対応。PyPIで公開中。',
+    tags: ['Python', 'CLI', 'PyPI', 'arXiv API', 'GitHub Actions', 'Claude API'],
+    github: 'https://github.com/yamadan96/arxiv-ingest',
+    demo: 'https://pypi.org/project/arxiv-ingest/',
+    image: null,
+  },
+  {
+    id: 'project-local-claude-code',
+    featured: true,
+    title: 'local-claude-code（ローカルLLM版コーディングエージェントCLI）',
+    description:
+      'Ollama / LM Studio / vLLM などOpenAI互換のローカルLLMサーバー上で動作するコーディングエージェントCLI。read_file・write_file・edit_file・bash・glob・grep・list_dirの7ツールを内蔵し、ワークスペースサンドボックスとask/auto権限モードを実装。小型モデル特有の不安定さに対し、JSON復旧・ファジーなツール名照合・無限ループ検出で対処した。',
+    tags: ['Python', 'CLI', 'Local LLM', 'Tool Calling', 'Ollama', 'uv'],
+    github: null,
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-gapless-keyboard',
+    featured: true,
+    title: 'GapLess Keyboard（AI返信 iOSカスタムキーボード）',
+    description:
+      'キーボードを切り替えるだけでAIが会話の文脈を読み取り、3パターンの返信案を生成するiOSカスタムキーボード。カジュアル・ビジネス・恋愛・SNSの4シーン切替、5種の性格プリセット、トーン調整スライダーを搭載。Gemini 2.5 Flash とNext.jsバックエンドAPIを連携し、実機での動作まで確認済み。',
+    tags: ['Swift', 'iOS', 'Keyboard Extension', 'Gemini API', 'Next.js'],
+    github: null,
+    demo: null,
+    image: null,
+  },
+  {
+    id: 'project-musclemon',
+    featured: true,
+    title: 'MuscleMon（筋トレ×モンスター育成）',
+    description:
+      '筋トレ記録を「相棒モンスターを育てる行為」に変換するFlutter Webアプリ。3種族×4段階進化、重量×回数×セットにストリークボーナスを加えたXP設計、デイリークエスト、Claude APIによるAIチャットコーチ、RPE入力とPR自動検知を実装。継続率向上を目的に機能を反復追加している。',
+    tags: ['Flutter', 'Dart', 'Claude API', 'Gamification', 'Vercel'],
+    github: null,
+    demo: 'https://musclemon.vercel.app',
+    image: null,
+  },
+  {
+    id: 'project-nurserhythm',
+    featured: false,
+    title: 'NurseRhythm（夜勤ナース向けシフト管理×スキマ学習PWA）',
+    description:
+      '夜勤で働く病棟ナース向けのPWA。シフト表をタップで転記できるまとめて入力、夜勤回数・総労働時間・手当の自動集計、5連勤や月9夜勤の負荷アラート、疲労度×睡眠の14日推移グラフ、誤答優先の間隔反復による看護クイズ、暖色ローライトの夜勤モードを搭載。外部依存ゼロ・データは端末内で完結。',
+    tags: ['PWA', 'Vanilla JS', 'localStorage', 'Vercel'],
+    github: null,
+    demo: 'https://nurserhythm.vercel.app',
+    image: null,
+  },
+  {
+    id: 'project-life-clock',
+    featured: false,
+    title: 'Life Clock Portal（人生時計×夢リスト）',
+    description:
+      '残り寿命を秒単位でカウントダウンし、夢リストと紐づけて「今日何をすべきか」を毎朝提示する自分専用ダッシュボードPWA。市場調査からペルソナ・MVP定義・ワイヤーフレームまで仕様を先に固めてから実装するspec-firstの進め方を試した。',
+    tags: ['PWA', 'Vanilla JS', 'localStorage', 'Vercel'],
+    github: null,
+    demo: 'https://life-nine-sooty.vercel.app',
+    image: null,
+  },
+  {
+    id: 'project-voice2report',
+    featured: false,
+    title: 'Voice2Report AI（音声メモ→レポート変換デモ）',
+    description:
+      'ラフなメモから日報・フォローアップメール・CRM/ATSエントリの3種を即時生成するデモアプリ。営業・カスタマーサクセス・採用の3ワークフローをプリセットで切替可能。LLMバックエンド接続前の価値検証用として、フロントエンドのみで完結する構成にした。',
+    tags: ['React', 'styled-components', 'framer-motion'],
+    github: 'https://github.com/yamadan96/voice2report-ai',
+    demo: null,
+    image: null,
+  },
+  {
     id: 'project-paper-survey',
     featured: true,
     title: 'Paper Survey',

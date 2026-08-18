@@ -51,16 +51,29 @@ const AchievementDescription = styled.p`
   line-height: 1.6;
 `;
 
+const AchievementLinks = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing.xs};
+`;
+
 const AchievementLink = styled.a`
   display: inline-block;
   font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.primary};
-  margin-top: ${({ theme }) => theme.spacing.xs};
   text-decoration: none;
   &:hover {
     color: ${({ theme }) => theme.colors.primaryLight};
   }
 `;
+
+// Accept either `links: [{ label, url }]` or a single legacy `link` string
+const toLinkList = (item) => {
+  if (item.links && item.links.length > 0) return item.links;
+  if (item.link) return [{ label: '詳細を見る', url: item.link }];
+  return [];
+};
 
 const AchievementsSection = () => (
   <Section id="achievements">
@@ -78,10 +91,19 @@ const AchievementsSection = () => (
           <AchievementContent>
             <AchievementTitle>{item.title}</AchievementTitle>
             <AchievementDescription>{item.description}</AchievementDescription>
-            {item.link && (
-              <AchievementLink href={item.link} target="_blank" rel="noopener noreferrer">
-                詳細を見る →
-              </AchievementLink>
+            {toLinkList(item).length > 0 && (
+              <AchievementLinks>
+                {toLinkList(item).map((l) => (
+                  <AchievementLink
+                    key={l.url}
+                    href={l.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {l.label} →
+                  </AchievementLink>
+                ))}
+              </AchievementLinks>
             )}
           </AchievementContent>
         </AchievementCard>
