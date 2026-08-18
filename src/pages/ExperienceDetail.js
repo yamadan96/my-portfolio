@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import experiences from '../data/experiences';
 import Tag from '../components/ui/Tag';
 import Button from '../components/ui/Button';
+import Disclosure from '../components/ui/Disclosure';
 
 const DetailWrapper = styled.div`
   max-width: ${({ $hasProjects }) => $hasProjects ? '1000px' : '800px'};
@@ -95,6 +96,46 @@ const ListItem = styled.li`
     height: 8px;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+// レベル1（概要）。専門知識がない読者が30秒で把握できる粒度に固定した5項目。
+const SUMMARY_FIELDS = [
+  ['built', '何をしたか'],
+  ['problem', 'なぜ必要だったか'],
+  ['role', '自分の担当'],
+  ['tech', '使った技術'],
+  ['result', '結果'],
+];
+
+const SummaryList = styled.dl`
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
+  margin: 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+`;
+
+const SummaryTerm = styled.dt`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary};
+  padding-top: 3px;
+  white-space: nowrap;
+`;
+
+const SummaryDesc = styled.dd`
+  margin: 0;
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.85;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin-bottom: ${({ theme }) => theme.spacing.sm};
   }
 `;
 
@@ -505,14 +546,25 @@ const ExperienceDetail = () => {
           <Role>{experience.role}</Role>
         </Header>
 
+        {experience.summary && (
+          <SectionBlock variants={itemVariants}>
+            <SectionLabel>概要</SectionLabel>
+            <SummaryList>
+              {SUMMARY_FIELDS.map(([key, label]) =>
+                experience.summary[key] ? (
+                  <React.Fragment key={key}>
+                    <SummaryTerm>{label}</SummaryTerm>
+                    <SummaryDesc>{experience.summary[key]}</SummaryDesc>
+                  </React.Fragment>
+                ) : null
+              )}
+            </SummaryList>
+          </SectionBlock>
+        )}
+
         <SectionBlock variants={itemVariants}>
           <SectionLabel>成果</SectionLabel>
           <Achievement>{details.achievements}</Achievement>
-        </SectionBlock>
-
-        <SectionBlock variants={itemVariants}>
-          <SectionLabel>概要</SectionLabel>
-          <Overview>{details.overview}</Overview>
         </SectionBlock>
 
         {hasProjects && (
@@ -554,12 +606,14 @@ const ExperienceDetail = () => {
         )}
 
         <SectionBlock variants={itemVariants}>
-          <SectionLabel>担当内容</SectionLabel>
-          <List>
-            {details.responsibilities.map((item, i) => (
-              <ListItem key={i}>{item}</ListItem>
-            ))}
-          </List>
+          <Disclosure label="担当内容の詳細を見る">
+            <Overview>{details.overview}</Overview>
+            <List>
+              {details.responsibilities.map((item, i) => (
+                <ListItem key={i}>{item}</ListItem>
+              ))}
+            </List>
+          </Disclosure>
         </SectionBlock>
 
         <SectionBlock variants={itemVariants}>
