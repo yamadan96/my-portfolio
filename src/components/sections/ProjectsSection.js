@@ -6,6 +6,7 @@ import SectionTitle from '../ui/SectionTitle';
 import Card from '../ui/Card';
 import Tag from '../ui/Tag';
 import Disclosure from '../ui/Disclosure';
+import MermaidDiagram from '../ui/MermaidDiagram';
 import projects from '../../data/projects';
 
 const ProjectsGrid = styled.div`
@@ -199,8 +200,14 @@ const ProjectSummary = ({ summary }) => (
   </SummaryList>
 );
 
-const TechnicalDetails = ({ blocks }) => (
-  <Disclosure label="技術詳細を見る">
+const TechnicalDetails = ({ blocks, diagram }) => (
+  <Disclosure label="システム構成図・技術詳細を見る">
+    {diagram && (
+      <TechBlock>
+        <TechLabel>システム構成</TechLabel>
+        <MermaidDiagram chart={diagram.chart} caption={diagram.caption} alt={diagram.alt} />
+      </TechBlock>
+    )}
     {blocks.map((b) => (
       <TechBlock key={b.label}>
         <TechLabel>{b.label}</TechLabel>
@@ -273,8 +280,8 @@ const ProjectsSection = () => (
               </ProjectLink>
             )}
           </Links>
-          {project.technical && project.technical.length > 0 && (
-            <TechnicalDetails blocks={project.technical} />
+          {(project.technical?.length > 0 || project.diagram) && (
+            <TechnicalDetails blocks={project.technical || []} diagram={project.diagram} />
           )}
         </Card>
       ))}
@@ -298,8 +305,8 @@ const ProjectsSection = () => (
               </ProjectLink>
             )}
           </Links>
-          {project.technical && project.technical.length > 0 && (
-            <TechnicalDetails blocks={project.technical} />
+          {(project.technical?.length > 0 || project.diagram) && (
+            <TechnicalDetails blocks={project.technical || []} diagram={project.diagram} />
           )}
         </OtherCard>
       ))}

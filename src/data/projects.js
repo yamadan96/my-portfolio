@@ -23,7 +23,26 @@ const projects = [
       { label: '依存関係のベンダリング', body: '採点環境はネットワーク遮断かつ Python 3.10 のため、LeRobot v0.6.0 を提出 zip に同梱し 3.10 へバックポートする機構を自作した。pip install に頼れない前提での配布設計。' },
       { label: '検証方法', body: 'ロボット環境を挟まないオープンループ検証を用意し、統合バグとモデル性能低下を切り分けられるようにした。採点環境と同条件（CUDA 13）での事前確認も実施。' },
       { label: '学んだこと', body: '実行環境の制約が設計を決めるという点。精度以前に「相手の環境で確実に起動すること」が提出物の価値を左右する。' },
-    ],  },
+    ],
+    diagram: {
+      alt: '採点環境からHTTPで観測が送られ、SmolVLAポリシーが行動を返す構成図',
+      caption: 'ネットワーク遮断された採点環境で動くよう、依存ライブラリを提出物に同梱している',
+      chart: `flowchart LR
+  subgraph SCORE["採点環境（ネットワーク遮断 / Python 3.10）"]
+    SIM["LIBERO-plus<br/>ロボットシミュレータ"]
+  end
+  subgraph ZIP["提出 zip（自作ベンダリング）"]
+    SRV["HTTP ポリシーサーバー"]
+    POL["SmolVLA + LoRA<br/>学習済みポリシー"]
+    LR["LeRobot v0.6.0<br/>（3.10 へバックポート）"]
+  end
+  TRAIN["LoRA 微調整<br/>（事前に実施）"] -.-> POL
+  SIM -- "観測（画像 + 指示文）" --> SRV
+  SRV --> POL
+  POL -- "行動（関節の目標値）" --> SIM
+  SRV --- LR`,
+    },
+  },
   {
     id: 'project-llm-finetune',
     featured: true,
@@ -47,7 +66,25 @@ const projects = [
       { label: 'モデル構成', body: 'ベースは Qwen2.5-7B-Instruct。rank=16 / alpha=32 で日本語 Dolly データセットを3エポック学習。学習対象パラメータは全体の約0.1%。' },
       { label: '工夫した点', body: 'LoRALinear / apply_lora を独立したモジュールに切り出し、任意のモデルの線形層に後から差し込める構造にした。学習後は対話デモから即座に挙動を確認できる。' },
       { label: '学んだこと', body: 'B をゼロ初期化する理由（学習開始時点で元モデルの出力を壊さない）のように、論文の一行が実装上の必然であることを体感できた。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'LoRAを自前実装して大規模言語モデルの線形層に差し込む構成図',
+      caption: '元の重みは凍結し、追加した小さな行列 A・B だけを学習する',
+      chart: `flowchart TB
+  IN["日本語の指示データ"] --> MODEL
+  subgraph MODEL["Qwen2.5-7B-Instruct"]
+    W["元の重み W<br/>（凍結・学習しない）"]
+    subgraph LORA["自前実装した LoRALinear"]
+      A["行列 A<br/>kaiming 初期化"]
+      B["行列 B<br/>ゼロ初期化"]
+    end
+  end
+  W --> SUM
+  A --> B --> SUM["h = Wx + BAx × α/r"]
+  SUM --> OUT["応答"]
+  SUM -. "勾配は A・B のみ<br/>（全体の約0.1%）" .-> LORA`,
+    },
+  },
   {
     id: 'project-vit-scratch',
     featured: true,
@@ -70,7 +107,25 @@ const projects = [
       { label: '再現対象', body: '"An Image is Worth 16x16 Words"（Dosovitskiy et al., ICLR 2021）。CIFAR-10（32×32）に合わせた ViT-Small 相当の構成。' },
       { label: 'モデルアーキテクチャ', body: 'Patch Embedding（4×4 パッチ、48→256 の線形射影）→ CLS トークン付加 → 学習可能な1次元位置埋め込み → Transformer ブロック×6（LayerNorm → Multi-Head Attention 8ヘッド → 残差 → LayerNorm → MLP 256→512、GELU → 残差）→ CLS トークンのみを LayerNorm して Linear(256→10)。' },
       { label: '工夫した点', body: '各コンポーネントを自己完結させ、論文の式番号への参照をコード内に残した。どのハイパーパラメータが論文由来で、どれが CIFAR-10 向けの調整かを区別できるようにしている。' },
-    ],  },
+    ],
+    diagram: {
+      alt: '画像をパッチに分割しTransformerで分類するVision Transformerの構成図',
+      caption: '論文の各式に対応するコンポーネントをすべて自作した',
+      chart: `flowchart TB
+  IMG["入力画像 32×32"] --> PATCH["Patch Embedding<br/>4×4 の64タイル → Linear(48→256)"]
+  PATCH --> CLS["CLS トークンを先頭に付加"]
+  CLS --> POS["+ 学習可能な位置埋め込み"]
+  POS --> BLK
+  subgraph BLK["Transformer Block × 6"]
+    LN1["LayerNorm"] --> ATT["Multi-Head Attention<br/>8ヘッド / d_model=256"]
+    ATT --> R1["+ 残差"]
+    R1 --> LN2["LayerNorm"] --> MLP["MLP 256→512<br/>GELU"]
+    MLP --> R2["+ 残差"]
+  end
+  BLK --> HEAD["CLS のみ取り出し<br/>LayerNorm → Linear(256→10)"]
+  HEAD --> OUT["10クラス分類<br/>CIFAR-10"]`,
+    },
+  },
   {
     id: 'project-sdxl-lora',
     featured: true,
@@ -94,7 +149,26 @@ const projects = [
       { label: 'LoRA の適用箇所', body: 'UNet の to_q / to_k / to_v に限定。元の重みは凍結し、追加した低ランク行列のみが勾配を受ける。' },
       { label: '推論フロー', body: 'プロンプトを CLIP テキストエンコーダで埋め込み → UNet で30ステップのノイズ除去 → VAE デコーダで 1024×1024 画像へ復元。' },
       { label: '苦労した点', body: '被写体の再現度と、プロンプトで指定した場面への追従性がトレードオフになる。学習を進めすぎると場面指示を無視して学習画像に寄る挙動が出る。' },
-    ],  },
+    ],
+    diagram: {
+      alt: '画像にノイズを加えて復元させる学習と、プロンプトから画像を生成する推論の構成図',
+      caption: '上段が学習、下段が生成。学習対象は UNet の注意機構の一部だけ',
+      chart: `flowchart TB
+  subgraph TR["学習（被写体の写真 5〜20枚）"]
+    IMGS["学習画像"] --> VAE_E["VAE エンコーダ"] --> Z["潜在表現 z"]
+    Z --> NOISE["ランダム時刻 t の<br/>DDPM ノイズを付加"]
+    NOISE --> UNET1["UNet<br/>（to_q/k/v に LoRA）"]
+    UNET1 --> PRED["ノイズ ε を予測"]
+    PRED --> LOSS["MSE 損失"]
+    LOSS -. "LoRA のみ更新" .-> UNET1
+  end
+  subgraph INF["生成"]
+    P["プロンプト"] --> CLIP["CLIP テキストエンコーダ"]
+    CLIP --> UNET2["UNet で30ステップ<br/>ノイズ除去"]
+    UNET2 --> VAE_D["VAE デコーダ"] --> RESULT["1024×1024 画像"]
+  end`,
+    },
+  },
   {
     id: 'project-disaster-app',
     featured: true,
@@ -117,7 +191,20 @@ const projects = [
       { label: 'モデル構成', body: 'DINOv2 をバックボーンとし、LoRA で災害画像ドメインへ適応させた分類器。学会発表（FIT2025 / IEICE2026 / 映像情報メディア学会2026）で検証した構成をそのまま使用している。' },
       { label: 'Selective Classification', body: '最大ソフトマックス値を確信度として用い、閾値を下回る入力は分類を棄権する。全件を無理に分類するより、確信できるものだけ自動化して残りを人に回す方が実運用に適するという判断。' },
       { label: '実装', body: 'Gradio による画像アップロード UI。研究コードと推論コードを共有し、論文の結果とアプリの挙動が乖離しないようにしている。' },
-    ],  },
+    ],
+    diagram: {
+      alt: '被災建物の写真を分類し、確信度が低い場合は判定を棄権する構成図',
+      caption: '確信度が閾値を下回る画像は自動判定せず、専門家の確認に回す',
+      chart: `flowchart LR
+  UP["建物写真を<br/>アップロード"] --> GR["Gradio UI"]
+  GR --> BB["DINOv2 ViT-L/14<br/>（凍結した基盤モデル）"]
+  BB --> LORA["LoRA アダプタ<br/>災害画像へ適応"]
+  LORA --> CLS["6クラス分類<br/>被害なし / 地震大破・中・軽 / 津波大破・軽"]
+  CLS --> SC{"確信度 ≧ 閾値？"}
+  SC -- "はい" --> ANS["損傷度を提示"]
+  SC -- "いいえ" --> ABST["判定を棄権<br/>→ 専門家が確認"]`,
+    },
+  },
   {
     id: 'project-arxiv-ingest',
     featured: true,
@@ -141,7 +228,27 @@ const projects = [
       { label: '安全な再実行', body: '記入済みのファイルは決して上書きしない設計。日次実行しても手で書いた内容が失われないため、長期運用に耐える。' },
       { label: '周辺機能', body: 'LLM による自動要約（--summarize）、日付範囲を指定した遡り取得（--since）、GitHub Issues / BibTeX / CSV へのエクスポート、Slack / Discord への通知、Obsidian の wikilink と Quartz サイトへの publish に対応。' },
       { label: '運用', body: 'GitHub Actions のテンプレートを同梱し、平日の定期実行と手動実行の両方に対応。CI でテストを回している。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'arXivから論文を集めて3層のノートを生成し、外部サービスへ連携する構成図',
+      caption: '記入済みのノートは上書きしないため、日次実行しても手書きの内容が残る',
+      chart: `flowchart LR
+  CRON["GitHub Actions<br/>平日に自動実行"] --> CLI
+  CFG["config.yaml<br/>キーワード設定"] --> CLI["arxiv-ingest CLI"]
+  CLI -- "検索" --> ARX["arXiv API"]
+  ARX --> CLI
+  CLI --> LLM["Claude API<br/>要約（--summarize）"]
+  LLM --> NOTES
+  subgraph NOTES["3層のノート（上書きしない）"]
+    S["sources/<br/>論文メタデータ"]
+    E["evidence/<br/>論文の主張"]
+    W["wiki/<br/>自分の理解"]
+  end
+  NOTES --> OUT1["Obsidian / Quartz"]
+  NOTES --> OUT2["GitHub Issues<br/>BibTeX / CSV"]
+  NOTES --> OUT3["Slack / Discord 通知"]`,
+    },
+  },
   {
     id: 'project-local-claude-code',
     featured: true,
@@ -165,7 +272,28 @@ const projects = [
       { label: '小型モデルへの対応', body: '小型モデルは JSON を壊す・ツール名を微妙に間違える・同じ操作を無限に繰り返すという失敗をする。JSON の復旧処理、ファジーなツール名照合、ループ検出をそれぞれ実装して対処した。' },
       { label: '接続先', body: 'OpenAI 互換 API を話すサーバー（Ollama / LM Studio / vLLM）であれば差し替え可能。特定ベンダーに依存しない構成。' },
       { label: '苦労した点', body: '同一ポートで別プロセスが待ち受けていたため、localhost の IPv6/IPv4 解決の違いで意図しないサービスへリクエストが飛ぶ問題に遭遇した。lsof で全リスナーを列挙して原因を特定し、IPv4 を明示して解決した。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'ローカルのLLMがツールを選んで実行するエージェントループの構成図',
+      caption: '外部にコードを送らず、操作範囲は1つのフォルダ内に制限される',
+      chart: `flowchart TB
+  USER["利用者の指示"] --> LOOP
+  subgraph LOOP["エージェントループ"]
+    LLMS["ローカル LLM サーバー<br/>Ollama / LM Studio / vLLM<br/>（OpenAI 互換 API）"]
+    GUARD["復旧処理<br/>JSON修復 / ツール名照合 / ループ検出"]
+    PERM{"ask / auto<br/>権限モード"}
+  end
+  LLMS -- "ツール呼び出し" --> GUARD --> PERM
+  PERM -- "許可" --> TOOLS
+  subgraph TOOLS["内蔵7ツール（サンドボックス内）"]
+    T1["read_file / write_file / edit_file"]
+    T2["bash"]
+    T3["glob / grep / list_dir"]
+  end
+  TOOLS -- "実行結果" --> LLMS
+  TOOLS --- WS["ワークスペース<br/>外部へのアクセスは拒否"]`,
+    },
+  },
   {
     id: 'project-paper-survey',
     featured: true,
@@ -187,7 +315,19 @@ const projects = [
     technical: [
       { label: '構成', body: 'Quartz v4 による静的サイト生成。Markdown の wikilink からノート間のグラフを自動構築し、関連論文をたどれるようにしている。日本語表示に合わせて locale と Noto Sans JP を設定。' },
       { label: '運用', body: 'GitHub Pages へ自動デプロイ。ノート追加の手順を定型化してあり、読了から公開までの手間を最小にしている。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'Markdownノートからリンク構造を解析して公開サイトを生成する構成図',
+      caption: 'ノート間のリンクからネットワーク図が自動生成され、関連論文をたどれる',
+      chart: `flowchart LR
+  MD["Markdown ノート<br/>wikilink で相互参照"] --> Q["Quartz v4<br/>静的サイト生成"]
+  Q --> GRAPH["リンク解析<br/>→ ネットワーク図"]
+  Q --> PAGES["各論文ページ"]
+  GRAPH --> GHA["GitHub Actions"]
+  PAGES --> GHA
+  GHA --> GP["GitHub Pages<br/>公開サイト"]`,
+    },
+  },
   {
     id: 'project-musclemon',
     featured: false,
@@ -211,7 +351,24 @@ const projects = [
       { label: 'AIコーチ', body: 'モンスターの性格・口調データをシステムプロンプトに埋め込み、直近のワークアウト要約だけを文脈として渡す（全履歴は送らずトークンを節約）。' },
       { label: 'APIキーの保護', body: 'クライアントアプリに API キーを埋め込まず、サーバーレス関数側に隔離。共有シークレットヘッダーで呼び出しを制限し、加えて提供元コンソール側で使用量上限を設定している。' },
       { label: '効果音', body: '音声ファイルを一切持たず、PCM WAV をメモリ上で生成して data URI として再生する方式にした。アセット管理のコストがゼロになる。' },
-    ],  },
+    ],
+    diagram: {
+      alt: '筋トレ記録から経験値を計算しモンスターを進化させる構成図とAPIキーの保護',
+      caption: 'API キーはアプリに埋め込まず、サーバーレス関数側に隔離している',
+      chart: `flowchart TB
+  REC["筋トレを記録<br/>重量 × 回数 × セット"] --> XP["経験値の計算<br/>+ 連続記録ボーナス"]
+  XP --> MON["モンスター<br/>3種族 × 4段階進化"]
+  REC --> PR["自己最高記録の自動検知"]
+  subgraph APP["Flutter Web アプリ（端末側）"]
+    XP
+    MON
+    PR
+  end
+  APP -- "共有シークレット付きで呼び出し" --> FN["サーバーレス関数<br/>（API キーはここだけ）"]
+  FN --> CLAUDE["Claude API<br/>AI チャットコーチ"]
+  CLAUDE --> FN --> APP`,
+    },
+  },
   {
     id: 'project-gapless-keyboard',
     featured: true,
@@ -234,7 +391,22 @@ const projects = [
       { label: '構成', body: 'Swift による Keyboard Extension が入力欄の文脈を取得し、Next.js のバックエンド API 経由で Gemini 2.5 Flash に返信案を生成させる。APIキーはバックエンド側に隔離。' },
       { label: '制約への対応', body: 'iOS のキーボード拡張はメモリ制限が厳しく、ネットワークアクセスにも Full Access の許可が必要。UI を軽量に保ち、生成処理をすべてサーバー側へ寄せる設計にした。' },
       { label: '苦労した点', body: '拡張機能はホストアプリと別プロセスで動くため、設定の共有と権限周りの取り扱いが通常のアプリ開発とは異なる。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'iOSキーボード拡張から自前APIを経由してAIが返信案を生成する構成図',
+      caption: 'キーボード拡張は軽量に保ち、生成処理はすべてサーバー側に寄せた',
+      chart: `flowchart LR
+  subgraph IOS["iPhone"]
+    KB["Keyboard Extension<br/>Swift"]
+    FIELD["入力欄<br/>会話の文脈"]
+  end
+  FIELD --> KB
+  KB -- "文脈 + 場面 + トーン" --> API["Next.js バックエンド API<br/>（API キーを保持）"]
+  API --> GEM["Gemini 2.5 Flash"]
+  GEM --> API -- "返信案 3パターン" --> KB
+  KB -- "選んだ案を直接入力" --> FIELD`,
+    },
+  },
   {
     id: 'project-10',
     featured: false,
@@ -256,7 +428,19 @@ const projects = [
     technical: [
       { label: '構成', body: 'Next.js + TypeScript の PWA。スクリーンショットを Gemini に渡し、発話者の左右関係と時系列を推定させてから返信案を生成させる。' },
       { label: 'プロンプト設計', body: '「無難」「ウケ狙い」「誘い」など方向性の異なる案を同時に出させることで、ユーザーが選べる状態を作る。単一の最適解を返すより実用的だという判断。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'チャット画面のスクリーンショットをAIに解釈させ返信案を生成する構成図',
+      caption: '画像をそのまま渡すため、会話を手で打ち直す必要がない',
+      chart: `flowchart LR
+  SS["チャット画面の<br/>スクリーンショット"] --> PWA["PWA<br/>Next.js + TypeScript"]
+  PWA --> VLM["Gemini<br/>画像と文章を同時に理解"]
+  VLM --> PARSE["発話者の左右関係<br/>と時系列を推定"]
+  PARSE --> GEN["方向性の異なる<br/>返信案を生成"]
+  GEN --> PWA
+  PWA --> PICK["利用者が選ぶ"]`,
+    },
+  },
   {
     id: 'project-nurserhythm',
     featured: false,
@@ -279,7 +463,25 @@ const projects = [
       { label: '構成', body: 'バニラ JavaScript の単一ファイル PWA。localStorage のみでデータを永続化し、サーバーを持たない。オフラインでも動作する。' },
       { label: '負荷アラートの設計', body: '5連勤・月9夜勤といった具体的な閾値でアラートを出す。抽象的な「働きすぎ」ではなく、現場で使われている基準に合わせた。' },
       { label: '復習アルゴリズム', body: '誤答した問題を優先的に再出題する間隔反復方式。学習履歴も端末内に保持する。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'シフト入力から集計・アラート・学習機能へ分岐する構成図。データは端末内に保存',
+      caption: '外部サービスを使わず、データは端末内だけに保存される',
+      chart: `flowchart TB
+  IN["シフト表を<br/>まとめて入力"] --> LS
+  subgraph APP["PWA（バニラ JavaScript / オフライン動作）"]
+    LS["localStorage<br/>端末内のみに保存"]
+    AGG["自動集計<br/>夜勤回数 / 労働時間 / 手当"]
+    ALERT["負荷アラート<br/>5連勤 / 月9夜勤"]
+    GRAPH["疲労度 × 睡眠<br/>14日推移グラフ"]
+    QUIZ["看護クイズ<br/>誤答を優先して再出題"]
+  end
+  LS --> AGG
+  LS --> ALERT
+  LS --> GRAPH
+  LS --> QUIZ`,
+    },
+  },
   {
     id: 'project-09',
     featured: false,
@@ -303,7 +505,20 @@ const projects = [
       { label: 'DOM 変更への対応', body: '推測でパーサーを書くと必ず外れるため、まず実際のページ構造を取得する probe スクリプトを用意し、それをコミットして資産化した。構造変更時の調査を短時間で再開できる。' },
       { label: '運用で見つけた問題', body: '施設×曜日ごとにルールが違うため、一律の条件判定では誤通知が出た。実利用者からの「平日に大量通知が来る」という報告を受けて、施設別ルールと時間帯除外を追加した。' },
       { label: '学んだこと', body: '外部サイトを相手にするコードは、ユニットテストでは壊れを検出できない。本番デプロイ後の挙動観察が唯一の検証手段になる場面がある。' },
-    ],  },
+    ],
+    diagram: {
+      alt: 'GitHub Actionsが毎日予約サイトを巡回し条件に合う枠を通知する構成図',
+      caption: 'CI は毎回クリーンな環境で起動するため、cache で DB を永続化している',
+      chart: `flowchart LR
+  CRON["GitHub Actions<br/>日次実行"] --> SEL["Selenium<br/>予約サイトを巡回"]
+  SEL --> RULE["施設 × 曜日ごとの<br/>条件判定"]
+  RULE --> DB["SQLite<br/>予約状態を記録"]
+  DB --- CACHE["Actions cache<br/>で DB を永続化"]
+  RULE --> NOTIFY["条件に合う枠を通知"]
+  NOTIFY --> USER["家族が実際に利用"]
+  PROBE["probe スクリプト<br/>実DOM構造を取得"] -. "サイト変更時の調査" .-> SEL`,
+    },
+  },
 ];
 
 export default projects;
