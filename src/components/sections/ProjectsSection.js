@@ -5,6 +5,7 @@ import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 import Card from '../ui/Card';
 import Tag from '../ui/Tag';
+import Disclosure from '../ui/Disclosure';
 import projects from '../../data/projects';
 
 const ProjectsGrid = styled.div`
@@ -125,6 +126,90 @@ const CATEGORY_LABELS = {
   product: 'Product',
 };
 
+// レベル1（概要）。初見の読者が30秒で把握できる粒度に固定した5項目。
+const SUMMARY_FIELDS = [
+  ['built', '作ったもの'],
+  ['problem', '課題'],
+  ['role', '担当'],
+  ['tech', '技術'],
+  ['result', '結果'],
+];
+
+const SummaryList = styled.dl`
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
+  margin: ${({ theme }) => `${theme.spacing.md} 0 0`};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+`;
+
+const SummaryLabel = styled.dt`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary};
+  padding-top: 2px;
+  white-space: nowrap;
+`;
+
+const SummaryValue = styled.dd`
+  margin: 0;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.75;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin-bottom: ${({ theme }) => theme.spacing.sm};
+  }
+`;
+
+const TechBlock = styled.div`
+  & + & {
+    margin-top: ${({ theme }) => theme.spacing.md};
+  }
+`;
+
+const TechLabel = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: ${({ theme }) => theme.colors.textMuted};
+  margin-bottom: 4px;
+`;
+
+const TechBody = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.8;
+`;
+
+const ProjectSummary = ({ summary }) => (
+  <SummaryList>
+    {SUMMARY_FIELDS.map(([key, label]) =>
+      summary[key] ? (
+        <React.Fragment key={key}>
+          <SummaryLabel>{label}</SummaryLabel>
+          <SummaryValue>{summary[key]}</SummaryValue>
+        </React.Fragment>
+      ) : null
+    )}
+  </SummaryList>
+);
+
+const TechnicalDetails = ({ blocks }) => (
+  <Disclosure label="技術詳細を見る">
+    {blocks.map((b) => (
+      <TechBlock key={b.label}>
+        <TechLabel>{b.label}</TechLabel>
+        <TechBody>{b.body}</TechBody>
+      </TechBlock>
+    ))}
+  </Disclosure>
+);
+
 const ProjectsSection = () => (
   <Section id="projects">
     <SectionTitle title="Projects" subtitle="モデル開発・ツール・プロダクト" />
@@ -141,6 +226,7 @@ const ProjectsSection = () => (
             <ProjectTitle>{project.title}</ProjectTitle>
           </ProjectHeader>
           <ProjectDescription>{project.description}</ProjectDescription>
+          {project.summary && <ProjectSummary summary={project.summary} />}
           <Tags>
             {project.tags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
@@ -187,6 +273,9 @@ const ProjectsSection = () => (
               </ProjectLink>
             )}
           </Links>
+          {project.technical && project.technical.length > 0 && (
+            <TechnicalDetails blocks={project.technical} />
+          )}
         </Card>
       ))}
     </ProjectsGrid>
@@ -196,6 +285,7 @@ const ProjectsSection = () => (
         <OtherCard key={project.id}>
           <OtherTitle>{project.title}</OtherTitle>
           <OtherDescription>{project.description}</OtherDescription>
+          {project.summary && <ProjectSummary summary={project.summary} />}
           <Links>
             {project.github && (
               <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer">
@@ -208,6 +298,9 @@ const ProjectsSection = () => (
               </ProjectLink>
             )}
           </Links>
+          {project.technical && project.technical.length > 0 && (
+            <TechnicalDetails blocks={project.technical} />
+          )}
         </OtherCard>
       ))}
     </OtherList>
