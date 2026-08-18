@@ -98,7 +98,7 @@ const projects = [
   },
   {
     id: 'project-musclemon',
-    featured: true,
+    featured: false,
     category: 'product',
     title: 'MuscleMon（筋トレ×モンスター育成）',
     description:
@@ -145,18 +145,6 @@ const projects = [
     image: null,
   },
   {
-    id: 'project-life-clock',
-    featured: false,
-    category: 'product',
-    title: 'Life Clock Portal（人生時計×夢リスト）',
-    description:
-      '残り寿命を秒単位でカウントダウンし、夢リストと紐づけて「今日何をすべきか」を毎朝提示する自分専用ダッシュボード PWA。市場調査からペルソナ・MVP 定義・ワイヤーフレームまで仕様を先に固めてから実装する spec-first の進め方を試した。',
-    tags: ['PWA', 'Vanilla JS', 'localStorage', 'Vercel'],
-    github: null,
-    demo: 'https://life-nine-sooty.vercel.app',
-    image: null,
-  },
-  {
     id: 'project-09',
     featured: false,
     category: 'tool',
@@ -166,20 +154,6 @@ const projects = [
     tags: ['Python', 'Selenium', 'SQLite', 'GitHub Actions', 'Automation'],
     github: 'https://github.com/yamadan96/Tennis-Court-Availability-Notification-System',
     demo: null,
-    image: null,
-  },
-  {
-    id: 'project-08',
-    featured: false,
-    category: 'product',
-    title: '温泉温度管理自動化システム（ハッカソン）',
-    category2: 'hackathon',
-    description:
-      '温泉ハッカソンにて開発。センサーで湯温を測り、スマホから遠隔で湯量を調節できる装置の試作機を、小型コンピュータとアプリで作り上げた。',
-    tags: ['Python', 'Raspberry Pi', 'Flutter', 'WebSocket', 'IoT'],
-    github: null,
-    demo: null,
-    blog: 'https://blog.shinonome.io/shibu2021-10/',
     image: null,
   },
 ];
