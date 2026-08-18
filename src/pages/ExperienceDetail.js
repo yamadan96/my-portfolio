@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -368,10 +368,40 @@ const itemVariants = {
 };
 
 const ProjectModal = ({ project, onClose }) => {
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    if (!project) return;
+
+    // Focus the close button when modal opens
+    const timer = setTimeout(() => {
+      if (closeRef.current) closeRef.current.focus();
+    }, 50);
+
+    // Lock body scroll
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    // Escape key handler
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [project, onClose]);
+
   if (!project) return null;
 
   return (
     <ModalOverlay
+      role="dialog"
+      aria-modal="true"
+      aria-label={project.name}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -384,7 +414,7 @@ const ProjectModal = ({ project, onClose }) => {
         transition={{ duration: 0.25 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <ModalClose onClick={onClose}>×</ModalClose>
+        <ModalClose ref={closeRef} onClick={onClose} aria-label="Close dialog">×</ModalClose>
         <ModalHeader>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
             <span style={{ fontSize: '2rem' }}>{project.icon}</span>
@@ -436,6 +466,16 @@ const ExperienceDetail = () => {
   const navigate = useNavigate();
   const experience = experiences.find((e) => e.id === id);
   const [selectedProject, setSelectedProject] = useState(null);
+  const triggerRef = useRef(null);
+
+  const closeModal = useCallback(() => {
+    setSelectedProject(null);
+    // Restore focus to the element that opened the modal
+    if (triggerRef.current) {
+      triggerRef.current.focus();
+      triggerRef.current = null;
+    }
+  }, []);
 
   if (!experience || !experience.details) {
     return (
@@ -484,7 +524,10 @@ const ExperienceDetail = () => {
                   key={i}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={(e) => {
+                    triggerRef.current = e.currentTarget;
+                    setSelectedProject(project);
+                  }}
                 >
                   <ProjectCardHeader>
                     <ProjectIcon>{project.icon}</ProjectIcon>
@@ -533,7 +576,7 @@ const ExperienceDetail = () => {
         {selectedProject && (
           <ProjectModal
             project={selectedProject}
-            onClose={() => setSelectedProject(null)}
+            onClose={closeModal}
           />
         )}
       </AnimatePresence>

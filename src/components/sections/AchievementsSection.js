@@ -77,7 +77,7 @@ const toLinkList = (item) => {
 
 const AchievementsSection = () => (
   <Section id="achievements">
-    <SectionTitle title="Achievements" subtitle="実績" />
+    <SectionTitle title="Awards & Recognition" subtitle="受賞・採択・掲載" />
     <AchievementsGrid>
       {profile.achievements.map((item, index) => (
         <AchievementCard

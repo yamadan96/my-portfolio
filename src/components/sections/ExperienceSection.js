@@ -100,7 +100,7 @@ const ExperienceSection = () => {
 
   return (
     <Section id="experience">
-      <SectionTitle title="Experience" subtitle="インターン・実務経験（16社）" />
+      <SectionTitle title="Experience" subtitle="実務・インターン経験（17社）" />
       <SubHeading>主要な経験</SubHeading>
       <SubNote>長期・現職を中心とした実務経験</SubNote>
       <Timeline items={major} onDetailClick={handleDetailClick} />

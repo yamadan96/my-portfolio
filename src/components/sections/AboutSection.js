@@ -9,7 +9,7 @@ const AboutGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.spacing['3xl']};
-  align-items: center;
+  align-items: start;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
@@ -38,28 +38,39 @@ const BioEn = styled.p`
 
 const StatsGrid = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: ${({ theme }) => theme.spacing.md};
-  justify-content: center;
 `;
 
 const StatCard = styled(motion.div)`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
+  display: grid;
+  grid-template-columns: minmax(92px, auto) 1fr;
+  align-items: baseline;
+  column-gap: ${({ theme }) => theme.spacing.lg};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.cardBg};
   backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.xl};
-  justify-content: center;
-  white-space: nowrap;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+`;
+
+const HighlightText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+const HighlightNote = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  line-height: 1.5;
 `;
 
 const StatLabel = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
-  white-space: nowrap;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-weight: 600;
+  line-height: 1.5;
 `;
 
 const CareerBadge = styled(motion.div)`
@@ -76,9 +87,42 @@ const CareerBadge = styled(motion.div)`
   font-weight: 600;
 `;
 
+const FocusBlock = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+`;
+
+const FocusLabel = styled.p`
+  && {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: ${({ theme }) => theme.colors.textMuted};
+    margin-bottom: ${({ theme }) => theme.spacing.sm};
+  }
+`;
+
+const FocusList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.xs};
+`;
+
+const FocusChip = styled.span`
+  display: inline-block;
+  padding: ${({ theme }) => `4px ${theme.spacing.md}`};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => `${theme.colors.primary}12`};
+  border: 1px solid ${({ theme }) => `${theme.colors.primary}30`};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+`;
+
 const StatValue = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: 800;
+  white-space: nowrap;
   background: ${({ theme }) => theme.colors.gradient};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -102,24 +146,32 @@ const AboutSection = () => (
         {profile.bio.map((line, i) => (
           <p key={i}>{line}</p>
         ))}
+        {profile.focusAreas && profile.focusAreas.length > 0 && (
+          <FocusBlock>
+            <FocusLabel>Focus Areas</FocusLabel>
+            <FocusList>
+              {profile.focusAreas.map((area) => (
+                <FocusChip key={area}>{area}</FocusChip>
+              ))}
+            </FocusList>
+          </FocusBlock>
+        )}
         {profile.bioEn && <BioEn>{profile.bioEn}</BioEn>}
-        <p>
-          研究では深層学習・画像処理・自然言語処理を中心に取り組み、学会発表の経験もあります。
-          インターンでは大手企業からスタートアップまで幅広い環境で開発経験を積み、
-          チーム開発やプロダクト志向の考え方を身につけました。
-        </p>
       </AboutText>
       <StatsGrid>
-        {profile.stats.map((stat, index) => (
+        {profile.highlights.map((item, index) => (
           <StatCard
-            key={stat.label}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            key={item.label}
+            initial={{ opacity: 0, x: 16 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            transition={{ duration: 0.4, delay: index * 0.07 }}
           >
-            <StatLabel>{stat.label}</StatLabel>
-            <StatValue>{stat.value}</StatValue>
+            <StatValue>{item.value}</StatValue>
+            <HighlightText>
+              <StatLabel>{item.label}</StatLabel>
+              {item.note && <HighlightNote>{item.note}</HighlightNote>}
+            </HighlightText>
           </StatCard>
         ))}
       </StatsGrid>

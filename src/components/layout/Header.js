@@ -48,6 +48,16 @@ const NavLinks = styled.nav`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.lg};
 
+  /* 項目数が増えたため、狭いデスクトップでは詰めて折り返しを防ぐ */
+  @media (max-width: ${({ theme }) => theme.breakpoints.xl}) {
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    gap: ${({ theme }) => theme.spacing.sm};
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
@@ -149,15 +159,18 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
+// MainPage のセクション順と一致させること
 const sections = [
   { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
   { id: 'research', label: 'Research' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'education', label: 'Education' },
+  { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
-  { id: 'achievements', label: 'Achievements' },
+  { id: 'publications', label: 'Publications' },
+  { id: 'achievements', label: 'Awards' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'opensource', label: 'OSS' },
+  { id: 'writing', label: 'Writing' },
   { id: 'contact', label: 'Contact' },
 ];
 

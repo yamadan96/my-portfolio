@@ -16,51 +16,95 @@ const ResearchGrid = styled.div`
   }
 `;
 
+const BadgeRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+`;
+
 const TypeBadge = styled.span`
   display: inline-block;
   padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
-  background: ${({ theme, $type }) =>
-    $type === '学会発表' ? `${theme.colors.success}20` : `${theme.colors.primary}20`};
-  color: ${({ theme, $type }) =>
-    $type === '学会発表' ? theme.colors.success : theme.colors.primary};
+  background: ${({ theme }) => `${theme.colors.primary}20`};
+  color: ${({ theme }) => theme.colors.primary};
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: ${({ theme }) => theme.fontSizes.xs};
   font-weight: 600;
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+`;
+
+const StatusBadge = styled.span`
+  display: inline-block;
+  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
+  background: ${({ theme }) => `${theme.colors.success}18`};
+  color: ${({ theme }) => theme.colors.success};
+  border: 1px solid ${({ theme }) => `${theme.colors.success}40`};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 600;
 `;
 
 const ResearchTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: 700;
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  line-height: 1.45;
 `;
 
 const Venue = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.primary};
   font-weight: 500;
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const Description = styled.p`
+const Block = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+const BlockLabel = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.textMuted};
+  margin-bottom: 4px;
+`;
+
+const BlockBody = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textSecondary};
-  line-height: 1.7;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  line-height: 1.75;
+`;
+
+const ResultList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const ResultItem = styled.li`
+  position: relative;
+  padding-left: 1.1em;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.75;
+  margin-bottom: 6px;
+
+  &::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.xs};
-`;
-
-const Citation = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.textMuted};
-  line-height: 1.6;
-  margin-top: ${({ theme }) => theme.spacing.sm};
-  font-style: italic;
+  margin-top: ${({ theme }) => theme.spacing.md};
 `;
 
 const ResearchLink = styled.a`
@@ -76,66 +120,61 @@ const ResearchLink = styled.a`
   }
 `;
 
-const MaterialsRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-top: ${({ theme }) => theme.spacing.md};
-`;
-
-const MaterialLink = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.primary};
-  background: ${({ theme }) => `${theme.colors.primary}10`};
-  border: 1px solid ${({ theme }) => `${theme.colors.primary}30`};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  &:hover {
-    background: ${({ theme }) => `${theme.colors.primary}20`};
-    border-color: ${({ theme }) => theme.colors.primary};
-  }
-`;
-
 const ResearchSection = () => (
   <Section id="research">
-    <SectionTitle title="Research" subtitle="研究実績" />
+    <SectionTitle
+      title="Research"
+      subtitle="進行中の研究 — 課題 / 貢献 / 結果"
+    />
     <ResearchGrid>
-      {research.map((item, index) => (
+      {research.map((item) => (
         <Card key={item.id}>
-          <TypeBadge $type={item.type}>{item.type}</TypeBadge>
+          <BadgeRow>
+            <TypeBadge>{item.type}</TypeBadge>
+            {item.status === 'submitting' && <StatusBadge>実験完了・投稿準備中</StatusBadge>}
+          </BadgeRow>
           <ResearchTitle>{item.title}</ResearchTitle>
-          <Venue>{item.venue} ({item.year})</Venue>
-          <Description>{item.description}</Description>
+          <Venue>{item.venue}</Venue>
+
+          {item.problem && (
+            <Block>
+              <BlockLabel>Problem</BlockLabel>
+              <BlockBody>{item.problem}</BlockBody>
+            </Block>
+          )}
+          {item.contribution && (
+            <Block>
+              <BlockLabel>My Contribution</BlockLabel>
+              <BlockBody>{item.contribution}</BlockBody>
+            </Block>
+          )}
+          {item.results && item.results.length > 0 && (
+            <Block>
+              <BlockLabel>Results</BlockLabel>
+              <ResultList>
+                {item.results.map((r) => (
+                  <ResultItem key={r}>{r}</ResultItem>
+                ))}
+              </ResultList>
+            </Block>
+          )}
+          {item.lessons && (
+            <Block>
+              <BlockLabel>Lessons Learned</BlockLabel>
+              <BlockBody>{item.lessons}</BlockBody>
+            </Block>
+          )}
+          {!item.problem && item.description && <BlockBody>{item.description}</BlockBody>}
+
           <Tags>
             {item.tags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
             ))}
           </Tags>
-          {item.citation && <Citation>{item.citation}</Citation>}
           {item.link && (
             <ResearchLink href={item.link} target="_blank" rel="noopener noreferrer">
-              論文・詳細 →
+              詳細 →
             </ResearchLink>
-          )}
-          {item.materials && item.materials.length > 0 && (
-            <MaterialsRow>
-              {item.materials.map((mat) => (
-                <MaterialLink
-                  key={mat.url}
-                  href={mat.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  📄 {mat.label}
-                </MaterialLink>
-              ))}
-            </MaterialsRow>
           )}
         </Card>
       ))}

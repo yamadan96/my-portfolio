@@ -17,16 +17,25 @@ const ProjectsGrid = styled.div`
   }
 `;
 
+// バッジはタイトルの上段に置く。横並びにすると長いタイトルが極端に折り返される
 const ProjectHeader = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
+const BadgeRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.xs};
+`;
+
 const ProjectTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: 700;
+  line-height: 1.45;
 `;
 
 const CategoryBadge = styled.span`
@@ -109,17 +118,27 @@ const OtherDescription = styled.p`
   margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
+// 採用担当がカード単位で「これは何の系統か」を1秒で判別できるようにするラベル
+const CATEGORY_LABELS = {
+  ml: 'Model / Research',
+  tool: 'Dev Tool',
+  product: 'Product',
+};
+
 const ProjectsSection = () => (
   <Section id="projects">
-    <SectionTitle title="Projects" subtitle="個人開発・ハッカソン" />
+    <SectionTitle title="Projects" subtitle="モデル開発・ツール・プロダクト" />
     <ProjectsGrid>
       {projects.filter((p) => p.featured).map((project) => (
         <Card key={project.id}>
           <ProjectHeader>
+            <BadgeRow>
+              {CATEGORY_LABELS[project.category] && (
+                <CategoryBadge>{CATEGORY_LABELS[project.category]}</CategoryBadge>
+              )}
+              {project.category2 === 'hackathon' && <CategoryBadge>Hackathon</CategoryBadge>}
+            </BadgeRow>
             <ProjectTitle>{project.title}</ProjectTitle>
-            {project.category === 'hackathon' && (
-              <CategoryBadge>Hackathon</CategoryBadge>
-            )}
           </ProjectHeader>
           <ProjectDescription>{project.description}</ProjectDescription>
           <Tags>

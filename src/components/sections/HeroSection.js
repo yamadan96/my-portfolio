@@ -88,6 +88,37 @@ const Description = styled(motion.p)`
   line-height: 1.8;
 `;
 
+const HeroFacts = styled(motion.div)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.xl};
+  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
+`;
+
+const HeroFact = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+`;
+
+const HeroFactValue = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: 800;
+  background: ${({ theme }) => theme.colors.gradient};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+`;
+
+const HeroFactLabel = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  white-space: nowrap;
+`;
+
 const SocialWrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
@@ -161,13 +192,21 @@ const HeroSection = () => {
           {typedText}
           <Cursor />
         </RoleText>
-        <Description variants={itemVariants}>{profile.bio}</Description>
+        <Description variants={itemVariants}>{profile.tagline}</Description>
+        <HeroFacts variants={itemVariants}>
+          {profile.stats.map((s) => (
+            <HeroFact key={s.label}>
+              <HeroFactValue>{s.value}</HeroFactValue>
+              <HeroFactLabel>{s.label}</HeroFactLabel>
+            </HeroFact>
+          ))}
+        </HeroFacts>
         <SocialWrapper variants={itemVariants}>
           <SocialIcons links={profile.social} />
         </SocialWrapper>
         <ButtonGroup variants={itemVariants}>
-          <Button onClick={() => scrollToSection('experience')} href="#experience">
-            経歴を見る
+          <Button onClick={() => scrollToSection('research')} href="#research">
+            研究を見る
           </Button>
           <Button variant="outline" onClick={() => scrollToSection('contact')} href="#contact">
             お問い合わせ
