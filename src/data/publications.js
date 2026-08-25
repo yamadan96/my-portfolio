@@ -9,6 +9,11 @@ const publications = [
     year: 2026,
     type: '学会発表（口頭・ポスター）',
     highlight: '公開ベンチマーク3件でSoTA更新',
+    // 原稿（ite2026-paper.pdf）掲載の Abstract をそのまま転記。
+    abstract:
+      'Since datasets for training dedicated models for such tasks are limited, utilization of general-purpose ' +
+      'visual foundation models (VFMs) is beneficial. In this paper, we found that a newer VFM is not necessarily ' +
+      'better: the previous-generation DINOv2 with LoRA outperformed the newer alternative in our comparative study.',
     description:
       '被災建物の損傷度分類において、視覚基盤モデル（DINOv2 ViT-L/14・DINOv3 ViT-L/16）の選択と適応戦略を、' +
       '規模の異なる4種の災害画像データセット（能登半島地震 832枚／PHI-Net 4,138枚／AIDERv2 13,399枚／MEDIC 49,353枚）で系統的に比較。' +

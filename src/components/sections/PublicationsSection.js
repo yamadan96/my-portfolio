@@ -63,6 +63,28 @@ const Highlight = styled.p`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const Abstract = styled.blockquote`
+  margin: ${({ theme }) => `0 0 ${theme.spacing.md}`};
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
+  border-left: 3px solid ${({ theme }) => `${theme.colors.primary}55`};
+  background: ${({ theme }) => `${theme.colors.primary}08`};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.75;
+`;
+
+const AbstractLabel = styled.span`
+  display: block;
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+
 const Description = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textSecondary};
@@ -123,6 +145,12 @@ const PublicationsSection = () => (
           </Head>
           <Venue>{item.venue}</Venue>
           {item.highlight && <Highlight>{item.highlight}</Highlight>}
+          {item.abstract && (
+            <Abstract>
+              <AbstractLabel>Abstract（原稿より）</AbstractLabel>
+              {item.abstract}
+            </Abstract>
+          )}
           <Description>{item.description}</Description>
           <Tags>
             {item.tags.map((tag) => (
