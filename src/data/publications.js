@@ -4,7 +4,8 @@ const publications = [
   {
     id: 'pub-ite2026',
     title: '視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較',
-    venue: '映像情報メディア学会 2026年年次大会（口頭）／第1回 知覚AIフォーラム（ポスター）',
+    venue:
+      '映像情報メディア学会 2026年年次大会（口頭）／第1回 知覚AIフォーラム（ポスター、2026年8月24日・東京理科大学 葛飾キャンパス）',
     year: 2026,
     type: '学会発表（口頭・ポスター）',
     highlight: '公開ベンチマーク3件でSoTA更新',
@@ -23,7 +24,8 @@ const publications = [
       '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 柏田 仁, 二瓶泰雄: 「視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較」, 映像情報メディア学会2026年年次大会講演予稿集, 2026年8月.',
     materials: [
       { label: '原稿PDF', url: '/papers/ite2026-paper.pdf' },
-      { label: '知覚AIフォーラム', url: 'https://www.rs.tus.ac.jp/perceptual-ai/#workshop-1' },
+      { label: 'ポスターPDF（知覚AIフォーラム）', url: '/papers/ite2026-poster.pdf' },
+      { label: '知覚AIフォーラム 開催案内', url: 'https://rist.tus.ac.jp/news/15938/' },
     ],
   },
   {
