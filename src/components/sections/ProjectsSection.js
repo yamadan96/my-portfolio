@@ -52,13 +52,6 @@ const CategoryBadge = styled.span`
   white-space: nowrap;
 `;
 
-const ProjectDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  line-height: 1.7;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-`;
-
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -111,13 +104,6 @@ const OtherTitle = styled.h4`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: 700;
   margin-bottom: 4px;
-`;
-
-const OtherDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
-  line-height: 1.6;
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
 // 採用担当がカード単位で「これは何の系統か」を1秒で判別できるようにするラベル
@@ -232,7 +218,6 @@ const ProjectsSection = () => (
             </BadgeRow>
             <ProjectTitle>{project.title}</ProjectTitle>
           </ProjectHeader>
-          <ProjectDescription>{project.description}</ProjectDescription>
           {project.summary && <ProjectSummary summary={project.summary} />}
           <Tags>
             {project.tags.map((tag) => (
@@ -281,7 +266,10 @@ const ProjectsSection = () => (
             )}
           </Links>
           {(project.technical?.length > 0 || project.diagram) && (
-            <TechnicalDetails blocks={project.technical || []} diagram={project.diagram} />
+            <TechnicalDetails
+              blocks={[{ label: '概要', body: project.description }, ...(project.technical || [])]}
+              diagram={project.diagram}
+            />
           )}
         </Card>
       ))}
@@ -291,7 +279,6 @@ const ProjectsSection = () => (
       {projects.filter((p) => !p.featured).map((project) => (
         <OtherCard key={project.id}>
           <OtherTitle>{project.title}</OtherTitle>
-          <OtherDescription>{project.description}</OtherDescription>
           {project.summary && <ProjectSummary summary={project.summary} />}
           <Links>
             {project.github && (
@@ -306,7 +293,10 @@ const ProjectsSection = () => (
             )}
           </Links>
           {(project.technical?.length > 0 || project.diagram) && (
-            <TechnicalDetails blocks={project.technical || []} diagram={project.diagram} />
+            <TechnicalDetails
+              blocks={[{ label: '概要', body: project.description }, ...(project.technical || [])]}
+              diagram={project.diagram}
+            />
           )}
         </OtherCard>
       ))}
