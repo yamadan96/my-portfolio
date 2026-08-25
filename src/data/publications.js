@@ -3,6 +3,12 @@
 const publications = [
   {
     id: 'pub-ite2026',
+    // Level 3（数字）: 3件とも「公開ベンチマークでの自手法スコア（先行報告）」で粒度を揃える
+    metrics: [
+      { value: '79.87%', label: 'PHI-Net Accuracy（先行報告 74.50%）' },
+      { value: '99.53%', label: 'AIDERv2 Accuracy（同 96.60%）' },
+      { value: '83.86%', label: 'MEDIC Weighted-F1（同 80.40%）' },
+    ],
     title: '視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較',
     venue:
       '映像情報メディア学会 2026年年次大会（口頭）／第1回 知覚AIフォーラム（ポスター、2026年8月24日・東京理科大学 葛飾キャンパス）',
@@ -35,6 +41,10 @@ const publications = [
   },
   {
     id: 'pub-ieice2026',
+    metrics: [
+      { value: '71.04%', label: 'Accuracy（単一タスク 68.99% → MTL、10シード平均）' },
+      { value: '0.656', label: 'Macro F1（同 0.637 →）' },
+    ],
     title: '被災建物画像の多クラス損傷度分類におけるマルチタスク学習の有効性',
     venue: 'IEICE2026 電子情報通信学会 総合大会',
     year: 2026,
@@ -57,6 +67,10 @@ const publications = [
   },
   {
     id: 'pub-fit2025',
+    metrics: [
+      { value: '0.77', label: 'Macro F1（ResNet-50 0.46 → DINOv2 + LoRA）' },
+      { value: '1,040枚', label: '能登半島地震の自作データセット（6クラス）' },
+    ],
     title: 'ファインチューニング手法に基づく被災建物画像の多クラス損傷度分類の精度改善',
     venue: 'FIT2025 第24回情報科学技術フォーラム',
     year: 2025,

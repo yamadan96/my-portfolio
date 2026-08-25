@@ -1,216 +1,183 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import profile from '../../data/profile';
 import SocialIcons from '../ui/SocialIcons';
-import Button from '../ui/Button';
 
-const HeroWrapper = styled.section`
-  min-height: 100vh;
+// このセクションの1メッセージ:
+//   「研究水準の検証と本番実装の両方をやる AI エンジニア」
+// これを 5 秒で伝えるために、置くのは 役割 / 一行の立ち位置 / 数字3つ / CTA だけ。
+const Wrapper = styled.header`
+  min-height: 88vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: ${({ theme }) => theme.spacing['4xl']} ${({ theme }) => theme.spacing.xl};
-  position: relative;
-  overflow: hidden;
+  padding: ${({ theme }) => `${theme.spacing['4xl']} ${theme.spacing.xl}`};
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    min-height: auto;
+    padding: ${({ theme }) => `${theme.spacing['3xl']} ${theme.spacing.md}`};
+    padding-top: 7rem;
+  }
 `;
 
-const HeroBg = styled.div`
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, ${({ theme }) => `${theme.colors.primary}15`} 0%, transparent 50%),
-              radial-gradient(ellipse at 70% 50%, ${({ theme }) => `${theme.colors.primaryDark}10`} 0%, transparent 50%);
+const Inner = styled.div`
+  width: 100%;
 `;
 
-const HeroContent = styled(motion.div)`
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-`;
-
-const Greeting = styled(motion.p)`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
+const Eyebrow = styled.p`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  letter-spacing: 0.08em;
   color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
   margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const Name = styled(motion.h1)`
-  font-size: ${({ theme }) => theme.fontSizes['6xl']};
+const Name = styled.h1`
+  font-size: ${({ theme }) => theme.fontSizes['5xl']};
   font-weight: 800;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  line-height: 1.1;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.fontSizes['4xl']};
   }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes['3xl']};
-  }
 `;
 
-const RoleText = styled(motion.div)`
+const Headline = styled.p`
+  margin-top: ${({ theme }) => theme.spacing.md};
+  max-width: 46rem;
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  min-height: 2.5rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: ${({ theme }) => theme.colors.text};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.fontSizes.xl};
   }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-  }
 `;
 
-const Cursor = styled.span`
-  display: inline-block;
-  width: 3px;
-  height: 1.2em;
-  background: ${({ theme }) => theme.colors.primary};
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: blink 1s step-end infinite;
-
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
-`;
-
-const Description = styled(motion.p)`
+const Sub = styled.p`
+  margin-top: ${({ theme }) => theme.spacing.md};
+  max-width: 46rem;
   font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.textMuted};
-  max-width: 600px;
-  margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
   line-height: 1.8;
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const HeroFacts = styled(motion.div)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.xl};
-  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
+const Proof = styled.dl`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: ${({ theme }) => theme.spacing.lg};
+  max-width: 52rem;
+  margin-top: ${({ theme }) => theme.spacing['2xl']};
+  padding-top: ${({ theme }) => theme.spacing.lg};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.md};
+  }
 `;
 
-const HeroFact = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-`;
-
-const HeroFactValue = styled.span`
+const ProofValue = styled.dt`
+  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  font-weight: 800;
-  background: ${({ theme }) => theme.colors.gradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.2;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
-const HeroFactLabel = styled.span`
+const ProofLabel = styled.dd`
+  margin-top: 2px;
   font-size: ${({ theme }) => theme.fontSizes.xs};
+  line-height: 1.6;
   color: ${({ theme }) => theme.colors.textMuted};
-  white-space: nowrap;
 `;
 
-const SocialWrapper = styled(motion.div)`
+const Actions = styled.div`
   display: flex;
-  justify-content: center;
-  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
-`;
-
-const ButtonGroup = styled(motion.div)`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.md};
-  justify-content: center;
   flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing['2xl']};
 `;
 
-const useTypingEffect = (texts, typingSpeed = 100, deletingSpeed = 50, pauseDuration = 2000) => {
-  const [displayText, setDisplayText] = useState('');
-  const [textIndex, setTextIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+const Primary = styled.button`
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  background: ${({ theme }) => theme.colors.primary};
+  color: #fff;
+  font-family: inherit;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: 600;
+  cursor: pointer;
 
-  useEffect(() => {
-    const currentText = texts[textIndex];
-    let timeout;
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+  }
+`;
 
-    if (!isDeleting && displayText === currentText) {
-      timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
-    } else if (isDeleting && displayText === '') {
-      setIsDeleting(false);
-      setTextIndex((prev) => (prev + 1) % texts.length);
-    } else {
-      timeout = setTimeout(() => {
-        setDisplayText(
-          isDeleting
-            ? currentText.substring(0, displayText.length - 1)
-            : currentText.substring(0, displayText.length + 1)
-        );
-      }, isDeleting ? deletingSpeed : typingSpeed);
-    }
+const Secondary = styled.a`
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
+  background: transparent;
+  font-family: inherit;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  color: ${({ theme }) => theme.colors.text};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
 
-    return () => clearTimeout(timeout);
-  }, [displayText, textIndex, isDeleting, texts, typingSpeed, deletingSpeed, pauseDuration]);
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
 
-  return displayText;
-};
+const Socials = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.xl};
+`;
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+const github = profile.social.find((s) => s.platform === 'github')?.url;
 
 const HeroSection = () => {
-  const typedText = useTypingEffect(profile.roles);
-
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const navigate = useNavigate();
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <HeroWrapper id="hero">
-      <HeroBg />
-      <HeroContent variants={containerVariants} initial="hidden" animate="visible">
-        <Greeting variants={itemVariants}>こんにちは、私は</Greeting>
-        <Name variants={itemVariants}>{profile.name}</Name>
-        <RoleText variants={itemVariants}>
-          {typedText}
-          <Cursor />
-        </RoleText>
-        <Description variants={itemVariants}>{profile.tagline}</Description>
-        <HeroFacts variants={itemVariants}>
-          {profile.stats.map((s) => (
-            <HeroFact key={s.label}>
-              <HeroFactValue>{s.value}</HeroFactValue>
-              <HeroFactLabel>{s.label}</HeroFactLabel>
-            </HeroFact>
+    <Wrapper id="hero">
+      <Inner>
+        <Eyebrow>AI Engineer — Vision Foundation Models &amp; LLM Agents</Eyebrow>
+        <Name>{profile.name}</Name>
+        <Headline>{profile.headline}</Headline>
+        <Sub>{profile.positioning}</Sub>
+        <Proof>
+          {profile.proof.map((p) => (
+            <div key={p.label}>
+              <ProofValue>{p.value}</ProofValue>
+              <ProofLabel>{p.label}</ProofLabel>
+            </div>
           ))}
-        </HeroFacts>
-        <SocialWrapper variants={itemVariants}>
+        </Proof>
+        <Actions>
+          <Primary onClick={() => scrollTo('work')}>Selected Work</Primary>
+          <Secondary href={github} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </Secondary>
+          <Secondary as="button" onClick={() => navigate('/more')}>
+            経歴・受賞・学位
+          </Secondary>
+          <Secondary as="button" onClick={() => scrollTo('contact')}>
+            Contact
+          </Secondary>
+        </Actions>
+        <Socials>
           <SocialIcons links={profile.social} />
-        </SocialWrapper>
-        <ButtonGroup variants={itemVariants}>
-          <Button variant="outline" onClick={() => scrollToSection('contact')} href="#contact">
-            お問い合わせ
-          </Button>
-        </ButtonGroup>
-      </HeroContent>
-    </HeroWrapper>
+        </Socials>
+      </Inner>
+    </Wrapper>
   );
 };
 

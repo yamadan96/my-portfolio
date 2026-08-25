@@ -1,190 +1,55 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import emailjs from '@emailjs/browser';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
+import SocialIcons from '../ui/SocialIcons';
+import profile from '../../data/profile';
 
-const ContactWrapper = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    max-width: 100%;
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.lg};
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
-`;
-
-const Label = styled.label`
+// このセクションの1メッセージ:
+//   「メール1通で連絡が取れる」
+// フォームも装飾も置かない。宛先と、返せる相談の種類だけ。
+const Body = styled.p`
+  max-width: 40rem;
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: 600;
+  line-height: 1.8;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const Input = styled.input`
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
-  background: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  color: ${({ theme }) => theme.colors.text};
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  transition: border-color ${({ theme }) => theme.transitions.fast};
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 3px ${({ theme }) => `${theme.colors.primary}20`};
-  }
-`;
-
-const TextArea = styled.textarea`
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
-  background: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
-  color: ${({ theme }) => theme.colors.text};
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  min-height: 150px;
-  resize: vertical;
-  transition: border-color ${({ theme }) => theme.transitions.fast};
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 3px ${({ theme }) => `${theme.colors.primary}20`};
-  }
-`;
-
-const SubmitButton = styled.button`
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
-  background: ${({ theme }) => theme.colors.gradient};
-  color: white;
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity ${({ theme }) => theme.transitions.normal};
+const Mail = styled.a`
+  display: inline-block;
+  margin-top: ${({ theme }) => theme.spacing.lg};
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary};
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
 
   &:hover {
-    opacity: 0.9;
+    border-bottom-color: ${({ theme }) => theme.colors.primary};
   }
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    word-break: break-all;
   }
 `;
 
-const StatusMessage = styled.p`
-  text-align: center;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ $success, theme }) => ($success ? theme.colors.success : theme.colors.error)};
+const Socials = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.xl};
 `;
 
-const ContactIntro = styled.div`
-  text-align: center;
-  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
-`;
-
-const IntroText = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  line-height: 1.8;
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-`;
-
-const ExampleList = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.sm};
-  justify-content: center;
-`;
-
-const ExampleItem = styled.li`
-  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
-  background: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const ContactSection = () => {
-  const form = useRef();
-  const [status, setStatus] = useState({ message: '', success: false });
-  const [sending, setSending] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSending(true);
-
-    emailjs
-      .sendForm('service_c42eif9', 'template_udjbasf', form.current, 'usagAKNIL-XGAkkrJ')
-      .then(() => {
-        setStatus({ message: '送信しました！ありがとうございます。', success: true });
-        form.current.reset();
-      })
-      .catch(() => {
-        setStatus({ message: '送信に失敗しました。もう一度お試しください。', success: false });
-      })
-      .finally(() => setSending(false));
-  };
-
-  return (
-    <Section id="contact">
-      <SectionTitle title="Contact" subtitle="お問い合わせ" />
-      <ContactWrapper>
-        <ContactIntro>
-          <IntroText>
-            お気軽にご連絡ください。以下のようなご相談をお待ちしています。
-          </IntroText>
-          <ExampleList>
-            <ExampleItem>カジュアル面談</ExampleItem>
-            <ExampleItem>共同研究・プロジェクトの相談</ExampleItem>
-            <ExampleItem>登壇・執筆の依頼</ExampleItem>
-            <ExampleItem>技術的な質問・相談</ExampleItem>
-            <ExampleItem>その他お問い合わせ</ExampleItem>
-          </ExampleList>
-        </ContactIntro>
-        <Form ref={form} onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label htmlFor="from_name">お名前</Label>
-            <Input type="text" id="from_name" name="from_name" required />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="reply_to">メールアドレス</Label>
-            <Input type="email" id="reply_to" name="reply_to" required />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="message">メッセージ</Label>
-            <TextArea id="message" name="message" required />
-          </FormGroup>
-          <SubmitButton type="submit" disabled={sending}>
-            {sending ? '送信中...' : '送信する'}
-          </SubmitButton>
-          {status.message && (
-            <StatusMessage $success={status.success}>{status.message}</StatusMessage>
-          )}
-        </Form>
-      </ContactWrapper>
-    </Section>
-  );
-};
+const ContactSection = () => (
+  <Section id="contact">
+    <SectionTitle title="Contact" subtitle="お問い合わせ" />
+    <Body>
+      AI/ML の開発・共同研究・採用に関するご連絡はメールでお願いします。
+    </Body>
+    <Mail href={`mailto:${profile.email}`}>{profile.email}</Mail>
+    <Socials>
+      <SocialIcons links={profile.social} />
+    </Socials>
+  </Section>
+);
 
 export default ContactSection;

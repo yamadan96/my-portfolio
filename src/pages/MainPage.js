@@ -1,34 +1,29 @@
 import React from 'react';
 import HeroSection from '../components/sections/HeroSection';
-import AboutSection from '../components/sections/AboutSection';
-import ExperienceSection from '../components/sections/ExperienceSection';
-import ProjectsSection from '../components/sections/ProjectsSection';
-import PublicationsSection from '../components/sections/PublicationsSection';
-import AchievementsSection from '../components/sections/AchievementsSection';
-import SkillsSection from '../components/sections/SkillsSection';
-import OpenSourceSection from '../components/sections/OpenSourceSection';
-import WritingSection from '../components/sections/WritingSection';
-import EducationSection from '../components/sections/EducationSection';
-import CertificationsSection from '../components/sections/CertificationsSection';
+import SelectedWorkSection from '../components/sections/SelectedWorkSection';
+import CareerSection from '../components/sections/CareerSection';
+import ResearchHighlightSection from '../components/sections/ResearchHighlightSection';
+import SkillsCoreSection from '../components/sections/SkillsCoreSection';
 import ContactSection from '../components/sections/ContactSection';
 
-// 情報設計: 研究者・AIエンジニアとしての中身（Experience → Projects → Publications）を
-// 上位に置き、経歴の裏付け（Education / Certifications）は末尾へ回している。
-// 進行中・投稿準備中の研究（ResearchSection / src/data/research.js）は非公開にしている。
-// 再掲するときは import と <ResearchSection /> を AboutSection の直後に戻す。
+// 情報設計（Progressive Disclosure）
+//   Level 1 = このページ: 何者か → 代表4件 → 経歴6社 → 代表研究 → 4領域 → 連絡先
+//   Level 2 = /work・/research・/more: 一覧と裏付け
+//   Level 3 = /experience/:id・各カードの技術詳細: 実装・実験条件
+//
+// トップから外したもの（削除ではなく降格）:
+//   About の長文 → Hero の2行へ集約
+//   Projects 13件 → /work
+//   Publications 全文 → /research
+//   Awards / Education / Certifications / OSS / Writing / 短期インターン → /more
+//   進行中の研究（research.js） → 非公開
 const MainPage = () => (
   <>
     <HeroSection />
-    <AboutSection />
-    <ExperienceSection />
-    <ProjectsSection />
-    <PublicationsSection />
-    <AchievementsSection />
-    <SkillsSection />
-    <OpenSourceSection />
-    <WritingSection />
-    <EducationSection />
-    <CertificationsSection />
+    <SelectedWorkSection />
+    <CareerSection />
+    <ResearchHighlightSection />
+    <SkillsCoreSection />
     <ContactSection />
   </>
 );
