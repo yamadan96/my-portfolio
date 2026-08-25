@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ThemeToggle from '../../theme/ThemeToggle';
 import useScrollSpy from '../../hooks/useScrollSpy';
 
@@ -162,21 +162,21 @@ const CloseButton = styled.button`
 // MainPage のセクション順と一致させること
 const sections = [
   { id: 'hero', label: 'Home' },
-  { id: 'about', label: 'About' },
+  { id: 'work', label: 'Work' },
   { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'publications', label: 'Publications' },
-  { id: 'achievements', label: 'Awards' },
+  { id: 'research', label: 'Research' },
   { id: 'skills', label: 'Skills' },
-  { id: 'opensource', label: 'OSS' },
-  { id: 'writing', label: 'Writing' },
   { id: 'contact', label: 'Contact' },
 ];
+
+// トップに載せない情報の入口。ナビでは1つにまとめる。
+const morePath = '/more';
 
 const Header = ({ isDark, onThemeToggle }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isMain = location.pathname === '/';
   const activeId = useScrollSpy(
     sections.map((s) => s.id),
@@ -203,9 +203,9 @@ const Header = ({ isDark, onThemeToggle }) => {
       <Nav $scrolled={scrolled}>
         <NavInner>
           <Logo onClick={() => scrollToSection('hero')}>Y.Yamada</Logo>
-          {isMain && (
-            <NavLinks>
-              {sections.slice(1).map((section) => (
+          <NavLinks>
+            {isMain &&
+              sections.slice(1).map((section) => (
                 <NavLink
                   key={section.id}
                   $active={activeId === section.id}
@@ -214,12 +214,20 @@ const Header = ({ isDark, onThemeToggle }) => {
                   {section.label}
                 </NavLink>
               ))}
-            </NavLinks>
-          )}
+            <NavLink
+              $active={location.pathname === morePath}
+              onClick={() => {
+                setMobileOpen(false);
+                navigate(morePath);
+              }}
+            >
+              Background
+            </NavLink>
+          </NavLinks>
           <RightGroup>
             <ThemeToggle isDark={isDark} onToggle={onThemeToggle} />
             {isMain && (
-              <Hamburger onClick={() => setMobileOpen(true)}>
+              <Hamburger onClick={() => setMobileOpen(true)} aria-label="メニューを開く">
                 <HamburgerLine />
                 <HamburgerLine />
                 <HamburgerLine />
@@ -245,6 +253,14 @@ const Header = ({ isDark, onThemeToggle }) => {
                 {section.label}
               </MobileNavLink>
             ))}
+            <MobileNavLink
+              onClick={() => {
+                setMobileOpen(false);
+                navigate(morePath);
+              }}
+            >
+              Background
+            </MobileNavLink>
           </MobileMenu>
         )}
       </AnimatePresence>

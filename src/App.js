@@ -7,6 +7,9 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import MainPage from './pages/MainPage';
 import ExperienceDetail from './pages/ExperienceDetail';
+import WorkPage from './pages/WorkPage';
+import ResearchPage from './pages/ResearchPage';
+import MorePage from './pages/MorePage';
 
 function App() {
   const [isDark, setIsDark] = useState(() => {
@@ -28,6 +31,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<MainPage />} />
+            <Route path="/work" element={<WorkPage />} />
+            <Route path="/research" element={<ResearchPage />} />
+            <Route path="/more" element={<MorePage />} />
             <Route path="/experience/:id" element={<ExperienceDetail />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
