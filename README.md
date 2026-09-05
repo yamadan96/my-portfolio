@@ -1,117 +1,65 @@
-# LionTech ポートフォリオ
+# yamadan96.github.io
 
-![LionTech ロゴ](./public/images/logo.png)
+Personal portfolio of Yuto Yamada (AI engineer / research engineer), published at
+<https://yamadan96.github.io>.
 
-## 概要
+## Information architecture
 
-このリポジトリは、Reactを使用して構築された個人用ポートフォリオウェブサイトです。プロジェクトの紹介、スキル、連絡先情報を掲載しています。GitHub Pagesを利用してホスティングされており、レスポンシブでモダンなユーザーエクスペリエンスを提供します。
+The landing page is written to be read in about 30 seconds, top to bottom:
 
-## 特徴
+| # | Section | What it answers | Source data |
+|---|---------|-----------------|-------------|
+| – | Hero | Who this is, in one line + a 3-line intro, two calls to action | `src/data/profile.js` |
+| 01 | Selected Work | Three industry projects: what was built, my role, the outcome | `src/data/selectedWork.js` |
+| 02 | Research | Three conference papers with direct links to PDF / slides / poster | `src/data/publications.js`, `src/data/research.js` |
+| 03 | Experience | Six long-term positions, one line each | `src/data/experiences.js` |
+| 04 | Skills | Four domains, only technologies actually used | `src/data/skillsCore.js` |
+| 05 | About / Contact | Two-paragraph bio, current affiliations, recognition, e-mail and profile links | `src/data/profile.js` |
 
-- **レスポンシブデザイン:** 様々な画面サイズに対応したレスポンシブデザイン。
-- **React:** スムーズで動的なユーザーインターフェイスを実現するためにReactを使用。
-- **Styled Components:** メンテナンス性と柔軟性を高めるためにStyled Componentsを使用してスタイリングを管理。
-- **GitHub Pages デプロイ:** GitHub Actionsを使用して自動的にGitHub Pagesにデプロイ。
-- **HashRouter を使用したルーティング:** GitHub Pages上でのルーティング問題を解決するためにHashRouterを使用。
+Everything else lives one level down:
 
-## セクション
+| Route | Content |
+|-------|---------|
+| `/work` | All personal / research implementations (`src/data/projects.js`) |
+| `/research` | All talks and theses with abstracts and citations |
+| `/more` | CV: all 17 companies, awards, full skill list, OSS, writing, education, certifications |
+| `/experience/:id` | Per-company detail pages |
 
-1. **ホーム**: LionTechおよびAIエンジニアとしての私の簡単な紹介。
-2. **プロフィール**: 私のバックグラウンド、スキル、経験に関する情報。
-3. **ポートフォリオ**: 特徴的なプロジェクトを紹介。
-4. **連絡先**: 直接メッセージを送信できる連絡フォーム。
+Rule of thumb when editing copy: the hero headline stays within 15–25 characters and
+states facts only; model and library names belong in Skills / Research, not in the hero
+or the bio; numbers are always preceded by the context that makes them readable.
 
-## 始め方
+## Stack
 
-### 前提条件
+React 18 · styled-components 6 · react-router-dom 6 · framer-motion · Create React App ·
+GitHub Pages (`gh-pages`).
 
-Node.jsとnpmがインストールされていることを確認してください。
+Design: light theme by default (dark available from the header toggle), serif display
+type for `h1`/`h2`, one accent colour for links, no gradients or glass effects.
 
-```bash
-node -v
-npm -v
-```
-
-### インストール
-
-1. リポジトリをクローンします:
-
-   ```bash
-   git clone https://github.com/yamadan96/my-portfolio.git
-   ```
-
-2. プロジェクトディレクトリに移動します:
-
-   ```bash
-   cd my-portfolio
-   ```
-
-3. 依存関係をインストールします:
-
-   ```bash
-   npm install
-   ```
-
-### ローカルでの実行
-
-開発サーバーを開始するには、以下を実行します:
+## Development
 
 ```bash
-npm start
+npm install
+npm start                       # http://localhost:3000
+npm test -- --watchAll=false    # unit tests (jest + testing-library)
+npm run build                   # validates Mermaid diagrams, then builds to build/
+npm run deploy                  # build + publish build/ to the gh-pages branch
 ```
 
-ブラウザで `http://localhost:3000` を開き、ウェブサイトを表示します。
+`scripts/validate-diagrams.mjs` runs before every build and fails it if any Mermaid
+chart in `src/data/projects.js` does not parse.
 
-### 本番ビルドの作成
-
-最適化された本番ビルドを作成するには、以下を実行します:
-
-```bash
-npm run build
-```
-
-### GitHub Pages へのデプロイ
-
-このプロジェクトは、`main` ブランチに変更がプッシュされるたびに、GitHub Actionsを通じて自動的にGitHub Pagesにデプロイされるよう設定されています。
-
-手動でデプロイするには、以下を実行します:
-
-```bash
-npm run deploy
-```
-
-サイトは以下のURLにデプロイされます:
+## Layout of `src/`
 
 ```
-https://yamadan96.github.io/my-portfolio/
+src/
+├── data/            content only – no JSX
+├── components/
+│   ├── layout/      Header, Footer, Section (page-width + reveal)
+│   ├── sections/    one file per landing-page or sub-page section
+│   └── ui/          SectionTitle, Editorial (shared card primitives), Disclosure, …
+├── pages/           MainPage, WorkPage, ResearchPage, MorePage, ExperienceDetail
+├── theme/           colour / type tokens (light + dark) and the theme toggle
+└── styles/          global CSS
 ```
-
-## 使用技術
-
-- React
-- Styled Components
-- React Router (HashRouter)
-- GitHub Pages
-- GitHub Actions (CI/CD)
-
-## プロジェクト構成
-
-```
-my-portfolio/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── styles/
-│   ├── App.js
-│   └── index.js
-├── .github/
-│   └── workflows/
-│       └── deploy.yml
-├── package.json
-├── README.md
-└── ...
-```
-
