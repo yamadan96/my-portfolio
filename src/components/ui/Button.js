@@ -14,26 +14,26 @@ const StyledButton = styled(motion.a)`
   cursor: pointer;
   text-decoration: none;
   transition: all ${({ theme }) => theme.transitions.normal};
-  border: 1px solid transparent;
+  border: 2px solid transparent;
 
   ${({ $variant, theme }) =>
     $variant === 'primary'
       ? css`
-          background: ${theme.colors.text};
-          border-color: ${theme.colors.text};
-          color: ${theme.colors.background};
+          background: ${theme.colors.gradient};
+          color: white;
           &:hover {
-            opacity: 0.85;
-            color: ${theme.colors.background};
+            opacity: 0.9;
+            transform: translateY(-2px);
+            color: white;
           }
         `
       : css`
           background: transparent;
-          color: ${theme.colors.text};
-          border-color: ${theme.colors.border};
+          color: ${theme.colors.primary};
+          border-color: ${theme.colors.primary};
           &:hover {
-            border-color: ${theme.colors.text};
-            color: ${theme.colors.text};
+            background: ${theme.colors.primary};
+            color: white;
           }
         `}
 `;

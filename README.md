@@ -5,37 +5,44 @@ Personal portfolio of Yuto Yamada (AI engineer / research engineer), published a
 
 ## Information architecture
 
-The landing page is written to be read in about 30 seconds, top to bottom:
+The landing page keeps the single-page layout of the July-2026 version (dark theme,
+centred hero, vertical timeline, card grids). What changed is the amount of text: every
+item is one or two lines, and anything longer lives on a sub page.
 
-| # | Section | What it answers | Source data |
-|---|---------|-----------------|-------------|
-| – | Hero | Who this is, in one line + a 2-line intro, two calls to action | `src/data/profile.js` |
-| 01 | Experience | Six long-term positions, one line each, with links to detail pages | `src/data/experiences.js` |
-| 02 | Research | Three conference papers, one line each, with direct links to PDF / slides / poster | `src/data/publications.js`, `src/data/research.js` |
-| 03 | Skills | Four domains, only technologies actually used | `src/data/skillsCore.js` |
-| 04 | About / Contact | Two short paragraphs, current affiliations, recognition, e-mail and profile links | `src/data/profile.js` |
+| Section | What it shows | Source data |
+|---------|---------------|-------------|
+| Hero | Name, rotating role titles, a one-line headline and a two-line intro, profile icons, two calls to action | `src/data/profile.js` |
+| About | Two short paragraphs, the 2027 position, three counts | `src/data/profile.js` |
+| Experience | Timeline of the long-term positions (one line each) plus compact cards for shorter programmes | `src/data/experiences.js` |
+| Research | Conference talks and theses, one line each, with links to PDF / slides / poster | `src/data/publications.js`, `src/data/research.js` |
+| Skills | Seven categories of technologies actually used | `src/data/skills.js` |
+| Education | Degrees and schools | `src/data/education.js` |
+| Projects | Featured personal / research implementations, one line each | `src/data/projects.js` |
+| Certifications | Certificates with links to the originals | `src/data/certifications.js` |
+| Achievements | Awards, press and programmes | `src/data/profile.js` |
+| Contact | E-mail | `src/data/profile.js` |
 
-Everything else lives one level down:
+Sub pages:
 
 | Route | Content |
 |-------|---------|
-| `/work` | All personal / research implementations (`src/data/projects.js`) |
-| `/research` | All talks and theses with abstracts and citations |
-| `/more` | CV: all 17 companies, awards, full skill list, OSS, writing, education, certifications |
+| `/work` | All personal / research implementations with collapsible technical details and diagrams |
+| `/research` | All talks and theses with abstracts, citations and materials |
+| `/more` | Open-source repositories and selected articles |
 | `/experience/:id` | Per-company detail pages |
 
 Rule of thumb when editing copy: the hero headline stays within 15–25 characters and
-states facts only; model and library names belong in Skills / Research, not in the hero
-or the bio; every item on the landing page is one or two lines — anything longer moves to a
-sub-page.
+states facts only; model and library names belong in Skills / Research / Projects, not in
+the hero or the bio; every item on the landing page is one or two lines; the profile icon
+row appears only in the hero.
 
 ## Stack
 
 React 18 · styled-components 6 · react-router-dom 6 · framer-motion · Create React App ·
 GitHub Pages (`gh-pages`).
 
-Design: light theme by default (dark available from the header toggle), serif display
-type for `h1`/`h2`, one accent colour for links, no gradients or glass effects.
+Design: dark theme by default (light available from the header toggle), Inter / Noto Sans JP,
+gradient section titles and glass cards as in the July-2026 version.
 
 ## Development
 
@@ -58,7 +65,7 @@ src/
 ├── components/
 │   ├── layout/      Header, Footer, Section (page-width + reveal)
 │   ├── sections/    one file per landing-page or sub-page section
-│   └── ui/          SectionTitle, Editorial (shared card primitives), Disclosure, …
+│   └── ui/          SectionTitle, Card, Tag, Timeline, SocialIcons, Disclosure, …
 ├── pages/           MainPage, WorkPage, ResearchPage, MorePage, ExperienceDetail
 ├── theme/           colour / type tokens (light + dark) and the theme toggle
 └── styles/          global CSS

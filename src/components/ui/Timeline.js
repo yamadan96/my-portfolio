@@ -69,11 +69,16 @@ const Role = styled.p`
   margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
+// 1〜2行に収める（oneLiner が無く description にフォールバックした場合も末尾を省略）
 const Description = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
   line-height: 1.6;
   margin-bottom: ${({ theme }) => theme.spacing.sm};
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 const Tags = styled.div`
@@ -141,20 +146,13 @@ const groupByCompany = (items) => {
   return groups;
 };
 
-const DescriptionEn = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.textMuted};
-  font-style: italic;
-  line-height: 1.6;
-  margin: -${({ theme }) => theme.spacing.xs} 0 ${({ theme }) => theme.spacing.sm};
-  opacity: 0.85;
-`;
+// Landing page shows one line per item: oneLiner if present, otherwise description
+const summaryLine = (item) => item.oneLiner || item.description;
 
 const ItemBody = ({ item, onDetailClick }) => (
   <>
     <Role>{item.role}</Role>
-    {item.description && <Description>{item.description}</Description>}
-    {item.descriptionEn && <DescriptionEn>{item.descriptionEn}</DescriptionEn>}
+    {summaryLine(item) && <Description>{summaryLine(item)}</Description>}
     {item.tags && (
       <Tags>
         {item.tags.slice(0, 4).map((tag) => (

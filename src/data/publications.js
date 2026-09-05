@@ -3,6 +3,7 @@
 const publications = [
   {
     id: 'pub-ite2026',
+    shortVenue: '映像情報メディア学会 2026年年次大会／知覚AIフォーラム',
     // Level 3（数字）: 3件とも「公開ベンチマークでの自手法スコア（先行報告）」で粒度を揃える
     metrics: [
       { value: '79.87%', label: 'PHI-Net Accuracy（先行報告 74.50%）' },
@@ -41,6 +42,7 @@ const publications = [
   },
   {
     id: 'pub-ieice2026',
+    shortVenue: 'IEICE 2026 総合大会',
     metrics: [
       { value: '71.04%', label: 'Accuracy（単一タスク 68.99% → MTL、10シード平均）' },
       { value: '0.656', label: 'Macro F1（同 0.637 →）' },
@@ -67,6 +69,7 @@ const publications = [
   },
   {
     id: 'pub-fit2025',
+    shortVenue: 'FIT2025',
     metrics: [
       { value: '0.77', label: 'Macro F1（ResNet-50 0.46 → DINOv2 + LoRA）' },
       { value: '1,040枚', label: '能登半島地震の自作データセット（6クラス）' },
@@ -93,6 +96,7 @@ const publications = [
   },
   {
     id: 'pub-bachelor-thesis',
+    shortVenue: '東京理科大学 卒業論文',
     title: '長期文脈を活用したフレーム外挿モデルによる動画異常検知',
     venue: '東京理科大学 創域理工学部 2024年度 卒業論文',
     year: 2024,

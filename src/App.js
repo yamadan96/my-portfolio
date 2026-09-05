@@ -12,11 +12,10 @@ import ResearchPage from './pages/ResearchPage';
 import MorePage from './pages/MorePage';
 
 function App() {
-  // 既定はライト。読み物として落ち着いて読めることを優先し、
-  // ダークは切替で選べるようにしておく（選択は localStorage に保存）
+  // 既定はダーク（2026年7月版と同じ）。切替は localStorage に保存
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem('theme');
-    return saved === 'dark';
+    return saved ? saved === 'dark' : true;
   });
 
   useEffect(() => {

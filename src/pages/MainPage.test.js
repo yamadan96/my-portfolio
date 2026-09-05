@@ -1,13 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import MainPage from './MainPage';
-import { lightTheme } from '../theme/theme';
+import { darkTheme } from '../theme/theme';
 
 const renderMain = () =>
   render(
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={darkTheme}>
       <MemoryRouter>
         <MainPage />
       </MemoryRouter>
@@ -15,28 +15,36 @@ const renderMain = () =>
   );
 
 describe('MainPage information architecture', () => {
-  it('presents the sections in the order a first-time reader should meet them', () => {
+  it('keeps the July-2026 section order', () => {
     renderMain();
     const headings = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
-    expect(headings).toEqual(['職務経歴', '研究・発表', 'スキル', 'プロフィール']);
+    expect(headings).toEqual([
+      'About',
+      'Experience',
+      'Research',
+      'Skills',
+      'Education',
+      'Projects',
+      'Certifications',
+      'Awards & Recognition',
+      'Contact',
+    ]);
   });
 
-  it('offers exactly two calls to action in the hero', () => {
+  it('offers the two hero calls to action', () => {
     renderMain();
-    expect(screen.getByRole('button', { name: '職務経歴を見る' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'プロフィールを見る' })).toBeInTheDocument();
+    const hero = within(document.getElementById('hero'));
+    expect(hero.getByText('経歴を見る')).toHaveAttribute('href', '#experience');
+    expect(hero.getByText('お問い合わせ')).toHaveAttribute('href', '#contact');
   });
 
-  it('keeps every experience row to one line of description', () => {
+  it('shows the profile icon row once, in the hero only', () => {
     renderMain();
-    // 6 rows, each with a 詳細 link and a short one-liner
-    expect(screen.getAllByRole('button', { name: '詳細 →' })).toHaveLength(6);
-  });
-
-  it('lists the external profile links exactly once, in the contact block', () => {
-    renderMain();
-    expect(screen.getAllByRole('link', { name: 'GitHub' })).toHaveLength(1);
-    expect(screen.getByRole('link', { name: /yuto\.yamada0101@gmail\.com/ })).toHaveAttribute(
+    const hero = document.getElementById('hero');
+    const contact = document.getElementById('contact');
+    expect(within(hero).getAllByRole('link', { name: /github/i })).toHaveLength(1);
+    expect(within(contact).queryAllByRole('link', { name: /github/i })).toHaveLength(0);
+    expect(within(contact).getByRole('link', { name: /yuto\.yamada0101@gmail\.com/ })).toHaveAttribute(
       'href',
       'mailto:yuto.yamada0101@gmail.com'
     );

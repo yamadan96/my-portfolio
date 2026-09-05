@@ -45,11 +45,16 @@ const CompactPeriod = styled.span`
   font-weight: 600;
 `;
 
+// 1〜2行に収める（description が長い場合は末尾を省略、全文は詳細ページへ）
 const CompactDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
   line-height: 1.6;
   margin-top: ${({ theme }) => theme.spacing.xs};
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 const CompactDetailLink = styled.span`
@@ -74,6 +79,8 @@ const ExperienceSection = () => {
   const major = experiences.filter((e) => !e.short && !e.secondary);
   const secondary = experiences.filter((e) => e.secondary);
   const short = experiences.filter((e) => e.short);
+  // Distinct company count (same company may appear in multiple entries)
+  const companyCount = new Set(experiences.map((e) => e.company)).size;
 
   const renderCompactGrid = (items) => (
     <CompactGrid>
@@ -100,7 +107,7 @@ const ExperienceSection = () => {
 
   return (
     <Section id="experience">
-      <SectionTitle title="Experience" subtitle="実務・インターン経験（17社）" />
+      <SectionTitle title="Experience" subtitle={`実務・インターン経験（${companyCount}社）`} />
       <SubHeading>主要な経験</SubHeading>
       <SubNote>長期・現職を中心とした実務経験</SubNote>
       <Timeline items={major} onDetailClick={handleDetailClick} />

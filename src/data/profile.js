@@ -1,4 +1,4 @@
-// トップページの Hero / About / Contact と、CV ページの受賞・表彰で使う人物データ。
+// トップページの Hero / About / Contact / Achievements で使う人物データ。
 //
 // 文章のルール:
 //   - Hero の見出し（headline）は 15〜25 文字。事実だけを書き、説明は intro / bio に分ける
@@ -8,13 +8,15 @@ const profile = {
   name: '山田 悠人',
   nameEn: 'Yuto Yamada',
   roleLabel: 'AI Engineer / Research Engineer',
+  // Hero のタイピング表示で順に出す肩書き
+  roles: ['AI Engineer', 'Research Engineer', 'Applied Scientist'],
   affiliation: '東京理科大学大学院 創域理工学研究科 電気電子情報工学専攻 M2',
   career: '2027年4月〜 外資系コンサルティングファーム AIアーキテクト職 入社予定',
 
-  // Hero: 見出し1行 + 紹介文2〜3行
+  // Hero: 見出し1行 + 紹介文2行（件数は About の stats に置き、ここには書かない）
   headline: '視覚基盤モデルの研究と、LLM システムの本番実装。',
   intro:
-    '東京理科大学大学院 M2。松尾研究所と Airion で AI エンジニアとして勤務し、学会発表4件、実務・インターン17社。' +
+    '東京理科大学大学院 M2。松尾研究所と Airion で AI エンジニアとして勤務。' +
     '2027年4月から外資系コンサルティングファームで AI アーキテクト。',
 
   // About: 研究と実務の2段落
@@ -23,30 +25,11 @@ const profile = {
     '実務では研究で使う手法を本番システムに実装。ロボット向け音声合成、契約書分類の LLM 化、業務システムを操作するエージェントへの知識注入など。',
   ],
 
-  // About: 現在地
-  now: [
-    { label: '所属', value: '東京理科大学大学院 創域理工学研究科 修士2年（2027年3月修了見込）' },
-    { label: '現職', value: '株式会社松尾研究所 AIエンジニア／株式会社Airion AIエンジニア' },
-    { label: '2027年4月〜', value: '外資系コンサルティングファーム AIアーキテクト' },
-  ],
-
-  // About: 第三者による評価・掲載。多くは載せず、裏が取れるものだけ
-  recognition: [
-    {
-      title: 'DECC 2025 ファイナリスト',
-      note: 'DISCO プログラミングコンテスト本戦（実機の半導体製造装置を制御）',
-      url: 'https://news.mynavi.jp/techplus/kikaku/disco_decc-2/',
-    },
-    {
-      title: 'トヨタイムズ掲載',
-      note: 'ロボット向けリアルタイム音声合成 AI（Airion）',
-      url: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html',
-    },
-    {
-      title: '東京大学 松尾・岩澤研究室 LLMATCH プログラム',
-      note: '選抜制 LLM 研究プログラム',
-      url: null,
-    },
+  // About: 数字3つ。単位と対象が一目で分かるものだけ
+  stats: [
+    { label: '学会発表', value: '4件' },
+    { label: '実務・インターン', value: '17社' },
+    { label: '国際会議 投稿準備中', value: '3件' },
   ],
 
   social: [

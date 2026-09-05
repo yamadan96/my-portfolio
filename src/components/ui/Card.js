@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const StyledCard = styled(motion.div)`
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.cardBg};
+  backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   padding: ${({ theme }) => theme.spacing.xl};
-  transition: border-color ${({ theme }) => theme.transitions.fast};
+  transition: all ${({ theme }) => theme.transitions.normal};
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.textMuted};
+    border-color: ${({ theme }) => theme.colors.primary};
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
 `;
 

@@ -1,129 +1,197 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import profile from '../../data/profile';
+import SocialIcons from '../ui/SocialIcons';
+import Button from '../ui/Button';
 
-// 最初の画面で伝えるのは 名前 / 肩書き / 見出し1行 / 紹介文 / 導線2つ だけ。
-// 数字の羅列・SNS アイコン・モデル名は置かない（それぞれ 詳細ページ / Contact / Skills が担当）。
-const Wrapper = styled.header`
-  max-width: ${({ theme }) => theme.contentWidth};
-  margin: 0 auto;
-  padding: ${({ theme }) => `9rem ${theme.spacing.xl} ${theme.spacing['3xl']}`};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => `7rem ${theme.spacing.md} ${theme.spacing['2xl']}`};
-  }
+const HeroWrapper = styled.section`
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spacing['4xl']} ${({ theme }) => theme.spacing.xl};
+  position: relative;
+  overflow: hidden;
 `;
 
-const Eyebrow = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
+const HeroBg = styled.div`
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, ${({ theme }) => `${theme.colors.primary}15`} 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 50%, ${({ theme }) => `${theme.colors.primaryDark}10`} 0%, transparent 50%);
+`;
+
+const HeroContent = styled(motion.div)`
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+`;
+
+const Greeting = styled(motion.p)`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  color: ${({ theme }) => theme.colors.primary};
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.textMuted};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const Name = styled.h1`
-  margin-top: ${({ theme }) => theme.spacing.md};
-  font-size: ${({ theme }) => theme.fontSizes['5xl']};
+const Name = styled(motion.h1)`
+  font-size: ${({ theme }) => theme.fontSizes['6xl']};
+  font-weight: 800;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
   line-height: 1.1;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.fontSizes['4xl']};
   }
-`;
-
-const NameEn = styled.span`
-  display: inline-block;
-  margin-left: ${({ theme }) => theme.spacing.md};
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: ${({ theme }) => theme.colors.textMuted};
-  vertical-align: 0.35em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    display: block;
-    margin: ${({ theme }) => `${theme.spacing.xs} 0 0`};
+    font-size: ${({ theme }) => theme.fontSizes['3xl']};
   }
 `;
 
-const Headline = styled.p`
-  margin-top: ${({ theme }) => theme.spacing.xl};
-  max-width: ${({ theme }) => theme.measure};
-  font-family: ${({ theme }) => theme.fonts.display};
+const RoleText = styled(motion.div)`
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  font-weight: 500;
-  line-height: 1.5;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  min-height: 2.5rem;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.fontSizes.xl};
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
 `;
 
-const Intro = styled.p`
-  margin-top: ${({ theme }) => theme.spacing.md};
-  max-width: ${({ theme }) => theme.measure};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  line-height: 1.9;
-  color: ${({ theme }) => theme.colors.textSecondary};
+const Cursor = styled.span`
+  display: inline-block;
+  width: 3px;
+  height: 1.2em;
+  background: ${({ theme }) => theme.colors.primary};
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
 `;
 
-const Actions = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-top: ${({ theme }) => theme.spacing.xl};
-`;
-
-const buttonBase = `
-  padding: 0.625rem 1.25rem;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
+// 見出し1行（profile.headline）。本文色で、紹介文より少し太く大きく表示する
+const Headline = styled(motion.p)`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: 600;
-  cursor: pointer;
-`;
-
-const Primary = styled.button`
-  ${buttonBase}
-  border: 1px solid ${({ theme }) => theme.colors.text};
-  background: ${({ theme }) => theme.colors.text};
-  color: ${({ theme }) => theme.colors.background};
-
-  &:hover {
-    opacity: 0.85;
-  }
-`;
-
-const Secondary = styled.button`
-  ${buttonBase}
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  background: transparent;
   color: ${({ theme }) => theme.colors.text};
+  max-width: 600px;
+  margin: 0 auto ${({ theme }) => theme.spacing.sm};
+  line-height: 1.6;
 
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.text};
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `;
+
+// 紹介文（profile.intro）。控えめな色で 2 行以内。
+// 幅を HeroContent と同じ 800px にして、デスクトップで 3 行に折り返さないようにする
+const Intro = styled(motion.p)`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.textMuted};
+  max-width: 800px;
+  margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
+  line-height: 1.8;
+`;
+
+const SocialWrapper = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
+`;
+
+const ButtonGroup = styled(motion.div)`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.md};
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const useTypingEffect = (texts, typingSpeed = 100, deletingSpeed = 50, pauseDuration = 2000) => {
+  const [displayText, setDisplayText] = useState('');
+  const [textIndex, setTextIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentText = texts[textIndex];
+    let timeout;
+
+    if (!isDeleting && displayText === currentText) {
+      timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
+    } else if (isDeleting && displayText === '') {
+      setIsDeleting(false);
+      setTextIndex((prev) => (prev + 1) % texts.length);
+    } else {
+      timeout = setTimeout(() => {
+        setDisplayText(
+          isDeleting
+            ? currentText.substring(0, displayText.length - 1)
+            : currentText.substring(0, displayText.length + 1)
+        );
+      }, isDeleting ? deletingSpeed : typingSpeed);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, textIndex, isDeleting, texts, typingSpeed, deletingSpeed, pauseDuration]);
+
+  return displayText;
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 
 const HeroSection = () => {
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const typedText = useTypingEffect(profile.roles);
+
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <Wrapper id="hero">
-      <Eyebrow>{profile.roleLabel}</Eyebrow>
-      <Name>
-        {profile.name}
-        <NameEn>{profile.nameEn}</NameEn>
-      </Name>
-      <Headline>{profile.headline}</Headline>
-      <Intro>{profile.intro}</Intro>
-      <Actions>
-        <Primary onClick={() => scrollTo('experience')}>職務経歴を見る</Primary>
-        <Secondary onClick={() => scrollTo('about')}>プロフィールを見る</Secondary>
-      </Actions>
-    </Wrapper>
+    <HeroWrapper id="hero">
+      <HeroBg />
+      <HeroContent variants={containerVariants} initial="hidden" animate="visible">
+        <Greeting variants={itemVariants}>こんにちは、私は</Greeting>
+        <Name variants={itemVariants}>{profile.name}</Name>
+        <RoleText variants={itemVariants}>
+          {typedText}
+          <Cursor />
+        </RoleText>
+        <Headline variants={itemVariants}>{profile.headline}</Headline>
+        <Intro variants={itemVariants}>{profile.intro}</Intro>
+        <SocialWrapper variants={itemVariants}>
+          <SocialIcons links={profile.social} />
+        </SocialWrapper>
+        <ButtonGroup variants={itemVariants}>
+          <Button onClick={() => scrollToSection('experience')} href="#experience">
+            経歴を見る
+          </Button>
+          <Button variant="outline" onClick={() => scrollToSection('contact')} href="#contact">
+            お問い合わせ
+          </Button>
+        </ButtonGroup>
+      </HeroContent>
+    </HeroWrapper>
   );
 };
 
