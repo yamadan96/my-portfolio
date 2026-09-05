@@ -139,9 +139,8 @@ const CloseButton = styled.button`
 
 // トップページのセクション順と一致させる（MainPage.js）
 const sections = [
-  { id: 'work', label: 'Work' },
-  { id: 'research', label: 'Research' },
   { id: 'experience', label: 'Experience' },
+  { id: 'research', label: 'Research' },
   { id: 'skills', label: 'Skills' },
   { id: 'about', label: 'About' },
 ];

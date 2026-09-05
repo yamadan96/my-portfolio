@@ -9,12 +9,11 @@ The landing page is written to be read in about 30 seconds, top to bottom:
 
 | # | Section | What it answers | Source data |
 |---|---------|-----------------|-------------|
-| – | Hero | Who this is, in one line + a 3-line intro, two calls to action | `src/data/profile.js` |
-| 01 | Selected Work | Three industry projects: what was built, my role, the outcome | `src/data/selectedWork.js` |
-| 02 | Research | Three conference papers with direct links to PDF / slides / poster | `src/data/publications.js`, `src/data/research.js` |
-| 03 | Experience | Six long-term positions, one line each | `src/data/experiences.js` |
-| 04 | Skills | Four domains, only technologies actually used | `src/data/skillsCore.js` |
-| 05 | About / Contact | Two-paragraph bio, current affiliations, recognition, e-mail and profile links | `src/data/profile.js` |
+| – | Hero | Who this is, in one line + a 2-line intro, two calls to action | `src/data/profile.js` |
+| 01 | Experience | Six long-term positions, one line each, with links to detail pages | `src/data/experiences.js` |
+| 02 | Research | Three conference papers, one line each, with direct links to PDF / slides / poster | `src/data/publications.js`, `src/data/research.js` |
+| 03 | Skills | Four domains, only technologies actually used | `src/data/skillsCore.js` |
+| 04 | About / Contact | Two short paragraphs, current affiliations, recognition, e-mail and profile links | `src/data/profile.js` |
 
 Everything else lives one level down:
 
@@ -27,7 +26,8 @@ Everything else lives one level down:
 
 Rule of thumb when editing copy: the hero headline stays within 15–25 characters and
 states facts only; model and library names belong in Skills / Research, not in the hero
-or the bio; numbers are always preceded by the context that makes them readable.
+or the bio; every item on the landing page is one or two lines — anything longer moves to a
+sub-page.
 
 ## Stack
 

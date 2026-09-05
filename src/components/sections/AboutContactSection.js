@@ -129,7 +129,7 @@ const AboutContactSection = () => {
 
   return (
     <Section id="about">
-      <SectionTitle index="05" eyebrow="About" title="プロフィール" />
+      <SectionTitle index="04" eyebrow="About" title="プロフィール" />
       <Grid>
         <div>
           {profile.bio.map((paragraph) => (

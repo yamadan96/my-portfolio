@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import profile from '../../data/profile';
 
 // 最初の画面で伝えるのは 名前 / 肩書き / 見出し1行 / 紹介文 / 導線2つ だけ。
-// 数字の羅列・SNS アイコン・モデル名は置かない（それぞれ 成果 / Contact / Skills が担当）。
+// 数字の羅列・SNS アイコン・モデル名は置かない（それぞれ 詳細ページ / Contact / Skills が担当）。
 const Wrapper = styled.header`
   max-width: ${({ theme }) => theme.contentWidth};
   margin: 0 auto;
@@ -120,7 +120,7 @@ const HeroSection = () => {
       <Headline>{profile.headline}</Headline>
       <Intro>{profile.intro}</Intro>
       <Actions>
-        <Primary onClick={() => scrollTo('work')}>代表実績を見る</Primary>
+        <Primary onClick={() => scrollTo('experience')}>職務経歴を見る</Primary>
         <Secondary onClick={() => scrollTo('about')}>プロフィールを見る</Secondary>
       </Actions>
     </Wrapper>

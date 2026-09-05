@@ -5,6 +5,7 @@ import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 import { MoreRow, TextLink } from '../ui/Editorial';
 import skillsCore from '../../data/skillsCore';
+import projects from '../../data/projects';
 
 // 領域名 → 技術名 だけ。説明文・アイコン・習熟度バーは置かない。全一覧（約70項目）は CV ページ。
 const List = styled.dl`
@@ -50,7 +51,7 @@ const SkillsCoreSection = () => {
 
   return (
     <Section id="skills">
-      <SectionTitle index="04" eyebrow="Skills" title="スキル" />
+      <SectionTitle index="03" eyebrow="Skills" title="スキル" />
       <List>
         {skillsCore.map((group) => (
           <Row key={group.category}>
@@ -64,6 +65,8 @@ const SkillsCoreSection = () => {
         ))}
       </List>
       <MoreRow>
+        <TextLink onClick={() => navigate('/work')}>個人開発・研究実装の一覧（{projects.length}件）→</TextLink>
+        <br />
         <TextLink onClick={() => navigate('/more')}>使用技術の全一覧を見る →</TextLink>
       </MoreRow>
     </Section>

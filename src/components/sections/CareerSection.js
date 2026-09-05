@@ -78,7 +78,7 @@ const CareerSection = () => {
 
   return (
     <Section id="experience">
-      <SectionTitle index="03" eyebrow="Experience" title="職務経歴" />
+      <SectionTitle index="01" eyebrow="Experience" title="職務経歴" />
       <List>
         {items.map((item) => (
           <Row key={item.id}>

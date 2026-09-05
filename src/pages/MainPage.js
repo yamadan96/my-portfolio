@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import HeroSection from '../components/sections/HeroSection';
-import SelectedWorkSection from '../components/sections/SelectedWorkSection';
 import ResearchHighlightSection from '../components/sections/ResearchHighlightSection';
 import CareerSection from '../components/sections/CareerSection';
 import SkillsCoreSection from '../components/sections/SkillsCoreSection';
@@ -9,11 +8,11 @@ import AboutContactSection from '../components/sections/AboutContactSection';
 
 // 情報設計（30秒で読み切れるトップ → 裏付けは下層へ）
 //   Level 1 = このページ:
-//     Hero（何者か） → 01 代表的な実績3件 → 02 研究・発表3件 → 03 職務経歴6社 → 04 スキル4領域 → 05 プロフィール・連絡先
+//     Hero（何者か） → 01 職務経歴6社 → 02 研究・発表3件 → 03 スキル4領域 → 04 プロフィール・連絡先
 //   Level 2 = /work（個人開発・研究実装）・/research（全発表と原稿）・/more（CV: 全経歴・受賞・資格・執筆）
 //   Level 3 = /experience/:id（各社での担当と技術詳細）
 //
-// トップに置かないもの: 資格・学歴・OSS・執筆・短期インターン・投稿準備中の研究の詳細
+// トップに置かないもの: 個人開発の一覧・資格・学歴・OSS・執筆・短期インターン・投稿準備中の研究の詳細
 const MainPage = () => {
   const { hash } = useLocation();
 
@@ -32,9 +31,8 @@ const MainPage = () => {
   return (
     <>
       <HeroSection />
-      <SelectedWorkSection />
-      <ResearchHighlightSection />
       <CareerSection />
+      <ResearchHighlightSection />
       <SkillsCoreSection />
       <AboutContactSection />
     </>
