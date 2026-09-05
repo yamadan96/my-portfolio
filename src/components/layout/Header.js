@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ThemeToggle from '../../theme/ThemeToggle';
 import useScrollSpy from '../../hooks/useScrollSpy';
 
-const Nav = styled(motion.header)`
+const Nav = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: ${({ theme, $scrolled }) =>
-    $scrolled ? theme.colors.glassBg : 'transparent'};
-  backdrop-filter: ${({ $scrolled }) => ($scrolled ? 'blur(20px)' : 'none')};
-  border-bottom: 1px solid ${({ theme, $scrolled }) =>
-    $scrolled ? theme.colors.glassBorder : 'transparent'};
-  transition: all ${({ theme }) => theme.transitions.normal};
+  background: ${({ theme, $scrolled }) => ($scrolled ? theme.colors.glassBg : 'transparent')};
+  backdrop-filter: ${({ $scrolled }) => ($scrolled ? 'blur(8px)' : 'none')};
+  border-bottom: 1px solid ${({ theme, $scrolled }) => ($scrolled ? theme.colors.border : 'transparent')};
+  transition: background ${({ theme }) => theme.transitions.normal},
+    border-color ${({ theme }) => theme.transitions.normal};
 `;
 
 const NavInner = styled.div`
-  max-width: 1200px;
+  max-width: ${({ theme }) => theme.contentWidth};
   margin: 0 auto;
   padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
   display: flex;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 0.5rem 1rem;
-  }
   align-items: center;
   justify-content: space-between;
+  gap: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
+  }
 `;
 
-const Logo = styled.a`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: 800;
-  background: ${({ theme }) => theme.colors.gradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+const Logo = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
-  text-decoration: none;
 `;
 
 const NavLinks = styled.nav`
@@ -48,14 +49,8 @@ const NavLinks = styled.nav`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.lg};
 
-  /* 項目数が増えたため、狭いデスクトップでは詰めて折り返しを防ぐ */
-  @media (max-width: ${({ theme }) => theme.breakpoints.xl}) {
-    gap: ${({ theme }) => theme.spacing.md};
-  }
-
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    gap: ${({ theme }) => theme.spacing.sm};
-    font-size: ${({ theme }) => theme.fontSizes.xs};
+    gap: ${({ theme }) => theme.spacing.md};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -63,32 +58,21 @@ const NavLinks = styled.nav`
   }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled.button`
+  background: none;
+  border: none;
+  padding: 2px 0;
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: 500;
-  color: ${({ theme, $active }) =>
-    $active ? theme.colors.primary : theme.colors.textSecondary};
+  color: ${({ theme, $active }) => ($active ? theme.colors.text : theme.colors.textSecondary)};
+  border-bottom: 1px solid ${({ theme, $active }) => ($active ? theme.colors.text : 'transparent')};
   cursor: pointer;
-  text-decoration: none;
-  transition: color ${({ theme }) => theme.transitions.fast};
-  position: relative;
+  transition: color ${({ theme }) => theme.transitions.fast},
+    border-color ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.text};
   }
-
-  ${({ $active, theme }) =>
-    $active &&
-    `&::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: ${theme.colors.gradient};
-      border-radius: 1px;
-    }`}
 `;
 
 const RightGroup = styled.div`
@@ -101,7 +85,6 @@ const Hamburger = styled.button`
   display: none;
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
   padding: ${({ theme }) => theme.spacing.xs};
 
@@ -114,63 +97,58 @@ const Hamburger = styled.button`
 
 const HamburgerLine = styled.span`
   display: block;
-  width: 24px;
-  height: 2px;
+  width: 22px;
+  height: 1.5px;
   background: ${({ theme }) => theme.colors.text};
-  border-radius: 1px;
-  transition: all ${({ theme }) => theme.transitions.fast};
 `;
 
 const MobileMenu = styled(motion.div)`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: ${({ theme }) => theme.colors.background};
+  inset: 0;
   z-index: 99;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: ${({ theme }) => theme.spacing['2xl']};
+  gap: ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => theme.spacing['2xl']};
+  background: ${({ theme }) => theme.colors.background};
 `;
 
-const MobileNavLink = styled.a`
-  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+const MobileNavLink = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: ${({ theme }) => theme.fonts.display};
+  font-size: ${({ theme }) => theme.fontSizes['3xl']};
   font-weight: 600;
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
-  text-decoration: none;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-  }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: ${({ theme }) => theme.spacing.xl};
-  right: ${({ theme }) => theme.spacing.xl};
+  top: ${({ theme }) => theme.spacing.lg};
+  right: ${({ theme }) => theme.spacing.lg};
   background: none;
   border: none;
-  color: ${({ theme }) => theme.colors.text};
   font-size: 1.5rem;
+  color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
 `;
 
-// MainPage のセクション順と一致させること
+// トップページのセクション順と一致させる（MainPage.js）
 const sections = [
-  { id: 'hero', label: 'Home' },
   { id: 'work', label: 'Work' },
-  { id: 'experience', label: 'Experience' },
   { id: 'research', label: 'Research' },
+  { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'about', label: 'About' },
 ];
+const sectionIds = ['hero', ...sections.map((s) => s.id)];
 
-// トップに載せない情報の入口。ナビでは1つにまとめる。
-const morePath = '/more';
+// トップに載せない網羅情報（全経歴・受賞・資格・執筆）は CV ページに置く
+const cvPath = '/more';
 
 const Header = ({ isDark, onThemeToggle }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -178,61 +156,58 @@ const Header = ({ isDark, onThemeToggle }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isMain = location.pathname === '/';
-  const activeId = useScrollSpy(
-    sections.map((s) => s.id),
-    120
-  );
+  const activeId = useScrollSpy(sectionIds, 120);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id) => {
+  const goToSection = (id) => {
     setMobileOpen(false);
     if (!isMain) {
-      window.location.href = `/#${id}`;
+      // 下層ページからは トップへ遷移してから該当セクションへ（MainPage が hash を読んでスクロールする）
+      navigate({ pathname: '/', hash: id });
       return;
     }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const goToCv = () => {
+    setMobileOpen(false);
+    navigate(cvPath);
   };
 
   return (
     <>
       <Nav $scrolled={scrolled}>
         <NavInner>
-          <Logo onClick={() => scrollToSection('hero')}>Y.Yamada</Logo>
-          <NavLinks>
-            {isMain &&
-              sections.slice(1).map((section) => (
-                <NavLink
-                  key={section.id}
-                  $active={activeId === section.id}
-                  onClick={() => scrollToSection(section.id)}
-                >
-                  {section.label}
-                </NavLink>
-              ))}
-            <NavLink
-              $active={location.pathname === morePath}
-              onClick={() => {
-                setMobileOpen(false);
-                navigate(morePath);
-              }}
-            >
-              Background
+          <Logo onClick={() => goToSection('hero')} aria-label="トップへ">
+            Yuto Yamada
+          </Logo>
+          <NavLinks aria-label="サイト内ナビゲーション">
+            {sections.map((section) => (
+              <NavLink
+                key={section.id}
+                $active={isMain && activeId === section.id}
+                onClick={() => goToSection(section.id)}
+              >
+                {section.label}
+              </NavLink>
+            ))}
+            <NavLink $active={location.pathname === cvPath} onClick={goToCv}>
+              CV
             </NavLink>
           </NavLinks>
           <RightGroup>
             <ThemeToggle isDark={isDark} onToggle={onThemeToggle} />
-            {isMain && (
-              <Hamburger onClick={() => setMobileOpen(true)} aria-label="メニューを開く">
-                <HamburgerLine />
-                <HamburgerLine />
-                <HamburgerLine />
-              </Hamburger>
-            )}
+            <Hamburger onClick={() => setMobileOpen(true)} aria-label="メニューを開く">
+              <HamburgerLine />
+              <HamburgerLine />
+              <HamburgerLine />
+            </Hamburger>
           </RightGroup>
         </NavInner>
       </Nav>
@@ -242,25 +217,18 @@ const Header = ({ isDark, onThemeToggle }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
-            <CloseButton onClick={() => setMobileOpen(false)}>✕</CloseButton>
+            <CloseButton onClick={() => setMobileOpen(false)} aria-label="メニューを閉じる">
+              ✕
+            </CloseButton>
+            <MobileNavLink onClick={() => goToSection('hero')}>Home</MobileNavLink>
             {sections.map((section) => (
-              <MobileNavLink
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-              >
+              <MobileNavLink key={section.id} onClick={() => goToSection(section.id)}>
                 {section.label}
               </MobileNavLink>
             ))}
-            <MobileNavLink
-              onClick={() => {
-                setMobileOpen(false);
-                navigate(morePath);
-              }}
-            >
-              Background
-            </MobileNavLink>
+            <MobileNavLink onClick={goToCv}>CV</MobileNavLink>
           </MobileMenu>
         )}
       </AnimatePresence>

@@ -3,75 +3,46 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
+import { MoreRow, TextLink } from '../ui/Editorial';
 import skillsCore from '../../data/skillsCore';
 
-// このセクションの1メッセージ:
-//   「基盤モデル / LLMエージェント / 本番化 / 評価 の4つを自分で回せる」
-// アイコンの羅列はしない。カテゴリ名（Level 2）と技術名（Level 3）で強度を分ける。
-const Grid = styled.div`
+// 領域名 → 技術名 だけ。説明文・アイコン・習熟度バーは置かない。全一覧（約70項目）は CV ページ。
+const List = styled.dl`
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const Row = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: 16rem minmax(0, 1fr);
   gap: ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => `${theme.spacing.md} 0`};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.sm};
   }
 `;
 
-const Group = styled.div`
-  padding-top: ${({ theme }) => theme.spacing.md};
-  border-top: 2px solid ${({ theme }) => theme.colors.primary};
-`;
-
-const Category = styled.h3`
+const Category = styled.dt`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: 700;
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
 `;
 
-const Lead = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  line-height: 1.6;
-  color: ${({ theme }) => theme.colors.textMuted};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-`;
-
-const Items = styled.ul`
-  list-style: none;
+const Items = styled.dd`
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.xs};
+  align-content: flex-start;
 `;
 
-const Item = styled.li`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const MoreRow = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.xl};
-  text-align: center;
-`;
-
-const MoreLink = styled.button`
-  background: none;
+const Item = styled.span`
+  display: inline-block;
+  padding: 3px 10px;
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
-  font-family: inherit;
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  cursor: pointer;
-
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.primary};
-  }
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const SkillsCoreSection = () => {
@@ -79,22 +50,21 @@ const SkillsCoreSection = () => {
 
   return (
     <Section id="skills">
-      <SectionTitle title="Skills" subtitle="主戦場は4領域" />
-      <Grid>
+      <SectionTitle index="04" eyebrow="Skills" title="スキル" />
+      <List>
         {skillsCore.map((group) => (
-          <Group key={group.category}>
+          <Row key={group.category}>
             <Category>{group.category}</Category>
-            <Lead>{group.lead}</Lead>
             <Items>
               {group.items.map((item) => (
                 <Item key={item}>{item}</Item>
               ))}
             </Items>
-          </Group>
+          </Row>
         ))}
-      </Grid>
+      </List>
       <MoreRow>
-        <MoreLink onClick={() => navigate('/more')}>使用技術の全一覧を見る →</MoreLink>
+        <TextLink onClick={() => navigate('/more')}>使用技術の全一覧を見る →</TextLink>
       </MoreRow>
     </Section>
   );

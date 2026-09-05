@@ -8,13 +8,13 @@ import WritingSection from '../components/sections/WritingSection';
 import EducationSection from '../components/sections/EducationSection';
 import CertificationsSection from '../components/sections/CertificationsSection';
 
-// Level 2: トップから外した「網羅情報」の置き場。
-// 採用担当が裏取りしたくなったときだけ来るページなので、密度は高くてよい。
+// Level 2: トップから外した網羅情報の置き場（CV）。
+// 裏取りをしたい読み手だけが来るページなので、密度は高くてよい。
 const MorePage = () => (
   <>
     <SubPageHeader
-      title="Background"
-      lead="全17社の実務経験、受賞・表彰、使用技術の全一覧、OSS・執筆、学歴と資格。トップページでは要約しか出していない裏付けをここに置いている。"
+      title="CV"
+      lead="全17社の実務経験、受賞・掲載、使用技術の全一覧、OSS・執筆、学歴と資格。トップページで要約した内容の裏付け。"
     />
     <ExperienceSection />
     <AchievementsSection />

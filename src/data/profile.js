@@ -1,91 +1,76 @@
+// トップページの Hero / About / Contact と、CV ページの受賞・表彰で使う人物データ。
+//
+// 文章のルール:
+//   - Hero の見出し（headline）は 15〜25 文字。事実だけを書き、説明は intro / bio に分ける
+//   - Hero と About ではモデル名・手法名を出さない（それらは Skills / Research が担当）
+//   - 数字は単位と対象が一目で分かるものだけ（学会発表4件・実務17社 など）
 const profile = {
   name: '山田 悠人',
   nameEn: 'Yuto Yamada',
-  title: 'AI Engineer',
-  roles: ['AI / ML Engineer', 'Research Engineer', 'Applied Scientist'],
+  roleLabel: 'AI Engineer / Research Engineer',
   affiliation: '東京理科大学大学院 創域理工学研究科 電気電子情報工学専攻 M2',
-  career: '2027年 外資系コンサルティングファーム AIアーキテクト職 入社予定',
-  // Hero 直下に出す1行。「何が任せられる人か」を最初の3秒で伝える
-  tagline:
-    '視覚基盤モデルと LLM の適応・評価を、論文レベルの検証と本番システムの両方で回すエンジニア。',
-  // --- Hero の情報階層 ---
-  // Level 1: headline（5秒で覚えてほしい1文）
-  // Level 2: positioning（専門領域と現在地）
-  // Level 3: proof（数字。3つとも「実務・研究で出した成果」で粒度を揃える）
-  headline: 'AIの精度を研究で詰めて、本番で動くシステムに乗せるところまで担当します。',
-  positioning:
-    '専門は視覚基盤モデル（DINOv2 / DINOv3）と LLM エージェントの適応・評価。' +
-    '東京理科大学大学院 M2、学会発表4件・実務17社。2027年より外資系コンサルティングファームで AI アーキテクト。',
-  proof: [
-    { value: '74% → 7%', label: 'GUIエージェントの探索空回り率（55本のA/B検証）' },
-    { value: '+14.1pt', label: '契約書分類の本番精度（既存ML → LLM 置き換え）' },
-    { value: '3件', label: '公開ベンチマークでSoTA更新（災害画像分類）' },
-  ],
+  career: '2027年4月〜 外資系コンサルティングファーム AIアーキテクト職 入社予定',
+
+  // Hero: 見出し1行 + 紹介文2〜3行
+  headline: '視覚基盤モデルの研究と、LLM システムの本番実装。',
+  intro:
+    '東京理科大学大学院 M2。松尾研究所と Airion で AI エンジニアとして勤務し、学会発表4件、実務・インターン17社。' +
+    '2027年4月から外資系コンサルティングファームで AI アーキテクト。',
+
+  // About: 研究と実務の2段落
   bio: [
-    '視覚基盤モデル（DINOv2 / DINOv3）と LLM の「適応」と「信頼できる評価」を研究テーマにしている。少数ラベル下での LoRA 適応、選択的分類のコスト最適化、空間リークを排した評価プロトコル設計が中心。',
-    '同時に、研究で使う手法をそのまま本番に載せる仕事もしている。ロボット向けリアルタイム音声合成（VITS2、トヨタイムズ掲載）、契約書分類 LLM の本番マイクロサービス化（+14pt）、GUI 自律操作エージェントへの RAG 知識注入（空回り 74%→7%）など。',
-    '学会発表4件、国際会議3件へ投稿準備中（WACV 2027 / IWAIT 2027 / IGARSS 2027）。実務・インターンは17社。',
+    '視覚基盤モデルと大規模言語モデルを少ないデータで適応させる方法と、その評価設計を研究。災害画像の損傷度分類を題材に学会で4件発表。',
+    '実務では研究で使う手法を本番システムに実装。ロボット向け音声合成、契約書分類の LLM 化、業務システムを操作するエージェントへの知識注入など。',
   ],
-  bioEn:
-    'AI engineer working on adaptation and trustworthy evaluation of vision foundation models and LLMs — low-rank adaptation under label scarcity, cost-sensitive selective classification, and leak-free evaluation protocols. I ship the same methods into production: real-time TTS for robots (featured on Toyota Times), an LLM contract classifier deployed as a production microservice (+14pt), and RAG knowledge injection for autonomous GUI agents (74%→7% wasted exploration). 4 domestic conference talks; 3 international submissions in preparation (WACV 2027 / IWAIT 2027 / IGARSS 2027).',
-  stats: [
-    { label: '学会発表', value: '4件' },
-    { label: '国際会議 投稿準備中', value: '3件' },
-    { label: '実務・インターン', value: '17社' },
+
+  // About: 現在地
+  now: [
+    { label: '所属', value: '東京理科大学大学院 創域理工学研究科 修士2年（2027年3月修了見込）' },
+    { label: '現職', value: '株式会社松尾研究所 AIエンジニア／株式会社Airion AIエンジニア' },
+    { label: '2027年4月〜', value: '外資系コンサルティングファーム AIアーキテクト' },
   ],
-  // About セクション右カラム。Hero の件数（stats）とは重複させず、
-  // 「何をどれだけ動かしたか」が分かる数字だけを置く
-  highlights: [
+
+  // About: 第三者による評価・掲載。多くは載せず、裏が取れるものだけ
+  recognition: [
     {
-      value: '3件',
-      label: '公開ベンチマークで SoTA 更新',
-      note: 'PHI-Net / AIDERv2 / MEDIC',
+      title: 'DECC 2025 ファイナリスト',
+      note: 'DISCO プログラミングコンテスト本戦（実機の半導体製造装置を制御）',
+      url: 'https://news.mynavi.jp/techplus/kikaku/disco_decc-2/',
     },
     {
-      value: '0.46 → 0.77',
-      label: '被災建物6クラス分類 Macro F1',
-      note: 'ResNet-50 → DINOv2 + LoRA（1,040枚）',
+      title: 'トヨタイムズ掲載',
+      note: 'ロボット向けリアルタイム音声合成 AI（Airion）',
+      url: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html',
     },
     {
-      value: '+36.6%',
-      label: 'コスト考慮型選択的分類の相対改善',
-      note: '逐次観測取得（SCAA）／3-seed 全て有意',
-    },
-    {
-      value: '74% → 7%',
-      label: 'GUIエージェントの探索空回り率',
-      note: '55本の before/after A/B 検証',
-    },
-    {
-      value: '+14pt',
-      label: '契約書分類の精度改善',
-      note: '既存MLモデル → LLM、本番マイクロサービス化',
-    },
-    {
-      value: '0.2秒/枚',
-      label: '鉄パイプ自動計数の推論速度',
-      note: '既存8秒/枚・束単位成功率ほぼ0% → 96.6%',
+      title: '東京大学 松尾・岩澤研究室 LLMATCH プログラム',
+      note: '選抜制 LLM 研究プログラム',
+      url: null,
     },
   ],
-  // 採用担当が最初に見る「専門領域」。Hero / About のチップ表示に使う
-  focusAreas: [
-    'Vision Foundation Models (DINOv2 / DINOv3)',
-    'Parameter-Efficient Fine-Tuning (LoRA)',
-    'LLM Post-Training (GRPO / SFT)',
-    'Selective Classification & Calibration',
-    'LLM Agents & RAG',
-    'Vision-Language-Action (VLA)',
-  ],
+
   social: [
-    { platform: 'github', url: 'https://github.com/yamadan96' },
-    { platform: 'qiita', url: 'https://qiita.com/yamadan96' },
-    { platform: 'x', url: 'https://x.com/dev2rich' },
-    { platform: 'linkedin', url: 'https://www.linkedin.com/in/悠人-山田-156149304' },
-    { platform: 'note', url: 'https://note.com/yuto_yamada398' },
-    { platform: 'zenn', url: 'https://zenn.dev/yuto0' },
-    { platform: 'wantedly', url: 'https://www.wantedly.com/id/yutoyamada0' },
+    { platform: 'github', label: 'GitHub', handle: 'yamadan96', url: 'https://github.com/yamadan96' },
+    {
+      platform: 'linkedin',
+      label: 'LinkedIn',
+      handle: 'Yuto Yamada',
+      url: 'https://www.linkedin.com/in/悠人-山田-156149304',
+    },
+    { platform: 'x', label: 'X', handle: '@dev2rich', url: 'https://x.com/dev2rich' },
+    { platform: 'qiita', label: 'Qiita', handle: 'yamadan96', url: 'https://qiita.com/yamadan96' },
+    { platform: 'zenn', label: 'Zenn', handle: 'yuto0', url: 'https://zenn.dev/yuto0' },
+    { platform: 'note', label: 'note', handle: 'yuto_yamada398', url: 'https://note.com/yuto_yamada398' },
+    {
+      platform: 'wantedly',
+      label: 'Wantedly',
+      handle: 'yutoyamada0',
+      url: 'https://www.wantedly.com/id/yutoyamada0',
+    },
   ],
   email: 'yuto.yamada0101@gmail.com',
+
+  // CV ページ（/more）の受賞・表彰セクション
   achievements: [
     {
       title: '国際会議 3件へ投稿準備中',

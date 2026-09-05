@@ -3,6 +3,7 @@
 const research = [
   {
     id: 'research-cwsc',
+    shortVenue: 'WACV 2027',
     title: 'コスト考慮型選択的分類における Divergence 定理と逐次観測取得（CWSC）',
     venue: 'WACV 2027 Round 2 投稿準備中',
     year: 2027,
@@ -28,6 +29,7 @@ const research = [
   },
   {
     id: 'research-gps-audit',
+    shortVenue: 'IGARSS 2027 / IEEE GRSL',
     title: 'GPS統合戦略の系統的監査 — 何が効き、何が効かず、なぜか',
     venue: 'IGARSS 2027 / IEEE GRSL 投稿準備中',
     year: 2027,
@@ -53,6 +55,7 @@ const research = [
   },
   {
     id: 'research-iwait2027',
+    shortVenue: 'IWAIT 2027',
     title: '較正の空間半径を利用したアノテーション優先順位付け',
     venue: 'IWAIT 2027（韓国・ソウル、2027年1月10〜12日）投稿準備中',
     year: 2027,

@@ -1,39 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import SocialIcons from '../ui/SocialIcons';
 import profile from '../../data/profile';
 
+// 著作権表示だけ。SNS・外部プロフィールへのリンクは About/Contact に1か所だけ置く
 const FooterWrapper = styled.footer`
-  padding: ${({ theme }) => `${theme.spacing['3xl']} ${theme.spacing.xl}`};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const FooterInner = styled.div`
-  max-width: 1200px;
+  max-width: ${({ theme }) => theme.contentWidth};
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.lg};
-`;
-
-const SocialWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Copyright = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  padding: ${({ theme }) => `${theme.spacing.xl} ${theme.spacing.xl}`};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   color: ${({ theme }) => theme.colors.textMuted};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.md}`};
+  }
 `;
 
 const Footer = () => (
   <FooterWrapper>
     <FooterInner>
-      <SocialWrapper>
-        <SocialIcons links={profile.social} />
-      </SocialWrapper>
-      <Copyright>&copy; {new Date().getFullYear()} {profile.nameEn}. All rights reserved.</Copyright>
+      &copy; {new Date().getFullYear()} {profile.nameEn}
     </FooterInner>
   </FooterWrapper>
 );

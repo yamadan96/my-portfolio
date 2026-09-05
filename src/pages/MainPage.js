@@ -1,31 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import HeroSection from '../components/sections/HeroSection';
 import SelectedWorkSection from '../components/sections/SelectedWorkSection';
-import CareerSection from '../components/sections/CareerSection';
 import ResearchHighlightSection from '../components/sections/ResearchHighlightSection';
+import CareerSection from '../components/sections/CareerSection';
 import SkillsCoreSection from '../components/sections/SkillsCoreSection';
-import ContactSection from '../components/sections/ContactSection';
+import AboutContactSection from '../components/sections/AboutContactSection';
 
-// 情報設計（Progressive Disclosure）
-//   Level 1 = このページ: 何者か → 代表4件 → 経歴6社 → 代表研究 → 4領域 → 連絡先
-//   Level 2 = /work・/research・/more: 一覧と裏付け
-//   Level 3 = /experience/:id・各カードの技術詳細: 実装・実験条件
+// 情報設計（30秒で読み切れるトップ → 裏付けは下層へ）
+//   Level 1 = このページ:
+//     Hero（何者か） → 01 代表的な実績3件 → 02 研究・発表3件 → 03 職務経歴6社 → 04 スキル4領域 → 05 プロフィール・連絡先
+//   Level 2 = /work（個人開発・研究実装）・/research（全発表と原稿）・/more（CV: 全経歴・受賞・資格・執筆）
+//   Level 3 = /experience/:id（各社での担当と技術詳細）
 //
-// トップから外したもの（削除ではなく降格）:
-//   About の長文 → Hero の2行へ集約
-//   Projects 13件 → /work
-//   Publications 全文 → /research
-//   Awards / Education / Certifications / OSS / Writing / 短期インターン → /more
-//   進行中の研究（research.js） → 非公開
-const MainPage = () => (
-  <>
-    <HeroSection />
-    <SelectedWorkSection />
-    <CareerSection />
-    <ResearchHighlightSection />
-    <SkillsCoreSection />
-    <ContactSection />
-  </>
-);
+// トップに置かないもの: 資格・学歴・OSS・執筆・短期インターン・投稿準備中の研究の詳細
+const MainPage = () => {
+  const { hash } = useLocation();
+
+  // 下層ページから「/#experience」のように戻ってきたときに該当セクションへ移動する。
+  // 初回描画直後はフォント読み込みでレイアウトが動き smooth スクロールが途中で止まるため、
+  // 描画が落ち着いた次のフレームで即時ジャンプする
+  useEffect(() => {
+    if (!hash) return undefined;
+    const id = hash.slice(1);
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'auto', block: 'start' });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [hash]);
+
+  return (
+    <>
+      <HeroSection />
+      <SelectedWorkSection />
+      <ResearchHighlightSection />
+      <CareerSection />
+      <SkillsCoreSection />
+      <AboutContactSection />
+    </>
+  );
+};
 
 export default MainPage;
