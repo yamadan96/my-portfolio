@@ -5,9 +5,11 @@ import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 import profile from '../../data/profile';
 
+// 数字欄は置かない（件数は本文に書いてある）。本文だけを読みやすい幅で中央に
 const AboutGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 46rem);
+  justify-content: center;
   gap: ${({ theme }) => theme.spacing['3xl']};
   align-items: center;
 
@@ -25,32 +27,6 @@ const AboutText = styled.div`
   }
 `;
 
-const StatsGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.md};
-  justify-content: center;
-`;
-
-const StatCard = styled(motion.div)`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.colors.cardBg};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.xl};
-  justify-content: center;
-  white-space: nowrap;
-`;
-
-const StatLabel = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
-  white-space: nowrap;
-`;
-
 const CareerBadge = styled(motion.div)`
   display: inline-flex;
   align-items: center;
@@ -63,15 +39,6 @@ const CareerBadge = styled(motion.div)`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.primary};
   font-weight: 600;
-`;
-
-const StatValue = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: 800;
-  background: ${({ theme }) => theme.colors.gradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 `;
 
 const AboutSection = () => (
@@ -93,21 +60,6 @@ const AboutSection = () => (
           <p key={i}>{paragraph}</p>
         ))}
       </AboutText>
-      {/* 数字は profile.stats の3件だけ。ラベルで対象と単位を示す */}
-      <StatsGrid>
-        {profile.stats.map((stat, index) => (
-          <StatCard
-            key={stat.label}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-          >
-            <StatLabel>{stat.label}</StatLabel>
-            <StatValue>{stat.value}</StatValue>
-          </StatCard>
-        ))}
-      </StatsGrid>
     </AboutGrid>
   </Section>
 );
