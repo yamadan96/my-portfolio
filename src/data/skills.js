@@ -96,7 +96,6 @@ const skills = [
       'New Relic / Grafana',
       'Prometheus',
       'CI/CD',
-      'MLflow',
       'Slack',
       'Arduino',
       'C / C++ / C#',
