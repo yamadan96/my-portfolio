@@ -44,9 +44,9 @@ describe('MainPage information architecture', () => {
     const contact = document.getElementById('contact');
     expect(within(hero).getAllByRole('link', { name: /github/i })).toHaveLength(1);
     expect(within(contact).queryAllByRole('link', { name: /github/i })).toHaveLength(0);
-    expect(within(contact).getByRole('link', { name: /yuto\.yamada0101@gmail\.com/ })).toHaveAttribute(
-      'href',
-      'mailto:yuto.yamada0101@gmail.com'
-    );
+    // Contact is the July form (name / e-mail / message), not a mailto link
+    expect(within(contact).getByLabelText('お名前')).toBeInTheDocument();
+    expect(within(contact).getByLabelText('メールアドレス')).toBeInTheDocument();
+    expect(within(contact).getByLabelText('メッセージ')).toBeInTheDocument();
   });
 });
