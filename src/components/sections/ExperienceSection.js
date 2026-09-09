@@ -51,10 +51,6 @@ const CompactDescription = styled.p`
   color: ${({ theme }) => theme.colors.textMuted};
   line-height: 1.6;
   margin-top: ${({ theme }) => theme.spacing.xs};
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 `;
 
 const CompactDetailLink = styled.span`

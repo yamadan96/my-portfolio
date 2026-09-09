@@ -461,10 +461,10 @@ const ProjectModal = ({ project, onClose }) => {
             <span style={{ fontSize: '2rem' }}>{project.icon}</span>
             <ModalTitle>{project.name}</ModalTitle>
           </div>
-          <ModalClient>{project.client}</ModalClient>
+          {project.client && <ModalClient>{project.client}</ModalClient>}
           <ModalMeta>
             <ProjectCardCategory>{project.category}</ProjectCardCategory>
-            <ProjectCardPeriod style={{ margin: 0 }}>{project.period}</ProjectCardPeriod>
+            {project.period && <ProjectCardPeriod style={{ margin: 0 }}>{project.period}</ProjectCardPeriod>}
           </ModalMeta>
         </ModalHeader>
 
@@ -585,11 +585,11 @@ const ExperienceDetail = () => {
                     <ProjectIcon>{project.icon}</ProjectIcon>
                     <div>
                       <ProjectCardTitle>{project.name}</ProjectCardTitle>
-                      <ProjectCardClient>{project.client}</ProjectCardClient>
+                      {project.client && <ProjectCardClient>{project.client}</ProjectCardClient>}
                     </div>
                   </ProjectCardHeader>
                   <ProjectCardCategory>{project.category}</ProjectCardCategory>
-                  <ProjectCardPeriod>{project.period}</ProjectCardPeriod>
+                  {project.period && <ProjectCardPeriod>{project.period}</ProjectCardPeriod>}
                   <ProjectCardSummary>{project.summary}</ProjectCardSummary>
                   <ProjectCardFooter>
                     {project.techStack.slice(0, 4).map((tech) => (
