@@ -96,12 +96,6 @@ const profile = {
       description: 'Airionでの次世代ロボット向けリアルタイム音声合成AI開発の成果がトヨタイムズニュースに掲載。',
       link: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html',
     },
-    {
-      title: 'G検定 2026#4 合格',
-      icon: '✅',
-      description:
-        '日本ディープラーニング協会（JDLA）Deep Learning for GENERAL 2026#4。受験者9,241名中の合格者7,677名。',
-    },
   ],
 };
 
