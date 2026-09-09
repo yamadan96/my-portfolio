@@ -64,12 +64,6 @@ const profile = {
       icon: '🎓',
       description: '東京大学 松尾・岩澤研究室の選抜制プログラム。図表を含む文書を検索する AI と、デザイン特許の画像検索を研究。',
     },
-    {
-      title: 'トヨタイムズ掲載',
-      icon: '📺',
-      description: 'Airion で開発したロボット向けの音声合成 AI が、トヨタイムズニュースで紹介された。',
-      link: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html',
-    },
   ],
 };
 
