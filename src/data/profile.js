@@ -1,7 +1,7 @@
 // トップページの Hero / About / Contact / Achievements で使う人物データ。
 //
 // 文章のルール:
-//   - Hero の見出し（headline）は 15〜25 文字。事実だけを書き、説明は intro / bio に分ける
+//   - Hero は紹介文（intro）2行だけ。事実だけを書き、説明は bio に分ける
 //   - Hero と About ではモデル名・手法名を出さない（それらは Skills / Research が担当）
 //   - 数字は単位と対象が一目で分かるものだけ（学会発表4件・実務17社 など）
 const profile = {
@@ -13,8 +13,7 @@ const profile = {
   affiliation: '東京理科大学大学院 創域理工学研究科 電気電子情報工学専攻 M2',
   career: '2027年4月〜 外資系コンサルティングファーム AIアーキテクト職 入社予定',
 
-  // Hero: 見出し1行 + 紹介文2行（件数は About の stats に置き、ここには書かない）
-  headline: '視覚基盤モデルの研究と、LLM システムの本番実装。',
+  // Hero: 紹介文2行（件数は About の stats に置き、ここには書かない）
   intro:
     '東京理科大学大学院 M2。松尾研究所と Airion で AI エンジニアとして勤務。' +
     '2027年4月から外資系コンサルティングファームで AI アーキテクト。',

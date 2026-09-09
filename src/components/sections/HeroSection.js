@@ -80,20 +80,6 @@ const Cursor = styled.span`
   }
 `;
 
-// 見出し1行（profile.headline）。本文色で、紹介文より少し太く大きく表示する
-const Headline = styled(motion.p)`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text};
-  max-width: 600px;
-  margin: 0 auto ${({ theme }) => theme.spacing.sm};
-  line-height: 1.6;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-  }
-`;
-
 // 紹介文（profile.intro）。控えめな色で 2 行以内。
 // 幅を HeroContent と同じ 800px にして、デスクトップで 3 行に折り返さないようにする
 const Intro = styled(motion.p)`
@@ -177,7 +163,6 @@ const HeroSection = () => {
           {typedText}
           <Cursor />
         </RoleText>
-        <Headline variants={itemVariants}>{profile.headline}</Headline>
         <Intro variants={itemVariants}>{profile.intro}</Intro>
         <SocialWrapper variants={itemVariants}>
           <SocialIcons links={profile.social} />
