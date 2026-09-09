@@ -1,5 +1,5 @@
 // 発表済み・発表確定の学会発表と学位論文。トップページの Research には先頭3件を出す。
-// 投稿準備中のものは research.js を参照。
+// 投稿中のものは research.js を参照。
 const publications = [
   {
     id: 'pub-ite2026',
@@ -36,6 +36,7 @@ const publications = [
       '山田悠人, 鈴木海友, 松田一朗, 多賀祥平, 松澤智史, 柏田 仁, 二瓶泰雄: 「視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較」, 映像情報メディア学会2026年年次大会講演予稿集, 2026年8月.',
     materials: [
       { label: '原稿PDF', url: '/papers/ite2026-paper.pdf' },
+      { label: 'スライドPDF', url: '/papers/ite2026-slides.pdf' },
       { label: 'ポスターPDF（知覚AIフォーラム）', url: '/papers/ite2026-poster.pdf' },
       { label: '知覚AIフォーラム 開催案内', url: 'https://rist.tus.ac.jp/news/15938/' },
     ],

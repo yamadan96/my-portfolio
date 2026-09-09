@@ -29,7 +29,7 @@ const profile = {
   stats: [
     { label: '学会発表', value: '4件' },
     { label: '実務・インターン', value: '17社' },
-    { label: '国際会議 投稿準備中', value: '3件' },
+    { label: '公開ベンチマーク SoTA更新', value: '3件' },
   ],
 
   social: [
@@ -56,10 +56,10 @@ const profile = {
   // CV ページ（/more）の受賞・表彰セクション
   achievements: [
     {
-      title: '国際会議 3件へ投稿準備中',
+      title: 'IWAIT 2027 に投稿（査読中）',
       icon: '🌏',
       description:
-        'WACV 2027（Round 2・コスト考慮型選択的分類）、IWAIT 2027（韓国ソウル・アノテーション優先順位付け）、IGARSS 2027 / IEEE GRSL（GPS統合戦略の監査）。いずれも実験・検証は完了済み。',
+        'Building Damage Classification Using Post-Disaster Images with Limited Expert Annotations（韓国・ソウル、2027年1月）。専門家ラベルが一部しかない状況で、位置事前分布を災害種別の軸に限定して損傷度を補完する手法。',
     },
     {
       title: '学会発表 4件',

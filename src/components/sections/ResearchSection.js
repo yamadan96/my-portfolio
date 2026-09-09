@@ -97,7 +97,7 @@ const MaterialLink = styled.a`
   }
 `;
 
-// 投稿準備中の国際会議を1行だけ添える（詳細は /research）
+// 投稿中（査読中）の国際会議を1行だけ添える
 const SubmittingNote = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
@@ -127,7 +127,7 @@ const MoreLink = styled(motion.button)`
   }
 `;
 
-const submitting = research.filter((item) => item.status === 'submitting');
+const submitting = research.filter((item) => item.status === 'submitted');
 const submittingVenues = submitting.map((item) => item.shortVenue || item.venue).join('／');
 
 const ResearchSection = () => {
@@ -182,7 +182,7 @@ const ResearchSection = () => {
       </ResearchGrid>
       {submitting.length > 0 && (
         <SubmittingNote>
-          国際会議 {submitting.length}件へ投稿準備中 — {submittingVenues}
+          国際会議へ投稿中（査読中）— {submittingVenues}
         </SubmittingNote>
       )}
       <MoreLinks>
