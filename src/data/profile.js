@@ -70,12 +70,6 @@ const profile = {
       ],
     },
     {
-      title: '公開ベンチマーク3件でSoTA更新',
-      icon: '📈',
-      description:
-        'PHI-Net 79.87%（先行報告74.50%）、AIDERv2 99.53%（同96.60%）、MEDIC 83.86% W-F1（同80.40%）。視覚基盤モデルの適応戦略の比較検証による。',
-    },
-    {
       title: 'DECC 2025 ファイナリスト',
       icon: '🏆',
       description:
