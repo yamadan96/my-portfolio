@@ -62,12 +62,12 @@ const profile = {
     {
       title: '松尾研 LLMATCHプログラム',
       icon: '🎓',
-      description: '東京大学 松尾・岩澤研究室 選抜制LLMプログラム参加。マルチモーダルRAG／意匠特許画像検索の研究を担当。',
+      description: '東京大学 松尾・岩澤研究室の選抜制プログラム。図表を含む文書を検索する AI と、デザイン特許の画像検索を研究。',
     },
     {
       title: 'トヨタイムズ掲載',
       icon: '📺',
-      description: 'Airionでの次世代ロボット向けリアルタイム音声合成AI開発の成果がトヨタイムズニュースに掲載。',
+      description: 'Airion で開発したロボット向けの音声合成 AI が、トヨタイムズニュースで紹介された。',
       link: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html',
     },
   ],
