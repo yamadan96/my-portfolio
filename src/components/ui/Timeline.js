@@ -69,16 +69,12 @@ const Role = styled.p`
   margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
-// 1〜2行に収める（oneLiner が無く description にフォールバックした場合も末尾を省略）
+// 本文は oneLiner（無ければ description）を省略せずに出す
 const Description = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
   line-height: 1.6;
   margin-bottom: ${({ theme }) => theme.spacing.sm};
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 `;
 
 const Tags = styled.div`

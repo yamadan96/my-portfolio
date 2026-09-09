@@ -33,16 +33,12 @@ const ProjectTitle = styled.h3`
   font-weight: 700;
 `;
 
-// 1〜2行に収める（summary.built が長い場合は末尾を省略）
+// 本文は summary.built の1文をそのまま出す（途中で省略しない）
 const ProjectDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textSecondary};
   line-height: 1.7;
   margin-bottom: ${({ theme }) => theme.spacing.md};
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 `;
 
 const Tags = styled.div`
