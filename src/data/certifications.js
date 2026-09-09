@@ -21,11 +21,13 @@ const certifications = [
     link: null,
   },
   {
-    name: "Harvard CS50x: Introduction to Computer Science",
+    name: 'Harvard CS50x: Introduction to Computer Science',
     category: 'CS',
     year: '2022年2月',
-    description: 'Harvard University提供のCS基礎コース修了',
-    link: 'https://cs50.harvard.edu/x/',
+    description: 'Harvard University 提供の CS 基礎コース修了（問題セット10・ラボ8・最終プロジェクト）',
+    // 証明書に印字された検証用 URL
+    link: 'https://cs50.harvard.edu/certificates/42c3158a-2221-4f86-bde8-75468835d44a',
+    pdfLink: '/certificates/harvard-cs50x-2022.pdf',
   },
   {
     name: '日商簿記検定3級',
