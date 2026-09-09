@@ -47,28 +47,8 @@ const profile = {
   ],
   email: 'yuto.yamada0101@gmail.com',
 
-  // CV ページ（/more）の受賞・表彰セクション
+  // Awards & Recognition: 第三者による受賞・選抜・掲載だけ（研究成果は Research が担当）
   achievements: [
-    {
-      title: 'IWAIT 2027 に投稿（査読中）',
-      icon: '🌏',
-      description:
-        'Building Damage Classification Using Post-Disaster Images with Limited Expert Annotations（韓国・ソウル、2027年1月）。専門家ラベルが一部しかない状況で、位置事前分布を災害種別の軸に限定して損傷度を補完する手法。',
-    },
-    {
-      title: '学会発表 4件',
-      icon: '📄',
-      description:
-        'FIT2025（口頭）、IEICE2026 総合大会（口頭）、映像情報メディア学会2026年年次大会（口頭）、第1回 知覚AIフォーラム（ポスター）。',
-      links: [
-        {
-          label: 'FIT2025',
-          url: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
-        },
-        { label: 'IEICE2026', url: 'https://pub.confit.atlas.jp/ja/event/general2026/presentation/D-12-80' },
-        { label: '知覚AIフォーラム', url: 'https://www.rs.tus.ac.jp/perceptual-ai/#workshop-1' },
-      ],
-    },
     {
       title: 'DECC 2025 ファイナリスト',
       icon: '🏆',
