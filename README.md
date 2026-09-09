@@ -11,7 +11,7 @@ item is one or two lines, and anything longer lives on a sub page.
 
 | Section | What it shows | Source data |
 |---------|---------------|-------------|
-| Hero | Name, rotating role titles, a two-line intro, profile icons, two calls to action | `src/data/profile.js` |
+| Hero | Name, rotating role titles, a three-line intro (affiliation / current work / from next April), profile icons, two calls to action | `src/data/profile.js` |
 | About | Two short paragraphs, the 2027 position, three counts | `src/data/profile.js` |
 | Experience | Timeline of the long-term positions (one line each) plus compact cards for shorter programmes | `src/data/experiences.js` |
 | Research | Conference talks and theses, one line each, with links to PDF / slides / poster | `src/data/publications.js`, `src/data/research.js` |
@@ -31,7 +31,7 @@ Sub pages:
 | `/more` | Open-source repositories and selected articles |
 | `/experience/:id` | Per-company detail pages |
 
-Rule of thumb when editing copy: the hero intro states facts only, in two lines; model and library names belong in Skills / Research / Projects, not in
+Rule of thumb when editing copy: the hero intro states one fact per line, three lines; model and library names belong in Skills / Research / Projects, not in
 the hero or the bio; every item on the landing page is one or two lines; the profile icon
 row appears only in the hero.
 

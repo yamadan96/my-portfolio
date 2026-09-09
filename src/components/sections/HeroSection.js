@@ -80,7 +80,7 @@ const Cursor = styled.span`
   }
 `;
 
-// 紹介文（profile.intro）。控えめな色で 2 行以内。
+// 紹介文（profile.intro）。控えめな色で、1行1事実の3行。
 // 幅を HeroContent と同じ 800px にして、デスクトップで 3 行に折り返さないようにする
 const Intro = styled(motion.p)`
   font-size: ${({ theme }) => theme.fontSizes.md};
@@ -88,6 +88,11 @@ const Intro = styled(motion.p)`
   max-width: 800px;
   margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
   line-height: 1.8;
+`;
+
+// 1行1事実で表示する（途中で折り返させない）
+const IntroLine = styled.span`
+  display: block;
 `;
 
 const SocialWrapper = styled(motion.div)`
@@ -163,7 +168,11 @@ const HeroSection = () => {
           {typedText}
           <Cursor />
         </RoleText>
-        <Intro variants={itemVariants}>{profile.intro}</Intro>
+        <Intro variants={itemVariants}>
+          {profile.intro.map((line) => (
+            <IntroLine key={line}>{line}</IntroLine>
+          ))}
+        </Intro>
         <SocialWrapper variants={itemVariants}>
           <SocialIcons links={profile.social} />
         </SocialWrapper>
