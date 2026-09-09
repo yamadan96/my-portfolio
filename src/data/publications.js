@@ -16,7 +16,7 @@ const publications = [
       '映像情報メディア学会 2026年年次大会（口頭）／第1回 知覚AIフォーラム（ポスター、2026年8月24日・東京理科大学 葛飾キャンパス）',
     year: 2026,
     type: '学会発表（口頭・ポスター）',
-    highlight: '公開ベンチマーク3件でSoTA更新',
+    highlight: '新しい基盤モデルが常に良いとは限らない。公開データ3件で最高精度を更新',
     // 原稿（ite2026-paper.pdf）掲載の Abstract をそのまま転記。
     abstract:
       'Since datasets for training dedicated models for such tasks are limited, utilization of general-purpose ' +
