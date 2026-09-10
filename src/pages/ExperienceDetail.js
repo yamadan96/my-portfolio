@@ -546,11 +546,13 @@ const ExperienceDetail = () => {
           <Role>{experience.role}</Role>
         </Header>
 
+        {/* 案件が複数ある場合、概要は役割レベル（何を / なぜ / 担当）だけにし、
+            技術と結果は各案件のカードに任せる（複数案件の数字が1つの文に混ざるのを避ける） */}
         {experience.summary && (
           <SectionBlock variants={itemVariants}>
             <SectionLabel>概要</SectionLabel>
             <SummaryList>
-              {SUMMARY_FIELDS.map(([key, label]) =>
+              {SUMMARY_FIELDS.filter(([key]) => !hasProjects || !['tech', 'result'].includes(key)).map(([key, label]) =>
                 experience.summary[key] ? (
                   <React.Fragment key={key}>
                     <SummaryTerm>{label}</SummaryTerm>
@@ -562,10 +564,12 @@ const ExperienceDetail = () => {
           </SectionBlock>
         )}
 
-        <SectionBlock variants={itemVariants}>
-          <SectionLabel>成果</SectionLabel>
-          <Achievement>{details.achievements}</Achievement>
-        </SectionBlock>
+        {!hasProjects && (
+          <SectionBlock variants={itemVariants}>
+            <SectionLabel>成果</SectionLabel>
+            <Achievement>{details.achievements}</Achievement>
+          </SectionBlock>
+        )}
 
         {hasProjects && (
           <SectionBlock variants={itemVariants}>
