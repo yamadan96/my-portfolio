@@ -312,7 +312,7 @@ const experiences = [
     // トップページの職務経歴用（1行）
     oneLiner: '社内文書検索・メール誤送信検出など社内 AI 10件以上の企画・開発',
     summary: {
-      built: '社内文書をAIで検索できる仕組み、メール誤送信の検出、退職リスクの予測など、10件以上の社内AIを作った。',
+      built: '社内 AI 活用の立ち上げ担当として、文書検索・メール誤送信検出・退職予測など10件以上の社内 AI を企画・開発。内訳は下のプロジェクト一覧のとおり。',
       problem: '社内にAI活用の実績がなく、何が実務で使えて何が使えないかの判断材料がなかった。',
       role: '企画・技術選定からプロトタイプ開発・社内デモ展開まで。2年10ヶ月にわたり社内AI開発を主導した。',
       tech: 'MicrosoftのクラウドAI（Azure OpenAI・AI Search・音声認識・チャットボット基盤）を軸に構成。用途ごとに使い分けた。',
@@ -349,6 +349,119 @@ const experiences = [
       ],
       achievements:
         'RAG検索・感情分析・音声認識比較検証・チャットボット等、10件以上のAIプロトタイプを開発し社内デモ環境へ展開。Azureクラウドサービスを横断的に活用したAI開発とPoCの型を確立',
+      // 案件ごとの内訳（詳細ページのカード＋モーダル）。responsibilities の文章を案件単位に整理したもので、新しい事実は含まない
+      projects: [
+        {
+          name: '社内文書をAIで検索して回答する仕組み',
+          client: '',
+          category: 'LLM / RAG',
+          period: '',
+          icon: '📚',
+          summary: '社内文書をAIで検索し、見つけた内容をもとに回答するRAG（検索して回答に使う仕組み）の社内向け検索システムを構築した。',
+          details: [
+            'Azure Blob Storage（クラウド上の文書の保管場所）にある社内文書を、Azure AI Searchでインデックス化（検索できるよう整理）した。',
+            '整理した文書をLLM（大規模言語モデル）と組み合わせ、RAG（社内文書を検索して回答に使う仕組み）の検索システムとして構築した。',
+            'LangChainとFAISS（検索処理のライブラリ）によるベクトル検索（文章の意味の近さで探す検索）の仕組みも、別途Azure VM（クラウド上の仮想サーバー）に実装した。',
+          ],
+          impact: '社内デモ環境への導入まで完了した。',
+          techStack: ['Azure Blob Storage', 'Azure AI Search', 'LangChain', 'FAISS', 'Azure VM'],
+        },
+        {
+          name: 'メールの誤送信をAIで自動検出する仕組み',
+          client: '',
+          category: 'LLM / RAG',
+          period: '',
+          icon: '📧',
+          summary: 'メール本文の感情をAIで読み取り、クレームのリスクが高い誤送信を自動で検出する社内向けの仕組みを構築した。',
+          details: [
+            'Azure OpenAI Service API（Microsoftのクラウドで使える生成AI）でメール本文の感情分析（文章から感情の傾向を判定する処理）を行った。',
+            '感情分析の結果をもとに、クレームリスクの高い誤送信を自動検出するシステムを構築した。',
+          ],
+          impact: '業務リスク管理へのAI適用事例として社内に展開した。',
+          techStack: ['Azure OpenAI Service'],
+        },
+        {
+          name: '音声認識サービスの比較検証と話者分離ツール',
+          client: '',
+          category: '音声認識',
+          period: '',
+          icon: '🎙️',
+          summary: '音声認識サービス3種を同じサンプル音声で比較して選定の根拠資料を作り、会話を話者ごとに分けて表示する画面も構築した。',
+          details: [
+            'Azure Speech to Text・Google Cloud STT・OpenAI Whisperの3サービスを、5種類計60分のサンプル音声で比較した。',
+            'サンプルは男性単数朗読・男性複数会話・女性単数朗読・女性会話調・男女混合の5種類。MeCab（日本語を単語に区切るツール）で形態素解析し、WER（単語誤り率）を算出した。',
+            'Azure Speech to Textの話者分離機能（Speaker Diarization）で、発言を話者ごとに分けて表示する画面をGradio（画面作成ツール）で構築した。',
+            '音声はmp3からwavへの変換とステレオからモノラルへの変換を経てAPIへ送信。話者名を任意に変更できる機能も実装した。',
+          ],
+          impact: '3サービスの比較結果を、音声認識プラットフォーム選定の根拠資料としてまとめた。',
+          techStack: ['Azure Speech to Text', 'Google Cloud STT', 'OpenAI Whisper', 'MeCab', 'Gradio'],
+        },
+        {
+          name: '生成AIチャットボットの構築と検証',
+          client: '',
+          category: 'LLM / RAG',
+          period: '',
+          icon: '💬',
+          summary: 'Azure AI Bot ServiceとAzure OpenAIを組み合わせた、生成AIが応答する社内向けチャットボットを構築し、動作を検証した。',
+          details: [
+            'Azure AI Bot Service（チャットボットの基盤）とAzure OpenAI（生成AI）を組み合わせたチャットボットを、Node.jsで構築した。',
+            'Bot Framework Emulator（開発用の動作検証ツール）で動作を検証した。',
+          ],
+          techStack: ['Azure AI Bot Service', 'Azure OpenAI', 'Node.js', 'Bot Framework Emulator'],
+        },
+        {
+          name: '社員の退職リスクを予測するモデルの構築',
+          client: '',
+          category: '機械学習',
+          period: '',
+          icon: '📊',
+          summary: '勤怠や評価などの社内の人材データをもとに、離職リスクをスコア（数値）として算出する退職予測モデルを構築した。',
+          details: [
+            '勤怠・評価などの社内の人材データを入力として、離職リスクスコア（退職しやすさを表す数値）を算出するモデルを構築した。',
+            'モデルはPythonとscikit-learn（機械学習ライブラリ）で実装した。',
+          ],
+          techStack: ['Python', 'scikit-learn'],
+        },
+        {
+          name: '文章の自動校正とコードレビューの自動化',
+          client: '',
+          category: '開発支援',
+          period: '',
+          icon: '🛠️',
+          summary: '文章のおかしな箇所を検知する校正ツールの調査・試作と、社内の開発規約に沿ってソースコードを自動でレビューする処理を実装した。',
+          details: [
+            'LSTM（文章の前後のつながりを学習する深層学習の手法）による異常箇所検知をベースに、校正ツールの調査とプロトタイプ開発を行った。',
+            'Git上のソースコードに対し、Word形式の社内開発規約（コードの書き方のルール）に基づく自動レビュー処理を実装した。',
+          ],
+          techStack: ['LSTM', 'Git'],
+        },
+        {
+          name: '勤務実績の自動取得とレシート読取の自動化',
+          client: '',
+          category: '業務自動化',
+          period: '',
+          icon: '🧾',
+          summary: 'Webサイトから勤務実績を自動で取り込んでファイルに保存する処理と、レシートの画像から文字を読み取る精度の調整を担当した。',
+          details: [
+            'Webスクレイピング（Webページから情報を自動で取り出す技術）で勤務実績データを自動取得し、CSV出力とスクリーンショット保存まで自動化した。',
+            'レシート読取OCR（画像から文字を読み取る技術）の画像前処理と精度チューニングを担当した。',
+          ],
+          techStack: ['Webスクレイピング', 'OCR'],
+        },
+        {
+          name: 'タスク管理Webアプリケーションの開発',
+          client: '',
+          category: 'Web開発',
+          period: '',
+          icon: '🗂️',
+          summary: 'タスクを登録して管理するWebアプリを、Django（サーバー側）とReact・Next.js（画面側）の構成で開発した。',
+          details: [
+            'サーバー側はDjango（PythonでWebアプリを作るための枠組み）で構築した。',
+            '画面側はReactとNext.jsで構築し、Redux Toolkit（画面の状態管理）とTailwind CSS（見た目の調整）を使用した。',
+          ],
+          techStack: ['Django', 'React', 'Next.js', 'Redux Toolkit', 'Tailwind CSS'],
+        },
+      ],
       techStack: [
         'Python',
         'Java',
@@ -842,7 +955,7 @@ const experiences = [
   {
     id: 'shinonome',
     summary: {
-      built: '日記の文章を自動生成するAIの開発と、銀行系ブロックチェーンプロジェクトのテスト設計を担当した。',
+      built: '日記の文章を自動生成する AI の受託開発、ブロックチェーン取引システムのテスト、後輩のコードレビューを担当。内訳は下のプロジェクト一覧のとおり。',
       problem: '自然な文章を自動で作るには、言い換えの手法を調べたうえで実装する必要があった。',
       role: '論文調査から実装・テスト・後輩指導まで。学生で構成されたチームで2年3ヶ月従事。',
       tech: '自然言語処理の言い換え手法を使用。ブロックチェーン案件では単体テストと結合テストを設計・実行した。',
@@ -869,6 +982,54 @@ const experiences = [
       ],
       achievements:
         'NLPを活用した受託開発を完遂し納品。ブロックチェーンプロジェクトではテスト設計・実行を通じてシステム品質に貢献し、コードレビューによるチーム全体の品質向上にも寄与',
+      // 案件ごとの内訳（詳細ページのカード＋モーダル）。responsibilities の文章を案件単位に整理したもので、新しい事実は含まない
+      projects: [
+        {
+          name: '日記の文章を自動で作るAIの開発',
+          client: '',
+          category: '自然言語処理',
+          period: '',
+          icon: '📝',
+          summary: '受託開発として、日記の文章を自動で生成するAIを開発し、自然で多様な文章を作るため、言い換えの手法を調べたうえで実装した。',
+          details: [
+            'Paraphrase（言い換え）手法に関するNLP（自然言語処理）の論文を調査し、最新のアプローチを把握した。',
+            'NLPライブラリを用いてPythonで実装し、実データで評価を行った。',
+            'プロンプト設計（AIへの指示文の作り方）による出力品質の改善も担当した。',
+          ],
+          impact: 'NLPを活用した受託開発を完遂し、納品した。',
+          techStack: ['Python', 'NLP', 'Paraphrasing', 'Prompt Engineering'],
+        },
+        {
+          name: 'ブロックチェーン取引システムのテスト設計・実行',
+          client: '',
+          category: 'テスト',
+          period: '',
+          icon: '🧪',
+          summary: '銀行系ブロックチェーンプロジェクトで、太陽光発電データに基づくトークン取引のシミュレーションシステムのテストを設計・実行した。',
+          details: [
+            '対象は、太陽光発電データに基づくトークン板取引（売買注文を突き合わせる取引）のシミュレーションシステム。',
+            '単体テスト（部品ごとの確認）と統合テスト（組み合わせた動作の確認）のテストケースを作成し、実行した。',
+            'テストケースの作成・実行に加えて、見つかったバグの報告まで担当した。',
+          ],
+          impact: 'バグの検出・報告を通じて、システム品質の向上に貢献した。',
+          techStack: ['Blockchain', 'Unit / Integration Testing'],
+        },
+        {
+          name: '後輩エンジニアのコードレビューと育成',
+          client: '',
+          category: '育成',
+          period: '',
+          icon: '🧑‍🏫',
+          summary: '大学生・大学院生で構成されたチームで、後輩エンジニアが書いたPythonコードのレビューを継続的に担当し、育成にも関わった。',
+          details: [
+            'Python基礎文法のレビュワーとして、コーディング規約（チームで決めた書き方のルール）への準拠を確認した。',
+            '規約の確認に加えて、バグ・パフォーマンス（処理速度）の問題・セキュリティ上の懸念を早い段階で指摘した。',
+            '問題点の指摘だけでなく、後輩エンジニアへの具体的な改善提案まで行った。',
+          ],
+          impact: '改善提案を通じて、チーム全体の開発品質を向上させた。',
+          techStack: ['Python'],
+        },
+      ],
       techStack: [
         'Python',
         'NLP',
