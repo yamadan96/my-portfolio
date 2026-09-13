@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import emailjs from '@emailjs/browser';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
+import profile from '../../data/profile';
 
 const ContactWrapper = styled.div`
   max-width: 600px;
@@ -125,6 +126,23 @@ const ExampleItem = styled.li`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
+const SecondaryLinks = styled.p`
+  margin-top: ${({ theme }) => theme.spacing.xl};
+  text-align: center;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textMuted};
+
+  a {
+    color: ${({ theme }) => theme.colors.accentText};
+    text-decoration: none;
+  }
+  a:hover {
+    color: ${({ theme }) => theme.colors.primaryLight};
+  }
+`;
+
+const secondaryLinks = profile.social.filter((s) => !profile.heroSocial.includes(s.platform));
+
 const ContactSection = () => {
   const form = useRef();
   const [status, setStatus] = useState({ message: '', success: false });
@@ -182,6 +200,17 @@ const ContactSection = () => {
             <StatusMessage $success={status.success}>{status.message}</StatusMessage>
           )}
         </Form>
+        {/* Hero に出さない SNS はここに文字リンクで置く（Hero は GitHub / LinkedIn だけ） */}
+        <SecondaryLinks aria-label="その他のリンク">
+          {secondaryLinks.map((s, i) => (
+            <React.Fragment key={s.platform}>
+              {i > 0 && <span aria-hidden="true"> · </span>}
+              <a href={s.url} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </React.Fragment>
+          ))}
+        </SecondaryLinks>
       </ContactWrapper>
     </Section>
   );
