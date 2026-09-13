@@ -8,8 +8,17 @@ describe('project data', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('gives every project a level-1 summary with all five fields', () => {
+  it('gives every project a level-1 summary (five fields) or a story (six fields + headline)', () => {
     projects.forEach((p) => {
+      if (p.story) {
+        // 業務案件は story 形式。課題 → 制約 → 担当 → アプローチ → 結果 → 学び と1行の headline を必ず持つ
+        ['problem', 'constraints', 'role', 'approach', 'results', 'learned'].forEach((k) => {
+          expect(typeof p.story[k]).toBe('string');
+          expect(p.story[k].length).toBeGreaterThan(0);
+        });
+        expect(p.headline.length).toBeGreaterThan(0);
+        return;
+      }
       expect(p.summary).toBeDefined();
       ['built', 'problem', 'role', 'tech', 'result'].forEach((k) => {
         expect(typeof p.summary[k]).toBe('string');

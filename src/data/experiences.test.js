@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import experiences from './experiences';
+import projects from './projects';
 
 describe('experience data', () => {
   it('has a unique id for every entry', () => {
@@ -21,10 +22,36 @@ describe('experience data', () => {
     experiences
       .filter((e) => e.hasDetail)
       .forEach((e) => {
+        expect(e.details.techStack.length).toBeGreaterThan(0);
+        if (e.details.highlights) {
+          // 代表実績を持つ経歴は「役割 → 代表実績 → プロジェクト → 技術スタック」の構成。
+          // 担当内容の長文は各プロジェクトの個別ページ側に移す
+          expect(e.details.highlights).toHaveLength(3);
+          e.details.highlights.forEach((h) => {
+            ['axis', 'title', 'text'].forEach((k) => expect(h[k].length).toBeGreaterThan(0));
+          });
+          expect(e.details.projects.length).toBeGreaterThan(0);
+          expect(e.details).not.toHaveProperty('responsibilities');
+          return;
+        }
         expect(e.details.overview.length).toBeGreaterThan(0);
         expect(e.details.achievements.length).toBeGreaterThan(0);
         expect(e.details.responsibilities.length).toBeGreaterThan(0);
-        expect(e.details.techStack.length).toBeGreaterThan(0);
+      });
+  });
+
+  it('points every project card with a projectId at an existing project page', () => {
+    const projectIds = new Set(projects.map((p) => p.id));
+    experiences
+      .filter((e) => e.details?.projects)
+      .forEach((e) => {
+        e.details.projects
+          .filter((card) => card.projectId)
+          .forEach((card) => {
+            expect(projectIds.has(card.projectId)).toBe(true);
+            // 個別ページ側からも経歴へ戻れること
+            expect(projects.find((p) => p.id === card.projectId).experienceId).toBe(e.id);
+          });
       });
   });
 

@@ -476,6 +476,135 @@ const projects = [
   PROBE["probe スクリプト<br/>実DOM構造を取得"] -. "サイト変更時の調査" .-> SEL`,
     },
   },
+  // ここから3件は株式会社Airion での業務案件。経歴ページ（/experience/airion）のカードから個別ページ（/projects/:id）として開く。
+  // summary ではなく story（課題 → 制約 → 担当 → アプローチ → 結果 → 学び）と headline（1行の要約）で書き、
+  // 数値や選定理由などの証拠レベルの記述は technical にまとめる（story の後に描画される）。
+  // 数値と限定表現（「社内評価データでの値」「PoC」）は経歴データの記載をそのまま移したもので、新しい事実は含まない
+  {
+    id: 'steel-pipe-counting',
+    featured: false,
+    category: 'ml',
+    title: '工場の鉄パイプを画像から自動で数える AI（Airion）',
+    description:
+      '束ねた鉄パイプの本数を画像から数える AI の PoC（試作検証）。4名体制のテックリードとして、モデル選定から学習・評価までを担当した。',
+    headline: '既存：束単位の成功率ほぼ0%・8秒/枚 → 4名チームのテックリード → YOLOv8＋3段階学習 → 96.6%・0.2秒/枚（社内評価）',
+    tags: ['Python', 'PyTorch', 'YOLOv8', 'Object Detection', 'Data Augmentation', 'PoC'],
+    github: null,
+    demo: null,
+    image: null,
+    experienceId: 'airion',
+    experienceLabel: '株式会社Airion',
+    story: {
+      problem: '束ねた鉄パイプの本数を画像から数えたい。既存システムは1本単位なら約9割の精度だが、束全体を正しく数えられる割合はほぼ0%で、処理にも1枚8秒かかっていた。',
+      constraints: '顧客提供の画像は341枚と少なく、公開データを加えて学習した。PoC（試作検証）であり、評価は社内評価データで行っている。',
+      role: 'PM1名＋エンジニア3名の4名体制で、テックリードとしてモデル選定から学習・評価までを担当した。',
+      approach: '物体検出モデル YOLOv8 を選定し、公開データでの事前学習→浅い層を固定した再学習→全層の再学習の3段階で学習。コントラスト変更とガウシアンノイズでデータを水増しし、切り出し画像で小さな物体の検出を強化した。',
+      results: '束単位の成功率は200〜300本で96.6%、処理時間は1枚0.2秒（既存はほぼ0%・8秒/枚）。いずれも社内評価データでの値。',
+      learned: 'TTA（推論時の拡張）は効果がなく、切り出し画像による小さな物体の検出強化が成功率を大きく押し上げた。束単位の成功率は1本ごとの精度とは別に測る必要がある。',
+    },
+    technical: [
+      { label: '体制と出発点', body: 'PM1名＋エンジニア3名の4名体制で、テックリードとしてPoCを担当。既存システムは1本単位で約9割の精度ながら束単位の成功率はほぼ0%、処理に8秒/枚を要していた。' },
+      { label: 'データ', body: '提供画像341枚に公開データ3,809枚を加えた計5,173枚で学習。コントラスト変更とガウシアンノイズによるデータ拡張（水増し）を適用した。' },
+      { label: 'モデル選定', body: 'YOLOv8-seg（領域分割版）はアノテーション（正解データ作成）の負荷、CenterNet/FCOSは初期精度の不安定さを理由に不採用とし、YOLOv8を選定。' },
+      { label: '学習構成', body: '公開データでの事前学習→浅層フリーズ再学習→全層再学習の3段階構成。TTA（推論時の拡張）は効果がなく、切り出し画像による小さな物体の検出強化が成功率を大きく押し上げた。' },
+      { label: '評価結果', body: 'Precision 0.9996／Recall 0.9994／mAP50 0.9949（いずれも社内評価データでの値。誤検出・見逃しの少なさを示す指標）。束単位の成功率は200〜300本で96.6%、推論0.2秒/枚。' },
+    ],
+    diagram: {
+      alt: '提供画像と公開データで3段階に学習したYOLOv8が、束ねた鉄パイプの画像から本数を数える構成図',
+      caption: '数値はいずれも社内評価データでの値',
+      chart: `flowchart LR
+  DATA["提供画像 341枚<br/>＋公開データ 3,809枚"] --> TRAIN["3段階の学習<br/>事前学習 → 浅層固定 → 全層再学習"]
+  TRAIN --> DET
+  IMG["束ねた鉄パイプの画像"] --> DET["YOLOv8 で検出"]
+  DET --> CNT["本数を集計"]
+  CNT --> OUT["束単位の成功率 96.6%<br/>推論 0.2秒/枚"]`,
+    },
+  },
+  {
+    id: 'realtime-speech-synthesis',
+    featured: false,
+    category: 'product',
+    title: 'コミュニケーションロボット向けリアルタイム音声合成（Airion）',
+    description:
+      'トヨタのコミュニケーションロボットが人と話すための、日本語のリアルタイム音声合成。モデル選定から収録データの整備・学習・推論 API までを一貫して担当した。',
+    headline: '収録60分の音声から日本語リアルタイム音声合成を構築 → モデル選定から推論 API まで担当 → 10モデル比較で Style-Bert-VITS2 を採用 → 12〜99文字を 0.43〜0.91秒で生成（トヨタイムズ掲載）',
+    tags: ['Python', 'Style-Bert-VITS2', 'FastAPI', 'Azure (GPU VM)', 'TensorBoard', 'Aivis', 'py-webrtcvad'],
+    github: null,
+    demo: null,
+    image: null,
+    links: [
+      { label: 'トヨタイムズ YouTube', url: 'https://www.youtube.com/watch?v=xsmQ9Slnvds' },
+      { label: '音声合成 PR TIMES', url: 'https://prtimes.jp/main/html/rd/p/000000004.000118893.html' },
+    ],
+    experienceId: 'airion',
+    experienceLabel: '株式会社Airion',
+    story: {
+      problem: 'トヨタのコミュニケーションロボットが人と話すために、日本語をリアルタイムで読み上げる音声合成が必要だった。',
+      constraints: '収録データは読み上げ40分＋会話20分のみ。採用した Style-Bert-VITS2 は AGPL v3（ソースを改変すると公開義務が生じるライセンス）のため、ソースを改変せず API 経由で使う構成にする必要があった。',
+      role: 'モデルの比較選定とライセンス確認、収録データの整備、学習、リアルタイム推論 API の構築までを一貫して担当した。',
+      approach: 'MeloTTS・VOICEVOX など10モデルを比較して Style-Bert-VITS2 JP-Extra を選定。収録音声を短く区切って文字起こしし、他の人の声・雑音・言い間違いを除く基準で整備した。Azure の GPU サーバーで学習し、FastAPI で2話者モデルを並列起動して推論 API にした。',
+      results: '生成時間は12文字0.43秒〜99文字0.91秒で、文字数にほぼ比例する。成果はトヨタイムズニュース・PR TIMES に掲載され、搭載ロボットはトヨタ博物館で展示されている。',
+      learned: '会話データ単独で学習したモデルは雑音が多く使えず、読み上げデータとの併用に切り替えた。学習が2,000ステップで頭打ちになる問題は、エポック（データを何周するか）単位の制御へ変更して解決した。',
+    },
+    technical: [
+      { label: 'モデル選定', body: 'MeloTTS・StyleTTS2・GPT-SoVITS・Fish Speech・VOICEVOXなど10モデルを比較し、日本語のみ約800時間の事前学習・アクセントの手動制御・WavLMDiscriminatorによる自然性向上を理由にStyle-Bert-VITS2 JP-Extraを選定。' },
+      { label: 'ライセンス対応', body: 'AGPL v3（ソースを改変すると公開義務が生じるライセンス）の影響範囲を精査し、ソース改変を避けてAPI経由で利用する構成へ設計変更した。' },
+      { label: 'データ設計', body: '読み上げ40分＋会話20分の収録データに対し、Aivisとpy-webrtcvadでスライス・文字起こしを行い、他話者の混入・雑音・笑い声・言い間違えを除外する基準を定めてアノテーション。会話データは407発話中251発話（13分27秒）を採用。ピンマイク収録によるデータ品質改善も提案した。' },
+      { label: '学習と推論', body: 'Azure GPUサーバー上でbatch_size=2・エポック制御による学習パイプラインを構築し、TensorBoardで損失を可視化（読み上げ40分のデータで約3.5時間）。推論はFastAPIで2話者モデルを別ポートに並列起動し、実測レイテンシは12文字0.43秒〜99文字0.91秒（最大1.09秒）と文字数にほぼ線形。漢字入力とひらがな入力を10ペアで比較し、漢字入力の方が生成時間が短い傾向を確認。' },
+      { label: '失敗と知見', body: '会話データ単独で学習したモデルは雑音が多く実用に耐えなかったため、読み上げデータとの併用に切り替え。改行のない長文ではメモリ使用量が増大して停止するため実用上限を特定。学習ステップ数を指定しても2,000で頭打ちになる問題を発見し、エポック数による制御へ変更した。' },
+      { label: '成果', body: '成果はトヨタイムズニュース・PR TIMESに掲載され、搭載ロボットはトヨタ博物館で展示されている。' },
+    ],
+    diagram: {
+      alt: '収録音声を整備してStyle-Bert-VITS2を学習し、FastAPIの推論APIからロボットの発話音声を返す構成図',
+      caption: '学習は Azure の GPU サーバー、推論は FastAPI で2話者モデルを並列起動',
+      chart: `flowchart LR
+  REC["収録音声<br/>読み上げ 40分＋会話 20分"] --> PREP["スライス・文字起こし<br/>Aivis / py-webrtcvad"]
+  PREP --> TRAIN["Style-Bert-VITS2 を学習<br/>Azure GPU / TensorBoard"]
+  TRAIN --> API["FastAPI 推論 API<br/>2話者モデルを並列起動"]
+  TXT["発話テキスト"] --> API
+  API --> OUT["音声<br/>12文字 0.43秒〜99文字 0.91秒"]
+  OUT --> ROBOT["コミュニケーションロボット"]`,
+    },
+  },
+  {
+    id: 'gx-works-gui-agent',
+    featured: false,
+    category: 'product',
+    title: '業務ソフト（GX Works 3）の画面を自動操作する GUI エージェント（Airion）',
+    description:
+      'DOM（画面の部品情報）を持たない Windows ネイティブアプリ GX Works 3 を、Claude Code による座標ベースの画面操作で自動化するエージェント。照合・表記統一・夜間バッチの3用途で実装した。',
+    headline: 'GX Works 3 は画面の部品情報（DOM）を持たない Windows アプリ → GUI 自動操作エージェントを構築 → Claude Code の座標操作で CSV 生成・PDF 照合・自動修正を繰り返し → 特殊命令123個中89個を自動照合・修正、夜間のバージョン登録も無人化',
+    tags: ['Python', 'Claude Code (GUI Agent)', 'pyautogui', 'Windowsタスクスケジューラ', 'GUI Automation'],
+    github: null,
+    demo: null,
+    image: null,
+    experienceId: 'airion',
+    experienceLabel: '株式会社Airion',
+    story: {
+      problem: 'Windows の業務ソフト GX Works 3 で、特殊命令123個の照合、ラダー解読ツールの表記統一、毎晩の CSV エクスポート→新バージョン登録を自動化する必要があった。',
+      constraints: 'GX Works 3 は画面の部品情報（DOM）を持たない Windows ネイティブアプリのため、画面座標での操作が前提になる。特殊命令のうち通信系・ハード依存のものは自動化の対象外。',
+      role: 'Claude Code（AI コーディングツール）による座標ベースの GUI 操作エージェントを構築し、3つの用途で実装した。',
+      approach: '特殊命令を9回に分けて処理し、AI が CSV 生成→PDF 照合→差分があればコードを自動修正する繰り返しで進めた。ラダー解読ツールの表示表記を GX Works に合わせて統一し、Windows のタスクスケジューラで毎晩 GUI を自動操作する夜間バッチを組んだ。',
+      results: '特殊命令123個のうち89個の自動照合・自動修正を実現（残りは通信系・ハード依存で対象外）。表記統一は1〜8ページすべて自動照合で合格し、CSV エクスポートから新バージョン登録までを無人化した。',
+      learned: '差分を検出したら AI がコードを直して再実行する繰り返しにすると、照合作業を人手なしで進められた。通信系・ハード依存の命令は画面操作だけでは確認できないため、対象外と判定して切り分けた。',
+    },
+    technical: [
+      { label: '対象と方式', body: 'DOMを持たないWindowsネイティブアプリを対象に、Claude Codeによる座標ベースGUI操作でエージェントを構築。' },
+      { label: '用途① 特殊命令の照合', body: '特殊命令123個を9バッチに分割し、AIがCSV生成→PDF照合→差分検出時にコードを自動修正するループで89個を完了（残りは通信系・ハード依存のため対象外と判定）。照合結果からPR（プルリクエスト：コード変更の提案文書）本文を自動生成した。' },
+      { label: '用途② 表記の統一', body: 'ラダー解読ツールの表示表記をGX Worksへ統一し、1〜8ページすべて自動照合で合格。' },
+      { label: '用途③ 夜間バッチ', body: 'Windowsタスクスケジューラで毎晩GUIを自動操作し、CSVエクスポート→新バージョン自動登録までを無人化した。' },
+    ],
+    diagram: {
+      alt: 'Claude CodeのエージェントがGX Works 3を座標で操作し、CSV生成とPDF照合を繰り返して自動修正する構成図',
+      caption: '差分があればコードを直して再実行し、一致したら PR 本文を自動生成する',
+      chart: `flowchart LR
+  AGENT["Claude Code エージェント<br/>画面座標で操作"] --> GX["GX Works 3<br/>（DOM を持たない Windows アプリ）"]
+  GX --> CSV["CSV を生成"] --> CHK["PDF と照合"]
+  CHK -- "差分あり" --> FIX["コードを自動修正"] --> AGENT
+  CHK -- "一致" --> PR["PR 本文を自動生成"]
+  SCHED["Windows タスクスケジューラ<br/>毎晩 GUI を自動操作"] --> EXP["CSV エクスポート →<br/>新バージョン自動登録"]`,
+    },
+  },
 ];
 
 export default projects;
