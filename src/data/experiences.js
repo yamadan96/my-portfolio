@@ -825,7 +825,7 @@ const experiences = [
         'CTOへの成果発表・プレゼンテーション',
       ],
       achievements:
-        'インターンシップ優秀者受賞。MLによる課題解決力とエンジニア視点での企画力を体得',
+        'インターンシップ優秀者に選出。MLによる課題解決力とエンジニア視点での企画力を体得',
       techStack: ['Python', 'Machine Learning', 'Data Analysis'],
     },
   },
