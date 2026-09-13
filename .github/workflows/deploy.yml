@@ -3,7 +3,11 @@ name: Deploy React App
 on:
   push:
     branches:
-      - main  # mainブランチにプッシュされたときにデプロイ
+      - main
+
+# ジョブのトークンは gh-pages への書き込みだけに絞る
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -11,28 +15,26 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3  # v3を使用
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'  # 最新のNode.jsバージョンを指定
+          node-version: '20'
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Configure Git
-        run: |
-          git config --global user.name "yamadan96"
-          git config --global user.email "82156810+yamadan96@users.noreply.github.com"
+        run: npm ci
 
       - name: Build the project
         run: npm run build
 
+      # gh-pages は履歴を持たせない（force_orphan）: 過去のビルドを公開履歴に残さないため
       - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # デフォルトのGITHUB_TOKENを使用
-        run: |
-          npx gh-pages -d build --repo https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-          
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: '41898282+github-actions[bot]@users.noreply.github.com'

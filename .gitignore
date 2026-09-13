@@ -29,3 +29,8 @@ yarn-error.log*
 /memo
 *.xlsx
 ~$*
+
+# 私的資料・エディタ設定・ローカルの伏せ字リスト
+/参考
+.vscode/
+/.denylist.json

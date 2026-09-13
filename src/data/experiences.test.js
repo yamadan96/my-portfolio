@@ -27,10 +27,23 @@ describe('experience data', () => {
       });
   });
 
-  it('names no client company that the employer has not disclosed itself', () => {
-    // Airion's own press release anonymises this party as 設備メーカー, so the
-    // portfolio must not be more specific than the company is.
+  it('keeps client identities out of the data', () => {
     const blob = JSON.stringify(experiences);
-    ['設備メーカー', 'equipment maker'].forEach((name) => expect(blob).not.toContain(name));
+    // 顧客名を書くフィールド自体を持たない。敬称付きの社名（〜様）も出さない
+    experiences.forEach((e) => expect(e).not.toHaveProperty('client'));
+    expect(blob).not.toMatch(/様[）)]/);
+    // ページの URL になる id にも社名を含めない（company に出している名前は除く）
+    experiences.forEach((e) => {
+      expect(e.id).toMatch(/^[a-z0-9-]+$/);
+    });
+    // 伏せた社名の一覧は git 管理外の .denylist.json に置く（あるときだけ検査する）
+    let denylist = [];
+    try {
+      // eslint-disable-next-line global-require
+      denylist = require('../../.denylist.json');
+    } catch (err) {
+      denylist = [];
+    }
+    denylist.forEach((name) => expect(blob).not.toContain(name));
   });
 });
