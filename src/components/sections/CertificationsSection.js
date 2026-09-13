@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
+import ExpandInPlace from '../ui/ExpandInPlace';
 import { mobileTapArea } from '../../styles/tapArea';
 import certifications from '../../data/certifications';
 
@@ -98,51 +99,64 @@ const sortedCertifications = certifications
   .sort((a, b) => yearMonth(b.cert.year) - yearMonth(a.cert.year) || a.index - b.index)
   .map(({ cert }) => cert);
 
+// トップページに開いた状態で出すのは topPage: true の5件。残りは折りたたみの中
+const primary = sortedCertifications.filter((cert) => cert.topPage);
+const others = sortedCertifications.filter((cert) => !cert.topPage);
+
+const CertCards = ({ items }) => (
+  <CertList>
+    {items.map((cert, index) => (
+      <CertCard
+        key={cert.name}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: index * 0.08 }}
+      >
+        <CertBadge>📜</CertBadge>
+        <CertInfo>
+          <CertName>{cert.name}</CertName>
+          {cert.year && (
+            <CertDescription>{cert.year} 取得</CertDescription>
+          )}
+          {(cert.link || cert.pdfLink) && (
+            <CertLinks>
+              {cert.link && (
+                <CertLink
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  証明を見る →
+                </CertLink>
+              )}
+              {cert.pdfLink && (
+                <CertLink
+                  href={cert.pdfLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  認定証PDF →
+                </CertLink>
+              )}
+            </CertLinks>
+          )}
+        </CertInfo>
+        <CertCategory>{cert.category}</CertCategory>
+      </CertCard>
+    ))}
+  </CertList>
+);
+
 const CertificationsSection = () => (
   <Section id="certifications">
     <SectionTitle title="Certifications" subtitle="資格・認定" />
-    <CertList>
-      {sortedCertifications.map((cert, index) => (
-        <CertCard
-          key={cert.name}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: index * 0.08 }}
-        >
-          <CertBadge>📜</CertBadge>
-          <CertInfo>
-            <CertName>{cert.name}</CertName>
-            {cert.year && (
-              <CertDescription>{cert.year} 取得</CertDescription>
-            )}
-            {(cert.link || cert.pdfLink) && (
-              <CertLinks>
-                {cert.link && (
-                  <CertLink
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    証明を見る →
-                  </CertLink>
-                )}
-                {cert.pdfLink && (
-                  <CertLink
-                    href={cert.pdfLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    認定証PDF →
-                  </CertLink>
-                )}
-              </CertLinks>
-            )}
-          </CertInfo>
-          <CertCategory>{cert.category}</CertCategory>
-        </CertCard>
-      ))}
-    </CertList>
+    <CertCards items={primary} />
+    {others.length > 0 && (
+      <ExpandInPlace label="その他の資格・修了証を見る →" closeLabel="その他の資格・修了証を閉じる ↑">
+        <CertCards items={others} />
+      </ExpandInPlace>
+    )}
   </Section>
 );
 

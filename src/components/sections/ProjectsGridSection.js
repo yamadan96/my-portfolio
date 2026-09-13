@@ -11,9 +11,10 @@ import projects from '../../data/projects';
 // ランディングページのカードに載せるタグの上限
 const MAX_TAGS_PER_CARD = 5;
 
+// 代表4件なので PC では 2×2 に揃える（3列だと1件だけ2段目に落ちる）
 const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   gap: ${({ theme }) => theme.spacing.xl};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {

@@ -5,20 +5,22 @@ import { motion } from 'framer-motion';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 import Timeline from '../ui/Timeline';
+import ExpandInPlace from '../ui/ExpandInPlace';
 import { mobileTapArea } from '../../styles/tapArea';
 import experiences from '../../data/experiences';
+
+// トップページのタイムラインに開いた状態で出す件数（experiences.js の先頭から）
+export const TOP_PAGE_COUNT = 5;
 
 const SubHeading = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: 700;
-  margin: ${({ theme }) => theme.spacing['2xl']} 0 ${({ theme }) => theme.spacing.lg};
+  margin: ${({ theme }) => theme.spacing.xl} 0 ${({ theme }) => theme.spacing.lg};
   color: ${({ theme }) => theme.colors.text};
-`;
 
-const SubNote = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
-  margin: -${({ theme }) => theme.spacing.sm} 0 ${({ theme }) => theme.spacing.lg};
+  &:first-child {
+    margin-top: 0;
+  }
 `;
 
 const CompactGrid = styled.div`
@@ -75,9 +77,11 @@ const ExperienceSection = () => {
     navigate(`/experience/${id}`);
   };
 
-  const major = experiences.filter((e) => !e.short && !e.secondary);
-  const secondary = experiences.filter((e) => e.secondary);
-  const short = experiences.filter((e) => e.short);
+  // 先頭5件だけをタイムラインに出し、残り（6件目以降・インターン・短期プログラム）は折りたたむ
+  const major = experiences.slice(0, TOP_PAGE_COUNT);
+  const rest = experiences.slice(TOP_PAGE_COUNT);
+  const others = rest.filter((e) => !e.short);
+  const short = rest.filter((e) => e.short);
 
   const renderCompactGrid = (items) => (
     <CompactGrid>
@@ -104,23 +108,26 @@ const ExperienceSection = () => {
 
   return (
     <Section id="experience">
-      <SectionTitle title="Experience" subtitle="実務・インターン経験" />
-      <SubHeading>主要な経験</SubHeading>
-      <SubNote>長期・現職を中心とした実務経験</SubNote>
+      <SectionTitle title="Experience" subtitle="主要な経験" />
       <Timeline items={major} onDetailClick={handleDetailClick} />
-      {secondary.length > 0 && (
-        <>
-          <SubHeading>その他の実務経験</SubHeading>
-          <SubNote>インターン・メンター等（{secondary.length}件）</SubNote>
-          {renderCompactGrid(secondary)}
-        </>
-      )}
-      {short.length > 0 && (
-        <>
-          <SubHeading>短期インターン・ワークショップ</SubHeading>
-          <SubNote>1日〜1週間の選抜型プログラム（{short.length}社）</SubNote>
-          {renderCompactGrid(short)}
-        </>
+      {rest.length > 0 && (
+        <ExpandInPlace
+          label={`その他の実務・インターン経験（${rest.length}件）をすべて見る`}
+          closeLabel="その他の経験を閉じる ↑"
+        >
+          {others.length > 0 && (
+            <>
+              <SubHeading>その他の実務経験</SubHeading>
+              {renderCompactGrid(others)}
+            </>
+          )}
+          {short.length > 0 && (
+            <>
+              <SubHeading>短期インターン・ワークショップ</SubHeading>
+              {renderCompactGrid(short)}
+            </>
+          )}
+        </ExpandInPlace>
       )}
     </Section>
   );

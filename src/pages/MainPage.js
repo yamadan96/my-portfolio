@@ -11,10 +11,12 @@ import CertificationsSection from '../components/sections/CertificationsSection'
 import AchievementsSection from '../components/sections/AchievementsSection';
 import ContactSection from '../components/sections/ContactSection';
 
-// 2026年7月版と同じ1ページ構成・同じ順番。各項目の文章だけ1〜2行に短くしている。
-// セクション id は Header.js のナビと一致させること:
-//   hero / about / experience / research / skills / education / projects / certifications / achievements / contact
-// 長い一覧（個人開発の技術詳細・全発表の原稿と要旨・OSS・執筆）は /work・/research・/more に置く。
+// 1ページ構成。上から「何者か（Hero / About）→ 何ができるか（Experience / Research / Projects / Skills）
+// → 何を証明しているか（Education / Certifications / Awards）」の順に並べ、30秒で読める分だけを開いて出す。
+// セクション id と並びは Header.js のナビと一致させること:
+//   hero / about / experience / research / projects / skills / education / certifications / achievements / contact
+// 長い一覧（6件目以降の経歴・その他の資格・Other Technologies）は各セクション内で折りたたみ、
+// 個人開発の技術詳細・全発表の原稿と要旨・OSS・執筆は /work・/research・/more に置く。
 const MainPage = () => {
   const { hash } = useLocation();
 
@@ -36,9 +38,9 @@ const MainPage = () => {
       <AboutSection />
       <ExperienceSection />
       <ResearchSection />
+      <ProjectsGridSection />
       <SkillsSection />
       <EducationSection />
-      <ProjectsGridSection />
       <CertificationsSection />
       <AchievementsSection />
       <ContactSection />

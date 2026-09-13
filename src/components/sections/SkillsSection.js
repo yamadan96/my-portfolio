@@ -3,12 +3,19 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
+import ExpandInPlace from '../ui/ExpandInPlace';
 import skills from '../../data/skills';
+
+// 開いた状態で出すのは core: true の4グループ（Core / LLM / Vision / Production）。
+// 残りのカテゴリは「Other Technologies」として1つに折りたたむ
+const coreGroups = skills.filter((group) => group.core);
+const otherGroups = skills.filter((group) => !group.core);
+const otherCount = otherGroups.reduce((n, group) => n + group.items.length, 0);
 
 const SkillsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: ${({ theme }) => theme.spacing.xl};
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: ${({ theme }) => theme.spacing.lg};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
@@ -21,15 +28,11 @@ const CategoryCard = styled(motion.div)`
   backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.borderRadius.xl};
-  padding: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.lg};
   transition: border-color ${({ theme }) => theme.transitions.normal};
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary};
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.spacing.lg};
   }
 `;
 
@@ -37,15 +40,15 @@ const CategoryHeader = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
 const CategoryIcon = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 `;
 
 const CategoryName = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: 700;
 `;
 
@@ -71,11 +74,39 @@ const Tag = styled(motion.span)`
   }
 `;
 
+// 折りたたみの中は「旧カテゴリ名 → タグ列」の行を縦に並べる（カードにはしない）
+const OtherPanel = styled.div`
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  padding: ${({ theme }) => theme.spacing.lg};
+  display: grid;
+  gap: ${({ theme }) => theme.spacing.md};
+`;
+
+const OtherRow = styled.div`
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: ${({ theme }) => theme.spacing.md};
+  align-items: start;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.xs};
+  }
+`;
+
+const OtherLabel = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  padding-top: 6px;
+`;
+
 const SkillsSection = () => (
   <Section id="skills">
-    <SectionTitle title="Skills" subtitle="技術スタック" />
+    <SectionTitle title="Skills" subtitle="Core Skills" />
     <SkillsGrid>
-      {skills.map((category, catIndex) => (
+      {coreGroups.map((category, catIndex) => (
         <CategoryCard
           key={category.category}
           initial={{ opacity: 0, y: 20 }}
@@ -103,6 +134,27 @@ const SkillsSection = () => (
         </CategoryCard>
       ))}
     </SkillsGrid>
+    {otherGroups.length > 0 && (
+      <ExpandInPlace
+        label={`Other Technologies（${otherCount}項目）を見る`}
+        closeLabel="Other Technologies を閉じる ↑"
+      >
+        <OtherPanel>
+          {otherGroups.map((group) => (
+            <OtherRow key={group.category}>
+              <OtherLabel>
+                {group.icon} {group.category}
+              </OtherLabel>
+              <TagList>
+                {group.items.map((skill) => (
+                  <Tag key={skill}>{skill}</Tag>
+                ))}
+              </TagList>
+            </OtherRow>
+          ))}
+        </OtherPanel>
+      </ExpandInPlace>
+    )}
   </Section>
 );
 

@@ -83,11 +83,29 @@ const Description = styled.p`
   margin-top: ${({ theme }) => theme.spacing.sm};
 `;
 
+// topPage: 'compact' の項目（高校）は「期間 · 学校 学科」の1行だけにする
+const CompactLine = styled.p`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
+const CompactSchool = styled.span`
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+// トップページには topPage: false 以外を出す（中学校は出さない）
+const visibleEducation = education.filter((item) => item.topPage !== false);
+
 const EducationSection = () => (
   <Section id="education">
     <SectionTitle title="Education" subtitle="学歴" />
     <TimelineWrapper>
-      {education.map((item, index) => (
+      {visibleEducation.map((item, index) => (
         <TimelineItem
           key={item.id}
           initial={{ opacity: 0, x: -20 }}
@@ -95,11 +113,21 @@ const EducationSection = () => (
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: index * 0.1 }}
         >
-          <Period>{item.period}</Period>
-          <School>{item.school}</School>
-          <Faculty>{item.faculty}</Faculty>
-          {item.degree && <Degree>{item.degree}</Degree>}
-          {item.description && <Description>{item.description}</Description>}
+          {item.topPage === 'compact' ? (
+            <CompactLine>
+              <Period>{item.period}</Period>
+              <CompactSchool>{item.school}</CompactSchool>
+              {item.faculty && <span>{item.faculty}</span>}
+            </CompactLine>
+          ) : (
+            <>
+              <Period>{item.period}</Period>
+              <School>{item.school}</School>
+              <Faculty>{item.faculty}</Faculty>
+              {item.degree && <Degree>{item.degree}</Degree>}
+              {item.description && <Description>{item.description}</Description>}
+            </>
+          )}
         </TimelineItem>
       ))}
     </TimelineWrapper>
