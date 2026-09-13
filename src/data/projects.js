@@ -46,7 +46,7 @@ const projects = [
     id: 'project-vit-scratch',
     featured: true,
     category: 'ml',
-    title: 'Vision Transformer スクラッチ実装（論文再現）',
+    title: 'Vision Transformer スクラッチ実装（論文ベース）',
     description:
       '"An Image is Worth 16x16 Words"（Dosovitskiy et al., ICLR 2021）を PyTorch でゼロから再現。Patch Embedding・学習可能な位置埋め込み・Multi-Head Attention・MLP ブロックの全コンポーネントを論文の式と対応付けて自作し、CIFAR-10 で学習（ViT-Small 構成、d_model=256・8ヘッド・6層）。',
     tags: ['Vision Transformer', 'PyTorch', 'Paper Reproduction', 'CIFAR-10'],
