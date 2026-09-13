@@ -15,7 +15,7 @@ const writing = {
       platform: 'Qiita',
       url: 'https://qiita.com/yamadan96/items/8926e19382896bc72bbf',
       summary:
-        '既存 ML モデルを LLM ベースに置き換えるまでの検証プロセスと、本番マイクロサービスへの組み込みまでを実務の視点で記録した。',
+        '既存 ML モデルを LLM ベースに置き換えるまでの検証プロセスと、本番導入可能なマイクロサービスとして実装するまでを実務の視点で記録した。',
       tags: ['LLM', 'Text Classification', 'LegalTech', 'Production'],
       featured: true,
     },
