@@ -316,7 +316,7 @@ const experiences = [
       problem: '社内にAI活用の実績がなく、何が実務で使えて何が使えないかの判断材料がなかった。',
       role: '企画・技術選定からプロトタイプ開発・社内デモ展開まで。2年10ヶ月にわたり社内AI開発を主導した。',
       tech: 'MicrosoftのクラウドAI（Azure OpenAI・AI Search・音声認識・チャットボット基盤）を軸に構成。用途ごとに使い分けた。',
-      result: '10件以上を社内デモ環境へ展開し、社内でAIを検証する進め方の型を確立した。',
+      result: '複数のシステムを社内デモ環境へ展開し、社内でAIを検証する進め方の型を確立した。',
     },
     company: '株式会社ソリューション・アンド・テクノロジー',
     role: 'システムエンジニア / DX統括部',
@@ -333,7 +333,7 @@ const experiences = [
       overview:
         '人事・会計系業務システム企業のDX統括部にて、2年10ヶ月にわたりAI開発全般を担当。' +
         'Azure OpenAI / AI Search / Speech to Text / Bot Service を軸に、' +
-        'RAG検索・感情分析・音声認識・チャットボット・退職予測など10件以上のAIプロトタイプ開発を主導。' +
+        'RAG検索・感情分析・音声認識・チャットボット・退職予測など複数のAIプロトタイプ開発を担当。' +
         '企画・技術選定からPoC開発・社内デモ展開まで一貫して遂行し、社内AI活用の基盤を構築した。',
       responsibilities: [
         '【RAG型社内ドキュメント検索】Azure Blob Storage上の社内文書をAzure AI Searchでインデックス化し、LLMと組み合わせたRAG検索システムを構築。LangChain + FAISSによるベクトル検索パイプラインも別途Azure VM上に実装し、社内デモ環境への導入まで完了',
@@ -348,7 +348,7 @@ const experiences = [
         '【Webアプリ開発】Django × React × Next.js（Redux Toolkit / Tailwind CSS）によるタスク管理アプリを開発',
       ],
       achievements:
-        'RAG検索・感情分析・音声認識比較検証・チャットボット等、10件以上のAIプロトタイプを開発し社内デモ環境へ展開。Azureクラウドサービスを横断的に活用したAI開発とPoCの型を確立',
+        'RAG検索・感情分析・音声認識比較検証・チャットボット等、複数のAIプロトタイプを開発し社内デモ環境へ展開。Azureクラウドサービスを横断的に活用したAI開発とPoCの型を確立',
       // 案件ごとの内訳（詳細ページのカード＋モーダル）。responsibilities の文章を案件単位に整理したもので、新しい事実は含まない
       projects: [
         {
