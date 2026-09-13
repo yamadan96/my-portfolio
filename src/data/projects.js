@@ -177,7 +177,7 @@ const projects = [
       built: '興味のある分野の新しい論文を毎日自動で集め、下書きノートまで作るコマンドラインツール。',
       problem: '論文は毎日大量に出るため、探すだけで時間が溶ける。集める作業を自動化し、読んで考える時間に充てたかった。',
       role: '設計・実装・公開まで単独。キーワード設定だけで動くようにし、自動実行の仕組みも用意した。',
-      tech: 'arXiv（論文公開サイト）から条件に合う論文を取得し、要約はAIに任せる。毎日の実行は GitHub Actions（自動実行の仕組み）に任せている。',
+      tech: 'arXiv API から条件に合う論文を取得し、LLM で要約とノート生成まで自動化する。毎日の実行は GitHub Actions（自動実行の仕組み）に任せている。',
       result: 'PyPI（Pythonのライブラリ公開サイト）で公開中。平日は自動で動き、すでに書き込んだノートは上書きしないため、繰り返し実行しても手作業が消えない。',
     },
     technical: [
@@ -445,13 +445,13 @@ const projects = [
     category: 'tool',
     title: 'テニスコート予約自動化システム',
     description:
-      '市営テニスコートの空き状況を毎日自動チェックし、条件に合う枠を通知・予約する仕組み。Selenium + SQLite + GitHub Actions（cache による DB 永続化）で構成し、家族が実際に日常利用している。実 DOM を probe してから実装する運用で、サイト構造変更にも追従。',
+      '市営テニスコートの空き状況を毎日自動チェックし、空き状況の確認・通知を自動化して予約作業を支援する仕組み。Selenium + SQLite + GitHub Actions（cache による DB 永続化）で構成し、家族が実際に日常利用している。実 DOM を probe してから実装する運用で、サイト構造変更にも追従。',
     tags: ['Python', 'Selenium', 'SQLite', 'GitHub Actions', 'Automation'],
     github: 'https://github.com/yamadan96/Tennis-Court-Availability-Notification-System',
     demo: null,
     image: null,
     summary: {
-      built: '市営テニスコートの空き状況を毎日自動で確認し、条件に合う枠を通知・予約する仕組み。家族が実際に日常的に使っている。',
+      built: '市営テニスコートの空き状況を毎日自動で確認・通知し、予約作業を支援する仕組み。家族が実際に日常的に使っている。',
       problem: '人気のコートは公開直後に埋まる。毎日手で確認するのは現実的でない。',
       role: '設計・実装・運用を単独。利用者（家族）からの不具合報告を受けて修正を続けている。',
       tech: 'ブラウザを自動操作して予約サイトを巡回し、結果をデータベースに記録。毎日の実行は GitHub Actions に任せている。',
