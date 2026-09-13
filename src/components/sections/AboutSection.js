@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 import profile from '../../data/profile';
@@ -27,18 +26,13 @@ const AboutText = styled.div`
   }
 `;
 
-const CareerBadge = styled(motion.div)`
-  display: inline-flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
-  background: ${({ theme }) => `${theme.colors.primary}15`};
-  border: 1px solid ${({ theme }) => `${theme.colors.primary}30`};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
+// 末尾の補助情報（所属・修了予定・入社予定）。本文より小さく、目立たせない
+const StatusLine = styled.p`
+  && {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    color: ${({ theme }) => theme.colors.textMuted};
+    margin-bottom: 0;
+  }
 `;
 
 const AboutSection = () => (
@@ -46,19 +40,11 @@ const AboutSection = () => (
     <SectionTitle title="About" subtitle="私について" />
     <AboutGrid>
       <AboutText>
-        {profile.career && (
-          <CareerBadge
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            {profile.career}
-          </CareerBadge>
-        )}
-        {/* 本文は profile.bio の2段落（研究・実務）のみ。文言はデータ側で管理する */}
+        {/* 本文は profile.bio の2段落（実務・研究）。文言はデータ側で管理する */}
         {profile.bio.map((paragraph, i) => (
           <p key={i}>{paragraph}</p>
         ))}
+        {profile.status && <StatusLine>{profile.status}</StatusLine>}
       </AboutText>
     </AboutGrid>
   </Section>
