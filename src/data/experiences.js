@@ -14,9 +14,9 @@ const experiences = [
     role: 'AIエンジニア（GUI自律探索エージェント×RAG 研究開発）',
     period: '2026年7月〜現在',
     description:
-      '業務システムを人の代わりに自動操作するAIエージェントの研究開発。社内文書の知識をAIに参照させて操作の成功率を高める仕組みを設計・実装し、比較実験で効果を数値で実証。',
+      '業務システムを人の代わりに自動操作するAIエージェントの研究開発。社内文書の知識をAIに参照させて操作の成功率を高める仕組みを設計・実装し、比較実験で効果を確認。',
     descriptionEn:
-      'R&D on autonomous GUI agents — designed a RAG-based knowledge injection pipeline and proved its impact through unattended A/B evaluation.',
+      'R&D on autonomous GUI agents — designed a RAG-based knowledge injection pipeline and measured its effect through unattended A/B evaluation.',
     tags: ['Python', 'LLM Agent', 'RAG', 'OpenAI API', 'Prompt Engineering'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
@@ -39,7 +39,7 @@ const experiences = [
       ],
       achievements:
         'RAG知識注入により検索品質を keyword recall 0.57→0.86 に改善し、汎用化後は7ケース全合格を達成。' +
-        '探索エージェントのメニュー空回り率を55本のA/B検証で74%→7%に削減し、RAG適用時には所要時間が約半分に短縮されることを実証',
+        '探索エージェントのメニュー空回り率を55本のA/B検証で74%→7%に削減し、RAG適用時には所要時間が約半分に短縮されるケースを確認',
       techStack: [
         'Python',
         'OpenAI API',
