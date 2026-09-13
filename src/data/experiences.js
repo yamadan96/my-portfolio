@@ -1,8 +1,10 @@
+// 並び順は時系列ではなく「LLM Agent / RAG / Computer Vision を実運用まで作れる」を早く示せる順（上位5件は固定）。
+// 6件目以降は終了日の降順。
 const experiences = [
   {
     id: 'matsuo-institute-gui-rag',
     // トップページの職務経歴用（1行）
-    oneLiner: '業務システムを自律操作する AI エージェントへの知識注入',
+    oneLiner: '業務システムを自律操作する LLM Agent に RAG を組み込み、検索 Recall を 57%→86% に改善、探索の空回りを 74%→7% に削減（55回の比較検証）',
     summary: {
       built: '人の代わりに業務システムを操作するAIに、社内文書を読ませて操作の成功率を上げる仕組みを作った。',
       problem: 'AIは画面を見て操作できても、その会社固有の業務ルールを知らない。知らないまま操作するとメニューを延々と探し回って終わる。',
@@ -11,7 +13,7 @@ const experiences = [
       result: '必要な情報を取り出せる割合が57%→86%、汎用化後は7件すべて合格。55回の比較実験で、メニュー探索の無駄な繰り返しを74%→7%に削減。',
     },
     company: '株式会社松尾研究所',
-    role: 'AIエンジニア（GUI自律探索エージェント×RAG 研究開発）',
+    role: 'AIエンジニア（GUI 自律探索エージェント × RAG）',
     period: '2026年7月〜現在',
     description:
       '業務システムを人の代わりに自動操作するAIエージェントの研究開発。社内文書の知識をAIに参照させて操作の成功率を高める仕組みを設計・実装し、比較実験で効果を確認。',
@@ -54,120 +56,9 @@ const experiences = [
     },
   },
   {
-    id: 'matsuo-institute-grpo',
-    // トップページの職務経歴用（1行）
-    oneLiner: 'LLM に狙った性格を持たせる強化学習の検証（研究開発）',
-    summary: {
-      built: 'AIチャットボットに、狙った「性格」を持たせる学習方法を検証した。',
-      problem: '性格を持たせようとすると、AIは「私は一貫性を重視します」と宣言するだけの見せかけの振る舞いに逃げる。本当に性格が身についたのかを測る必要があった。',
-      role: '論文10本の調査、報酬の与え方3方式の比較、評価方法の設計、失敗パターンの分析。職員4名を含む約7名のチームで担当。',
-      tech: '強化学習（良い応答に高い点数を与えて学習させる方法）を使用。点数をつける役もAIに任せ、8個の候補を並べて順位をつけさせる方式にした。',
-      result: '性格の獲得に成功。点数の配分比率が結果を最も左右すると特定し、AIが点数稼ぎに走る3つの失敗パターンを類型化して、チームのモデル選定基準に反映された。',
-    },
-    company: '株式会社松尾研究所',
-    role: 'Research Engineer（LLM性格制御・強化学習 研究開発）',
-    period: '2026年2月〜2026年6月（5ヶ月）',
-    description:
-      'AIチャットボットに狙った「性格」を持たせる研究開発。強化学習を用いた学習方法の比較検証と、性能・安全性の評価を担当。',
-    descriptionEn:
-      'Taught an LLM to express targeted personality traits via reinforcement learning (GRPO), covering reward design and safety evaluation.',
-    tags: ['Python', 'GRPO', 'PyTorch', 'LoRA', 'vLLM'],
-    url: 'https://matsuo-institute.com/',
-    blogUrl: null,
-    hasDetail: true,
-    details: {
-      overview:
-        '株式会社松尾研究所にて、強化学習（GRPO）でLLMにBig Five性格特性を獲得させる研究開発に従事。' +
-        '職員4名を含む約7名のチームで、' +
-        '先行研究サーベイによる方針策定から、報酬関数の設計比較・報酬ハック分析・モデル評価まで、学習パイプラインの検証を幅広く担当。',
-      responsibilities: [
-        '先行研究サーベイ（論文10本）: ペルソナ・性格シミュレーション（BIG5-CHAT / PersonaLLM / CharacterBot）、RL-Zero系手法（DeepSeek-R1 / OLMo 3 / DeepSeekMath）、構造化報酬設計（RewardAnything / Rubrics-as-Rewards）の3領域を調査。個別サマリー・統合サマリー・実装ロードマップを作成し、前フェーズの報酬ハック（Judge LLMのアシスタント性バイアス）への対策として原則ベース報酬＋ルーブリック型報酬の導入方針を策定',
-        '報酬関数の設計比較: Listwise／Pointwise／Listwise単一ファセットの3方式を比較検証し、単一ファセット方式を採用。Pointwiseは学習が不安定、Listwiseで複数ファセットを同時提示するとJudge LLMが表層キーワードに依存する問題を特定。1プロンプトにつき8候補を生成してJudge LLMへ一括提示する順位ベースの連続値報酬を設計し、性格ファセット報酬と応答品質報酬を別プロンプトへ分離して重み比率を制御可能にした',
-        '3層の評価パイプライン構築: IPIP-NEO 120問によるBig Five 30ファセットのリッカート測定（性格獲得度）、状況設定付き4択問題による性格特性の発現率測定（行動レベルの一貫性）、JMMLUによる学術知識の正答率測定（性格付与が一般能力を劣化させるalignment taxの検出）を組み合わせ、性格獲得と能力維持のトレードオフを定量評価',
-        '報酬ハック（Reward Hacking）の類型化と対策特定: 「一貫性」「厳密に遵守」等の定型句の反復、応答冒頭への性格宣言の挿入、攻撃的表現への収束という3類型を同定し、条件別に発生頻度を定量化。ファセット数よりも性格報酬と応答品質報酬の重み比率が支配的因子であることを突き止め、安全なモデル選定基準の策定に反映',
-        'GRPO学習の実行と実験管理: ベースモデルQwen3-8Bに対し、4bit量子化＋LoRA（rank 64 / alpha 128 / 全線形層）によるGRPO学習をNVIDIA H200環境上で実行。訓練6,880件・評価1,732件、実効バッチサイズ16、1エポックあたり約15時間。評価粒度・プロンプト形式を変えた複数条件をWandBで実験管理し、条件間の差分要因を分析',
-      ],
-      achievements:
-        '単一ファセット方式による性格特性の獲得に成功。報酬設計の感度分析で重み比率が支配因子であることを特定し、報酬ハックの類型化とあわせてチームの最終モデル選定基準の策定に貢献',
-      techStack: [
-        'Python',
-        'PyTorch',
-        'Qwen3-8B',
-        'Unsloth',
-        'GRPO',
-        'LoRA',
-        'vLLM',
-        'WandB',
-        'TRL',
-        'HuggingFace',
-        'IPIP-NEO',
-        'JMMLU',
-        'NVIDIA H200',
-      ],
-    },
-  },
-  {
-    id: 'legaltech-freelance',
-    // トップページの職務経歴用（1行）
-    oneLiner: '法務向け AI サービスの利用状況ダッシュボードと週次レポート自動生成',
-    summary: {
-      built: '法務の専門職が使うAIサービスに、利用状況が見える管理画面と、週次レポートの自動生成を追加した。',
-      problem: 'どの機能がどれだけ使われているかが分からず、改善の判断ができなかった。',
-      role: '画面・サーバー・インフラのすべて。常駐エンジニア1名に自分が加わった2名体制で、1ヶ月で設計から本番リリースまで。',
-      tech: 'サーバー側はPythonのFastAPI、画面はReact。レポート生成はAIに任せ、GitHub Actions（決めた時刻に自動実行する仕組み）で毎週動かしている。',
-      result: '複数の機能を本番リリース。AI契約書チェックの公開ソフトウェアでは、仕込まれた問題点を検出して初回公開に貢献した。',
-    },
-    company: 'リーガルテックスタートアップ',
-    role: 'フリーランスエンジニア（Python / FastAPI / React）',
-    period: '2026年6月（1ヶ月）',
-    description:
-      '法務専門職向けAIサービスの機能開発をフリーランスとして担当。利用状況が一目で分かる管理画面や、週次レポートの自動生成など複数の機能を、1ヶ月で設計から本番リリースまで完遂。',
-    descriptionEn:
-      'Freelance full-stack development for a legal-tech AI platform — shipped usage dashboards and automated weekly reporting, from design to production in one month.',
-    tags: ['Python', 'FastAPI', 'React', 'TypeScript', 'MCP', 'PostgreSQL'],
-    url: null,
-    blogUrl: null,
-    hasDetail: true,
-    details: {
-      overview:
-        'リーガルテックスタートアップにて、専門職向けAIプラットフォームの機能開発・運用支援にフリーランスとして従事。' +
-        '常駐エンジニア1名に自分が加わった2名体制で、' +
-        'AI契約書チェックOSSの品質検証・リリース準備から、大規模ドキュメントの変換スクリプト開発、' +
-        'FastAPI + Reactによる管理画面ダッシュボード実装、週次レポート自動生成（PydanticAI + Gemini）まで、' +
-        'バックエンド・フロントエンド・インフラを横断して担当。',
-      responsibilities: [
-        'AI契約書チェックOSSのリリース前品質検証: NDA・業務委託・システム開発・売買の4契約類型で仕込み問題点を検出（OSS の初回公開前の品質検証）',
-        'ドキュメント変換スクリプト開発（Python）: 大規模ドキュメントのシート別Markdown変換・セクション分割・SHA256ハッシュによるstale検知の3スクリプトを実装。Python 3.9互換・CI通過・PRマージ済み',
-        'MCP利用頻度ダッシュボード実装: バックエンドに集計クエリ・APIエンドポイントを追加、フロントエンドにランク番号+プログレスバーのテーブルUIを実装。ステージングデプロイ成功',
-        'ドリルダウン機能実装: ツール別・会員別の詳細データを取得する2エンドポイントを追加し、ドロワー方式のUIコンポーネントを実装してPRマージ',
-        '週次レポート自動生成: PydanticAI + Geminiによる自動レポート生成システムをGitHub Actions化。PR/Issue収集・CI失敗検出・サニタイズ処理を実装',
-        'Cloud Monitoringインフラ整備: Cloud Run向けアラートポリシーをTerraformモジュール化し、staging/productionへの組み込みと運用Runbookを追加',
-      ],
-      achievements:
-        '複数のPRをマージ。AI契約書チェックOSSの公開前検証、MCPダッシュボード・ドリルダウン機能のステージング検証を経たリリース、週次レポート自動生成のCI/CD組み込み完了',
-      techStack: [
-        'Python',
-        'FastAPI',
-        'SQLAlchemy',
-        'PostgreSQL',
-        'Pydantic',
-        'PydanticAI',
-        'Gemini API',
-        'React',
-        'TypeScript',
-        'Mantine v8',
-        'TanStack Router',
-        'MCP (Model Context Protocol)',
-        'Terraform',
-        'Google Cloud Monitoring',
-        'GitHub Actions',
-      ],
-    },
-  },
-  {
     id: 'airion',
     // トップページの職務経歴用（1行）
-    oneLiner: 'ロボット向け音声合成（トヨタイムズ掲載）・製造ライン向け物体検出など、複数の AI 開発',
+    oneLiner: '製造ライン向け物体検出をテックリードとして開発（束単位の検出成功率 96.6%）。ロボット向け音声合成も製品開発（トヨタイムズ掲載）',
     summary: {
       built: 'AI開発事業部で、顧客ごとに異なる AI 開発案件を複数担当。主な案件は下のプロジェクト一覧のとおり。',
       problem: '顧客ごとに課題が違うため、既製品では解決できない。何を使うかの選定から現場で使える形にするまでを毎回自分で決める必要があった。',
@@ -308,9 +199,114 @@ const experiences = [
     },
   },
   {
+    id: 'legalon',
+    // トップページの職務経歴用（1行）
+    oneLiner: '契約書分類モデルを LLM に置き換え、Accuracy を +14.1pt 改善（76.0%→90.1%）。本番マイクロサービスまで実装',
+    summary: {
+      built: '契約書の種類を自動で判別するAIを、従来の機械学習から大規模言語モデルへ置き換えた。',
+      problem: '従来の仕組みは日本語契約書の判別精度が76%にとどまり、分類の間違いを人が直す手間が残っていた。',
+      role: '試作段階の実験・検証から、本番サービスに組み込むプログラムの実装まで一貫して担当。',
+      tech: 'Googleの大規模言語モデル（Gemini 2.5 Flash）を使用。AIへの指示文を4段階に分けて改善し、どの改善が効いたかを段階ごとに測定した。',
+      result: '日本語契約書で76.0%→90.1%（+14.1pt）、英語契約書で84.3%→89.3%（+5.0pt）。約6,160行・60件超のテストを本番品質で納品した。',
+    },
+    company: '株式会社LegalOn Technologies',
+    role: 'AIエンジニア（NLP / LLM）',
+    period: '2026年2月〜3月（2ヶ月）',
+    description:
+      '契約書の種類をAIで自動判別するシステムを研究開発。従来の仕組みから精度を大幅に改善（日本語契約書で+14pt）し、試作から本番サービスへの組み込みまで一貫して担当。',
+    descriptionEn:
+      'LLM-based contract classification R&D — improved accuracy by +14pt over the legacy ML model and shipped it as a production microservice.',
+    tags: ['Python', 'LLM', 'GCP', 'Prompt Engineering', 'Pydantic'],
+    url: 'https://legalontech.jp/',
+    blogUrl: 'https://qiita.com/yamadan96/items/8926e19382896bc72bbf',
+    hasDetail: true,
+    details: {
+      overview:
+        'AI法務プラットフォームにおける契約書自動分類機能のLLM化プロジェクトに従事。' +
+        '日本語58カテゴリ・英語26カテゴリの契約書をGemini 2.5 Flash（Vertex AI）で自動分類するシステムを研究開発し、' +
+        '従来の機械学習モデルを大幅に上回る精度を達成。' +
+        'PoCでの実験・検証から本番マイクロサービスの実装まで一貫して担当し、5PRマージ・約6,160行・60件超のテストを納品。',
+      responsibilities: [
+        '【プロンプトエンジニアリング】システムプロンプト・カテゴリカタログ・Few-shot例を体系的に設計し、4段階のアブレーション実験で反復最適化。V0（Acc 0.689）→ V1（0.828）→ V2（0.869）→ V3（0.901）と累積+21.2ptの精度向上を達成',
+        '【Few-shot学習戦略】例題をAnchor（出力フォーマットの定着）・Boundary（境界判別）・Error-targeted（頻出誤分類の是正）の3役割で戦略的に設計し、精度向上とトークンコスト増のトレードオフを最適化',
+        '【言語別入力戦略の解明】英語契約書に日本語の説明文を使うとAccuracyが0.575まで低下する問題を発見。アブレーションにより英語カテゴリ名の導入が最大の精度寄与（+0.022）であることを特定し、全文入力は英語で+0.022・日本語で-0.005と言語依存性を定量化',
+        '【非契約文書の検出】報告書・社内メモ等の非契約文書を識別する機能を設計・評価。V0では対象20件が全て誤分類（F1=0.000）だったものをFew-shot設計で解消',
+        '【本番マイクロサービス実装】PoCコードを型安全なサービスとして再設計（FastAPI POST /classify）。Pydanticによるデータモデル、LLM応答のJSONパースとリトライ、バッチ処理（Parquet→API→JSONL）、コスト追跡を実装し、pytest 60件超でCI/CDを整備',
+        '【ML vs LLM の比較評価】同一評価データで従来MLモデル（XGBoost + vaporettoトークナイザ）とAccuracy・F1・Precision・Recall・混同行列を多角的に比較し、導入判断の根拠を提供',
+      ],
+      achievements:
+        '日本語契約書で従来ML比+14.1pt（Acc 0.760→0.901）、英語契約書で+5.0pt（Acc 0.843→0.893）の精度改善を達成。4段階のプロンプト反復で累積+21.2ptを実現し、5PRマージ・57件のコードレビュー対応を経てプロダクション品質のコードを納品',
+      techStack: [
+        'Python',
+        'Gemini 2.5 Flash',
+        'Google Cloud (Vertex AI)',
+        'FastAPI',
+        'Pydantic',
+        'XGBoost',
+        'Bazel',
+        'pytest',
+        'ruff',
+        'mypy',
+      ],
+    },
+  },
+  {
+    id: 'matsuo-institute-grpo',
+    // トップページの職務経歴用（1行）
+    oneLiner: 'LLM に狙った性格を持たせる GRPO 学習を設計・実行し、報酬設計の比較から失敗パターン3類型を特定',
+    summary: {
+      built: 'AIチャットボットに、狙った「性格」を持たせる学習方法を検証した。',
+      problem: '性格を持たせようとすると、AIは「私は一貫性を重視します」と宣言するだけの見せかけの振る舞いに逃げる。本当に性格が身についたのかを測る必要があった。',
+      role: '論文10本の調査、報酬の与え方3方式の比較、評価方法の設計、失敗パターンの分析。職員4名を含む約7名のチームで担当。',
+      tech: '強化学習（良い応答に高い点数を与えて学習させる方法）を使用。点数をつける役もAIに任せ、8個の候補を並べて順位をつけさせる方式にした。',
+      result: '性格の獲得に成功。点数の配分比率が結果を最も左右すると特定し、AIが点数稼ぎに走る3つの失敗パターンを類型化して、チームのモデル選定基準に反映された。',
+    },
+    company: '株式会社松尾研究所',
+    role: 'Research Engineer（LLM 性格制御 × 強化学習）',
+    period: '2026年2月〜2026年6月（5ヶ月）',
+    description:
+      'AIチャットボットに狙った「性格」を持たせる研究開発。強化学習を用いた学習方法の比較検証と、性能・安全性の評価を担当。',
+    descriptionEn:
+      'Taught an LLM to express targeted personality traits via reinforcement learning (GRPO), covering reward design and safety evaluation.',
+    tags: ['Python', 'GRPO', 'PyTorch', 'LoRA', 'vLLM'],
+    url: 'https://matsuo-institute.com/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        '株式会社松尾研究所にて、強化学習（GRPO）でLLMにBig Five性格特性を獲得させる研究開発に従事。' +
+        '職員4名を含む約7名のチームで、' +
+        '先行研究サーベイによる方針策定から、報酬関数の設計比較・報酬ハック分析・モデル評価まで、学習パイプラインの検証を幅広く担当。',
+      responsibilities: [
+        '先行研究サーベイ（論文10本）: ペルソナ・性格シミュレーション（BIG5-CHAT / PersonaLLM / CharacterBot）、RL-Zero系手法（DeepSeek-R1 / OLMo 3 / DeepSeekMath）、構造化報酬設計（RewardAnything / Rubrics-as-Rewards）の3領域を調査。個別サマリー・統合サマリー・実装ロードマップを作成し、前フェーズの報酬ハック（Judge LLMのアシスタント性バイアス）への対策として原則ベース報酬＋ルーブリック型報酬の導入方針を策定',
+        '報酬関数の設計比較: Listwise／Pointwise／Listwise単一ファセットの3方式を比較検証し、単一ファセット方式を採用。Pointwiseは学習が不安定、Listwiseで複数ファセットを同時提示するとJudge LLMが表層キーワードに依存する問題を特定。1プロンプトにつき8候補を生成してJudge LLMへ一括提示する順位ベースの連続値報酬を設計し、性格ファセット報酬と応答品質報酬を別プロンプトへ分離して重み比率を制御可能にした',
+        '3層の評価パイプライン構築: IPIP-NEO 120問によるBig Five 30ファセットのリッカート測定（性格獲得度）、状況設定付き4択問題による性格特性の発現率測定（行動レベルの一貫性）、JMMLUによる学術知識の正答率測定（性格付与が一般能力を劣化させるalignment taxの検出）を組み合わせ、性格獲得と能力維持のトレードオフを定量評価',
+        '報酬ハック（Reward Hacking）の類型化と対策特定: 「一貫性」「厳密に遵守」等の定型句の反復、応答冒頭への性格宣言の挿入、攻撃的表現への収束という3類型を同定し、条件別に発生頻度を定量化。ファセット数よりも性格報酬と応答品質報酬の重み比率が支配的因子であることを突き止め、安全なモデル選定基準の策定に反映',
+        'GRPO学習の実行と実験管理: ベースモデルQwen3-8Bに対し、4bit量子化＋LoRA（rank 64 / alpha 128 / 全線形層）によるGRPO学習をNVIDIA H200環境上で実行。訓練6,880件・評価1,732件、実効バッチサイズ16、1エポックあたり約15時間。評価粒度・プロンプト形式を変えた複数条件をWandBで実験管理し、条件間の差分要因を分析',
+      ],
+      achievements:
+        '単一ファセット方式による性格特性の獲得に成功。報酬設計の感度分析で重み比率が支配因子であることを特定し、報酬ハックの類型化とあわせてチームの最終モデル選定基準の策定に貢献',
+      techStack: [
+        'Python',
+        'PyTorch',
+        'Qwen3-8B',
+        'Unsloth',
+        'GRPO',
+        'LoRA',
+        'vLLM',
+        'WandB',
+        'TRL',
+        'HuggingFace',
+        'IPIP-NEO',
+        'JMMLU',
+        'NVIDIA H200',
+      ],
+    },
+  },
+  {
     id: 'solty',
     // トップページの職務経歴用（1行）
-    oneLiner: '社内文書検索・メール誤送信検出など、複数の社内 AI システムを企画・開発',
+    oneLiner: '2年10ヶ月、社内文書検索（RAG）・メール誤送信検出などの社内 AI を企画から実装・社内展開まで担当',
     summary: {
       built: '社内 AI 活用の立ち上げ担当として、文書検索・メール誤送信検出・退職予測など、複数の社内 AI システムを企画・開発。主なものは下のプロジェクト一覧のとおり。',
       problem: '社内にAI活用の実績がなく、何が実務で使えて何が使えないかの判断材料がなかった。',
@@ -485,54 +481,60 @@ const experiences = [
     },
   },
   {
-    id: 'legalon',
+    id: 'legaltech-freelance',
     // トップページの職務経歴用（1行）
-    oneLiner: '契約書分類モデルの LLM 置き換えと本番マイクロサービス化',
+    oneLiner: '法務向け AI サービスの利用状況ダッシュボードと週次レポート自動生成',
     summary: {
-      built: '契約書の種類を自動で判別するAIを、従来の機械学習から大規模言語モデルへ置き換えた。',
-      problem: '従来の仕組みは日本語契約書の判別精度が76%にとどまり、分類の間違いを人が直す手間が残っていた。',
-      role: '試作段階の実験・検証から、本番サービスに組み込むプログラムの実装まで一貫して担当。',
-      tech: 'Googleの大規模言語モデル（Gemini 2.5 Flash）を使用。AIへの指示文を4段階に分けて改善し、どの改善が効いたかを段階ごとに測定した。',
-      result: '日本語契約書で76.0%→90.1%（+14.1pt）、英語契約書で84.3%→89.3%（+5.0pt）。約6,160行・60件超のテストを本番品質で納品した。',
+      built: '法務の専門職が使うAIサービスに、利用状況が見える管理画面と、週次レポートの自動生成を追加した。',
+      problem: 'どの機能がどれだけ使われているかが分からず、改善の判断ができなかった。',
+      role: '画面・サーバー・インフラのすべて。常駐エンジニア1名に自分が加わった2名体制で、1ヶ月で設計から本番リリースまで。',
+      tech: 'サーバー側はPythonのFastAPI、画面はReact。レポート生成はAIに任せ、GitHub Actions（決めた時刻に自動実行する仕組み）で毎週動かしている。',
+      result: '複数の機能を本番リリース。AI契約書チェックの公開ソフトウェアでは、仕込まれた問題点を検出して初回公開に貢献した。',
     },
-    company: '株式会社LegalOn Technologies',
-    role: 'AIエンジニア（NLP / LLM）',
-    period: '2026年2月〜3月（2ヶ月）',
+    company: 'リーガルテックスタートアップ',
+    role: 'フリーランスエンジニア（Python / FastAPI / React）',
+    period: '2026年6月（1ヶ月）',
     description:
-      '契約書の種類をAIで自動判別するシステムを研究開発。従来の仕組みから精度を大幅に改善（日本語契約書で+14pt）し、試作から本番サービスへの組み込みまで一貫して担当。',
+      '法務専門職向けAIサービスの機能開発をフリーランスとして担当。利用状況が一目で分かる管理画面や、週次レポートの自動生成など複数の機能を、1ヶ月で設計から本番リリースまで完遂。',
     descriptionEn:
-      'LLM-based contract classification R&D — improved accuracy by +14pt over the legacy ML model and shipped it as a production microservice.',
-    tags: ['Python', 'LLM', 'GCP', 'Prompt Engineering', 'Pydantic'],
-    url: 'https://legalontech.jp/',
-    blogUrl: 'https://qiita.com/yamadan96/items/8926e19382896bc72bbf',
+      'Freelance full-stack development for a legal-tech AI platform — shipped usage dashboards and automated weekly reporting, from design to production in one month.',
+    tags: ['Python', 'FastAPI', 'React', 'TypeScript', 'MCP', 'PostgreSQL'],
+    url: null,
+    blogUrl: null,
     hasDetail: true,
     details: {
       overview:
-        'AI法務プラットフォームにおける契約書自動分類機能のLLM化プロジェクトに従事。' +
-        '日本語58カテゴリ・英語26カテゴリの契約書をGemini 2.5 Flash（Vertex AI）で自動分類するシステムを研究開発し、' +
-        '従来の機械学習モデルを大幅に上回る精度を達成。' +
-        'PoCでの実験・検証から本番マイクロサービスの実装まで一貫して担当し、5PRマージ・約6,160行・60件超のテストを納品。',
+        'リーガルテックスタートアップにて、専門職向けAIプラットフォームの機能開発・運用支援にフリーランスとして従事。' +
+        '常駐エンジニア1名に自分が加わった2名体制で、' +
+        'AI契約書チェックOSSの品質検証・リリース準備から、大規模ドキュメントの変換スクリプト開発、' +
+        'FastAPI + Reactによる管理画面ダッシュボード実装、週次レポート自動生成（PydanticAI + Gemini）まで、' +
+        'バックエンド・フロントエンド・インフラを横断して担当。',
       responsibilities: [
-        '【プロンプトエンジニアリング】システムプロンプト・カテゴリカタログ・Few-shot例を体系的に設計し、4段階のアブレーション実験で反復最適化。V0（Acc 0.689）→ V1（0.828）→ V2（0.869）→ V3（0.901）と累積+21.2ptの精度向上を達成',
-        '【Few-shot学習戦略】例題をAnchor（出力フォーマットの定着）・Boundary（境界判別）・Error-targeted（頻出誤分類の是正）の3役割で戦略的に設計し、精度向上とトークンコスト増のトレードオフを最適化',
-        '【言語別入力戦略の解明】英語契約書に日本語の説明文を使うとAccuracyが0.575まで低下する問題を発見。アブレーションにより英語カテゴリ名の導入が最大の精度寄与（+0.022）であることを特定し、全文入力は英語で+0.022・日本語で-0.005と言語依存性を定量化',
-        '【非契約文書の検出】報告書・社内メモ等の非契約文書を識別する機能を設計・評価。V0では対象20件が全て誤分類（F1=0.000）だったものをFew-shot設計で解消',
-        '【本番マイクロサービス実装】PoCコードを型安全なサービスとして再設計（FastAPI POST /classify）。Pydanticによるデータモデル、LLM応答のJSONパースとリトライ、バッチ処理（Parquet→API→JSONL）、コスト追跡を実装し、pytest 60件超でCI/CDを整備',
-        '【ML vs LLM の比較評価】同一評価データで従来MLモデル（XGBoost + vaporettoトークナイザ）とAccuracy・F1・Precision・Recall・混同行列を多角的に比較し、導入判断の根拠を提供',
+        'AI契約書チェックOSSのリリース前品質検証: NDA・業務委託・システム開発・売買の4契約類型で仕込み問題点を検出（OSS の初回公開前の品質検証）',
+        'ドキュメント変換スクリプト開発（Python）: 大規模ドキュメントのシート別Markdown変換・セクション分割・SHA256ハッシュによるstale検知の3スクリプトを実装。Python 3.9互換・CI通過・PRマージ済み',
+        'MCP利用頻度ダッシュボード実装: バックエンドに集計クエリ・APIエンドポイントを追加、フロントエンドにランク番号+プログレスバーのテーブルUIを実装。ステージングデプロイ成功',
+        'ドリルダウン機能実装: ツール別・会員別の詳細データを取得する2エンドポイントを追加し、ドロワー方式のUIコンポーネントを実装してPRマージ',
+        '週次レポート自動生成: PydanticAI + Geminiによる自動レポート生成システムをGitHub Actions化。PR/Issue収集・CI失敗検出・サニタイズ処理を実装',
+        'Cloud Monitoringインフラ整備: Cloud Run向けアラートポリシーをTerraformモジュール化し、staging/productionへの組み込みと運用Runbookを追加',
       ],
       achievements:
-        '日本語契約書で従来ML比+14.1pt（Acc 0.760→0.901）、英語契約書で+5.0pt（Acc 0.843→0.893）の精度改善を達成。4段階のプロンプト反復で累積+21.2ptを実現し、5PRマージ・57件のコードレビュー対応を経てプロダクション品質のコードを納品',
+        '複数のPRをマージ。AI契約書チェックOSSの公開前検証、MCPダッシュボード・ドリルダウン機能のステージング検証を経たリリース、週次レポート自動生成のCI/CD組み込み完了',
       techStack: [
         'Python',
-        'Gemini 2.5 Flash',
-        'Google Cloud (Vertex AI)',
         'FastAPI',
+        'SQLAlchemy',
+        'PostgreSQL',
         'Pydantic',
-        'XGBoost',
-        'Bazel',
-        'pytest',
-        'ruff',
-        'mypy',
+        'PydanticAI',
+        'Gemini API',
+        'React',
+        'TypeScript',
+        'Mantine v8',
+        'TanStack Router',
+        'MCP (Model Context Protocol)',
+        'Terraform',
+        'Google Cloud Monitoring',
+        'GitHub Actions',
       ],
     },
   },
