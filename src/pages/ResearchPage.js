@@ -7,7 +7,7 @@ const ResearchPage = () => (
   <>
     <SubPageHeader
       title="Research"
-      lead="査読付き学会発表と学位論文。各項目に原稿PDF・スライド・ポスターを添付している。"
+      lead="学会発表と学位論文。各項目に原稿PDF・スライド・ポスターを添付している。"
     />
     <PublicationsSection />
   </>
