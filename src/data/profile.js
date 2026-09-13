@@ -50,6 +50,8 @@ const profile = {
     },
   ],
   email: 'yuto.yamada0101@gmail.com',
+  // Contact 冒頭の1行。何の相談なら連絡してよいかを明示する（Hero には出さない）
+  contactNote: '副業・業務委託・共同研究のご相談を歓迎します。',
 
   // Awards & Recognition: 第三者による受賞・選抜・掲載だけ（研究成果は Research が担当）
   achievements: [

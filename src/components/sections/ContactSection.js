@@ -126,6 +126,13 @@ const ExampleItem = styled.li`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
+const ContactNote = styled.p`
+  margin: 0 0 ${({ theme }) => theme.spacing.lg};
+  text-align: center;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+`;
+
 const SecondaryLinks = styled.p`
   margin-top: ${({ theme }) => theme.spacing.xl};
   text-align: center;
@@ -168,6 +175,7 @@ const ContactSection = () => {
     <Section id="contact">
       <SectionTitle title="Contact" subtitle="お問い合わせ" />
       <ContactWrapper>
+        {profile.contactNote && <ContactNote>{profile.contactNote}</ContactNote>}
         <ContactIntro>
           <IntroText>
             お気軽にご連絡ください。以下のようなご相談をお待ちしています。
