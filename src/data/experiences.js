@@ -19,7 +19,7 @@ const experiences = [
       '業務システムを人の代わりに自動操作するAIエージェントの研究開発。社内文書の知識をAIに参照させて操作の成功率を高める仕組みを設計・実装し、比較実験で効果を確認。',
     descriptionEn:
       'R&D on autonomous GUI agents — designed a RAG-based knowledge injection pipeline and measured its effect through unattended A/B evaluation.',
-    tags: ['Python', 'LLM Agent', 'RAG', 'OpenAI API', 'Prompt Engineering'],
+    tags: ['LLM Agent', 'RAG', 'Python', 'OpenAI API', 'Prompt Engineering'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
     hasDetail: true,
@@ -73,7 +73,7 @@ const experiences = [
       '音声合成・画像認識・文書処理・デスクトップGUI自動化など、複数のAI開発プロジェクトに従事。ロボット向け音声合成の成果はトヨタイムズに掲載。',
     descriptionEn:
       'Built AI systems across voice synthesis (featured on Toyota Times), computer vision, document automation, and desktop GUI agents.',
-    tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM Agent'],
+    tags: ['PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM Agent', 'Python'],
     url: 'https://airion.co.jp/',
     mediaLinks: [
       { label: 'トヨタイムズ YouTube', url: 'https://www.youtube.com/watch?v=xsmQ9Slnvds' },
@@ -216,7 +216,7 @@ const experiences = [
       '契約書の種類をAIで自動判別するシステムを研究開発。従来の仕組みから精度を大幅に改善（日本語契約書で+14pt）し、試作から本番サービスへの組み込みまで一貫して担当。',
     descriptionEn:
       'LLM-based contract classification R&D — improved accuracy by +14pt over the legacy ML model and shipped it as a production microservice.',
-    tags: ['Python', 'LLM', 'GCP', 'Prompt Engineering', 'Pydantic'],
+    tags: ['LLM', 'Pydantic', 'Python', 'GCP', 'Prompt Engineering'],
     url: 'https://legalontech.jp/',
     blogUrl: 'https://qiita.com/yamadan96/items/8926e19382896bc72bbf',
     hasDetail: true,
@@ -268,7 +268,7 @@ const experiences = [
       'AIチャットボットに狙った「性格」を持たせる研究開発。強化学習を用いた学習方法の比較検証と、性能・安全性の評価を担当。',
     descriptionEn:
       'Taught an LLM to express targeted personality traits via reinforcement learning (GRPO), covering reward design and safety evaluation.',
-    tags: ['Python', 'GRPO', 'PyTorch', 'LoRA', 'vLLM'],
+    tags: ['GRPO', 'PyTorch', 'LoRA', 'vLLM', 'Python'],
     url: 'https://matsuo-institute.com/',
     blogUrl: null,
     hasDetail: true,
@@ -321,7 +321,7 @@ const experiences = [
       '業務システム企業の社内AI開発を担当。社員の退職リスク予測、メール誤送信の自動検出、社内文書をAIで検索できる仕組みなど、複数のシステムを社内デモ環境まで展開。',
     descriptionEn:
       'In-house AI development: employee attrition prediction, email misdelivery detection, and RAG-based document search — multiple systems deployed to the internal demo environment.',
-    tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
+    tags: ['Azure OpenAI', 'Azure AI Search', 'Django', 'React', 'Python'],
     url: 'https://www.solty.co.jp/',
     blogUrl: null,
     hasDetail: true,

@@ -78,8 +78,6 @@ const ExperienceSection = () => {
   const major = experiences.filter((e) => !e.short && !e.secondary);
   const secondary = experiences.filter((e) => e.secondary);
   const short = experiences.filter((e) => e.short);
-  // Distinct company count (same company may appear in multiple entries)
-  const companyCount = new Set(experiences.map((e) => e.company)).size;
 
   const renderCompactGrid = (items) => (
     <CompactGrid>
@@ -106,7 +104,7 @@ const ExperienceSection = () => {
 
   return (
     <Section id="experience">
-      <SectionTitle title="Experience" subtitle={`実務・インターン経験（${companyCount}社）`} />
+      <SectionTitle title="Experience" subtitle="実務・インターン経験" />
       <SubHeading>主要な経験</SubHeading>
       <SubNote>長期・現職を中心とした実務経験</SubNote>
       <Timeline items={major} onDetailClick={handleDetailClick} />
