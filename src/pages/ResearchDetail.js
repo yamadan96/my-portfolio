@@ -161,6 +161,14 @@ const MetricLabel = styled.p`
   margin: ${({ theme }) => `${theme.spacing.xs} 0 0`};
 `;
 
+/* 数値カードの注記（先行報告との比較が論文間比較である旨など）。カードの直下に置き、数字だけが独り歩きしないようにする */
+const MetricsNote = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  line-height: 1.6;
+  margin: ${({ theme }) => `-${theme.spacing.sm} 0 ${theme.spacing.lg}`};
+`;
+
 const Links = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -293,6 +301,7 @@ const ResearchDetail = () => {
                   ))}
                 </Metrics>
               )}
+              {key === 'results' && pub.metricsNote && <MetricsNote>{pub.metricsNote}</MetricsNote>}
               <Body>{detail[key]}</Body>
             </SectionBlock>
           ) : null

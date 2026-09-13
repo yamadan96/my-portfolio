@@ -38,6 +38,25 @@ describe('publication data', () => {
     });
   });
 
+  it('ties the ITE2026 5.53pt result to the Noto dataset and labels the cross-paper comparison everywhere', () => {
+    const ite = publications.find((p) => p.id === 'pub-ite2026');
+    // (1) 5.53pt は能登半島地震の小規模データ（学習832枚）に限った結果として書く
+    [ite.claim, ite.highlight, ite.resultCards[2].label, ite.detail.results].forEach((text) => {
+      expect(text).toMatch(/能登/);
+      expect(text).toMatch(/832/);
+    });
+    expect(ite.detail.results).toMatch(/PHI-Net.*0\.25/);
+    expect(ite.detail.results).toMatch(/MEDIC.*消失/);
+    expect(ite.detail.interpretation).toMatch(/全データセットに共通する結果ではない/);
+    // (2) 先行報告との比較の数字が出る場所には必ず「実験条件の異なる論文間比較」を添える
+    [ite.metricsNote, ite.detail.results, ite.detail.interpretation].forEach((text) =>
+      expect(text).toMatch(/実験条件の異なる論文間比較/)
+    );
+    [ite.claim, ite.highlight, ...ite.resultCards.map((c) => `${c.value} ${c.label}`)].forEach((text) => {
+      ['79.87', '74.50', '99.53', '96.60', '83.86', '80.40'].forEach((n) => expect(text).not.toContain(n));
+    });
+  });
+
   it('gives the thesis a short title and keywords for its list row', () => {
     theses.forEach((p) => {
       expect(p.shortTitle.length).toBeGreaterThan(0);

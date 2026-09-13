@@ -33,7 +33,10 @@ describe('ResearchPage (level 2 list)', () => {
       '/research/pub-fit2025',
       '/research/pub-bachelor-thesis',
     ]);
-    expect(screen.getByText(/小規模データでは DINOv2 が最新の DINOv3 を 5\.53pt 上回った/)).toBeInTheDocument();
+    // 5.53pt は能登半島地震の小規模データ（学習832枚）に限った結果として書く
+    expect(
+      screen.getByText(/能登半島地震の小規模データ（学習832枚）では DINOv2 が最新の DINOv3 を 5\.53pt 上回った/)
+    ).toBeInTheDocument();
     expect(screen.getByText(/災害の種類・程度・有無を補助タスクにすると、10シード平均で精度が上がった/)).toBeInTheDocument();
     expect(screen.getByText(/少量データでも基盤モデルの一部だけを学習すれば精度が出る/)).toBeInTheDocument();
   });
@@ -67,6 +70,8 @@ describe('ResearchPage (level 2 list)', () => {
     expect(text).not.toMatch(/r=8/);
     expect(text).not.toMatch(/Since datasets/);
     expect(text).not.toMatch(/論文間比較/);
+    // 先行報告との比較（論文間比較）の数字は一覧に出さない
+    ['79.87', '74.50', '99.53', '96.60', '83.86', '80.40'].forEach((n) => expect(text).not.toContain(n));
     expect(text).not.toMatch(/講演予稿集/);
     expect(screen.queryByRole('link', { name: /原稿PDF/ })).not.toBeInTheDocument();
   });
