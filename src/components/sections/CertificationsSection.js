@@ -80,11 +80,21 @@ const CertLink = styled.a`
   }
 `;
 
+// 取得年月の新しい順に並べる（year は「2026年9月」形式）。同じ月なら記載順を保つ
+const yearMonth = (year) => {
+  const m = /(\d{4})年(?:(\d{1,2})月)?/.exec(year || '');
+  return m ? Number(m[1]) * 100 + Number(m[2] || 0) : 0;
+};
+const sortedCertifications = certifications
+  .map((cert, index) => ({ cert, index }))
+  .sort((a, b) => yearMonth(b.cert.year) - yearMonth(a.cert.year) || a.index - b.index)
+  .map(({ cert }) => cert);
+
 const CertificationsSection = () => (
   <Section id="certifications">
     <SectionTitle title="Certifications" subtitle="資格・認定" />
     <CertList>
-      {certifications.map((cert, index) => (
+      {sortedCertifications.map((cert, index) => (
         <CertCard
           key={cert.name}
           initial={{ opacity: 0, y: 20 }}
