@@ -50,7 +50,7 @@ const projects = [
     description:
       'Ollama / LM Studio / vLLM など OpenAI 互換のローカル LLM サーバー上で動作するコーディングエージェント CLI。read_file・write_file・edit_file・bash・glob・grep・list_dir の7ツールを内蔵し、ワークスペースサンドボックスと ask/auto 権限モードを実装。小型モデル特有の不安定さに対し、JSON 復旧・ファジーなツール名照合・無限ループ検出で対処した。',
     tags: ['Python', 'CLI', 'Local LLM', 'Tool Calling', 'Ollama', 'uv'],
-    github: null,
+    github: 'https://github.com/yamadan96/local-claude-code',
     demo: null,
     image: null,
     summary: {
