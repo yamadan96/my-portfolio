@@ -8,7 +8,7 @@ const publications = [
     // Level 3（数字）: 3件とも「公開ベンチマークでの自手法スコア（先行報告）」で粒度を揃える
     metrics: [
       { value: '79.87%', label: 'PHI-Net Accuracy（先行報告 74.50%）' },
-      { value: '99.53%', label: 'AIDERv2 Accuracy（同 96.60%）' },
+      { value: '99.53%', label: 'AIDERv2 Weighted-F1（同 96.60%）' },
       { value: '83.86%', label: 'MEDIC Weighted-F1（同 80.40%）' },
     ],
     title: '視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較',
@@ -16,7 +16,7 @@ const publications = [
       '映像情報メディア学会 2026年年次大会（口頭）／第1回 知覚AIフォーラム（ポスター、2026年8月24日・東京理科大学 葛飾キャンパス）',
     year: 2026,
     type: '学会発表（口頭・ポスター）',
-    highlight: '新しい基盤モデルが常に良いとは限らない。公開データ3件で元論文の報告値を上回った',
+    highlight: '新しい基盤モデルが常に良いとは限らない。公開データ3件で元論文の報告値を上回った（論文間比較）',
     // 原稿（ite2026-paper.pdf）掲載の Abstract をそのまま転記。
     abstract:
       'Since datasets for training dedicated models for such tasks are limited, utilization of general-purpose ' +
@@ -25,12 +25,12 @@ const publications = [
     description:
       '被災建物の損傷度分類において、視覚基盤モデル（DINOv2 ViT-L/14・DINOv3 ViT-L/16）の選択と適応戦略を、' +
       '規模の異なる4種の災害画像データセット（能登半島地震 832枚／PHI-Net 4,138枚／AIDERv2 13,399枚／MEDIC 49,353枚）で系統的に比較。' +
-      'より大規模に事前学習されたDINOv3が最小規模の能登データではDINOv2を5.53ポイント下回る一方、' +
-      'PHI-Net規模では差が0.25ポイントまで消失する反直感的な現象を報告。' +
-      'またPHI-NetではFull Fine-Tuning（3億439万パラメータ更新・76.20%）に対し、' +
-      'LoRA r=8（79万パラメータ＝全体の0.26%のみ更新）が79.82%と上回り、低ランク適応の暗黙的正則化効果を実証。' +
-      'PHI-Net 79.87%（先行報告74.50%）、AIDERv2 99.53%（同96.60%）、MEDIC 83.86% W-F1（同80.40%）と、' +
-      '3つの公開ベンチマークすべてで原著の報告値を上回った。',
+      'より大規模に事前学習されたDINOv3が最小規模の能登データではDINOv2を5.53ポイント下回り（6シード全てでDINOv2が優位、Wilcoxon p=0.031）、' +
+      'PHI-Net（4,138枚）では差が0.25ポイントに縮小、最大規模のMEDICでは実質的に消失した。予想に反して、新しいモデルが常に良いとは限らないことを報告。' +
+      'またPHI-NetではFull Fine-Tuning（約3.04億パラメータ更新・76.20%）に対し、' +
+      'LoRA r=8（79万パラメータ＝全体の0.26%のみ更新）が79.82%と上回った（6シード）。論文ではこれを、低ランク制約が正則化として働く可能性を支持する結果と解釈している。' +
+      'PHI-Net 79.87%（先行報告74.50%）、AIDERv2 99.53% W-F1（同96.60%）、MEDIC 83.86% W-F1（同80.40%）と、' +
+      '3つの公開ベンチマークで各原著の報告値を上回った（実験条件の異なる論文間比較）。',
     tags: ['Vision Foundation Model', 'DINOv2', 'DINOv3', 'LoRA', 'Disaster Assessment'],
     link: 'https://www.ite.or.jp/annual/2026/',
     citation:
