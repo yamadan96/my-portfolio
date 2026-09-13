@@ -3,48 +3,32 @@
   "homepage": "https://yamadan96.github.io",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "framer-motion": "^11.3.30",
     "mermaid": "^11.16.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.1",
-    "react-scripts": "5.0.1",
-    "styled-components": "^6.1.12",
-    "web-vitals": "^2.1.4"
+    "react-router-dom": "^6.30.6",
+    "styled-components": "^6.5.3"
   },
   "scripts": {
+    "start": "vite",
+    "build": "node scripts/validate-diagrams.mjs && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prebuild": "node scripts/validate-diagrams.mjs"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "~6.9.1",
+    "@testing-library/react": "^16.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "gh-pages": "^6.3.0",
+    "jsdom": "^30.0.1",
+    "vite": "^8.3.0",
+    "vitest": "^4.1.11"
   }
 }

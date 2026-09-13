@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import experiences from './experiences';
 
 describe('experience data', () => {
@@ -37,13 +38,10 @@ describe('experience data', () => {
       expect(e.id).toMatch(/^[a-z0-9-]+$/);
     });
     // 伏せた社名の一覧は git 管理外の .denylist.json に置く（あるときだけ検査する）
-    let denylist = [];
-    try {
-      // eslint-disable-next-line global-require
-      denylist = require('../../.denylist.json');
-    } catch (err) {
-      denylist = [];
-    }
+    const denylistPath = new URL('../../.denylist.json', import.meta.url);
+    const denylist = fs.existsSync(denylistPath)
+      ? JSON.parse(fs.readFileSync(denylistPath, 'utf8'))
+      : [];
     denylist.forEach((name) => expect(blob).not.toContain(name));
   });
 });
