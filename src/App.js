@@ -10,6 +10,7 @@ import ExperienceDetail from './pages/ExperienceDetail';
 import WorkPage from './pages/WorkPage';
 import ProjectDetail from './pages/ProjectDetail';
 import ResearchPage from './pages/ResearchPage';
+import ResearchDetail from './pages/ResearchDetail';
 import MorePage from './pages/MorePage';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/work" element={<WorkPage />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/research" element={<ResearchPage />} />
+            <Route path="/research/:id" element={<ResearchDetail />} />
             <Route path="/more" element={<MorePage />} />
             <Route path="/experience/:id" element={<ExperienceDetail />} />
             <Route path="*" element={<Navigate to="/" replace />} />
