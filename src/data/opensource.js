@@ -2,8 +2,16 @@
 const openSource = {
   githubUrl: 'https://github.com/yamadan96',
   summary:
-    '論文再現・スクラッチ実装・研究成果のデモを公開している。コードを読める形で残すことを重視し、実験の再現手順まで含めてリポジトリに置いている。',
+    '論文実装・スクラッチ実装・研究成果のデモなど、実際に動かしたコードを公開している。',
   repositories: [
+    {
+      name: 'local-claude-code',
+      url: 'https://github.com/yamadan96/local-claude-code',
+      language: 'Python',
+      description:
+        'Ollama など OpenAI 互換のローカル LLM で動くコーディングエージェント CLI。ファイル操作を作業フォルダ内に制限し、コマンド実行前の確認モードを備える。MIT ライセンス。',
+      topics: ['LLM Agent', 'CLI', 'Local LLM', 'MIT'],
+    },
     {
       name: 'arxiv-ingest',
       url: 'https://github.com/yamadan96/arxiv-ingest',
@@ -14,27 +22,20 @@ const openSource = {
       topics: ['CLI', 'PyPI', 'LLM', 'GitHub Actions'],
     },
     {
-      name: 'vit-from-scratch',
-      url: 'https://github.com/yamadan96/vit-from-scratch',
-      language: 'Python',
-      description:
-        'Vision Transformer（Dosovitskiy et al., 2020）を PyTorch でゼロから再現。CIFAR-10 で学習。',
-      topics: ['ViT', 'PyTorch', 'Paper Reproduction'],
-    },
-    {
       name: 'llm-finetune',
       url: 'https://github.com/yamadan96/llm-finetune',
       language: 'Python',
       description:
-        'LoRA（Hu et al., 2021）を自前実装し、Qwen2.5-7B を日本語 instruction tuning。PEFT 非依存。',
+        'LoRA（Hu et al., 2021）を PEFT 非依存で自前実装し、Qwen2.5-7B の日本語 instruction tuning 用の学習パイプラインを実装。',
       topics: ['LoRA', 'Qwen2.5', 'Instruction Tuning'],
     },
     {
-      name: 'sdxl-lora',
-      url: 'https://github.com/yamadan96/sdxl-lora',
+      name: 'vit-from-scratch',
+      url: 'https://github.com/yamadan96/vit-from-scratch',
       language: 'Python',
-      description: 'Stable Diffusion XL + LoRA の DreamBooth 方式ファインチューニングと Gradio WebApp。',
-      topics: ['SDXL', 'LoRA', 'Diffusers', 'Gradio'],
+      description:
+        'Vision Transformer（Dosovitskiy et al., 2020）の主要コンポーネントを PyTorch でスクラッチ実装。CIFAR-10 で学習・検証。',
+      topics: ['ViT', 'PyTorch', 'From Scratch', 'Paper Implementation'],
     },
     {
       name: 'disaster-app',
@@ -42,6 +43,13 @@ const openSource = {
       language: 'Python',
       description: '学会発表した DINOv2 + LoRA の損傷度分類モデルを WebApp 化（研究論文の実装）。',
       topics: ['DINOv2', 'LoRA', 'Gradio'],
+    },
+    {
+      name: 'sdxl-lora',
+      url: 'https://github.com/yamadan96/sdxl-lora',
+      language: 'Python',
+      description: 'Stable Diffusion XL + LoRA の DreamBooth 方式ファインチューニングと Gradio WebApp。',
+      topics: ['SDXL', 'LoRA', 'Diffusers', 'Gradio'],
     },
     {
       name: 'paper-survey',
