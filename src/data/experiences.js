@@ -144,7 +144,7 @@ const experiences = [
         'Cloud Monitoringインフラ整備: Cloud Run向けアラートポリシーをTerraformモジュール化し、staging/productionへの組み込みと運用Runbookを追加',
       ],
       achievements:
-        '複数のPRをマージ。AI契約書チェックOSS公開貢献、MCPダッシュボード・ドリルダウン機能のステージング本番リリース、週次レポート自動生成のCI/CD組み込み完了',
+        '複数のPRをマージ。AI契約書チェックOSS公開貢献、MCPダッシュボード・ドリルダウン機能のステージング検証を経たリリース、週次レポート自動生成のCI/CD組み込み完了',
       techStack: [
         'Python',
         'FastAPI',
