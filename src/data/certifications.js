@@ -34,7 +34,8 @@ const certifications = [
     category: '会計',
     year: '2023年1月',
     description: '日本商工会議所主催',
-    link: null,
+    // 合格証書のスキャン（生年月日・証番号は塗りつぶし済み）
+    link: '/certificates/nissho-boki-3-2023.jpg',
   },
   {
     name: 'JDLA認定「現場で使えるディープラーニング基礎講座」',
