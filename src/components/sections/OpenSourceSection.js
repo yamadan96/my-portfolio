@@ -105,7 +105,7 @@ const ProfileLink = styled.a`
 
 const OpenSourceSection = () => (
   <Section id="opensource">
-    <SectionTitle title="Open Source" subtitle="公開リポジトリ" />
+    <SectionTitle title="GitHub Projects" subtitle="Selected Public Repositories" />
     <Intro>{openSource.summary}</Intro>
     <Grid>
       {openSource.repositories.map((repo) => (
