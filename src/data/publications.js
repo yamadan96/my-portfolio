@@ -137,27 +137,27 @@ const publications = [
     id: 'pub-fit2025',
     shortVenue: 'FIT2025',
     shortTitle: 'LoRA による損傷度分類',
-    claim: '少量データでも基盤モデルの一部だけを学習すれば精度が出る',
+    claim: 'LoRA で基盤モデル DINOv2 の精度は大きく上がるが、少量データでは ConvNeXt の標準学習が最も安定',
     resultCards: [
       { value: '1,040枚', label: '自作データセット' },
       { value: '6', label: 'クラス' },
-      { value: '0.77', label: 'Macro F1（DINOv2 + LoRA）' },
+      { value: '0.37 → 0.56', label: 'Macro F1（DINOv2、LoRA 適用前→後）' },
     ],
     metrics: [
-      { value: '0.77', label: 'Macro F1（ResNet-50 0.46 → DINOv2 + LoRA）' },
+      { value: '0.37 → 0.56', label: 'Macro F1（DINOv2 ViT-B、標準学習 → LoRA 適用）' },
       { value: '1,040枚', label: '能登半島地震の自作データセット（6クラス）' },
     ],
     title: 'ファインチューニング手法に基づく被災建物画像の多クラス損傷度分類の精度改善',
     venue: 'FIT2025 第24回情報科学技術フォーラム',
     year: 2025,
     type: '学会発表（口頭）',
-    highlight: '少ない写真でも、基盤モデルの一部だけを学習すれば精度が出る',
+    highlight: 'LoRA で基盤モデル DINOv2 の精度は大きく上がるが、少量データでは ConvNeXt の標準学習が最も安定',
     description:
       '地震・津波などの大規模災害直後の被災建物損傷度分類の自動化。' +
       '2024年能登半島地震の被災家屋を現地撮影した独自データセット（1,040枚・6クラス・518×518画素／訓練832枚・評価208枚の固定分割）を使用。' +
       'クラス分布は最大313枚〜最小88枚と不均衡で、専門家によるラベル付与でも判断が分かれる難易度の高いタスク。' +
-      'ResNet-50（Acc 0.51／Macro F1 0.46）、ConvNeXt-Tiny（0.66／0.54）に対し、' +
-      'DINOv2（ViT-B）＋LoRAが Acc 0.80／Macro F1 0.77 で最良となり、少数データ環境における精度と軽量性の両立を示した。',
+      '標準ファインチューニングでは ConvNeXt-Tiny（Acc 0.66／Macro F1 0.54）が最も高く、DINOv2（ViT-B）は 0.45／0.37 にとどまった。' +
+      'LoRA を適用すると DINOv2 は 0.65／0.56 まで改善したが、ConvNeXt-Tiny／Base（0.64／0.58、0.66／0.56）には及ばなかった。',
     detail: {
       question:
         '地震・津波などの大規模災害直後に、被災建物の損傷度分類を自動化したい。' +
@@ -166,12 +166,14 @@ const publications = [
         '2024年能登半島地震の被災家屋を現地撮影した独自データセット。1,040枚・6クラス・518×518画素、訓練832枚・評価208枚の固定分割。' +
         'クラス分布は最大313枚〜最小88枚と不均衡。',
       method:
-        'CNN（ResNet-50・ConvNeXt-Tiny）と、視覚基盤モデル DINOv2（ViT-B）に LoRA を適用した手法を比較。' +
+        'ResNet-50・EfficientNetV2-S・ConvNeXt-Tiny／Base・Swin-Tiny・ViT-Base・DINOv2（ViT-B）の7モデルを、標準ファインチューニングと LoRA 適用の2方式で比較。' +
         'LoRA は基盤モデルの一部のパラメータだけを学習する。',
       experiments: '固定分割の訓練832枚で各モデルを学習し、評価208枚で Accuracy と Macro F1 を比較した。',
       results:
-        'ResNet-50（Acc 0.51／Macro F1 0.46）、ConvNeXt-Tiny（0.66／0.54）に対し、DINOv2（ViT-B）＋LoRA が Acc 0.80／Macro F1 0.77 で最良。',
-      interpretation: '少数データ環境でも、基盤モデルの一部だけを学習すれば精度が出る。DINOv2＋LoRA は精度と軽量性の両立を示した。',
+        '標準学習：ResNet-50 Acc 0.51／Macro F1 0.46、ConvNeXt-Tiny 0.66／0.54、DINOv2 0.45／0.37。' +
+        'LoRA 適用：DINOv2 0.65／0.56、ConvNeXt-Tiny 0.64／0.58、ConvNeXt-Base 0.66／0.56。' +
+        '初稿では DINOv2＋LoRA を Acc 0.80／Macro F1 0.77 と誤記しており、2025-08-25 の正誤表で訂正した（掲載 PDF は訂正後の版）。',
+      interpretation: 'ConvNeXt 系は標準学習で安定して高精度を示し、このタスクでは CNN が有効。DINOv2 は LoRA で大きく改善しており、自己教師あり学習の汎用表現にタスク特化の調整を加える有効性が示唆される（論文の結論）。',
     },
     tags: ['Deep Learning', 'LoRA', 'CNN', 'ViT', 'Disaster Assessment'],
     link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',

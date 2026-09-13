@@ -38,7 +38,7 @@ describe('ResearchPage (level 2 list)', () => {
       screen.getByText(/能登半島地震の小規模データ（学習832枚）では DINOv2 が最新の DINOv3 を 5\.53pt 上回った/)
     ).toBeInTheDocument();
     expect(screen.getByText(/災害の種類・程度・有無を補助タスクにすると、10シード平均で精度が上がった/)).toBeInTheDocument();
-    expect(screen.getByText(/少量データでも基盤モデルの一部だけを学習すれば精度が出る/)).toBeInTheDocument();
+    expect(screen.getByText(/LoRA で基盤モデル DINOv2 の精度は大きく上がるが、少量データでは ConvNeXt の標準学習が最も安定/)).toBeInTheDocument();
   });
 
   it('derives the presentation badge from the type', () => {
@@ -49,7 +49,7 @@ describe('ResearchPage (level 2 list)', () => {
 
   it('shows three result cards per paper with the numbers of the data file', () => {
     renderPage();
-    ['+5.53pt', '68.99→71.04%', '0.77'].forEach((value) =>
+    ['+5.53pt', '68.99→71.04%', '0.37 → 0.56'].forEach((value) =>
       expect(screen.getByText(value)).toBeInTheDocument()
     );
     expect(screen.getAllByText('1,040枚')).toHaveLength(2);
