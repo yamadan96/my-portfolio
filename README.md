@@ -37,8 +37,11 @@ row appears only in the hero.
 
 ## Stack
 
-React 18 · styled-components 6 · react-router-dom 6 · framer-motion · Create React App ·
-GitHub Pages (`gh-pages`).
+React 18 · styled-components 6 · react-router-dom 6 · framer-motion · Vite 8 (build / dev
+server) · Vitest (unit tests, jsdom + testing-library) · GitHub Pages (`gh-pages`).
+
+Components keep their `.js` extension from the Create React App days; `vite.config.js`
+compiles JSX in `src/**/*.js` through a small pre plugin.
 
 Design: dark theme by default (light available from the header toggle), Inter / Noto Sans JP,
 gradient section titles and glass cards as in the July-2026 version.
@@ -47,11 +50,14 @@ gradient section titles and glass cards as in the July-2026 version.
 
 ```bash
 npm install
-npm start                       # http://localhost:3000
-npm test -- --watchAll=false    # unit tests (jest + testing-library)
+npm start                       # Vite dev server, http://localhost:5173
+npm test -- --run               # unit tests once (vitest + testing-library); `npm test` watches
 npm run build                   # validates Mermaid diagrams, then builds to build/
+npm run preview                 # serves build/ locally, http://localhost:4173
 npm run deploy                  # build + publish build/ to the gh-pages branch
 ```
+
+Node 22 or newer is required (the GitHub Actions workflow uses Node 22).
 
 `scripts/validate-diagrams.mjs` runs before every build and fails it if any Mermaid
 chart in `src/data/projects.js` does not parse.
