@@ -43,6 +43,51 @@ const projects = [
     },
   },
   {
+    id: 'project-local-claude-code',
+    featured: true,
+    category: 'tool',
+    title: 'local-claude-code（ローカルLLM版コーディングエージェント CLI）',
+    description:
+      'Ollama / LM Studio / vLLM など OpenAI 互換のローカル LLM サーバー上で動作するコーディングエージェント CLI。read_file・write_file・edit_file・bash・glob・grep・list_dir の7ツールを内蔵し、ワークスペースサンドボックスと ask/auto 権限モードを実装。小型モデル特有の不安定さに対し、JSON 復旧・ファジーなツール名照合・無限ループ検出で対処した。',
+    tags: ['Python', 'CLI', 'Local LLM', 'Tool Calling', 'Ollama', 'uv'],
+    github: null,
+    demo: null,
+    image: null,
+    summary: {
+      built: '自分のパソコン内で動くAIに、ファイルの読み書きやコマンド実行を任せられるコーディング支援ツール。',
+      problem: '一般的なAIコーディングツールは外部サービスにコードを送る。手元だけで完結させたかった。',
+      role: '設計・実装を単独で担当。小型モデル特有の不安定さへの対処も自分で見つけて実装した。',
+      tech: 'Ollama など「自分のPCでAIを動かすソフト」に接続し、AIがファイル操作やコマンド実行を自分で選んで実行する（Tool Calling という仕組み）。',
+      result: 'ファイル読み書き・コマンド実行・検索など7種類の操作をAIに任せられる。ファイル操作は作業フォルダ内に制限し、コマンド実行前に確認を求めるモードも実装した。',
+    },
+    technical: [
+      { label: 'ツール構成', body: 'read_file / write_file / edit_file / bash / glob / grep / list_dir の7ツールを内蔵。ワークスペース外へのアクセスを拒否するサンドボックスと、ask / auto の権限モードを備える。' },
+      { label: '小型モデルへの対応', body: '小型モデルは JSON を壊す・ツール名を微妙に間違える・同じ操作を無限に繰り返すという失敗をする。JSON の復旧処理、ファジーなツール名照合、ループ検出をそれぞれ実装して対処した。' },
+      { label: '接続先', body: 'OpenAI 互換 API を話すサーバー（Ollama / LM Studio / vLLM）であれば差し替え可能。特定ベンダーに依存しない構成。' },
+      { label: '苦労した点', body: '同一ポートで別プロセスが待ち受けていたため、localhost の IPv6/IPv4 解決の違いで意図しないサービスへリクエストが飛ぶ問題に遭遇した。lsof で全リスナーを列挙して原因を特定し、IPv4 を明示して解決した。' },
+    ],
+    diagram: {
+      alt: 'ローカルのLLMがツールを選んで実行するエージェントループの構成図',
+      caption: '外部にコードを送らず、操作範囲は1つのフォルダ内に制限される',
+      chart: `flowchart TB
+  USER["利用者の指示"] --> LOOP
+  subgraph LOOP["エージェントループ"]
+    LLMS["ローカル LLM サーバー<br/>Ollama / LM Studio / vLLM<br/>（OpenAI 互換 API）"]
+    GUARD["復旧処理<br/>JSON修復 / ツール名照合 / ループ検出"]
+    PERM{"ask / auto<br/>権限モード"}
+  end
+  LLMS -- "ツール呼び出し" --> GUARD --> PERM
+  PERM -- "許可" --> TOOLS
+  subgraph TOOLS["内蔵7ツール（サンドボックス内）"]
+    T1["read_file / write_file / edit_file"]
+    T2["bash"]
+    T3["glob / grep / list_dir"]
+  end
+  TOOLS -- "実行結果" --> LLMS
+  TOOLS --- WS["ワークスペース<br/>外部へのアクセスは拒否"]`,
+    },
+  },
+  {
     id: 'project-vit-scratch',
     featured: true,
     category: 'ml',
@@ -81,49 +126,6 @@ const projects = [
   end
   BLK --> HEAD["CLS のみ取り出し<br/>LayerNorm → Linear(256→10)"]
   HEAD --> OUT["10クラス分類<br/>CIFAR-10"]`,
-    },
-  },
-  {
-    id: 'project-sdxl-lora',
-    featured: true,
-    category: 'ml',
-    title: 'SDXL + LoRA 画像生成（DreamBooth 方式）',
-    description:
-      'Stable Diffusion XL を LoRA でファインチューニングし、被写体画像5〜20枚から任意のシーンでの 1024×1024 画像を生成。UNet の to_q/k/v に LoRA を適用し、VAE エンコード → DDPM ノイズ付加 → ノイズ予測の MSE 損失で LoRA パラメータのみを更新する学習パイプラインを実装。',
-    tags: ['Stable Diffusion XL', 'LoRA', 'DreamBooth', 'Diffusers', 'Python'],
-    github: 'https://github.com/yamadan96/sdxl-lora',
-    demo: null,
-    image: null,
-    summary: {
-      built: '特定の人や物の写真を5〜20枚与えると、その被写体を任意の場面で描いた画像を生成できるようにする学習の仕組み。',
-      problem: '画像生成モデルは一般的な絵は描けるが、特定の被写体は知らない。モデル全体を学習し直すのは計算量が大きすぎるため、一部だけを学習する方法を試した。',
-      role: 'ノイズを加えて元に戻す学習ループ、学習対象の限定、画像生成までのパイプラインを実装。',
-      tech: 'Stable Diffusion XL（テキストから画像を生成するモデル）に対し、LoRA で注意機構の一部だけを学習。DreamBooth という「少数の写真から被写体を覚えさせる」方式を採用した。',
-      result: '5〜20枚の入力から1024×1024の画像を生成。学習対象を UNet の一部に絞ることで、モデル全体を学習し直さずに被写体を再現できることを確認した。',
-    },
-    technical: [
-      { label: '学習パイプライン', body: '学習画像を VAE エンコーダで潜在表現 z に変換 → ランダムな時刻 t の DDPM ノイズを付加 → UNet がノイズ ε を予測 → 真のノイズとの MSE 損失 → LoRA パラメータ（A, B）のみを更新。' },
-      { label: 'LoRA の適用箇所', body: 'UNet の to_q / to_k / to_v に限定。元の重みは凍結し、追加した低ランク行列のみが勾配を受ける。' },
-      { label: '推論フロー', body: 'プロンプトを CLIP テキストエンコーダで埋め込み → UNet で30ステップのノイズ除去 → VAE デコーダで 1024×1024 画像へ復元。' },
-      { label: '苦労した点', body: '被写体の再現度と、プロンプトで指定した場面への追従性がトレードオフになる。学習を進めすぎると場面指示を無視して学習画像に寄る挙動が出る。' },
-    ],
-    diagram: {
-      alt: '画像にノイズを加えて復元させる学習と、プロンプトから画像を生成する推論の構成図',
-      caption: '上段が学習、下段が生成。学習対象は UNet の注意機構の一部だけ',
-      chart: `flowchart TB
-  subgraph TR["学習（被写体の写真 5〜20枚）"]
-    IMGS["学習画像"] --> VAE_E["VAE エンコーダ"] --> Z["潜在表現 z"]
-    Z --> NOISE["ランダム時刻 t の<br/>DDPM ノイズを付加"]
-    NOISE --> UNET1["UNet<br/>（to_q/k/v に LoRA）"]
-    UNET1 --> PRED["ノイズ ε を予測"]
-    PRED --> LOSS["MSE 損失"]
-    LOSS -. "LoRA のみ更新" .-> UNET1
-  end
-  subgraph INF["生成"]
-    P["プロンプト"] --> CLIP["CLIP テキストエンコーダ"]
-    CLIP --> UNET2["UNet で30ステップ<br/>ノイズ除去"]
-    UNET2 --> VAE_D["VAE デコーダ"] --> RESULT["1024×1024 画像"]
-  end`,
     },
   },
   {
@@ -207,48 +209,46 @@ const projects = [
     },
   },
   {
-    id: 'project-local-claude-code',
-    featured: true,
-    category: 'tool',
-    title: 'local-claude-code（ローカルLLM版コーディングエージェント CLI）',
+    id: 'project-sdxl-lora',
+    featured: false,
+    category: 'ml',
+    title: 'SDXL + LoRA 画像生成（DreamBooth 方式）',
     description:
-      'Ollama / LM Studio / vLLM など OpenAI 互換のローカル LLM サーバー上で動作するコーディングエージェント CLI。read_file・write_file・edit_file・bash・glob・grep・list_dir の7ツールを内蔵し、ワークスペースサンドボックスと ask/auto 権限モードを実装。小型モデル特有の不安定さに対し、JSON 復旧・ファジーなツール名照合・無限ループ検出で対処した。',
-    tags: ['Python', 'CLI', 'Local LLM', 'Tool Calling', 'Ollama', 'uv'],
-    github: null,
+      'Stable Diffusion XL を LoRA でファインチューニングし、被写体画像5〜20枚から任意のシーンでの 1024×1024 画像を生成。UNet の to_q/k/v に LoRA を適用し、VAE エンコード → DDPM ノイズ付加 → ノイズ予測の MSE 損失で LoRA パラメータのみを更新する学習パイプラインを実装。',
+    tags: ['Stable Diffusion XL', 'LoRA', 'DreamBooth', 'Diffusers', 'Python'],
+    github: 'https://github.com/yamadan96/sdxl-lora',
     demo: null,
     image: null,
     summary: {
-      built: '自分のパソコン内で動くAIに、ファイルの読み書きやコマンド実行を任せられるコーディング支援ツール。',
-      problem: '一般的なAIコーディングツールは外部サービスにコードを送る。手元だけで完結させたかった。',
-      role: '設計・実装を単独で担当。小型モデル特有の不安定さへの対処も自分で見つけて実装した。',
-      tech: 'Ollama など「自分のPCでAIを動かすソフト」に接続し、AIがファイル操作やコマンド実行を自分で選んで実行する（Tool Calling という仕組み）。',
-      result: 'ファイル読み書き・コマンド実行・検索など7種類の操作をAIに任せられる。ファイル操作は作業フォルダ内に制限し、コマンド実行前に確認を求めるモードも実装した。',
+      built: '特定の人や物の写真を5〜20枚与えると、その被写体を任意の場面で描いた画像を生成できるようにする学習の仕組み。',
+      problem: '画像生成モデルは一般的な絵は描けるが、特定の被写体は知らない。モデル全体を学習し直すのは計算量が大きすぎるため、一部だけを学習する方法を試した。',
+      role: 'ノイズを加えて元に戻す学習ループ、学習対象の限定、画像生成までのパイプラインを実装。',
+      tech: 'Stable Diffusion XL（テキストから画像を生成するモデル）に対し、LoRA で注意機構の一部だけを学習。DreamBooth という「少数の写真から被写体を覚えさせる」方式を採用した。',
+      result: '5〜20枚の入力から1024×1024の画像を生成。学習対象を UNet の一部に絞ることで、モデル全体を学習し直さずに被写体を再現できることを確認した。',
     },
     technical: [
-      { label: 'ツール構成', body: 'read_file / write_file / edit_file / bash / glob / grep / list_dir の7ツールを内蔵。ワークスペース外へのアクセスを拒否するサンドボックスと、ask / auto の権限モードを備える。' },
-      { label: '小型モデルへの対応', body: '小型モデルは JSON を壊す・ツール名を微妙に間違える・同じ操作を無限に繰り返すという失敗をする。JSON の復旧処理、ファジーなツール名照合、ループ検出をそれぞれ実装して対処した。' },
-      { label: '接続先', body: 'OpenAI 互換 API を話すサーバー（Ollama / LM Studio / vLLM）であれば差し替え可能。特定ベンダーに依存しない構成。' },
-      { label: '苦労した点', body: '同一ポートで別プロセスが待ち受けていたため、localhost の IPv6/IPv4 解決の違いで意図しないサービスへリクエストが飛ぶ問題に遭遇した。lsof で全リスナーを列挙して原因を特定し、IPv4 を明示して解決した。' },
+      { label: '学習パイプライン', body: '学習画像を VAE エンコーダで潜在表現 z に変換 → ランダムな時刻 t の DDPM ノイズを付加 → UNet がノイズ ε を予測 → 真のノイズとの MSE 損失 → LoRA パラメータ（A, B）のみを更新。' },
+      { label: 'LoRA の適用箇所', body: 'UNet の to_q / to_k / to_v に限定。元の重みは凍結し、追加した低ランク行列のみが勾配を受ける。' },
+      { label: '推論フロー', body: 'プロンプトを CLIP テキストエンコーダで埋め込み → UNet で30ステップのノイズ除去 → VAE デコーダで 1024×1024 画像へ復元。' },
+      { label: '苦労した点', body: '被写体の再現度と、プロンプトで指定した場面への追従性がトレードオフになる。学習を進めすぎると場面指示を無視して学習画像に寄る挙動が出る。' },
     ],
     diagram: {
-      alt: 'ローカルのLLMがツールを選んで実行するエージェントループの構成図',
-      caption: '外部にコードを送らず、操作範囲は1つのフォルダ内に制限される',
+      alt: '画像にノイズを加えて復元させる学習と、プロンプトから画像を生成する推論の構成図',
+      caption: '上段が学習、下段が生成。学習対象は UNet の注意機構の一部だけ',
       chart: `flowchart TB
-  USER["利用者の指示"] --> LOOP
-  subgraph LOOP["エージェントループ"]
-    LLMS["ローカル LLM サーバー<br/>Ollama / LM Studio / vLLM<br/>（OpenAI 互換 API）"]
-    GUARD["復旧処理<br/>JSON修復 / ツール名照合 / ループ検出"]
-    PERM{"ask / auto<br/>権限モード"}
+  subgraph TR["学習（被写体の写真 5〜20枚）"]
+    IMGS["学習画像"] --> VAE_E["VAE エンコーダ"] --> Z["潜在表現 z"]
+    Z --> NOISE["ランダム時刻 t の<br/>DDPM ノイズを付加"]
+    NOISE --> UNET1["UNet<br/>（to_q/k/v に LoRA）"]
+    UNET1 --> PRED["ノイズ ε を予測"]
+    PRED --> LOSS["MSE 損失"]
+    LOSS -. "LoRA のみ更新" .-> UNET1
   end
-  LLMS -- "ツール呼び出し" --> GUARD --> PERM
-  PERM -- "許可" --> TOOLS
-  subgraph TOOLS["内蔵7ツール（サンドボックス内）"]
-    T1["read_file / write_file / edit_file"]
-    T2["bash"]
-    T3["glob / grep / list_dir"]
-  end
-  TOOLS -- "実行結果" --> LLMS
-  TOOLS --- WS["ワークスペース<br/>外部へのアクセスは拒否"]`,
+  subgraph INF["生成"]
+    P["プロンプト"] --> CLIP["CLIP テキストエンコーダ"]
+    CLIP --> UNET2["UNet で30ステップ<br/>ノイズ除去"]
+    UNET2 --> VAE_D["VAE デコーダ"] --> RESULT["1024×1024 画像"]
+  end`,
     },
   },
   {
@@ -283,6 +283,44 @@ const projects = [
   GRAPH --> GHA["GitHub Actions"]
   PAGES --> GHA
   GHA --> GP["GitHub Pages<br/>公開サイト"]`,
+    },
+  },
+  {
+    id: 'project-gapless-keyboard',
+    featured: true,
+    category: 'product',
+    title: 'GapLess Keyboard（AI 返信 iOS カスタムキーボード）',
+    description:
+      'キーボードを切り替えるだけで AI が会話の文脈を読み取り、3パターンの返信案を生成する iOS カスタムキーボード。シーン切替・性格プリセット・トーン調整スライダーを搭載。Gemini 2.5 Flash と Next.js バックエンド API を連携し、実機での動作まで確認済み。',
+    tags: ['Swift', 'iOS', 'Keyboard Extension', 'Gemini API', 'Next.js'],
+    github: null,
+    demo: null,
+    image: null,
+    summary: {
+      built: 'キーボードを切り替えるだけで、AIが会話の流れを読んで返信案を出してくれる iPhone 用のキーボード。',
+      problem: '返信案を出すアプリは、アプリを開いて貼り付ける手間がかかる。キーボード自体に組み込めば、その手間が消える。',
+      role: 'iOS のキーボード拡張とバックエンドAPIの両方を実装し、実機で動作を確認。',
+      tech: 'iOS のキーボード拡張機能（Keyboard Extension）として実装。返信案の生成は Gemini を利用している。',
+      result: 'カジュアル・ビジネスなどの場面切替、性格プリセット、トーン調整スライダーを搭載。実機インストールまで完了。',
+    },
+    technical: [
+      { label: '構成', body: 'Swift による Keyboard Extension が入力欄の文脈を取得し、Next.js のバックエンド API 経由で Gemini 2.5 Flash に返信案を生成させる。APIキーはバックエンド側に隔離。' },
+      { label: '制約への対応', body: 'iOS のキーボード拡張はメモリ制限が厳しく、ネットワークアクセスにも Full Access の許可が必要。UI を軽量に保ち、生成処理をすべてサーバー側へ寄せる設計にした。' },
+      { label: '苦労した点', body: '拡張機能はホストアプリと別プロセスで動くため、設定の共有と権限周りの取り扱いが通常のアプリ開発とは異なる。' },
+    ],
+    diagram: {
+      alt: 'iOSキーボード拡張から自前APIを経由してAIが返信案を生成する構成図',
+      caption: 'キーボード拡張は軽量に保ち、生成処理はすべてサーバー側に寄せた',
+      chart: `flowchart LR
+  subgraph IOS["iPhone"]
+    KB["Keyboard Extension<br/>Swift"]
+    FIELD["入力欄<br/>会話の文脈"]
+  end
+  FIELD --> KB
+  KB -- "文脈 + 場面 + トーン" --> API["Next.js バックエンド API<br/>（API キーを保持）"]
+  API --> GEM["Gemini 2.5 Flash"]
+  GEM --> API -- "返信案 3パターン" --> KB
+  KB -- "選んだ案を直接入力" --> FIELD`,
     },
   },
   {
@@ -324,44 +362,6 @@ const projects = [
   APP -- "共有シークレット付きで呼び出し" --> FN["サーバーレス関数<br/>（API キーはここだけ）"]
   FN --> CLAUDE["Claude API<br/>AI チャットコーチ"]
   CLAUDE --> FN --> APP`,
-    },
-  },
-  {
-    id: 'project-gapless-keyboard',
-    featured: true,
-    category: 'product',
-    title: 'GapLess Keyboard（AI 返信 iOS カスタムキーボード）',
-    description:
-      'キーボードを切り替えるだけで AI が会話の文脈を読み取り、3パターンの返信案を生成する iOS カスタムキーボード。シーン切替・性格プリセット・トーン調整スライダーを搭載。Gemini 2.5 Flash と Next.js バックエンド API を連携し、実機での動作まで確認済み。',
-    tags: ['Swift', 'iOS', 'Keyboard Extension', 'Gemini API', 'Next.js'],
-    github: null,
-    demo: null,
-    image: null,
-    summary: {
-      built: 'キーボードを切り替えるだけで、AIが会話の流れを読んで返信案を出してくれる iPhone 用のキーボード。',
-      problem: '返信案を出すアプリは、アプリを開いて貼り付ける手間がかかる。キーボード自体に組み込めば、その手間が消える。',
-      role: 'iOS のキーボード拡張とバックエンドAPIの両方を実装し、実機で動作を確認。',
-      tech: 'iOS のキーボード拡張機能（Keyboard Extension）として実装。返信案の生成は Gemini を利用している。',
-      result: 'カジュアル・ビジネスなどの場面切替、性格プリセット、トーン調整スライダーを搭載。実機インストールまで完了。',
-    },
-    technical: [
-      { label: '構成', body: 'Swift による Keyboard Extension が入力欄の文脈を取得し、Next.js のバックエンド API 経由で Gemini 2.5 Flash に返信案を生成させる。APIキーはバックエンド側に隔離。' },
-      { label: '制約への対応', body: 'iOS のキーボード拡張はメモリ制限が厳しく、ネットワークアクセスにも Full Access の許可が必要。UI を軽量に保ち、生成処理をすべてサーバー側へ寄せる設計にした。' },
-      { label: '苦労した点', body: '拡張機能はホストアプリと別プロセスで動くため、設定の共有と権限周りの取り扱いが通常のアプリ開発とは異なる。' },
-    ],
-    diagram: {
-      alt: 'iOSキーボード拡張から自前APIを経由してAIが返信案を生成する構成図',
-      caption: 'キーボード拡張は軽量に保ち、生成処理はすべてサーバー側に寄せた',
-      chart: `flowchart LR
-  subgraph IOS["iPhone"]
-    KB["Keyboard Extension<br/>Swift"]
-    FIELD["入力欄<br/>会話の文脈"]
-  end
-  FIELD --> KB
-  KB -- "文脈 + 場面 + トーン" --> API["Next.js バックエンド API<br/>（API キーを保持）"]
-  API --> GEM["Gemini 2.5 Flash"]
-  GEM --> API -- "返信案 3パターン" --> KB
-  KB -- "選んだ案を直接入力" --> FIELD`,
     },
   },
   {
