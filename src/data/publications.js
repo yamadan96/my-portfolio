@@ -16,7 +16,7 @@ const publications = [
       '映像情報メディア学会 2026年年次大会（口頭）／第1回 知覚AIフォーラム（ポスター、2026年8月24日・東京理科大学 葛飾キャンパス）',
     year: 2026,
     type: '学会発表（口頭・ポスター）',
-    highlight: '新しい基盤モデルが常に良いとは限らない。公開データ3件で最高精度を更新',
+    highlight: '新しい基盤モデルが常に良いとは限らない。公開データ3件で元論文の報告値を上回った',
     // 原稿（ite2026-paper.pdf）掲載の Abstract をそのまま転記。
     abstract:
       'Since datasets for training dedicated models for such tasks are limited, utilization of general-purpose ' +
@@ -30,7 +30,7 @@ const publications = [
       'またPHI-NetではFull Fine-Tuning（3億439万パラメータ更新・76.20%）に対し、' +
       'LoRA r=8（79万パラメータ＝全体の0.26%のみ更新）が79.82%と上回り、低ランク適応の暗黙的正則化効果を実証。' +
       'PHI-Net 79.87%（先行報告74.50%）、AIDERv2 99.53%（同96.60%）、MEDIC 83.86% W-F1（同80.40%）と、' +
-      '3つの公開ベンチマークで一貫してSoTAを更新。',
+      '3つの公開ベンチマークすべてで原著の報告値を上回った。',
     tags: ['Vision Foundation Model', 'DINOv2', 'DINOv3', 'LoRA', 'Disaster Assessment'],
     link: 'https://www.ite.or.jp/annual/2026/',
     citation:
