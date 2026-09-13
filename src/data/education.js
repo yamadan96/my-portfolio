@@ -5,7 +5,7 @@ const education = [
     faculty: '創域理工学研究科 電気電子情報工学専攻',
     degree: '修士課程',
     period: '2025年4月〜2027年3月（修了見込み）',
-    description: '被災建物画像の損傷度分類AI、生成モデルの研究に従事',
+    description: '災害の写真から建物の壊れ具合を判定する AI の研究',
   },
   {
     id: 'edu-02',
