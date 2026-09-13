@@ -83,7 +83,7 @@ describe('ExperienceDetail highlights layout (airion)', () => {
 
   it('keeps the modal for a card without a projectId', () => {
     renderDetail('airion');
-    fireEvent.click(screen.getByText('製造業向けラダー図の要約AIシステム'));
+    fireEvent.click(screen.getByText('製造業向けラダー図の要約・検索AIシステム'));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.queryByTestId('project-route')).not.toBeInTheDocument();
   });

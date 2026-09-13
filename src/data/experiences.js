@@ -89,7 +89,7 @@ const experiences = [
       highlights: [
         { axis: 'Computer Vision', title: '鉄パイプ自動計数', text: '束単位の検出成功率 96.6%（社内評価）、推論 0.2秒/枚。4名チームでテックリード。' },
         { axis: 'Speech AI', title: 'コミュニケーションロボット向け音声合成', text: '10モデルを比較して Style-Bert-VITS2 を採用。学習からリアルタイム推論 API まで担当（トヨタイムズ掲載）。' },
-        { axis: 'LLM / Agent', title: '製造業向け AI システム', text: 'ラダープログラムを対象とした LLM/RAG（自動要約など）と、Windows 業務ソフトの GUI 自動操作エージェントを設計・実装。' },
+        { axis: 'LLM / Agent', title: '製造業向け AI システム', text: 'ラダー図の自動要約・自然言語検索・設備情報抽出を行う RAG（LLM-as-a-Judge で評価）と、Windows 業務ソフトの GUI 自動操作エージェントを設計・実装。' },
       ],
       // 案件ごとの内訳（詳細ページのカード）。projectId があるカードは projects.js の個別ページ（/projects/:id）へ遷移し、
       // 取り組み内容・成果はそちら（story）に置くのでカードには持たせない。ないカードはモーダルで開く。新しい事実は含まない
@@ -115,17 +115,18 @@ const experiences = [
           techStack: ['Python', 'PyTorch', 'YOLOv8'],
         },
         {
-          name: '製造業向けラダー図の要約AIシステム',
+          name: '製造業向けラダー図の要約・検索AIシステム',
           client: '製造業向けコンサルティング案件',
           category: 'LLM / RAG',
           period: '',
           icon: '🏭',
-          summary: '製造業の設備を動かす制御プログラム（ラダー図）を対象に、内容の自動要約などを行う LLM/RAG システムの開発に従事した。',
+          summary: '製造業の設備を動かす制御プログラム（ラダー図）を対象に、内容の自動要約・言葉での検索・設備情報の抽出を行う LLM/RAG システムを設計した。',
           details: [
             'ラダー図と、それをテキスト形式に変換したコード（IL/ST）を対象に、関連資料を探して回答に使うRAG（検索拡張生成）の仕組みで設計した。',
             '現場ごとの独特な言い回し（現場方言）にも対応できるようにし、オンプレ（自社サーバー）・クラウド・APIのどこで動かすかの実行環境選定を担当した。',
+            '評価は専用のベンチマーク（評価用の問題集）を定め、LLM（大規模言語モデル）に採点させるLLM-as-a-Judgeを含む多面的な評価として設計した。',
           ],
-          techStack: ['LLM', 'RAG'],
+          techStack: ['LLM', 'RAG', 'LLM-as-a-Judge'],
         },
         {
           name: '業務ソフトの画面をAIが自動操作するエージェント',
@@ -165,7 +166,7 @@ const experiences = [
         'LoRA',
         'Optuna',
         'Pandas / NumPy',
-        'RAG',
+        'RAG / LLM-as-a-Judge',
         'Claude Code (GUI Agent)',
         'pyautogui',
       ],
