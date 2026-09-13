@@ -32,7 +32,7 @@ const profile = {
       platform: 'linkedin',
       label: 'LinkedIn',
       handle: 'Yuto Yamada',
-      url: 'https://www.linkedin.com/in/悠人-山田-156149304',
+      url: 'https://www.linkedin.com/in/yuto-yamada-ai/',
     },
     { platform: 'x', label: 'X', handle: '@dev2rich', url: 'https://x.com/dev2rich' },
     { platform: 'qiita', label: 'Qiita', handle: 'yamadan96', url: 'https://qiita.com/yamadan96' },
