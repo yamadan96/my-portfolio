@@ -15,16 +15,21 @@ const renderSection = () =>
 describe('ProjectsSection', () => {
   it('renders the level-1 summary labels for every project', () => {
     renderSection();
-    // Each project contributes one 作ったもの row; the label is what a
-    // first-time reader scans for.
-    expect(screen.getAllByText('作ったもの')).toHaveLength(projects.length);
-    expect(screen.getAllByText('結果')).toHaveLength(projects.length);
+    // Each summary-shaped project contributes one 作ったもの row; the label is
+    // what a first-time reader scans for. Story-shaped projects show their
+    // one-line headline instead.
+    const withSummary = projects.filter((p) => p.summary);
+    expect(screen.getAllByText('作ったもの')).toHaveLength(withSummary.length);
+    expect(screen.getAllByText('結果')).toHaveLength(withSummary.length);
+    projects
+      .filter((p) => !p.summary && p.headline)
+      .forEach((p) => expect(screen.getByText(p.headline)).toBeInTheDocument());
   });
 
   it('keeps technical details collapsed until the reader opens them', () => {
     renderSection();
     const triggers = screen.getAllByRole('button', { name: /技術詳細を見る/ });
-    expect(triggers).toHaveLength(projects.filter((p) => p.technical?.length).length);
+    expect(triggers).toHaveLength(projects.filter((p) => p.technical?.length || p.diagram).length);
     triggers.forEach((t) => expect(t).toHaveAttribute('aria-expanded', 'false'));
   });
 
