@@ -167,9 +167,9 @@ const experiences = [
   {
     id: 'airion',
     // トップページの職務経歴用（1行）
-    oneLiner: 'ロボット向け音声合成（トヨタイムズ掲載）・製造ライン向け物体検出など AI 開発10件超',
+    oneLiner: 'ロボット向け音声合成（トヨタイムズ掲載）・製造ライン向け物体検出など、複数の AI 開発',
     summary: {
-      built: 'AI開発事業部で、顧客ごとに異なるAI開発案件を10件超担当。内訳は下のプロジェクト一覧のとおり。',
+      built: 'AI開発事業部で、顧客ごとに異なる AI 開発案件を複数担当。主な案件は下のプロジェクト一覧のとおり。',
       problem: '顧客ごとに課題が違うため、既製品では解決できない。何を使うかの選定から現場で使える形にするまでを毎回自分で決める必要があった。',
       role: '各案件でモデルの選定・データ設計・学習・評価・顧客への報告までを担当。鉄パイプ計数ではPM1名＋エンジニア3名の中でテックリード。',
       tech: '音声合成は10モデルを比較してStyle-Bert-VITS2を選定。画像は物体検出モデル（YOLOv8）、業務ソフト自動化は画面の座標を指定して操作するAIエージェント。',
@@ -179,7 +179,7 @@ const experiences = [
     role: 'AI開発事業部 AIエンジニア',
     period: '2024年4月〜現在',
     description:
-      '音声合成・画像認識・文書処理・デスクトップGUI自動化など、10件超のAI開発プロジェクトに従事。ロボット向け音声合成の成果はトヨタイムズに掲載。',
+      '音声合成・画像認識・文書処理・デスクトップGUI自動化など、複数のAI開発プロジェクトに従事。ロボット向け音声合成の成果はトヨタイムズに掲載。',
     descriptionEn:
       'Built AI systems across voice synthesis (featured on Toyota Times), computer vision, document automation, and desktop GUI agents.',
     tags: ['Python', 'PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM Agent'],
