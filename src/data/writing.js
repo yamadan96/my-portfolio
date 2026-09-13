@@ -9,6 +9,27 @@ const writing = {
   ],
   articles: [
     {
+      id: 'w-legalon',
+      title: 'LegalOn Technologies で2ヶ月間インターンした話 — 契約書分類を LLM で置き換え、Accuracy を 76.0%→90.1%（+14.1pt）に改善',
+      date: '2026-04',
+      platform: 'Qiita',
+      url: 'https://qiita.com/yamadan96/items/8926e19382896bc72bbf',
+      summary:
+        '既存 ML モデルを LLM ベースに置き換えるまでの検証プロセスと、本番マイクロサービスへの組み込みまでを実務の視点で記録した。',
+      tags: ['LLM', 'Text Classification', 'LegalTech', 'Production'],
+      featured: true,
+    },
+    {
+      id: 'w-mixi-mlops',
+      title: 'MIXI『みてね』でのMLOpsインターン：機械学習基盤の効率化と最適化に取り組んだ8週間',
+      date: '2025-11',
+      platform: 'Qiita',
+      url: 'https://qiita.com/yamadan96/items/9e29293f1bc6d03c1c46',
+      summary: '大規模サービスの ML パイプラインに対する改善を、実運用の制約込みで振り返った記録。',
+      tags: ['MLOps', 'AWS', 'ML Pipeline'],
+      featured: true,
+    },
+    {
       id: 'w-qwen3vl',
       title: 'Qwen3-VL アーキテクチャ調査',
       date: '2025-11',
@@ -39,27 +60,6 @@ const writing = {
       summary:
         '第1回 理論編（DDPM / DDIM の数学的基礎）、第2回 実装編（U-Net を Keras で完全実装）、第3回 応用編（Stable Diffusion 3 と2024-2025年の最新研究）、第4回 実践編（実験結果・トラブルシューティング・最適化）の4部構成。',
       tags: ['Diffusion Model', 'DDPM', 'DDIM', 'U-Net', 'Stable Diffusion 3'],
-      featured: true,
-    },
-    {
-      id: 'w-legalon',
-      title: 'LegalOn Technologies で2ヶ月間インターンした話 — 契約書分類をLLMで置き換えて精度14%改善した',
-      date: '2026-04',
-      platform: 'Qiita',
-      url: 'https://qiita.com/yamadan96/items/8926e19382896bc72bbf',
-      summary:
-        '既存 ML モデルを LLM ベースに置き換えるまでの検証プロセスと、本番マイクロサービスへの組み込みまでを実務の視点で記録した。',
-      tags: ['LLM', 'Text Classification', 'LegalTech', 'Production'],
-      featured: true,
-    },
-    {
-      id: 'w-mixi-mlops',
-      title: 'MIXI『みてね』でのMLOpsインターン：機械学習基盤の効率化と最適化に取り組んだ8週間',
-      date: '2025-11',
-      platform: 'Qiita',
-      url: 'https://qiita.com/yamadan96/items/9e29293f1bc6d03c1c46',
-      summary: '大規模サービスの ML パイプラインに対する改善を、実運用の制約込みで振り返った記録。',
-      tags: ['MLOps', 'AWS', 'ML Pipeline'],
       featured: true,
     },
     {
