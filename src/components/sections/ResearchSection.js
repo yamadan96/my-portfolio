@@ -182,7 +182,7 @@ const ResearchSection = () => {
       </ResearchGrid>
       {submitting.length > 0 && (
         <SubmittingNote>
-          国際会議へ投稿中（査読中）— {submittingVenues}
+          国際会議へ投稿済み（査読中）— {submittingVenues}
         </SubmittingNote>
       )}
       <MoreLinks>
