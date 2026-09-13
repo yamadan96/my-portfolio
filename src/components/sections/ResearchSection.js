@@ -135,7 +135,7 @@ const ResearchSection = () => {
 
   return (
     <Section id="research">
-      <SectionTitle title="Research" subtitle="学会発表4件と学位論文" />
+      <SectionTitle title="Research" subtitle="学会発表3件と学位論文" />
       <ResearchGrid>
         {publications.map((pub) => {
           const materials = pub.materials || [];
