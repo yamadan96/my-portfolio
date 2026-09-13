@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Tag from './Tag';
+import { mobileTapArea } from '../../styles/tapArea';
 
 const TimelineWrapper = styled.div`
   position: relative;
@@ -30,6 +31,10 @@ const TimelineItem = styled(motion.div)`
     padding-bottom: 0;
   }
 
+  @media (max-width: 768px) {
+    padding-bottom: ${({ theme }) => theme.spacing.xl};
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -53,7 +58,7 @@ const TimelineItem = styled(motion.div)`
 
 const Period = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.accentText};
   font-weight: 600;
 `;
 
@@ -73,7 +78,7 @@ const Role = styled.p`
 const Description = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: ${({ theme }) => theme.spacing.sm};
 `;
 
@@ -99,13 +104,15 @@ const ExternalLink = styled.a`
   align-items: center;
   gap: 4px;
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.accentText};
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
     color: ${({ theme }) => theme.colors.primaryLight};
   }
+
+  ${mobileTapArea}
 `;
 
 const DetailLink = styled(motion.a)`
@@ -113,13 +120,15 @@ const DetailLink = styled(motion.a)`
   align-items: center;
   gap: 4px;
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.accentText};
   margin-top: ${({ theme }) => theme.spacing.sm};
   cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => theme.colors.primaryLight};
   }
+
+  ${mobileTapArea}
 `;
 
 const ProjectBlock = styled.div`

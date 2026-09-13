@@ -48,7 +48,7 @@ const AchievementTitle = styled.h3`
 const AchievementDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
-  line-height: 1.6;
+  line-height: 1.7;
 `;
 
 const AchievementLinks = styled.div`

@@ -79,7 +79,7 @@ const Degree = styled.p`
 const Description = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
-  line-height: 1.6;
+  line-height: 1.7;
   margin-top: ${({ theme }) => theme.spacing.sm};
 `;
 

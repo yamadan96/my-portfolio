@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 import Timeline from '../ui/Timeline';
+import { mobileTapArea } from '../../styles/tapArea';
 import experiences from '../../data/experiences';
 
 const SubHeading = styled.h3`
@@ -41,7 +42,7 @@ const CompactCompany = styled.h4`
 
 const CompactPeriod = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.accentText};
   font-weight: 600;
 `;
 
@@ -49,20 +50,22 @@ const CompactPeriod = styled.span`
 const CompactDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
-  line-height: 1.6;
+  line-height: 1.7;
   margin-top: ${({ theme }) => theme.spacing.xs};
 `;
 
 const CompactDetailLink = styled.span`
   display: inline-block;
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.accentText};
   margin-top: ${({ theme }) => theme.spacing.sm};
   cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => theme.colors.primaryLight};
   }
+
+  ${mobileTapArea}
 `;
 
 const ExperienceSection = () => {
