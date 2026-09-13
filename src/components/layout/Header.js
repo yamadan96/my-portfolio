@@ -48,13 +48,19 @@ const NavLinks = styled.nav`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.lg};
 
+  /* タブレット幅ではナビが右のテーマ切替ボタンに重なるため間隔を詰める */
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
 `;
 
+// ナビは本文ではないので、テーマの sm（15px）ではなく従来の 14px のまま据え置く
 const NavLink = styled.a`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: 0.875rem;
   font-weight: 500;
   color: ${({ theme, $active }) =>
     $active ? theme.colors.primary : theme.colors.textSecondary};
