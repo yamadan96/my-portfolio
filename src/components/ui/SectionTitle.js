@@ -3,7 +3,11 @@ import styled from 'styled-components';
 
 const TitleWrapper = styled.div`
   text-align: center;
-  margin-bottom: ${({ theme }) => theme.spacing['3xl']};
+  margin-bottom: 2.5rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-bottom: ${({ theme }) => theme.spacing.xl};
+  }
 `;
 
 const Title = styled.h2`

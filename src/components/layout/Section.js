@@ -2,13 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+// 上下余白は 6rem → 3.5rem（モバイル 4rem → 2.5rem）に詰め、
+// 詰めた分はセクション間の細い区切り線で境界を示す
 const StyledSection = styled.section`
-  padding: ${({ theme }) => theme.spacing['4xl']} ${({ theme }) => theme.spacing.xl};
+  position: relative;
+  padding: 3.5rem ${({ theme }) => theme.spacing.xl};
   max-width: 1200px;
   margin: 0 auto;
 
+  & + &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: ${({ theme }) => theme.spacing.xl};
+    right: ${({ theme }) => theme.spacing.xl};
+    height: 1px;
+    background: ${({ theme }) => theme.colors.border};
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.spacing['3xl']} ${({ theme }) => theme.spacing.md};
+    padding: 2.5rem ${({ theme }) => theme.spacing.md};
+
+    & + &::before {
+      left: ${({ theme }) => theme.spacing.md};
+      right: ${({ theme }) => theme.spacing.md};
+    }
   }
 `;
 

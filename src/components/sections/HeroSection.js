@@ -5,12 +5,17 @@ import profile from '../../data/profile';
 import SocialIcons from '../ui/SocialIcons';
 import Button from '../ui/Button';
 
+// 全画面にすると下に大きな空白が出るため、高さは 80vh に抑える（上は固定ヘッダー分を多めに取る）
 const HeroWrapper = styled.section`
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${({ theme }) => theme.spacing['4xl']} ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => `${theme.spacing['4xl']} ${theme.spacing.xl} ${theme.spacing['2xl']}`};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => `5.5rem ${theme.spacing.md} ${theme.spacing['2xl']}`};
+  }
   position: relative;
   overflow: hidden;
 `;
