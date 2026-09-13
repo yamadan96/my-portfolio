@@ -1,3 +1,5 @@
+// topPage: トップページでの見せ方。'full'（既定）/ 'compact'（1行・説明なし）/ false（出さない）。
+// 本郷中学校はトップページには出さないがデータは残す（履歴書生成などで使う）。
 const education = [
   {
     id: 'edu-01',
@@ -18,6 +20,7 @@ const education = [
   {
     id: 'edu-03',
     school: '本郷高等学校',
+    topPage: 'compact',
     faculty: '普通科',
     degree: '',
     period: '2017年4月〜2020年3月',
@@ -26,6 +29,7 @@ const education = [
   {
     id: 'edu-04',
     school: '本郷中学校',
+    topPage: false,
     faculty: '',
     degree: '',
     period: '2014年4月〜2017年3月',

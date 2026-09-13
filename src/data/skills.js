@@ -1,31 +1,57 @@
+// トップページの Skills。
+//   - 先頭4グループ（Core / LLM / Vision / Production）だけを開いた状態で出す
+//   - それ以外は「Other Technologies」に折りたたむ（旧カテゴリの分け方はそのまま残す）
+// 4グループの項目は下の折りたたみ側にもともとあった項目から抜き出したもの（新しい項目は足していない）。
+//   LLM → 'LLM / 生成AI' カテゴリ、Agents → 'LLM Agents / Tool Calling'、Computer Vision → 'Vision / 生成モデル' カテゴリ
 const skills = [
+  {
+    category: 'Core',
+    icon: '⭐',
+    core: true,
+    items: ['Python', 'PyTorch', 'LLM', 'RAG', 'Agents', 'Computer Vision'],
+  },
+  {
+    category: 'LLM',
+    icon: '🤖',
+    core: true,
+    items: ['LoRA', 'GRPO', 'vLLM', 'OpenAI', 'Claude', 'Gemini'],
+  },
+  {
+    category: 'Vision',
+    icon: '🖼️',
+    core: true,
+    items: ['DINOv2', 'ViT', 'YOLOv8', 'OpenCV'],
+  },
+  {
+    category: 'Production',
+    icon: '🚀',
+    core: true,
+    items: ['FastAPI', 'Docker', 'Kubernetes', 'AWS', 'GCP', 'Azure'],
+  },
+  // ---- ここから下は「Other Technologies」の中（上の4グループに出した項目は除いてある） ----
   {
     category: 'LLM / 生成AI',
     icon: '🤖',
     items: [
-      'LoRA / QLoRA',
-      'GRPO（強化学習）',
+      'QLoRA',
       'SFT / Instruction Tuning',
       'RAG（Vector Store / File Search）',
-      'LLM Agents / Tool Calling',
       'Prompt Engineering',
       'LLM-as-a-Judge',
-      'vLLM / Unsloth / TRL',
+      'Unsloth / TRL',
       'LangChain / Semantic Kernel',
-      'OpenAI / Claude / Gemini API',
     ],
   },
   {
     category: 'Vision / 生成モデル',
     icon: '🖼️',
     items: [
-      'Vision Transformer (ViT)',
-      'DINOv2 / DINOv3',
+      'DINOv3',
       'VLM (Qwen3-VL)',
       'Diffusion Models / Flow Matching',
       'Stable Diffusion XL',
       'VAE / CW-VAE',
-      'YOLOv8 / Segment Anything',
+      'Segment Anything',
       'ConvLSTM / 3D-CNN',
       'ArcFace / Metric Learning',
       'Grad-CAM (XAI)',
@@ -35,13 +61,10 @@ const skills = [
     category: 'ML 基盤 / データ',
     icon: '🧠',
     items: [
-      'Python',
-      'PyTorch',
       'Transformers (HuggingFace)',
       'scikit-learn',
       'LightGBM',
       'TensorFlow',
-      'OpenCV',
       'WandB / MLflow',
       'pandas / NumPy',
       'Style-Bert-VITS2 (TTS)',
@@ -52,7 +75,6 @@ const skills = [
     icon: '⚙️',
     items: [
       'Django',
-      'FastAPI',
       'Spring Boot (Kotlin)',
       'Ruby on Rails',
       'Go',
@@ -78,14 +100,7 @@ const skills = [
   {
     category: 'Cloud / Infra',
     icon: '☁️',
-    items: [
-      'AWS (SQS, S3, EC2, ECS)',
-      'GCP (BigQuery, Vertex AI)',
-      'Azure (OpenAI, AI Search)',
-      'Docker',
-      'Kubernetes',
-      'Terraform',
-    ],
+    items: ['Terraform'],
   },
   {
     category: 'Tools / Other',

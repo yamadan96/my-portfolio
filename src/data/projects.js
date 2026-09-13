@@ -1,4 +1,6 @@
 // category: 'ml'（モデル開発・論文再現）/ 'tool'（開発者向けツール）/ 'product'（プロダクト）
+// featured: true の4件がトップページの Projects に出る。並び順は配列順（先頭4件に置く）。
+// /work は全件を載せる（featured の有無で分けない）。
 const projects = [
   {
     id: 'project-llm-finetune',
@@ -40,51 +42,6 @@ const projects = [
   A --> B --> SUM["h = Wx + BAx × α/r"]
   SUM --> OUT["応答"]
   SUM -. "勾配は A・B のみ<br/>（全体の約0.1%）" .-> LORA`,
-    },
-  },
-  {
-    id: 'project-local-claude-code',
-    featured: true,
-    category: 'tool',
-    title: 'local-claude-code（ローカルLLM版コーディングエージェント CLI）',
-    description:
-      'Ollama / LM Studio / vLLM など OpenAI 互換のローカル LLM サーバー上で動作するコーディングエージェント CLI。read_file・write_file・edit_file・bash・glob・grep・list_dir の7ツールを内蔵し、ワークスペースサンドボックスと ask/auto 権限モードを実装。小型モデル特有の不安定さに対し、JSON 復旧・ファジーなツール名照合・無限ループ検出で対処した。',
-    tags: ['Python', 'CLI', 'Local LLM', 'Tool Calling', 'Ollama', 'uv'],
-    github: 'https://github.com/yamadan96/local-claude-code',
-    demo: null,
-    image: null,
-    summary: {
-      built: '自分のパソコン内で動くAIに、ファイルの読み書きやコマンド実行を任せられるコーディング支援ツール。',
-      problem: '一般的なAIコーディングツールは外部サービスにコードを送る。手元だけで完結させたかった。',
-      role: '設計・実装を単独で担当。小型モデル特有の不安定さへの対処も自分で見つけて実装した。',
-      tech: 'Ollama など「自分のPCでAIを動かすソフト」に接続し、AIがファイル操作やコマンド実行を自分で選んで実行する（Tool Calling という仕組み）。',
-      result: 'ファイル読み書き・コマンド実行・検索など7種類の操作をAIに任せられる。ファイル操作は作業フォルダ内に制限し、コマンド実行前に確認を求めるモードも実装した。',
-    },
-    technical: [
-      { label: 'ツール構成', body: 'read_file / write_file / edit_file / bash / glob / grep / list_dir の7ツールを内蔵。ワークスペース外へのアクセスを拒否するサンドボックスと、ask / auto の権限モードを備える。' },
-      { label: '小型モデルへの対応', body: '小型モデルは JSON を壊す・ツール名を微妙に間違える・同じ操作を無限に繰り返すという失敗をする。JSON の復旧処理、ファジーなツール名照合、ループ検出をそれぞれ実装して対処した。' },
-      { label: '接続先', body: 'OpenAI 互換 API を話すサーバー（Ollama / LM Studio / vLLM）であれば差し替え可能。特定ベンダーに依存しない構成。' },
-      { label: '苦労した点', body: '同一ポートで別プロセスが待ち受けていたため、localhost の IPv6/IPv4 解決の違いで意図しないサービスへリクエストが飛ぶ問題に遭遇した。lsof で全リスナーを列挙して原因を特定し、IPv4 を明示して解決した。' },
-    ],
-    diagram: {
-      alt: 'ローカルのLLMがツールを選んで実行するエージェントループの構成図',
-      caption: '外部にコードを送らず、操作範囲は1つのフォルダ内に制限される',
-      chart: `flowchart TB
-  USER["利用者の指示"] --> LOOP
-  subgraph LOOP["エージェントループ"]
-    LLMS["ローカル LLM サーバー<br/>Ollama / LM Studio / vLLM<br/>（OpenAI 互換 API）"]
-    GUARD["復旧処理<br/>JSON修復 / ツール名照合 / ループ検出"]
-    PERM{"ask / auto<br/>権限モード"}
-  end
-  LLMS -- "ツール呼び出し" --> GUARD --> PERM
-  PERM -- "許可" --> TOOLS
-  subgraph TOOLS["内蔵7ツール（サンドボックス内）"]
-    T1["read_file / write_file / edit_file"]
-    T2["bash"]
-    T3["glob / grep / list_dir"]
-  end
-  TOOLS -- "実行結果" --> LLMS
-  TOOLS --- WS["ワークスペース<br/>外部へのアクセスは拒否"]`,
     },
   },
   {
@@ -137,7 +94,8 @@ const projects = [
       '学会発表した研究成果（DINOv2 + LoRA）を、画像をアップロードすると地震・津波による建物の損傷度を判定する WebApp として実装。Selective Classification を組み込み、確信度が低い入力については判定を棄権する設計とした。',
     tags: ['DINOv2', 'LoRA', 'Gradio', 'Selective Classification', 'Python'],
     github: 'https://github.com/yamadan96/disaster-app',
-    demo: null,
+    // Hugging Face の無料 Space（アイドル時はスリープし、起動に1分ほどかかる）
+    demo: 'https://huggingface.co/spaces/yuto090612/disaster-app',
     image: null,
     summary: {
       built: '被災した建物の写真をアップロードすると、地震や津波でどの程度壊れているかを判定するWebアプリ。',
@@ -165,8 +123,53 @@ const projects = [
     },
   },
   {
-    id: 'project-arxiv-ingest',
+    id: 'project-local-claude-code',
     featured: true,
+    category: 'tool',
+    title: 'local-claude-code（ローカルLLM版コーディングエージェント CLI）',
+    description:
+      'Ollama / LM Studio / vLLM など OpenAI 互換のローカル LLM サーバー上で動作するコーディングエージェント CLI。read_file・write_file・edit_file・bash・glob・grep・list_dir の7ツールを内蔵し、ワークスペースサンドボックスと ask/auto 権限モードを実装。小型モデル特有の不安定さに対し、JSON 復旧・ファジーなツール名照合・無限ループ検出で対処した。',
+    tags: ['Python', 'CLI', 'Local LLM', 'Tool Calling', 'Ollama', 'uv'],
+    github: 'https://github.com/yamadan96/local-claude-code',
+    demo: null,
+    image: null,
+    summary: {
+      built: '自分のパソコン内で動くAIに、ファイルの読み書きやコマンド実行を任せられるコーディング支援ツール。',
+      problem: '一般的なAIコーディングツールは外部サービスにコードを送る。手元だけで完結させたかった。',
+      role: '設計・実装を単独で担当。小型モデル特有の不安定さへの対処も自分で見つけて実装した。',
+      tech: 'Ollama など「自分のPCでAIを動かすソフト」に接続し、AIがファイル操作やコマンド実行を自分で選んで実行する（Tool Calling という仕組み）。',
+      result: 'ファイル読み書き・コマンド実行・検索など7種類の操作をAIに任せられる。ファイル操作は作業フォルダ内に制限し、コマンド実行前に確認を求めるモードも実装した。',
+    },
+    technical: [
+      { label: 'ツール構成', body: 'read_file / write_file / edit_file / bash / glob / grep / list_dir の7ツールを内蔵。ワークスペース外へのアクセスを拒否するサンドボックスと、ask / auto の権限モードを備える。' },
+      { label: '小型モデルへの対応', body: '小型モデルは JSON を壊す・ツール名を微妙に間違える・同じ操作を無限に繰り返すという失敗をする。JSON の復旧処理、ファジーなツール名照合、ループ検出をそれぞれ実装して対処した。' },
+      { label: '接続先', body: 'OpenAI 互換 API を話すサーバー（Ollama / LM Studio / vLLM）であれば差し替え可能。特定ベンダーに依存しない構成。' },
+      { label: '苦労した点', body: '同一ポートで別プロセスが待ち受けていたため、localhost の IPv6/IPv4 解決の違いで意図しないサービスへリクエストが飛ぶ問題に遭遇した。lsof で全リスナーを列挙して原因を特定し、IPv4 を明示して解決した。' },
+    ],
+    diagram: {
+      alt: 'ローカルのLLMがツールを選んで実行するエージェントループの構成図',
+      caption: '外部にコードを送らず、操作範囲は1つのフォルダ内に制限される',
+      chart: `flowchart TB
+  USER["利用者の指示"] --> LOOP
+  subgraph LOOP["エージェントループ"]
+    LLMS["ローカル LLM サーバー<br/>Ollama / LM Studio / vLLM<br/>（OpenAI 互換 API）"]
+    GUARD["復旧処理<br/>JSON修復 / ツール名照合 / ループ検出"]
+    PERM{"ask / auto<br/>権限モード"}
+  end
+  LLMS -- "ツール呼び出し" --> GUARD --> PERM
+  PERM -- "許可" --> TOOLS
+  subgraph TOOLS["内蔵7ツール（サンドボックス内）"]
+    T1["read_file / write_file / edit_file"]
+    T2["bash"]
+    T3["glob / grep / list_dir"]
+  end
+  TOOLS -- "実行結果" --> LLMS
+  TOOLS --- WS["ワークスペース<br/>外部へのアクセスは拒否"]`,
+    },
+  },
+  {
+    id: 'project-arxiv-ingest',
+    featured: false,
     category: 'tool',
     title: 'arxiv-ingest（PyPI 公開）',
     description:
@@ -253,7 +256,7 @@ const projects = [
   },
   {
     id: 'project-paper-survey',
-    featured: true,
+    featured: false,
     category: 'tool',
     title: 'Paper Survey（論文サーベイ公開サイト）',
     description:
@@ -287,7 +290,7 @@ const projects = [
   },
   {
     id: 'project-gapless-keyboard',
-    featured: true,
+    featured: false,
     category: 'product',
     title: 'GapLess Keyboard（AI 返信 iOS カスタムキーボード）',
     description:
@@ -499,7 +502,7 @@ const projects = [
       constraints: '顧客提供の画像は341枚と少なく、公開データを加えて学習した。PoC（試作検証）であり、評価は社内評価データで行っている。',
       role: 'PM1名＋エンジニア3名の4名体制で、テックリードとしてモデル選定から学習・評価までを担当した。',
       approach: '物体検出モデル YOLOv8 を選定し、公開データでの事前学習→浅い層を固定した再学習→全層の再学習の3段階で学習。コントラスト変更とガウシアンノイズでデータを水増しし、切り出し画像で小さな物体の検出を強化した。',
-      results: '束単位の成功率は200〜300本で96.6%、処理時間は1枚0.2秒（既存はほぼ0%・8秒/枚）。いずれも社内評価データでの値。',
+      results: '束単位の成功率は200〜300本で96.6%（社内評価データ）、処理時間は1枚0.2秒（既存はほぼ0%・8秒/枚）。',
       learned: 'TTA（推論時の拡張）は効果がなく、切り出し画像による小さな物体の検出強化が成功率を大きく押し上げた。束単位の成功率は1本ごとの精度とは別に測る必要がある。',
     },
     technical: [
