@@ -687,7 +687,7 @@ const experiences = [
     secondary: true,
     company: 'GMOメディア株式会社',
     role: '機械学習エンジニア',
-    period: '2025年7月〜8月（1ヶ月）',
+    period: '2025年7月〜8月（10日間）',
     description:
       'ポイントサイトの売上を予測するAIモデルを構築し、精度96.1%（社内データでの検証値）。予測結果を毎週表計算ソフトへ自動反映する仕組みも構築。',
     tags: ['Python', 'LightGBM', 'BigQuery', 'GCP'],
