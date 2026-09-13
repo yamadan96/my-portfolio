@@ -88,6 +88,13 @@ const certifications = [
     link: 'https://www.openbadge-global.com/api/v1.0/openBadge/v2/Wallet/Public/GetAssertionShare/bldidkE4U3JwaVR0QUdvOUhiYzV5QT09',
     pdfLink: '/certificates/jdla-g-general-2026-4.pdf',
   },
+  {
+    name: '東京大学松尾・岩澤研究室 講座「Physical AI 基礎編 2026」修了証',
+    category: 'AI',
+    year: '2026年9月',
+    description: '松尾・岩澤研究室が主宰する Physical AI 基礎編（2026）を修了（2026年9月11日付）',
+    link: '/certificates/matsuoken-physical-ai-basic-2026.pdf',
+  },
 ];
 
 export default certifications;
