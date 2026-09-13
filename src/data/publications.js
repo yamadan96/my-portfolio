@@ -1,10 +1,24 @@
 // 発表済み・発表確定の学会発表と学位論文。
-// highlight はトップページの1行。数字ではなく「何が分かったか」を言葉で書く（数字は原稿・スライドに）。
+// 各項目の使い分け:
+//   highlight   … トップページの1行。数字ではなく「何が分かったか」を言葉で書く（数字は原稿・スライドに）
+//   shortTitle  … 一覧行の短い題名（トップページ・/research）
+//   claim       … 一覧行の1行の主張。数字は description・metrics にあるものだけを使う
+//   resultCards … /research の一覧行に出す結果カード3枚（value + label）。数字は description・metrics と一致させる
+//   detail      … 個別ページ（/research/:id）の本文。研究課題 → データセット → 手法 → 実験 → 結果 → 解釈。
+//                 既存の abstract・description・metrics を並べ直したもので、新しい事実は足さない
 // 投稿中のものは research.js を参照。
 const publications = [
   {
     id: 'pub-ite2026',
     shortVenue: '映像情報メディア学会 2026年年次大会／知覚AIフォーラム',
+    shortTitle: '視覚基盤モデルの比較',
+    claim:
+      '小規模データでは DINOv2 が最新の DINOv3 を 5.53pt 上回った。4データセット・6シードでモデル世代とデータ規模の関係を検証',
+    resultCards: [
+      { value: '4', label: 'データセット' },
+      { value: '6', label: 'シード' },
+      { value: '+5.53pt', label: 'DINOv2 vs DINOv3' },
+    ],
     // Level 3（数字）: 3件とも「公開ベンチマークでの自手法スコア（先行報告）」で粒度を揃える
     metrics: [
       { value: '79.87%', label: 'PHI-Net Accuracy（先行報告 74.50%）' },
@@ -16,7 +30,7 @@ const publications = [
       '映像情報メディア学会 2026年年次大会（口頭）／第1回 知覚AIフォーラム（ポスター、2026年8月24日・東京理科大学 葛飾キャンパス）',
     year: 2026,
     type: '学会発表（口頭・ポスター）',
-    highlight: '新しい基盤モデルが常に良いとは限らない。公開データ3件で元論文の報告値を上回った（論文間比較）',
+    highlight: '新しい基盤モデルが常に良いとは限らない。小規模データでは DINOv2 が DINOv3 を 5.53pt 上回った',
     // 原稿（ite2026-paper.pdf）掲載の Abstract をそのまま転記。
     abstract:
       'Since datasets for training dedicated models for such tasks are limited, utilization of general-purpose ' +
@@ -31,6 +45,29 @@ const publications = [
       'LoRA r=8（79万パラメータ＝全体の0.26%のみ更新）が79.82%と上回った（6シード）。論文ではこれを、低ランク制約が正則化として働く可能性を支持する結果と解釈している。' +
       'PHI-Net 79.87%（先行報告74.50%）、AIDERv2 99.53% W-F1（同96.60%）、MEDIC 83.86% W-F1（同80.40%）と、' +
       '3つの公開ベンチマークで各原著の報告値を上回った（実験条件の異なる論文間比較）。',
+    detail: {
+      question:
+        '被災建物の損傷度分類では、専用モデルを学習するためのデータセットが限られるため、汎用の視覚基盤モデル（VFM）を使うのが有効である。' +
+        'では、より新しい世代の基盤モデルを選べば常に良いのか。データ規模によってその答えは変わるのか。',
+      dataset:
+        '規模の異なる4種の災害画像データセット：能登半島地震 832枚／PHI-Net 4,138枚／AIDERv2 13,399枚／MEDIC 49,353枚。',
+      method:
+        '視覚基盤モデル DINOv2 ViT-L/14 と DINOv3 ViT-L/16 を、LoRA と Full Fine-Tuning の2つの適応戦略で被災建物の損傷度分類に適用し、' +
+        'モデルの選択と適応戦略を系統的に比較した。',
+      experiments:
+        'モデル世代（DINOv2 / DINOv3）× データ規模（4データセット）の比較を6シードで実施。' +
+        'PHI-Net では Full Fine-Tuning（約3.04億パラメータ更新）と LoRA r=8（79万パラメータ＝全体の0.26%のみ更新）も6シードで比較した。',
+      results:
+        'より大規模に事前学習された DINOv3 は、最小規模の能登データでは DINOv2 を 5.53 ポイント下回った（6シード全てで DINOv2 が優位、Wilcoxon p=0.031）。' +
+        'PHI-Net（4,138枚）では差が 0.25 ポイントに縮小し、最大規模の MEDIC では実質的に消失した。' +
+        'PHI-Net では Full Fine-Tuning 76.20% に対し、LoRA r=8 が 79.82% と上回った（6シード）。' +
+        '公開ベンチマーク3件では PHI-Net 79.87%（先行報告 74.50%）、AIDERv2 99.53% W-F1（同 96.60%）、MEDIC 83.86% W-F1（同 80.40%）と、' +
+        '各原著の報告値を上回った（実験条件の異なる論文間比較）。',
+      interpretation:
+        '予想に反して、新しいモデルが常に良いとは限らない。データ規模が小さいほど前世代の DINOv2 が優位で、規模が大きくなるほど差は縮まった。' +
+        'PHI-Net で LoRA r=8 が Full Fine-Tuning を上回った点は、論文ではこれを、低ランク制約が正則化として働く可能性を支持する結果と解釈している。' +
+        '先行報告との比較は実験条件の異なる論文間比較であり、同一条件での比較ではない。',
+    },
     tags: ['Vision Foundation Model', 'DINOv2', 'DINOv3', 'LoRA', 'Disaster Assessment'],
     link: 'https://www.ite.or.jp/annual/2026/',
     citation:
@@ -45,6 +82,13 @@ const publications = [
   {
     id: 'pub-ieice2026',
     shortVenue: 'IEICE 2026 総合大会',
+    shortTitle: 'マルチタスク学習',
+    claim: '災害の種類・程度・有無を補助タスクにすると、10シード平均で精度が上がった（有意差検定は未実施）',
+    resultCards: [
+      { value: '1,040枚', label: '能登半島地震の画像' },
+      { value: '10', label: 'シード' },
+      { value: '68.99→71.04%', label: 'Accuracy（10シード平均）' },
+    ],
     metrics: [
       { value: '71.04%', label: 'Accuracy（単一タスク 68.99% → MTL、10シード平均）' },
       { value: '0.656', label: 'Macro F1（同 0.637 →）' },
@@ -59,6 +103,21 @@ const publications = [
       '能登半島地震の被災建物画像1,040枚（DINOv2 ViT-L/14＋LoRA r=16、10シード）で、Accuracy 68.99±2.95% → 71.04±3.10%、' +
       'Macro F1 0.6366±0.0272 → 0.6556±0.0488（差はいずれも1標準偏差以内、有意差検定は未実施）。' +
       'Macro F1 の改善から少数クラスでの性能向上が示唆された。補助タスクの損失は固定重み（0.2／0.2／0.3）で主タスク損失に加算。',
+    detail: {
+      question:
+        '被災建物画像の多クラス損傷度分類で、損傷度ラベルの階層構造から派生する補助タスク（被害程度・災害種別・被害の有無）を' +
+        '主タスクと同時に学習させると、主タスクの精度は上がるか。',
+      dataset: '能登半島地震の被災建物画像 1,040枚。',
+      method:
+        '損傷度ラベルの階層構造から自動派生した3つの補助タスク（被害程度・災害種別・被害の有無）を主タスクと同時に学習するマルチタスク学習。' +
+        'バックボーンは DINOv2 ViT-L/14 ＋ LoRA r=16。補助タスクの損失は固定重み（0.2／0.2／0.3）で主タスク損失に加算する。',
+      experiments: '主タスクのみの単一タスク学習とマルチタスク学習をそれぞれ10シードで学習し、Accuracy と Macro F1 の平均で比較した。',
+      results:
+        'Accuracy 68.99±2.95% → 71.04±3.10%、Macro F1 0.6366±0.0272 → 0.6556±0.0488（10シード平均）。' +
+        '差はいずれも1標準偏差以内、有意差検定は未実施。',
+      interpretation:
+        'Macro F1 の改善から少数クラスでの性能向上が示唆された。ただし差はいずれも1標準偏差以内、有意差検定は未実施。',
+    },
     tags: ['Multi-task Learning', 'DINOv2', 'LoRA', 'Class Imbalance'],
     link: 'https://pub.confit.atlas.jp/ja/event/general2026/presentation/D-12-80',
     citation:
@@ -72,6 +131,13 @@ const publications = [
   {
     id: 'pub-fit2025',
     shortVenue: 'FIT2025',
+    shortTitle: 'LoRA による損傷度分類',
+    claim: '少量データでも基盤モデルの一部だけを学習すれば精度が出る',
+    resultCards: [
+      { value: '1,040枚', label: '自作データセット' },
+      { value: '6', label: 'クラス' },
+      { value: '0.77', label: 'Macro F1（DINOv2 + LoRA）' },
+    ],
     metrics: [
       { value: '0.77', label: 'Macro F1（ResNet-50 0.46 → DINOv2 + LoRA）' },
       { value: '1,040枚', label: '能登半島地震の自作データセット（6クラス）' },
@@ -87,6 +153,21 @@ const publications = [
       'クラス分布は最大313枚〜最小88枚と不均衡で、専門家によるラベル付与でも判断が分かれる難易度の高いタスク。' +
       'ResNet-50（Acc 0.51／Macro F1 0.46）、ConvNeXt-Tiny（0.66／0.54）に対し、' +
       'DINOv2（ViT-B）＋LoRAが Acc 0.80／Macro F1 0.77 で最良となり、少数データ環境における精度と軽量性の両立を示した。',
+    detail: {
+      question:
+        '地震・津波などの大規模災害直後に、被災建物の損傷度分類を自動化したい。' +
+        '専門家によるラベル付与でも判断が分かれ、写真も少ない条件で、どのファインチューニング手法が精度を出せるか。',
+      dataset:
+        '2024年能登半島地震の被災家屋を現地撮影した独自データセット。1,040枚・6クラス・518×518画素、訓練832枚・評価208枚の固定分割。' +
+        'クラス分布は最大313枚〜最小88枚と不均衡。',
+      method:
+        'CNN（ResNet-50・ConvNeXt-Tiny）と、視覚基盤モデル DINOv2（ViT-B）に LoRA を適用した手法を比較。' +
+        'LoRA は基盤モデルの一部のパラメータだけを学習する。',
+      experiments: '固定分割の訓練832枚で各モデルを学習し、評価208枚で Accuracy と Macro F1 を比較した。',
+      results:
+        'ResNet-50（Acc 0.51／Macro F1 0.46）、ConvNeXt-Tiny（0.66／0.54）に対し、DINOv2（ViT-B）＋LoRA が Acc 0.80／Macro F1 0.77 で最良。',
+      interpretation: '少数データ環境でも、基盤モデルの一部だけを学習すれば精度が出る。DINOv2＋LoRA は精度と軽量性の両立を示した。',
+    },
     tags: ['Deep Learning', 'LoRA', 'CNN', 'ViT', 'Disaster Assessment'],
     link: 'https://www.ieice.org/publications/conferences/summary.php?id=FIT0000017580&expandable=2&ConfCd=F&session_num=7n&lecture_number=I-029&year=2025&conf_type=F',
     citation:
@@ -99,6 +180,10 @@ const publications = [
   {
     id: 'pub-bachelor-thesis',
     shortVenue: '東京理科大学 卒業論文',
+    shortTitle: '動画異常検知',
+    claim: '動画の長い文脈を使って、事故などの異常を検知する',
+    // /research の Thesis 行に出す手法・データセット名（結果カードは持たない）
+    keywords: ['CW-VAE', 'OOPS!'],
     title: '長期文脈を活用したフレーム外挿モデルによる動画異常検知',
     venue: '東京理科大学 創域理工学部 2024年度 卒業論文',
     year: 2024,
@@ -108,11 +193,27 @@ const publications = [
       '事故などの異常を動画から検知するタスクにおいて、従来手法が苦手とする長期的な背景変化や動作パターンの抽出を目的に、' +
       'Clockwork Variational Autoencoder（CW-VAE）を活用した手法を提案。' +
       'OOPS!データセットを用いてConvLSTMとの定量比較を実施し、AUC・F1など複数指標で優れた結果を達成。',
+    // 卒業論文は「解釈」に当たる記述が無いので detail に持たない（個別ページでは見出しごと出ない）
+    detail: {
+      question: '事故などの異常を動画から検知するとき、従来手法が苦手とする長期的な背景変化や動作パターンをどう捉えるか。',
+      dataset: 'OOPS! データセット。',
+      method: 'Clockwork Variational Autoencoder（CW-VAE）を活用したフレーム外挿モデル。動画の長期文脈を使って異常を検知する。',
+      experiments: 'OOPS! データセットで ConvLSTM と定量比較した。',
+      results: 'AUC・F1 など複数指標で ConvLSTM より優れた結果を達成。',
+    },
     tags: ['VAE', 'CW-VAE', 'Anomaly Detection', 'Video Analysis', 'ConvLSTM', 'OOPS!'],
     link: 'https://github.com/yamadan96/cwvae-anomaly-detection-thesis',
     citation: null,
     materials: [],
   },
 ];
+
+// 学会発表（type が「学会発表」で始まる）だけを新しい順に。トップページと /research の一覧が使う
+export const conferencePapers = publications
+  .filter((pub) => typeof pub.type === 'string' && pub.type.startsWith('学会発表'))
+  .sort((a, b) => b.year - a.year);
+
+// 学位論文（卒業論文・修士論文）
+export const theses = publications.filter((pub) => typeof pub.type === 'string' && pub.type.endsWith('論文'));
 
 export default publications;

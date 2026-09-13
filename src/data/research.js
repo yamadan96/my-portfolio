@@ -1,5 +1,11 @@
 // 進行中・投稿中の研究テーマ。
 // 発表済み／確定済みの学会発表・論文は publications.js を参照。
+
+// /research の冒頭に出す「Research Focus」。現在の研究テーマ（災害画像解析・意匠画像検索）を2〜3行で言う
+export const researchFocus =
+  '少量の専門家ラベルしか得られない実世界画像認識を対象に、Vision Foundation Models や Parameter-Efficient Fine-Tuning を用いた高精度化を研究しています。' +
+  '現在は主に災害画像解析と意匠画像検索に取り組んでいます。';
+
 const research = [
   {
     id: 'research-iwait2027',
