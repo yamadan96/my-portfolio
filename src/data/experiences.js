@@ -524,7 +524,7 @@ const experiences = [
     },
     company: '株式会社MIXI',
     role: '機械学習エンジニア',
-    period: '2025年10月〜11月（2ヶ月）',
+    period: '2025年10月〜11月（8週間）',
     description:
       '家族アルバムアプリ「みてね」にて、画像を扱うAIシステムの高速化とコスト削減を担当。処理速度を最大42.8%改善。',
     descriptionEn:
