@@ -173,6 +173,41 @@ const TechBody = styled.p`
   line-height: 1.8;
 `;
 
+// 個別ページ（/projects/:id）へのリンク。href を持たせて通常のリンクとしても動くようにし、
+// onOpenProject があるときだけ画面遷移をルーターに任せる（Router の外でも描画できるようにするため）
+const DetailLink = styled.a`
+  display: inline-block;
+  margin-top: ${({ theme }) => theme.spacing.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.primary};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primaryLight};
+  }
+`;
+
+const ProjectDetailLink = ({ id, onOpenProject }) => (
+  <DetailLink
+    href={`/projects/${id}`}
+    onClick={(e) => {
+      if (!onOpenProject) return;
+      e.preventDefault();
+      onOpenProject(id);
+    }}
+  >
+    詳細 →
+  </DetailLink>
+);
+
+// story 形式（業務案件）のカードは5項目の概要の代わりに1行の要約（headline）を出す
+const Headline = styled.p`
+  margin: ${({ theme }) => `${theme.spacing.md} 0 0`};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.75;
+`;
+
 const ProjectSummary = ({ summary }) => (
   <SummaryList>
     {SUMMARY_FIELDS.map(([key, label]) =>
@@ -203,7 +238,7 @@ const TechnicalDetails = ({ blocks, diagram }) => (
   </Disclosure>
 );
 
-const ProjectsSection = () => (
+const ProjectsSection = ({ onOpenProject }) => (
   <Section id="projects">
     <SectionTitle title="Projects" subtitle="モデル開発・ツール・プロダクト" />
     <ProjectsGrid>
@@ -219,6 +254,7 @@ const ProjectsSection = () => (
             <ProjectTitle>{project.title}</ProjectTitle>
           </ProjectHeader>
           {project.summary && <ProjectSummary summary={project.summary} />}
+          <ProjectDetailLink id={project.id} onOpenProject={onOpenProject} />
           <Tags>
             {project.tags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
@@ -280,6 +316,8 @@ const ProjectsSection = () => (
         <OtherCard key={project.id}>
           <OtherTitle>{project.title}</OtherTitle>
           {project.summary && <ProjectSummary summary={project.summary} />}
+          {!project.summary && project.headline && <Headline>{project.headline}</Headline>}
+          <ProjectDetailLink id={project.id} onOpenProject={onOpenProject} />
           <Links>
             {project.github && (
               <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer">

@@ -100,7 +100,8 @@ const ListItem = styled.li`
 `;
 
 // レベル1（概要）。専門知識がない読者が30秒で把握できる粒度に固定した5項目。
-const SUMMARY_FIELDS = [
+// プロジェクト個別ページ（ProjectDetail）でも同じ見出しを使う
+export const SUMMARY_FIELDS = [
   ['built', '何をしたか'],
   ['problem', 'なぜ必要だったか'],
   ['role', '自分の担当'],
@@ -146,6 +147,49 @@ const Achievement = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.text};
+`;
+
+/* 代表実績（3件固定の短いブロック）。軸 → 題名 → 1〜2行の本文 */
+const HighlightList = styled.ol`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${({ theme }) => theme.spacing.md};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const HighlightItem = styled.li`
+  padding: ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.cardBg};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+`;
+
+const HighlightAxis = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: ${({ theme }) => theme.colors.accentText};
+  margin: 0 0 ${({ theme }) => theme.spacing.xs};
+`;
+
+const HighlightTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 ${({ theme }) => theme.spacing.sm};
+`;
+
+const HighlightText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.7;
+  margin: 0;
 `;
 
 const Tags = styled.div`
@@ -265,6 +309,15 @@ const MiniTag = styled.span`
   background: ${({ theme }) => theme.colors.surface};
   padding: 2px 6px;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
+`;
+
+// 個別ページ（/projects/:id）を持つカードだけに出す案内。モーダルで開くカードには出さない
+const ProjectCardLink = styled.span`
+  display: block;
+  margin-top: ${({ theme }) => theme.spacing.md};
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.accentText};
 `;
 
 /* プロジェクト詳細モーダル */
@@ -509,6 +562,11 @@ const ExperienceDetail = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const triggerRef = useRef(null);
 
+  // 個別ページ（/projects/:id）の「経歴へ」リンクから戻ったときに、前ページのスクロール位置が残らないようにする
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   const closeModal = useCallback(() => {
     setSelectedProject(null);
     // Restore focus to the element that opened the modal
@@ -533,6 +591,13 @@ const ExperienceDetail = () => {
 
   const { details } = experience;
   const hasProjects = details.projects && details.projects.length > 0;
+  // 代表実績を持つ経歴は「役割 → 代表実績 → プロジェクト一覧 → 技術スタック」の4ブロックだけにする。
+  // 担当内容の長文は各プロジェクトの個別ページ（/projects/:id）へ移したので、この構成では出さない
+  const hasHighlights = Array.isArray(details.highlights) && details.highlights.length > 0;
+  // 概要に出す項目：代表実績あり → 何をしたか・自分の担当のみ / 案件複数 → 技術と結果を除く / それ以外 → 5項目
+  const summaryKeys = hasHighlights
+    ? ['built', 'role']
+    : SUMMARY_FIELDS.map(([key]) => key).filter((key) => !hasProjects || !['tech', 'result'].includes(key));
 
   return (
     <DetailWrapper $hasProjects={hasProjects}>
@@ -550,9 +615,9 @@ const ExperienceDetail = () => {
             技術と結果は各案件のカードに任せる（複数案件の数字が1つの文に混ざるのを避ける） */}
         {experience.summary && (
           <SectionBlock variants={itemVariants}>
-            <SectionLabel>概要</SectionLabel>
+            <SectionLabel>{hasHighlights ? '役割' : '概要'}</SectionLabel>
             <SummaryList>
-              {SUMMARY_FIELDS.filter(([key]) => !hasProjects || !['tech', 'result'].includes(key)).map(([key, label]) =>
+              {SUMMARY_FIELDS.filter(([key]) => summaryKeys.includes(key)).map(([key, label]) =>
                 experience.summary[key] ? (
                   <React.Fragment key={key}>
                     <SummaryTerm>{label}</SummaryTerm>
@@ -561,6 +626,21 @@ const ExperienceDetail = () => {
                 ) : null
               )}
             </SummaryList>
+          </SectionBlock>
+        )}
+
+        {hasHighlights && (
+          <SectionBlock variants={itemVariants}>
+            <SectionLabel>代表実績</SectionLabel>
+            <HighlightList>
+              {details.highlights.map((h) => (
+                <HighlightItem key={h.title}>
+                  <HighlightAxis>{h.axis}</HighlightAxis>
+                  <HighlightTitle>{h.title}</HighlightTitle>
+                  <HighlightText>{h.text}</HighlightText>
+                </HighlightItem>
+              ))}
+            </HighlightList>
           </SectionBlock>
         )}
 
@@ -581,6 +661,11 @@ const ExperienceDetail = () => {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={(e) => {
+                    // projectId を持つカードは個別ページへ、持たないカードはモーダルで開く
+                    if (project.projectId) {
+                      navigate(`/projects/${project.projectId}`);
+                      return;
+                    }
                     triggerRef.current = e.currentTarget;
                     setSelectedProject(project);
                   }}
@@ -603,22 +688,25 @@ const ExperienceDetail = () => {
                       <MiniTag>+{project.techStack.length - 4}</MiniTag>
                     )}
                   </ProjectCardFooter>
+                  {project.projectId && <ProjectCardLink>詳細ページ →</ProjectCardLink>}
                 </ProjectCard>
               ))}
             </ProjectsGrid>
           </SectionBlock>
         )}
 
-        <SectionBlock variants={itemVariants}>
-          <Disclosure label="担当内容の詳細を見る">
-            <Overview>{details.overview}</Overview>
-            <List>
-              {details.responsibilities.map((item, i) => (
-                <ListItem key={i}>{item}</ListItem>
-              ))}
-            </List>
-          </Disclosure>
-        </SectionBlock>
+        {!hasHighlights && details.responsibilities && (
+          <SectionBlock variants={itemVariants}>
+            <Disclosure label="担当内容の詳細を見る">
+              <Overview>{details.overview}</Overview>
+              <List>
+                {details.responsibilities.map((item, i) => (
+                  <ListItem key={i}>{item}</ListItem>
+                ))}
+              </List>
+            </Disclosure>
+          </SectionBlock>
+        )}
 
         <SectionBlock variants={itemVariants}>
           <SectionLabel>技術スタック</SectionLabel>

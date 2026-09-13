@@ -10,3 +10,7 @@ global.IntersectionObserver = class {
   unobserve() {}
   disconnect() {}
 };
+
+// jsdom には window.scrollTo の実装がなく「Not implemented」を console.error に出すため、
+// ページ遷移時に先頭へ戻す処理がテストの出力を汚さないよう空実装にしておく。
+window.scrollTo = () => {};
