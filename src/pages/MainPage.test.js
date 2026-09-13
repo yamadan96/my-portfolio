@@ -15,16 +15,16 @@ const renderMain = () =>
   );
 
 describe('MainPage information architecture', () => {
-  it('keeps the July-2026 section order', () => {
+  it('orders the sections as who → what they can do → what proves it', () => {
     renderMain();
     const headings = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
     expect(headings).toEqual([
       'About',
       'Experience',
       'Research',
+      'Projects',
       'Skills',
       'Education',
-      'Projects',
       'Certifications',
       'Awards & Recognition',
       'Contact',
