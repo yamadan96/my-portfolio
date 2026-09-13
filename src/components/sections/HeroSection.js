@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import profile from '../../data/profile';
 import SocialIcons from '../ui/SocialIcons';
 import Button from '../ui/Button';
 
+// Hero は「何者か → 証拠」の2段だけ。挨拶・タイピング肩書き・所属の行は置かない
 // 全画面にすると下に大きな空白が出るため、高さは 80vh に抑える（上は固定ヘッダー分を多めに取る）
 const HeroWrapper = styled.section`
   min-height: 80vh;
@@ -34,13 +35,6 @@ const HeroContent = styled(motion.div)`
   max-width: 800px;
 `;
 
-const Greeting = styled(motion.p)`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-`;
-
 const Name = styled(motion.h1)`
   font-size: ${({ theme }) => theme.fontSizes['6xl']};
   font-weight: 800;
@@ -56,11 +50,12 @@ const Name = styled(motion.h1)`
   }
 `;
 
-const RoleText = styled(motion.div)`
+// 固定肩書き。5秒で読める1つだけ
+const Title = styled(motion.p)`
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
-  min-height: 2.5rem;
+  color: ${({ theme }) => theme.colors.primary};
+  font-weight: 600;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.fontSizes.xl};
@@ -71,33 +66,77 @@ const RoleText = styled(motion.div)`
   }
 `;
 
-const Cursor = styled.span`
-  display: inline-block;
-  width: 3px;
-  height: 1.2em;
-  background: ${({ theme }) => theme.colors.primary};
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: blink 1s step-end infinite;
+const Tagline = styled(motion.p)`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.8;
+  margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
+  max-width: 640px;
+`;
 
-  @keyframes blink {
-    50% { opacity: 0; }
+// モバイルでは句読点の位置で改行する（途中の単語で折り返させない）
+const TaglinePart = styled.span`
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: block;
   }
 `;
 
-// 紹介文（profile.intro）。控えめな色で、1行1事実の3行。
-// 幅を HeroContent と同じ 800px にして、デスクトップで 3 行に折り返さないようにする
-const Intro = styled(motion.p)`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.textMuted};
-  max-width: 800px;
+// 実績チップ3つ。数字を主役にし、指標名と対象は小さく添える
+const ProofRow = styled(motion.ul)`
+  list-style: none;
+  padding: 0;
   margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
-  line-height: 1.8;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: ${({ theme }) => theme.spacing.md};
+  max-width: 720px;
+
+  /* モバイルは1列。3列だと数字が折れて読めない */
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
-// 1行1事実で表示する（途中で折り返させない）
-const IntroLine = styled.span`
+const Proof = styled.li`
+  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.sm}`};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
+  }
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  background: ${({ theme }) => `${theme.colors.surface}80`};
+`;
+
+const ProofAxis = styled.span`
   display: block;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: ${({ theme }) => theme.colors.accentText};
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
+`;
+
+const ProofValue = styled.span`
+  display: block;
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: 700;
+  line-height: 1.2;
+  color: ${({ theme }) => theme.colors.text};
+  white-space: nowrap;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
+`;
+
+const ProofMetric = styled.span`
+  display: block;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  line-height: 1.5;
+  margin-top: ${({ theme }) => theme.spacing.xs};
 `;
 
 const SocialWrapper = styled(motion.div)`
@@ -113,36 +152,6 @@ const ButtonGroup = styled(motion.div)`
   flex-wrap: wrap;
 `;
 
-const useTypingEffect = (texts, typingSpeed = 100, deletingSpeed = 50, pauseDuration = 2000) => {
-  const [displayText, setDisplayText] = useState('');
-  const [textIndex, setTextIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentText = texts[textIndex];
-    let timeout;
-
-    if (!isDeleting && displayText === currentText) {
-      timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
-    } else if (isDeleting && displayText === '') {
-      setIsDeleting(false);
-      setTextIndex((prev) => (prev + 1) % texts.length);
-    } else {
-      timeout = setTimeout(() => {
-        setDisplayText(
-          isDeleting
-            ? currentText.substring(0, displayText.length - 1)
-            : currentText.substring(0, displayText.length + 1)
-        );
-      }, isDeleting ? deletingSpeed : typingSpeed);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayText, textIndex, isDeleting, texts, typingSpeed, deletingSpeed, pauseDuration]);
-
-  return displayText;
-};
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -157,29 +166,34 @@ const itemVariants = {
 };
 
 const HeroSection = () => {
-  const typedText = useTypingEffect(profile.roles);
-
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const heroLinks = profile.social.filter((s) => profile.heroSocial.includes(s.platform));
 
   return (
     <HeroWrapper id="hero">
       <HeroBg />
       <HeroContent variants={containerVariants} initial="hidden" animate="visible">
-        <Greeting variants={itemVariants}>こんにちは、私は</Greeting>
         <Name variants={itemVariants}>{profile.name}</Name>
-        <RoleText variants={itemVariants}>
-          {typedText}
-          <Cursor />
-        </RoleText>
-        <Intro variants={itemVariants}>
-          {profile.intro.map((line) => (
-            <IntroLine key={line}>{line}</IntroLine>
+        <Title variants={itemVariants}>{profile.title}</Title>
+        <Tagline variants={itemVariants}>
+          {profile.tagline.map((part) => (
+            <TaglinePart key={part}>{part}</TaglinePart>
           ))}
-        </Intro>
+        </Tagline>
+        <ProofRow variants={itemVariants} aria-label="主な実績">
+          {profile.proofPoints.map((p) => (
+            <Proof key={p.axis}>
+              <ProofAxis>{p.axis}</ProofAxis>
+              <ProofValue>{p.value}</ProofValue>
+              <ProofMetric>{p.metric}</ProofMetric>
+            </Proof>
+          ))}
+        </ProofRow>
         <SocialWrapper variants={itemVariants}>
-          <SocialIcons links={profile.social} />
+          <SocialIcons links={heroLinks} />
         </SocialWrapper>
         <ButtonGroup variants={itemVariants}>
           <Button onClick={() => scrollToSection('experience')} href="#experience">

@@ -1,24 +1,28 @@
 // トップページの Hero / About / Contact / Achievements で使う人物データ。
 //
 // 文章のルール:
-//   - Hero は紹介文（intro）3行だけ。1行1事実、説明は bio に分ける
+//   - Hero は「何者か（title / tagline）」と「証拠（proofPoints 3つ）」だけ。会社名・案件の説明は Experience に置く
 //   - Hero と About ではモデル名・手法名を出さない（それらは Skills / Research が担当）
-//   - 数字は単位と対象が一目で分かるものだけ（学会発表3件・実務17社 など）
+//   - 数字は指標名と対象が分かる形でだけ出す（Recall 57%→86%、Accuracy +14.1pt など）
 const profile = {
   name: '山田 悠人',
   nameEn: 'Yuto Yamada',
-  roleLabel: 'AI Engineer / Research Engineer',
-  // Hero のタイピング表示で順に出す肩書き
-  roles: ['AI Engineer', 'Research Engineer', 'Applied Scientist'],
+  // Hero の固定肩書き（タイピング表示はやめた。5秒で読める1つだけ）
+  title: 'AI Engineer — LLM Agents / RAG / Computer Vision',
+  // Hero の1行。「何者か」を役割の広さ（研究・検証〜実運用）で言い切る
+  // 2要素に分けてあるのは、モバイルでこの位置で改行させるため（PC では1行に繋がる）
+  tagline: ['LLM Agent・RAG・Computer Vision を、', '研究・検証から実運用まで一貫して実装。'],
+  // Hero の実績チップ3つ。数字は experiences.js の summary.result と一致させる
+  proofPoints: [
+    { axis: 'RAG', value: '57% → 86%', metric: '検索 Recall（業務システムを操作する LLM Agent への知識注入）' },
+    { axis: 'Computer Vision', value: '96.6%', metric: '束単位の検出成功率（製造ライン向け物体検出）' },
+    { axis: 'LLM / NLP', value: '+14.1pt', metric: 'Accuracy（契約書分類モデルの LLM 化）' },
+  ],
+  // Hero に出す SNS はこの2つだけ。残りは Contact 末尾に文字リンクで置く
+  heroSocial: ['github', 'linkedin'],
   affiliation: '東京理科大学大学院 創域理工学研究科 電気電子情報工学専攻 M2',
   career: '2027年4月〜 外資系コンサルティングファーム AIアーキテクト職 入社予定',
 
-  // Hero: 紹介文3行（所属 / 今の仕事 / 来年から）。1行1事実、略語は使わない。件数は書かない
-  intro: [
-    '東京理科大学大学院 修士2年（2027年3月修了見込み）',
-    '松尾研究所・Airion で AI エンジニアとして勤務中',
-    '2027年4月から 外資系コンサルティングファームの AI アーキテクト',
-  ],
 
   // About: 研究と実務の2段落。専門用語は使わず「何をしている人か」だけを書く
   bio: [
