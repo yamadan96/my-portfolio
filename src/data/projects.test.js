@@ -1,7 +1,7 @@
 import projects from './projects';
 
 // Mermaid syntax itself is validated by scripts/validate-diagrams.mjs at
-// prebuild time — mermaid is ESM and CRA's jest cannot transform it.
+// prebuild time (scripts/validate-diagrams.mjs); the unit tests stay data-only.
 describe('project data', () => {
   it('has a unique id for every entry', () => {
     const ids = projects.map((p) => p.id);
