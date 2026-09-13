@@ -1,49 +1,6 @@
 // category: 'ml'（モデル開発・論文再現）/ 'tool'（開発者向けツール）/ 'product'（プロダクト）
 const projects = [
   {
-    id: 'project-parc2026-vla',
-    featured: true,
-    category: 'ml',
-    title: 'PARC2026 予選 — SmolVLA ポリシーサーバー（Vision-Language-Action）',
-    description:
-      'AIRoA × 東京大学松尾・岩澤研究室「PARC2026 予選 Track 1」向けに、LIBERO-plus 上で lerobot/smolvla_libero_plus を LoRA 微調整し、採点環境（Python 3.10 / CUDA 13 / ネットワーク遮断）で動く HTTP ポリシーサーバーとして提出。ネットワーク遮断という制約から、LeRobot v0.6.0 を zip へ同梱して Python 3.10 へバックポートするベンダリング機構を自作した。環境を挟まないオープンループ検証を用意し、統合バグとモデル性能低下を切り分けられるようにしている。',
-    tags: ['VLA', 'SmolVLA', 'LeRobot', 'LIBERO', 'LoRA', 'Robotics', 'Python'],
-    github: null,
-    demo: null,
-    image: null,
-    summary: {
-      built: 'ロボットが「言葉の指示」を受けて物を操作するAIモデルを学習させ、コンテストの採点システムから呼び出せるサーバーとして提出した。',
-      problem: '採点環境はインターネットに接続できず、こちらが用意したプログラムだけで動かす必要があった。ライブラリを普通にインストールする方法が使えない。',
-      role: 'モデルの追加学習、採点環境で動くサーバーの実装、必要なライブラリを提出物に同梱する仕組みの自作までを担当。',
-      tech: 'SmolVLA（カメラ画像と言葉の指示から、ロボットの動きを直接出力するモデル）をLoRA（モデル全体ではなく、ごく一部だけを学習し直す省メモリな手法）で追加学習した。',
-      result: 'ネットワーク遮断・Python 3.10 という制約下で動作するサーバーを完成させ、予選に提出。ロボット環境を介さない検証手順も用意し、不具合の原因が「つなぎ込み」か「モデルの性能」かを切り分けられるようにした。',
-    },
-    technical: [
-      { label: 'システム構成', body: '学習済みポリシーを HTTP サーバーとして公開し、採点側からの観測入力に対して行動を返す構成。ベースは lerobot/smolvla_libero_plus で、LIBERO-plus タスク上で LoRA 微調整を行った。' },
-      { label: '依存関係のベンダリング', body: '採点環境はネットワーク遮断かつ Python 3.10 のため、LeRobot v0.6.0 を提出 zip に同梱し 3.10 へバックポートする機構を自作した。pip install に頼れない前提での配布設計。' },
-      { label: '検証方法', body: 'ロボット環境を挟まないオープンループ検証を用意し、統合バグとモデル性能低下を切り分けられるようにした。採点環境と同条件（CUDA 13）での事前確認も実施。' },
-      { label: '学んだこと', body: '実行環境の制約が設計を決めるという点。精度以前に「相手の環境で確実に起動すること」が提出物の価値を左右する。' },
-    ],
-    diagram: {
-      alt: '採点環境からHTTPで観測が送られ、SmolVLAポリシーが行動を返す構成図',
-      caption: 'ネットワーク遮断された採点環境で動くよう、依存ライブラリを提出物に同梱している',
-      chart: `flowchart LR
-  subgraph SCORE["採点環境（ネットワーク遮断 / Python 3.10）"]
-    SIM["LIBERO-plus<br/>ロボットシミュレータ"]
-  end
-  subgraph ZIP["提出 zip（自作ベンダリング）"]
-    SRV["HTTP ポリシーサーバー"]
-    POL["SmolVLA + LoRA<br/>学習済みポリシー"]
-    LR["LeRobot v0.6.0<br/>（3.10 へバックポート）"]
-  end
-  TRAIN["LoRA 微調整<br/>（事前に実施）"] -.-> POL
-  SIM -- "観測（画像 + 指示文）" --> SRV
-  SRV --> POL
-  POL -- "行動（関節の目標値）" --> SIM
-  SRV --- LR`,
-    },
-  },
-  {
     id: 'project-llm-finetune',
     featured: true,
     category: 'ml',
