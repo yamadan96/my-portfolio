@@ -322,9 +322,9 @@ const experiences = [
     role: 'システムエンジニア / DX統括部',
     period: '2023年7月〜2026年5月（2年10ヶ月）',
     description:
-      '業務システム企業の社内AI開発を担当。社員の退職リスク予測、メール誤送信の自動検出、社内文書をAIで検索できる仕組みなど、複数のシステムを実用化。',
+      '業務システム企業の社内AI開発を担当。社員の退職リスク予測、メール誤送信の自動検出、社内文書をAIで検索できる仕組みなど、複数のシステムを社内デモ環境まで展開。',
     descriptionEn:
-      'In-house AI development: employee attrition prediction, email misdelivery detection, and RAG-based document search — multiple systems shipped to production.',
+      'In-house AI development: employee attrition prediction, email misdelivery detection, and RAG-based document search — multiple systems deployed to the internal demo environment.',
     tags: ['Python', 'Azure OpenAI', 'Azure AI Search', 'Django', 'React'],
     url: 'https://www.solty.co.jp/',
     blogUrl: null,
