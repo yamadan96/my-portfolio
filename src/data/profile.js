@@ -14,8 +14,8 @@ const profile = {
   tagline: ['LLM Agent・RAG・Computer Vision を、', '研究・検証から実運用まで一貫して実装。'],
   // Hero の実績チップ3つ。数字は experiences.js の summary.result と一致させる
   proofPoints: [
-    { axis: 'RAG', value: '57% → 86%', metric: '検索 Recall（業務システムを操作する LLM Agent への知識注入）' },
-    { axis: 'Computer Vision', value: '96.6%', metric: '束単位の検出成功率（製造ライン向け物体検出）' },
+    { axis: 'RAG', value: '57% → 86%', metric: '検索 Recall・7ケース（業務システムを操作する LLM Agent への知識注入）' },
+    { axis: 'Computer Vision', value: '96.6%', metric: '束単位の検出成功率・社内評価（製造ライン向け物体検出の PoC）' },
     { axis: 'LLM / NLP', value: '+14.1pt', metric: 'Accuracy（契約書分類モデルの LLM 化）' },
   ],
   // Hero に出す SNS はこの2つだけ。残りは Contact 末尾に文字リンクで置く
@@ -26,7 +26,7 @@ const profile = {
 
   // About: 実務 → 研究の順の2段落。数字は指標名つきで、Hero の proofPoints と同じ値を使う
   bio: [
-    '実務：LLM Agent / RAG / Computer Vision を製品・業務システムへ実装。RAG の検索 Recall 57%→86%、製造ライン向け物体検出 96.6%、契約書分類の LLM 化で Accuracy +14.1pt を経験。',
+    '実務：LLM Agent / RAG / Computer Vision を製品・業務システムへ実装。RAG の検索 Recall 57%→86%（7ケース）、製造ライン向け物体検出の PoC で 96.6%（社内評価）、契約書分類の LLM 化で Accuracy +14.1pt を経験。',
     '研究：少量の専門家アノテーションを用いた被災建物の損傷度分類を研究。FIT2025、IEICE 2026、映像情報メディア学会 2026 で発表。',
   ],
 
