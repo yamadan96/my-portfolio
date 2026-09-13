@@ -3,12 +3,18 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
+import { mobileTapArea } from '../../styles/tapArea';
 import certifications from '../../data/certifications';
 
+// 768px 以上は2列グリッド（並びは左→右・上→下で新しい順を保つ）、それ未満は1列
 const CertList = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: ${({ theme }) => theme.spacing.md};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 `;
 
 const CertCard = styled(motion.div)`
@@ -73,11 +79,13 @@ const CertLinks = styled.div`
 
 const CertLink = styled.a`
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.accentText};
   text-decoration: none;
   &:hover {
     color: ${({ theme }) => theme.colors.primaryLight};
   }
+
+  ${mobileTapArea}
 `;
 
 // 取得年月の新しい順に並べる（year は「2026年9月」形式）。同じ月なら記載順を保つ

@@ -10,6 +10,10 @@ const StyledCard = styled(motion.div)`
   padding: ${({ theme }) => theme.spacing.xl};
   transition: all ${({ theme }) => theme.transitions.normal};
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.spacing.lg};
+  }
+
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary};
     transform: translateY(-4px);

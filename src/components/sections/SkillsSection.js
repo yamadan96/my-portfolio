@@ -12,6 +12,7 @@ const SkillsGrid = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.md};
   }
 `;
 
@@ -25,6 +26,10 @@ const CategoryCard = styled(motion.div)`
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.spacing.lg};
   }
 `;
 
