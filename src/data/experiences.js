@@ -163,7 +163,6 @@ const experiences = [
         'Azure (GPU VM)',
         'TensorBoard',
         'Roboflow / CVAT',
-        'LoRA',
         'Optuna',
         'Pandas / NumPy',
         'RAG / LLM-as-a-Judge',
