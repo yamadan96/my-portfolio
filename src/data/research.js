@@ -33,14 +33,14 @@ const research = [
     problem:
       '拡散モデルの学習レシピ（損失設計・ノイズスケジュール）は CNN（U-Net）バックボーンを前提に磨かれてきた。同じレシピが Transformer バックボーンでも最適なのかは自明でない。',
     contribution:
-      'Neural Flow Diffusion Models（NFDM）を Just Image Transformer 上で体系的に検証。stop-gradient・decoupled loss・GVP型ノイズスケジュールを自前実装し、要因実験でアーキテクチャ間の「非転移性」を実証。',
+      'Neural Flow Diffusion Models（NFDM）を Just Image Transformer 上で体系的に検証。stop-gradient・decoupled loss・GVP型ノイズスケジュールを自前実装し、要因実験でアーキテクチャ間の「非転移性」を確認。',
     results: [
       'JiT-S/4（32.56M）・JiT-B/4 に加え、比較対象として U-Net（38M）・DiT-B（130M）で CIFAR-10・12条件＋マルチシードの実験を実施',
       'FID を 312 → 13.90 まで改善',
       'CNN バックボーンで最適とされる学習レシピが Transformer では逆転することを要因実験で確認',
     ],
     description:
-      'NFDM を Transformer バックボーン上で系統的に検証し、CNN で最適とされる学習レシピの非転移性を実証。FID 312 → 13.90。',
+      'NFDM を Transformer バックボーン上で系統的に検証し、CNN で最適とされる学習レシピの非転移性を確認。FID 312 → 13.90。',
     tags: ['Diffusion Model', 'Flow Matching', 'NFDM', 'Vision Transformer', 'DiT', 'CIFAR-10'],
     link: null,
   },
