@@ -1137,7 +1137,7 @@ const experiences = [
     secondary: true,
     company: '株式会社松尾研究所',
     role: '戦略コンサルティング補佐（大手食品企業DX推進）',
-    period: '2023年1月〜5月（5ヶ月）',
+    period: '2023年2月〜5月（4ヶ月）',
     description:
       '大手食品企業のデジタル変革プロジェクトを戦略面から支援。市場規模の試算や競合調査、経営陣向け資料の作成を担当。',
     tags: ['Strategy', 'Market Research', 'DX'],
