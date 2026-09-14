@@ -562,11 +562,6 @@ const ExperienceDetail = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const triggerRef = useRef(null);
 
-  // 個別ページ（/projects/:id）の「経歴へ」リンクから戻ったときに、前ページのスクロール位置が残らないようにする
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
-
   const closeModal = useCallback(() => {
     setSelectedProject(null);
     // Restore focus to the element that opened the modal
@@ -601,7 +596,13 @@ const ExperienceDetail = () => {
 
   return (
     <DetailWrapper $hasProjects={hasProjects}>
-      <BackButton onClick={() => navigate('/')} whileHover={{ x: -4 }}>
+      <BackButton
+        // アプリ内の前のページがあれば履歴を戻り、元のスクロール位置に帰す（直接開いたときはトップの経歴セクションへ）
+        onClick={() =>
+          window.history.state?.idx > 0 ? navigate(-1) : navigate({ pathname: '/', hash: 'experience' })
+        }
+        whileHover={{ x: -4 }}
+      >
         ← 戻る
       </BackButton>
       <motion.div variants={containerVariants} initial="hidden" animate="visible">

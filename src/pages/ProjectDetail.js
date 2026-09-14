@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -264,11 +264,6 @@ const collectLinks = (project) => [
 const ProjectDetail = () => {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
-
-  // 経歴ページのカード（ページ中ほど）から遷移すると前ページのスクロール位置が残るので、先頭から読めるようにする
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
 
   if (!project) {
     return (

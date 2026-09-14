@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -235,11 +235,6 @@ const collectMaterials = (pub) => [
 const ResearchDetail = () => {
   const { id } = useParams();
   const pub = publications.find((p) => p.id === id);
-
-  // 一覧の下の方の行から遷移すると前ページのスクロール位置が残るので、先頭から読めるようにする
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
 
   if (!pub) {
     return (

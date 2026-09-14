@@ -47,7 +47,14 @@ const SubPageHeader = ({ title, lead }) => {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <Back onClick={() => navigate('/')}>← トップへ戻る</Back>
+      <Back
+        onClick={() =>
+          // アプリ内の前のページがあれば履歴を戻り、元のスクロール位置に帰す（直接開いたときはトップへ）
+          window.history.state?.idx > 0 ? navigate(-1) : navigate('/')
+        }
+      >
+        ← 戻る
+      </Back>
       <Title>{title}</Title>
       {lead && <Lead>{lead}</Lead>}
     </Wrapper>

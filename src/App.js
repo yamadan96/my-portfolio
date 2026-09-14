@@ -5,6 +5,7 @@ import { darkTheme, lightTheme } from './theme/theme';
 import GlobalStyles from './styles/GlobalStyles';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+import ScrollManager from './components/layout/ScrollManager';
 import MainPage from './pages/MainPage';
 import ExperienceDetail from './pages/ExperienceDetail';
 import WorkPage from './pages/WorkPage';
@@ -30,6 +31,7 @@ function App() {
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyles />
       <Router>
+        <ScrollManager />
         <Header isDark={isDark} onThemeToggle={toggleTheme} />
         <main>
           <Routes>
