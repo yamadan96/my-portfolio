@@ -9,6 +9,8 @@ const projects = [
     title: 'LoRA スクラッチ実装による LLM ファインチューニング',
     description:
       'PEFT 等のライブラリを使わず LoRA（LoRALinear / apply_lora）を自前実装し、Qwen2.5-7B-Instruct を日本語 instruction tuning。h = Wx + BAx×(α/r) の定式に沿って A を kaiming 初期化・B をゼロ初期化し、学習開始時 ΔW=0 を保証。全パラメータの約0.1%のみを学習対象とした。',
+    // トップページのカードに出す1行の根拠。description / technical / tags にある語だけを並べる
+    evidence: 'PEFT を使わず LoRA を自前実装 · Qwen2.5-7B-Instruct · Instruction Tuning',
     tags: ['LoRA (from scratch)', 'Qwen2.5-7B', 'PyTorch', 'Instruction Tuning', 'uv'],
     github: 'https://github.com/yamadan96/llm-finetune',
     demo: null,
@@ -51,6 +53,7 @@ const projects = [
     title: 'Vision Transformer スクラッチ実装（論文ベース）',
     description:
       '"An Image is Worth 16x16 Words"（Dosovitskiy et al., ICLR 2021）を PyTorch でゼロから再現。Patch Embedding・学習可能な位置埋め込み・Multi-Head Attention・MLP ブロックの全コンポーネントを論文の式と対応付けて自作し、CIFAR-10 で学習（ViT-Small 構成、d_model=256・8ヘッド・6層）。',
+    evidence: '論文の式と対応付けて全コンポーネントを PyTorch で自作 · CIFAR-10 で学習',
     tags: ['Vision Transformer', 'PyTorch', 'Paper Reproduction', 'CIFAR-10'],
     github: 'https://github.com/yamadan96/vit-from-scratch',
     demo: null,
@@ -92,6 +95,7 @@ const projects = [
     title: '被災建物損傷度分類 WebApp（研究成果のデプロイ）',
     description:
       '学会発表した研究成果（DINOv2 + LoRA）を、画像をアップロードすると地震・津波による建物の損傷度を判定する WebApp として実装。Selective Classification を組み込み、確信度が低い入力については判定を棄権する設計とした。',
+    evidence: 'DINOv2 ViT-L/14 ＋ LoRA ＋ 補助ヘッド · Gradio · Selective Classification',
     tags: ['DINOv2', 'LoRA', 'Gradio', 'Selective Classification', 'Python'],
     github: 'https://github.com/yamadan96/disaster-app',
     // Hugging Face の無料 Space（アイドル時はスリープし、起動に1分ほどかかる）
@@ -129,7 +133,9 @@ const projects = [
     title: 'local-claude-code（ローカルLLM版コーディングエージェント CLI）',
     description:
       'Ollama / LM Studio / vLLM など OpenAI 互換のローカル LLM サーバー上で動作するコーディングエージェント CLI。read_file・write_file・edit_file・bash・glob・grep・list_dir の7ツールを内蔵し、ワークスペースサンドボックスと ask/auto 権限モードを実装。小型モデル特有の不安定さに対し、JSON 復旧・ファジーなツール名照合・無限ループ検出で対処した。',
-    tags: ['Python', 'CLI', 'Local LLM', 'Tool Calling', 'Ollama', 'uv'],
+    evidence: 'Ollama / LM Studio / vLLM に接続 · Tool Calling · 7ツールを内蔵',
+    // 先頭3件がカードに出るので、この案件を言い当てる順に並べる（内容は変えない）
+    tags: ['Local LLM', 'Tool Calling', 'CLI', 'Python', 'Ollama', 'uv'],
     github: 'https://github.com/yamadan96/local-claude-code',
     demo: null,
     image: null,
@@ -540,7 +546,7 @@ const projects = [
       constraints: '顧客提供の画像は341枚と少なく、公開データを加えて学習した。PoC（試作検証）であり、評価は社内評価データで行っている。',
       role: 'PM1名＋エンジニア3名の4名体制で、テックリードとしてモデル選定から学習・評価までを担当した。',
       approach: '物体検出モデル YOLOv8 を選定し、公開データでの事前学習→浅い層を固定した再学習→全層の再学習の3段階で学習。切り出し画像を学習データに加えて小さな物体の検出を強化した。コントラスト変更とガウシアンノイズによるデータ拡張は別モデルで検証した。',
-      results: '束単位の成功率は200〜300本で96.6%（社内評価データ）、推論時間は1枚0.2秒（推論のみ。既存システムは撮影から計算まで1枚8秒）。',
+      results: '束単位の成功率は200〜300本で96.6%（28/29枚、社内評価データ）、推論時間は1枚0.2秒（推論のみ。既存システムは撮影から計算まで1枚8秒）。',
       learned: 'TTA（推論時の拡張）は効果がなく、切り出し画像による小さな物体の検出強化が成功率を大きく押し上げた。束単位の成功率は1本ごとの精度とは別に測る必要がある。',
     },
     technical: [

@@ -12,6 +12,15 @@ const publications = [
     id: 'pub-ite2026',
     shortVenue: '映像情報メディア学会 2026年年次大会／知覚AIフォーラム',
     shortTitle: '視覚基盤モデルの比較',
+    // トップページの行に出す表示用フィールド。finding（見出し1行）・conditions（条件1行）・
+    // presentations（会場と発表形式のバッジ）に分ける。数字は description / metrics にあるものだけを使い、
+    // 会場名と発表形式は venue / type の文字列から切り出す（publications.test.js で検査）
+    finding: 'DINOv2 が DINOv3 を +5.53pt 上回った',
+    conditions: '能登半島地震 · 学習832枚 · 6シード · Wilcoxon p=0.031',
+    presentations: [
+      { venue: '映像情報メディア学会 2026年年次大会', type: '口頭' },
+      { venue: '第1回 知覚AIフォーラム', type: 'ポスター' },
+    ],
     // 5.53pt は最小規模の能登データに限った結果なので、どこに出すときも「能登半島地震の小規模データ」と結び付けて書く
     claim:
       '能登半島地震の小規模データ（学習832枚）では DINOv2 が最新の DINOv3 を 5.53pt 上回った。4データセット・6シードでモデル世代とデータ規模の関係を検証',
@@ -88,6 +97,9 @@ const publications = [
     id: 'pub-ieice2026',
     shortVenue: 'IEICE 2026 総合大会',
     shortTitle: 'マルチタスク学習',
+    finding: 'Accuracy 68.99% → 71.04%、Macro F1 0.6366 → 0.6556',
+    conditions: '能登半島地震 1,040枚 · 10シード平均 · 有意差検定は未実施',
+    presentations: [{ venue: 'IEICE2026 電子情報通信学会 総合大会', type: '口頭' }],
     claim: '災害の種類・程度・有無を補助タスクにすると、10シード平均で精度が上がった（有意差検定は未実施）',
     resultCards: [
       { value: '1,040枚', label: '能登半島地震の画像' },
@@ -137,6 +149,10 @@ const publications = [
     id: 'pub-fit2025',
     shortVenue: 'FIT2025',
     shortTitle: 'LoRA による損傷度分類',
+    finding: 'LoRA で DINOv2 の Macro F1 0.37 → 0.56',
+    conditions: '能登半島地震 1,040枚 · 6クラス · 訓練832枚／評価208枚',
+    presentations: [{ venue: 'FIT2025 第24回情報科学技術フォーラム', type: '口頭' }],
+    topNote: 'ConvNeXt の標準学習が最も安定',
     claim: 'LoRA で基盤モデル DINOv2 の精度は大きく上がるが、少量データでは ConvNeXt の標準学習が最も安定',
     resultCards: [
       { value: '1,040枚', label: '自作データセット' },

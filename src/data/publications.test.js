@@ -38,10 +38,35 @@ describe('publication data', () => {
     });
   });
 
+  it('gives every paper the top-page row fields, taken from what the entry already says', () => {
+    conferencePapers.forEach((p) => {
+      expect(p.finding.length).toBeGreaterThan(0);
+      expect(p.conditions.length).toBeGreaterThan(0);
+      // 行に出す数字は description / metrics にあるものだけ
+      const source = [p.description, ...p.metrics.map((m) => `${m.value} ${m.label}`)].join(' ');
+      `${p.finding} ${p.conditions}`
+        .match(/\d[\d,.]*/g)
+        ?.forEach((n) => expect(source).toContain(n));
+      // 会場名と発表形式は venue / type の文字列から切り出す
+      expect(p.presentations.length).toBeGreaterThan(0);
+      p.presentations.forEach((pres) => {
+        expect(p.venue).toContain(pres.venue);
+        expect(`${p.type}${p.venue}`).toContain(pres.type);
+      });
+    });
+  });
+
   it('ties the ITE2026 5.53pt result to the Noto dataset and labels the cross-paper comparison everywhere', () => {
     const ite = publications.find((p) => p.id === 'pub-ite2026');
     // (1) 5.53pt は能登半島地震の小規模データ（学習832枚）に限った結果として書く
-    [ite.claim, ite.highlight, ite.resultCards[2].label, ite.detail.results].forEach((text) => {
+    // トップページの行は finding（数字）と conditions（条件）の2行で1組にして出す
+    [
+      ite.claim,
+      ite.highlight,
+      ite.resultCards[2].label,
+      ite.detail.results,
+      `${ite.finding} ${ite.conditions}`,
+    ].forEach((text) => {
       expect(text).toMatch(/能登/);
       expect(text).toMatch(/832/);
     });
@@ -52,7 +77,13 @@ describe('publication data', () => {
     [ite.metricsNote, ite.detail.results, ite.detail.interpretation].forEach((text) =>
       expect(text).toMatch(/実験条件の異なる論文間比較/)
     );
-    [ite.claim, ite.highlight, ...ite.resultCards.map((c) => `${c.value} ${c.label}`)].forEach((text) => {
+    [
+      ite.claim,
+      ite.highlight,
+      ite.finding,
+      ite.conditions,
+      ...ite.resultCards.map((c) => `${c.value} ${c.label}`),
+    ].forEach((text) => {
       ['79.87', '74.50', '99.53', '96.60', '83.86', '80.40'].forEach((n) => expect(text).not.toContain(n));
     });
   });

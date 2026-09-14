@@ -1,5 +1,7 @@
 // topPage: true の5件だけがトップページに開いた状態で出る（並びは取得年月の新しい順）。
-// それ以外は「その他の資格・修了証を見る →」の中に入る。
+// それ以外は「すべての資格・修了証を見る →」の中に入る。
+// shortName / issuer は name を「資格名」と「発行元」に切り分けた表示用フィールド（新しい事実は足さない）。
+// shortName が無い項目は name をそのまま出す。
 const certifications = [
   {
     name: '普通自動車第一種免許（MT）',
@@ -25,6 +27,8 @@ const certifications = [
   {
     name: 'Harvard CS50x: Introduction to Computer Science',
     topPage: true,
+    shortName: 'CS50x: Introduction to Computer Science',
+    issuer: 'Harvard University',
     category: 'CS',
     year: '2022年2月',
     description: 'Harvard University 提供の CS 基礎コース修了（問題セット10・ラボ8・最終プロジェクト）',
@@ -58,6 +62,8 @@ const certifications = [
   {
     name: '東京大学松尾研究室 集中講義「画像認識」修了証',
     topPage: true,
+    shortName: '集中講義「画像認識」修了',
+    issuer: '東京大学 松尾研究室',
     category: 'AI',
     year: '2022年4月',
     description: '画像認識のための先端的機械学習モデルの設計と開発に関する所定のプログラムを修了',
@@ -73,6 +79,8 @@ const certifications = [
   {
     name: '東京大学松尾研究室 集中講義「深層生成モデル」修了証',
     topPage: true,
+    shortName: '集中講義「深層生成モデル」修了',
+    issuer: '東京大学 松尾研究室',
     category: 'AI',
     year: '2024年4月',
     description: '深層生成モデルの設計と開発に関する所定のプログラムを修了（2024 Spring）',
@@ -88,6 +96,8 @@ const certifications = [
   {
     name: 'G検定（JDLA Deep Learning for GENERAL 2026 #4）',
     topPage: true,
+    shortName: 'G検定',
+    issuer: 'JDLA',
     category: 'AI',
     year: '2026年8月',
     description:
@@ -98,6 +108,8 @@ const certifications = [
   {
     name: '東京大学松尾・岩澤研究室 講座「Physical AI 基礎編 2026」修了証',
     topPage: true,
+    shortName: 'Physical AI 基礎編 2026 修了',
+    issuer: '東京大学 松尾・岩澤研究室',
     category: 'AI',
     year: '2026年9月',
     description: '松尾・岩澤研究室が主宰する Physical AI 基礎編（2026）を修了（2026年9月11日付）',

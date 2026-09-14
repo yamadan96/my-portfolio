@@ -18,6 +18,26 @@ describe('experience data', () => {
     });
   });
 
+  it('gives the first five entries the top-page fields, with numbers split out of the sentence', () => {
+    const TOP_PAGE_COUNT = 5;
+    experiences.slice(0, TOP_PAGE_COUNT).forEach((e) => {
+      expect(e.top).toBeDefined();
+      expect(e.top.built.length).toBeGreaterThan(0);
+      // 本文（built）に数字は入れない。数字は metrics か resultLine に出す
+      expect(e.top.built).not.toMatch(/\d/);
+      expect(e.top.metrics || e.top.resultLine).toBeTruthy();
+      // タグは同じエントリの tags から選ぶ（新しい技術名を足さない）
+      e.top.tags.forEach((tag) => expect(e.tags).toContain(tag));
+      // 数字はそのエントリが既に述べているものだけ
+      const source = [e.oneLiner, e.summary.result, e.details.achievements].join(' ');
+      (e.top.metrics ?? []).forEach((m) => {
+        expect(m.value.length).toBeGreaterThan(0);
+        expect(m.label.length).toBeGreaterThan(0);
+        `${m.value} ${m.label}`.match(/\d[\d,.]*/g)?.forEach((n) => expect(source).toContain(n));
+      });
+    });
+  });
+
   it('backs every detail page with the fields it renders', () => {
     experiences
       .filter((e) => e.hasDetail)
