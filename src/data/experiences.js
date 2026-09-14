@@ -452,9 +452,10 @@ const experiences = [
             'Azure Blob Storage（クラウド上の文書の保管場所）にある社内文書を、Azure AI Searchでインデックス化（検索できるよう整理）した。',
             '整理した文書をLLM（大規模言語モデル）と組み合わせ、RAG（社内文書を検索して回答に使う仕組み）の検索システムとして構築した。',
             'LangChainとFAISS（検索処理のライブラリ）によるベクトル検索（文章の意味の近さで探す検索）の仕組みも、別途Azure VM（クラウド上の仮想サーバー）に実装した。',
+            '質問画面は Udemy の教材を参考に Next.js で作り、GitHub Actions から Azure Static Web Apps へ自動でデプロイされるようにした。',
           ],
           impact: '社内デモ環境への導入まで完了した。',
-          techStack: ['Azure Blob Storage', 'Azure AI Search', 'LangChain', 'FAISS', 'Azure VM'],
+          techStack: ['Azure Blob Storage', 'Azure AI Search', 'LangChain', 'FAISS', 'Azure VM', 'Next.js', 'Azure Static Web Apps'],
         },
         {
           name: 'メールの誤送信をAIで自動検出する仕組み',
