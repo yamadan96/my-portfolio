@@ -53,7 +53,7 @@ describe('ExperienceDetail highlights layout (airion)', () => {
     renderDetail('airion');
     expect(screen.getByText('何をしたか')).toBeInTheDocument();
     expect(screen.getByText('自分の担当')).toBeInTheDocument();
-    expect(screen.getByText(/4名チームのテックリードを担当/)).toBeInTheDocument();
+    expect(screen.getByText(/4名チームのエンジニア兼テックリードを担当/)).toBeInTheDocument();
     ['なぜ必要だったか', '使った技術', '結果'].forEach((label) =>
       expect(screen.queryByText(label)).not.toBeInTheDocument()
     );

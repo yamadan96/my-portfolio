@@ -46,7 +46,7 @@ const profile = {
 
   // About: 実務 → 研究の順の2段落。実務行は「領域・体制・担当範囲」だけを書き、数字は Hero と Experience に任せる
   bio: [
-    '実務：LLM Agent / RAG / Computer Vision を中心に、研究・PoCから本番実装まで経験。約12名のLLM Agent開発ではRAG部分を設計・実装し、製造業向けComputer Visionでは4名チームのテックリードを担当。LegalOnでは契約書分類モデルのLLM化から本番導入可能なマイクロサービスの実装まで、別のLegalTech案件では2名体制で設計から本番リリースまで担当。',
+    '実務：LLM Agent / RAG / Computer Vision を中心に、研究・PoCから本番実装まで経験。約12名のLLM Agent開発ではRAG部分を設計・実装し、製造業向けComputer Visionでは4名チームのエンジニア兼テックリードを担当。LegalOnでは契約書分類モデルのLLM化から本番導入可能なマイクロサービスの実装まで、別のLegalTech案件では2名体制で設計から本番リリースまで担当。',
     '研究：少量の専門家アノテーションで被災建物の損傷度を分類する研究（能登半島地震の画像 1,040枚・6分類）。FIT2025 では LoRA 適用で DINOv2 の Macro F1 を 0.37→0.56 に改善。IEICE 2026、映像情報メディア学会 2026 でも発表。',
   ],
 
@@ -54,7 +54,7 @@ const profile = {
   // （数字は Hero と Experience、学会名は Research が持つ）。bio は履歴書生成などの一次情報源として残す
   aboutLines: [
     'LLM Agent / RAG / Computer Vision を中心に、研究・PoC から本番実装まで経験。',
-    '実務では、LLM Agent の RAG 部分の設計・実装、製造業向け Computer Vision のテックリード、契約書分類モデルの LLM 化と本番導入可能なマイクロサービスの実装。',
+    '実務では、LLM Agent の RAG 部分の設計・実装、製造業向け Computer Vision のエンジニア兼テックリード、契約書分類モデルの LLM 化と本番導入可能なマイクロサービスの実装。',
     '研究では、限られた専門家ラベルの下での被災建物の損傷度分類（Vision Foundation Models / Parameter-Efficient Fine-Tuning）。',
   ],
 
