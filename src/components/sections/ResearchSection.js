@@ -66,6 +66,13 @@ const Conditions = styled.p`
   line-height: 1.6;
 `;
 
+const PubTitle = styled.p`
+  margin: 0 0 ${({ theme }) => theme.spacing.xs};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  line-height: 1.6;
+`;
+
 const Badges = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -138,6 +145,11 @@ const submittingVenues = submitting.map((item) => item.shortVenue || item.venue)
 
 const ResearchSection = () => {
   const navigate = useNavigate();
+  // 1つの研究を複数の会場で発表することがあるため、会場数はデータから数える
+  const presentationCount = conferencePapers.reduce(
+    (total, pub) => total + (pub.presentations ? pub.presentations.length : 1),
+    0,
+  );
 
   return (
     <Section id="research">
@@ -150,6 +162,7 @@ const ResearchSection = () => {
               <Topic>{pub.shortTitle}</Topic>
               <Finding>{pub.finding}</Finding>
               <Conditions>{pub.conditions}</Conditions>
+              <PubTitle>発表題目：{pub.title}</PubTitle>
               {pub.presentations && (
                 <Badges aria-label="発表の場">
                   {pub.presentations.map((p) => (
@@ -168,7 +181,7 @@ const ResearchSection = () => {
         ))}
       </Rows>
       <FooterLine>
-        学会発表{conferencePapers.length}件
+        {conferencePapers.length}件の研究を{presentationCount}会場で発表
         {submitting.length > 0 && ` · ${submittingVenues} 投稿済み（査読中）`}
       </FooterLine>
       <MoreLinks>
