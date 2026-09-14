@@ -49,7 +49,7 @@ const certifications = [
     category: 'AI',
     year: '2024年1月',
     description: '日本ディープラーニング協会認定プログラム修了',
-    link: null,
+    link: '/certificates/jdla-dl-basic-2024.pdf',
   },
   {
     name: 'Data Science Education Program Level 3（Specialization）',
