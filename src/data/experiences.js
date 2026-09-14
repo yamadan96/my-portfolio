@@ -2,6 +2,50 @@
 // 6件目以降は終了日の降順。
 const experiences = [
   {
+    id: 'dmm',
+    // トップページの職務経歴用（1行）
+    oneLiner:
+      '大規模エンタメサービス向けの自社 AI モデル開発を業務委託で支援。CTO 直下でアーキテクチャ選定・実装から評価パイプラインの設計までを担当',
+    top: {
+      built: '大規模エンタメサービス向けの自社 AI モデル開発を業務委託で支援',
+      resultLine: 'CTO 直下でモデル選定から評価の仕組みづくりまでを担当',
+      roleLine: '週20時間・フルリモートの業務委託',
+      tags: ['LLM', 'Speech AI', 'Python'],
+    },
+    summary: {
+      built: '動画・音声・画像を扱うサービス向けに、自社で持つAIモデルの開発と改善を支援する。',
+      problem: '案件票では、モデルの選び方から評価の仕組みづくりまでを担う人員が求められている。',
+      role: 'CTO直下で、モデルのアーキテクチャ選定と実装、評価パイプラインの設計、学習データ収集を担当する。',
+      tech: '言語・音声・画像・動画のモデルを対象とし、必要に応じて追加学習（SFT・強化学習・LoRA）も行う。',
+      result: '2026年9月16日開始の案件のため、成果はこれから。',
+    },
+    company: '合同会社DMM.com',
+    role: 'AIエンジニア / データサイエンティスト（業務委託）',
+    period: '2026年9月〜2026年11月',
+    description:
+      '大規模エンタメサービス向けの自社AIモデル開発を支援。CTO直下で、言語・音声・画像・動画のモデル選定と実装、評価パイプラインの設計、学習データ収集を担当。',
+    descriptionEn:
+      'Freelance AI engineer supporting in-house model development for a large entertainment service, reporting to the CTO.',
+    tags: ['LLM', 'Speech AI', 'Computer Vision', 'Python'],
+    url: 'https://dmm-corp.com/',
+    blogUrl: null,
+    hasDetail: true,
+    details: {
+      overview:
+        'レバテック経由の業務委託として、合同会社DMM.comのAI案件に参画。' +
+        'CTO直下で、自社AIモデル（言語・音声・画像・動画）のアーキテクチャ選定と実装、評価パイプラインの設計、学習データ収集を担当する。' +
+        '契約期間は2026年9月16日から2026年11月30日、週20時間のフルリモート。',
+      responsibilities: [
+        '自社AIモデルのアーキテクチャ選定と実装',
+        'モデルの良し悪しを測る評価パイプラインの設計',
+        '学習データの収集と、必要に応じた追加学習（SFT・強化学習・LoRA）の実行',
+      ],
+      achievements:
+        '2026年9月16日に参画開始。契約は2026年11月30日まで、週20時間のフルリモート。成果はこれから。',
+      techStack: ['Python', 'LLM', 'Speech AI', 'Computer Vision'],
+    },
+  },
+  {
     id: 'matsuo-institute-gui-rag',
     // トップページの職務経歴用（1行）
     oneLiner: '業務システムを自律操作する LLM Agent の RAG 部分を設計・実装（約12名のプロジェクト）。業務システム上の評価で検索 Recall 57%→86%（7ケース）、探索の空回り 74%→7%（55回の比較検証）',
@@ -844,7 +888,7 @@ const experiences = [
       problem: '実際のサービスが抱える課題を、限られた期間で分析し解決策まで示す必要があった。',
       role: '要因分析・解決策の立案・実装・CTOへの発表まで一貫して担当。',
       tech: '機械学習とデータ分析で要因を特定し、解決策を実装した。',
-      result: '4日間のインターンシップで優秀者に選出された。',
+      result: 'CTO への成果発表を行い、後日 COO・CTO との特別面談に招待された。',
     },
     short: true,
     company: '株式会社スタンバイ',
@@ -866,7 +910,7 @@ const experiences = [
         'CTOへの成果発表・プレゼンテーション',
       ],
       achievements:
-        'インターンシップ優秀者に選出。MLによる課題解決力とエンジニア視点での企画力を体得',
+        'CTOへの成果発表を行い、後日COO・CTOとの特別面談に招待された。MLによる課題解決とエンジニア視点での企画を短期間で経験',
       techStack: ['Python', 'Machine Learning', 'Data Analysis'],
     },
   },

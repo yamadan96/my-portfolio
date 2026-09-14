@@ -10,7 +10,7 @@ import { mobileTapArea } from '../../styles/tapArea';
 import experiences from '../../data/experiences';
 
 // トップページのタイムラインに開いた状態で出す件数（experiences.js の先頭から）
-export const TOP_PAGE_COUNT = 6;
+export const TOP_PAGE_COUNT = 7;
 
 const RowList = styled.div`
   max-width: 900px;
