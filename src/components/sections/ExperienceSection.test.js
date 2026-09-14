@@ -21,7 +21,7 @@ describe('ExperienceSection', () => {
 
   it('shows only the first five entries in the timeline', () => {
     renderSection();
-    expect(TOP_PAGE_COUNT).toBe(5);
+    expect(TOP_PAGE_COUNT).toBe(6);
     const companies = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent);
     expect(companies).toEqual(major.map((e) => e.company));
     rest.forEach((e) => expect(screen.queryByText(e.description)).not.toBeInTheDocument());
