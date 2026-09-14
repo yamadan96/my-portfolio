@@ -697,6 +697,42 @@ const projects = [
   ALB -. "ヘルスチェック<br/>2台とも正常" .-> EC2B`,
     },
   },
+  {
+    id: 'project-go-api-mentoring',
+    featured: false,
+    category: 'product',
+    title: 'Go の REST API と AWS 構築（メンタリング課題）',
+    description:
+      'メンターの課題とレビューに沿って、Go の REST API をデータベース・キャッシュ・自動テスト・Terraform まで段階的に作った。',
+    evidence: 'テスト関数63件（うち統合テスト41件）· 設計判断の記録（ADR）8本 · Terraform で54リソースを作成し、確認後に削除',
+    tags: ['Go', 'PostgreSQL', 'Redis', 'Terraform', 'AWS', 'GitHub Actions'],
+    github: null,
+    demo: null,
+    image: null,
+    summary: {
+      built: '書籍とタスクを扱う REST API を Go で作り、AWS 上に置いて動作を確かめた。',
+      problem: '課題ごとに、同時更新の衝突やキャッシュ障害など、新しい設計上の論点を扱う必要があった。',
+      role: '実装、テスト、設計判断の記録を一人で担当。主な PR はメンターのレビューを受けてからマージした。',
+      tech: '同時更新はバージョン番号による楽観ロックで検出し、読み取りは Redis のキャッシュを経由。データベースとキャッシュを実際に起動する統合テストを CI で回した。',
+      result: 'Terraform で ALB・ECS・RDS など54リソースを作成し、API からデータベースへの保存を確認したあと削除した。',
+    },
+    technical: [
+      { label: '同時更新', body: 'version 列による楽観ロックで、「対象が存在しない（404）」と「他の更新と衝突した（409）」を区別して返す。' },
+      { label: 'キャッシュ', body: '読み取りを Redis 経由にし、Redis が応答しないときはデータベースへ切り替える。同時に起きたキャッシュミスは1回の問い合わせにまとめ、統合テストで確認した。' },
+      { label: 'CI', body: 'lint・単体テスト・統合テスト・Docker ビルドを並列に実行。インフラの変更は PR で plan を確認してから適用する。' },
+      { label: 'インフラ', body: 'Terraform で VPC・ALB・ECS・RDS などを作成して動作を確認し、確認後に削除した。デプロイの自動化は完成していない。' },
+    ],
+    diagram: {
+      alt: 'ロードバランサーの後ろに Go の API を置き、その先にデータベースをつないだ AWS 構成と、ローカル環境のキャッシュの図',
+      caption: '検証時に Terraform で作成し、確認後に削除した構成（キャッシュはローカル環境で使用）',
+      chart: `graph LR
+  U["利用者"] --> ALB["ALB"]
+  ALB --> API["Go の API<br/>ECS"]
+  API --> DB["PostgreSQL<br/>RDS"]
+  API -. "ローカル環境" .-> C["Redis<br/>読み取りキャッシュ"]
+  GH["GitHub Actions<br/>lint・テスト・plan"] -.-> API`,
+    },
+  },
 ];
 
 export default projects;
