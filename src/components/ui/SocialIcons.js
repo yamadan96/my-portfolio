@@ -81,8 +81,10 @@ const socialIcons = { github: GitHubIcon, qiita: QiitaIcon, x: XIcon, linkedin: 
 
 const SocialIcons = ({ links }) => (
   <IconsWrapper>
-    {links.map(({ platform, url }) => {
+    {links.map(({ platform, url, label }) => {
       const Icon = socialIcons[platform];
+      // label はサービス名（GitHub / LinkedIn など）。読み上げと hover のツールチップに同じ語を使う
+      const name = label || platform;
       return Icon ? (
         <IconLink
           key={platform}
@@ -91,7 +93,8 @@ const SocialIcons = ({ links }) => (
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          aria-label={platform}
+          aria-label={name}
+          title={name}
         >
           <Icon />
         </IconLink>

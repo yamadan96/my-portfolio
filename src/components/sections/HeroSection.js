@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import SocialIcons from '../ui/SocialIcons';
 import profile from '../../data/profile';
 import Button from '../ui/Button';
 
@@ -171,17 +172,10 @@ const ButtonGroup = styled(motion.div)`
 `;
 
 // 44px のアイコンボタンはやめ、CTA の下に小さな文字リンクで置く
-const SmallLinks = styled(motion.p)`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
-
-  a {
-    color: ${({ theme }) => theme.colors.accentText};
-    text-decoration: none;
-  }
-  a:hover {
-    color: ${({ theme }) => theme.colors.primaryLight};
-  }
+const SocialWrapper = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  margin-top: ${({ theme }) => theme.spacing.md};
 `;
 
 const containerVariants = {
@@ -240,16 +234,9 @@ const HeroSection = () => {
             GitHubを見る
           </Button>
         </ButtonGroup>
-        <SmallLinks variants={itemVariants}>
-          {heroLinks.map((s, i) => (
-            <React.Fragment key={s.platform}>
-              {i > 0 && <span aria-hidden="true"> · </span>}
-              <a href={s.url} target="_blank" rel="noopener noreferrer">
-                {s.label}
-              </a>
-            </React.Fragment>
-          ))}
-        </SmallLinks>
+        <SocialWrapper variants={itemVariants}>
+          <SocialIcons links={heroLinks} />
+        </SocialWrapper>
       </HeroContent>
     </HeroWrapper>
   );
