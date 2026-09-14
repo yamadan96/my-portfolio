@@ -98,57 +98,15 @@ const StatusMessage = styled.p`
 
 const ContactIntro = styled.div`
   text-align: center;
-  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
+// 1行だけ。相談の例をチップで並べるのはやめた（フォームの直前で読ませる文を1つに絞る）
 const IntroText = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.textSecondary};
   line-height: 1.8;
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
-
-const ExampleList = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.sm};
-  justify-content: center;
-`;
-
-const ExampleItem = styled.li`
-  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
-  background: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.full};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const ContactNote = styled.p`
-  margin: 0 0 ${({ theme }) => theme.spacing.lg};
-  text-align: center;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-`;
-
-const SecondaryLinks = styled.p`
-  margin-top: ${({ theme }) => theme.spacing.xl};
-  text-align: center;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
-
-  a {
-    color: ${({ theme }) => theme.colors.accentText};
-    text-decoration: none;
-  }
-  a:hover {
-    color: ${({ theme }) => theme.colors.primaryLight};
-  }
-`;
-
-const secondaryLinks = profile.social.filter((s) => !profile.heroSocial.includes(s.platform));
 
 const ContactSection = () => {
   const form = useRef();
@@ -175,18 +133,8 @@ const ContactSection = () => {
     <Section id="contact">
       <SectionTitle title="Contact" subtitle="お問い合わせ" />
       <ContactWrapper>
-        {profile.contactNote && <ContactNote>{profile.contactNote}</ContactNote>}
         <ContactIntro>
-          <IntroText>
-            お気軽にご連絡ください。以下のようなご相談をお待ちしています。
-          </IntroText>
-          <ExampleList>
-            <ExampleItem>カジュアル面談</ExampleItem>
-            <ExampleItem>共同研究・プロジェクトの相談</ExampleItem>
-            <ExampleItem>登壇・執筆の依頼</ExampleItem>
-            <ExampleItem>技術的な質問・相談</ExampleItem>
-            <ExampleItem>その他お問い合わせ</ExampleItem>
-          </ExampleList>
+          <IntroText>{profile.contactIntro}</IntroText>
         </ContactIntro>
         <Form ref={form} onSubmit={handleSubmit}>
           <FormGroup>
@@ -208,17 +156,6 @@ const ContactSection = () => {
             <StatusMessage $success={status.success}>{status.message}</StatusMessage>
           )}
         </Form>
-        {/* Hero に出さない SNS はここに文字リンクで置く（Hero は GitHub / LinkedIn だけ） */}
-        <SecondaryLinks aria-label="その他のリンク">
-          {secondaryLinks.map((s, i) => (
-            <React.Fragment key={s.platform}>
-              {i > 0 && <span aria-hidden="true"> · </span>}
-              <a href={s.url} target="_blank" rel="noopener noreferrer">
-                {s.label}
-              </a>
-            </React.Fragment>
-          ))}
-        </SecondaryLinks>
       </ContactWrapper>
     </Section>
   );

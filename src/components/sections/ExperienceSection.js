@@ -4,13 +4,18 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
-import Timeline from '../ui/Timeline';
+import ExperienceRow from '../ui/ExperienceRow';
 import ExpandInPlace from '../ui/ExpandInPlace';
 import { mobileTapArea } from '../../styles/tapArea';
 import experiences from '../../data/experiences';
 
 // トップページのタイムラインに開いた状態で出す件数（experiences.js の先頭から）
 export const TOP_PAGE_COUNT = 5;
+
+const RowList = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+`;
 
 const SubHeading = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.lg};
@@ -109,10 +114,14 @@ const ExperienceSection = () => {
   return (
     <Section id="experience">
       <SectionTitle title="Experience" subtitle="主要な経験" />
-      <Timeline items={major} onDetailClick={handleDetailClick} />
+      <RowList>
+        {major.map((item) => (
+          <ExperienceRow key={item.id} item={item} onDetailClick={handleDetailClick} />
+        ))}
+      </RowList>
       {rest.length > 0 && (
         <ExpandInPlace
-          label={`その他の実務・インターン経験（${rest.length}件）をすべて見る`}
+          label={`その他${rest.length}件の経験を見る →`}
           closeLabel="その他の経験を閉じる ↑"
         >
           {others.length > 0 && (

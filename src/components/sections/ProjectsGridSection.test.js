@@ -29,6 +29,18 @@ describe('ProjectsGridSection (top page)', () => {
     expect(projects.filter((p) => p.featured)).toHaveLength(4);
   });
 
+  it('makes every card a link to its project page, and keeps the live demo link', () => {
+    renderSection();
+    expect(screen.getAllByRole('link', { name: '詳細を見る →' })).toHaveLength(4);
+    expect(
+      screen.getByRole('link', { name: projects.find((p) => p.id === 'project-disaster-app').title })
+    ).toHaveAttribute('href', '/projects/project-disaster-app');
+    expect(screen.getByRole('link', { name: 'Demo' })).toHaveAttribute(
+      'href',
+      'https://huggingface.co/spaces/yuto090612/disaster-app'
+    );
+  });
+
   it('keeps the links to /work and /more', () => {
     renderSection();
     expect(screen.getByRole('button', { name: /すべての個人開発と技術詳細を見る/ })).toBeInTheDocument();

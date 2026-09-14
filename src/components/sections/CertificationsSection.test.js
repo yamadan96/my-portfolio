@@ -17,25 +17,27 @@ const names = () => screen.getAllByRole('heading', { level: 3 }).map((h) => h.te
 describe('CertificationsSection', () => {
   it('opens with exactly five certifications in this order', () => {
     renderSection();
+    // 見出しは shortName（発行元は隣の行に分ける）
     expect(names()).toEqual([
-      '東京大学松尾・岩澤研究室 講座「Physical AI 基礎編 2026」修了証',
-      'G検定（JDLA Deep Learning for GENERAL 2026 #4）',
-      '東京大学松尾研究室 集中講義「深層生成モデル」修了証',
-      '東京大学松尾研究室 集中講義「画像認識」修了証',
-      'Harvard CS50x: Introduction to Computer Science',
+      'Physical AI 基礎編 2026 修了',
+      'G検定',
+      '集中講義「深層生成モデル」修了',
+      '集中講義「画像認識」修了',
+      'CS50x: Introduction to Computer Science',
     ]);
+    expect(screen.getAllByText('東京大学 松尾研究室')).toHaveLength(2);
     // 運転免許は折りたたみの中にだけある
     expect(screen.queryByText(/免許/)).not.toBeInTheDocument();
   });
 
   it('keeps the certificate links on the visible cards', () => {
     renderSection();
-    expect(screen.getAllByRole('link', { name: '証明を見る →' }).length).toBeGreaterThanOrEqual(5);
+    expect(screen.getAllByRole('link', { name: /の証明$/ }).length).toBeGreaterThanOrEqual(5);
   });
 
   it('expands the rest in place', () => {
     renderSection();
-    const toggle = screen.getByRole('button', { name: 'その他の資格・修了証を見る →' });
+    const toggle = screen.getByRole('button', { name: 'すべての資格・修了証を見る →' });
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
 
     fireEvent.click(toggle);

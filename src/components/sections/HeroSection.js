@@ -1,21 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import profile from '../../data/profile';
-import SocialIcons from '../ui/SocialIcons';
 import Button from '../ui/Button';
 
-// Hero は「何者か → 証拠」の2段だけ。挨拶・タイピング肩書き・所属の行は置かない
-// 全画面にすると下に大きな空白が出るため、高さは 80vh に抑える（上は固定ヘッダー分を多めに取る）
+// Hero は「何者か → 証拠」の2段だけ。挨拶・タイピング肩書き・所属の行は置かない。
+// 視線の順序は 肩書き（最も濃い）→ 名前 → 実績3件。実績カードは該当の経歴ページへのリンクにする
 const HeroWrapper = styled.section`
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${({ theme }) => `${theme.spacing['4xl']} ${theme.spacing.xl} ${theme.spacing['2xl']}`};
+  padding: ${({ theme }) => `5.5rem ${theme.spacing.xl} ${theme.spacing.xl}`};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => `5.5rem ${theme.spacing.md} ${theme.spacing['2xl']}`};
+    padding: ${({ theme }) => `5rem ${theme.spacing.md} ${theme.spacing.lg}`};
   }
   position: relative;
   overflow: hidden;
@@ -36,41 +36,45 @@ const HeroContent = styled(motion.div)`
 `;
 
 const Name = styled(motion.h1)`
-  font-size: ${({ theme }) => theme.fontSizes['6xl']};
+  font-size: 3.25rem;
   font-weight: 800;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
   line-height: 1.1;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes['4xl']};
+    font-size: 2rem;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes['3xl']};
+    font-size: 1.625rem;
   }
 `;
 
-// 固定肩書き。5秒で読める1つだけ
+// 固定肩書き。5秒で読める1つだけ。名前より小さいが、濃さ（太字＋グラデーション）で視覚の起点にする
 const Title = styled(motion.p)`
-  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-size: ${({ theme }) => theme.fontSizes['3xl']};
+  font-weight: 700;
+  background: ${({ theme }) => theme.colors.gradient};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes.xl};
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
+    font-size: ${({ theme }) => theme.fontSizes.xl};
   }
 `;
 
 const Tagline = styled(motion.p)`
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.textSecondary};
-  line-height: 1.8;
-  margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
+  line-height: 1.7;
+  margin: 0 auto ${({ theme }) => theme.spacing.lg};
   max-width: 640px;
 `;
 
@@ -81,11 +85,11 @@ const TaglinePart = styled.span`
   }
 `;
 
-// 実績チップ3つ。数字を主役にし、指標名と対象は小さく添える
+// 実績チップ3つ。数字を主役にし、指標名と条件は小さく添える
 const ProofRow = styled(motion.ul)`
   list-style: none;
   padding: 0;
-  margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
+  margin: 0 auto ${({ theme }) => theme.spacing.lg};
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: ${({ theme }) => theme.spacing.md};
@@ -98,15 +102,26 @@ const ProofRow = styled(motion.ul)`
   }
 `;
 
-const Proof = styled.li`
+// カード全体を該当の経歴ページへのリンクにする（数字の出どころへ1タップで行ける）
+const ProofLink = styled(Link)`
+  display: block;
+  height: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
   padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.sm}`};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  background: ${({ theme }) => `${theme.colors.surface}80`};
+  transition: border-color ${({ theme }) => theme.transitions.normal};
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
   }
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  background: ${({ theme }) => `${theme.colors.surface}80`};
 `;
 
 const ProofAxis = styled.span`
@@ -134,15 +149,17 @@ const ProofValue = styled.span`
 const ProofMetric = styled.span`
   display: block;
   font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.textMuted};
+  color: ${({ theme }) => theme.colors.textSecondary};
   line-height: 1.5;
   margin-top: ${({ theme }) => theme.spacing.xs};
 `;
 
-const SocialWrapper = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  margin-bottom: ${({ theme }) => theme.spacing['2xl']};
+// 測定条件（対象・件数・評価データ）。数字だけが独り歩きしないよう必ず添える
+const ProofCondition = styled.span`
+  display: block;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.textMuted};
+  line-height: 1.5;
 `;
 
 const ButtonGroup = styled(motion.div)`
@@ -150,6 +167,21 @@ const ButtonGroup = styled(motion.div)`
   gap: ${({ theme }) => theme.spacing.md};
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+// 44px のアイコンボタンはやめ、CTA の下に小さな文字リンクで置く
+const SmallLinks = styled(motion.p)`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.textMuted};
+
+  a {
+    color: ${({ theme }) => theme.colors.accentText};
+    text-decoration: none;
+  }
+  a:hover {
+    color: ${({ theme }) => theme.colors.primaryLight};
+  }
 `;
 
 const containerVariants = {
@@ -164,6 +196,8 @@ const itemVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
+
+const githubUrl = profile.social.find((s) => s.platform === 'github')?.url;
 
 const HeroSection = () => {
   const scrollToSection = (id) => {
@@ -185,24 +219,37 @@ const HeroSection = () => {
         </Tagline>
         <ProofRow variants={itemVariants} aria-label="主な実績">
           {profile.proofPoints.map((p) => (
-            <Proof key={p.axis}>
-              <ProofAxis>{p.axis}</ProofAxis>
-              <ProofValue>{p.value}</ProofValue>
-              <ProofMetric>{p.metric}</ProofMetric>
-            </Proof>
+            <li key={p.axis}>
+              <ProofLink
+                to={`/experience/${p.experienceId}`}
+                aria-label={`${p.axis}: ${p.value} ${p.metric}（${p.condition}）`}
+              >
+                <ProofAxis>{p.axis}</ProofAxis>
+                <ProofValue>{p.value}</ProofValue>
+                <ProofMetric>{p.metric}</ProofMetric>
+                <ProofCondition>{p.condition}</ProofCondition>
+              </ProofLink>
+            </li>
           ))}
         </ProofRow>
-        <SocialWrapper variants={itemVariants}>
-          <SocialIcons links={heroLinks} />
-        </SocialWrapper>
         <ButtonGroup variants={itemVariants}>
           <Button onClick={() => scrollToSection('experience')} href="#experience">
-            経歴を見る
+            実務経験を見る
           </Button>
-          <Button variant="outline" onClick={() => scrollToSection('contact')} href="#contact">
-            お問い合わせ
+          <Button variant="outline" href={githubUrl} target="_blank" rel="noopener noreferrer">
+            GitHubを見る
           </Button>
         </ButtonGroup>
+        <SmallLinks variants={itemVariants}>
+          {heroLinks.map((s, i) => (
+            <React.Fragment key={s.platform}>
+              {i > 0 && <span aria-hidden="true"> · </span>}
+              <a href={s.url} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </React.Fragment>
+          ))}
+        </SmallLinks>
       </HeroContent>
     </HeroWrapper>
   );

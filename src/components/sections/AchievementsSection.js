@@ -16,10 +16,7 @@ const AchievementsGrid = styled.div`
 `;
 
 const AchievementCard = styled(motion.div)`
-  display: flex;
-  align-items: flex-start;
-  gap: ${({ theme }) => theme.spacing.md};
-  padding: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.cardBg};
   backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.border};
@@ -32,20 +29,14 @@ const AchievementCard = styled(motion.div)`
   }
 `;
 
-const AchievementIcon = styled.span`
-  font-size: 2rem;
-  flex-shrink: 0;
-`;
-
-const AchievementContent = styled.div``;
-
 const AchievementTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: 700;
   margin-bottom: ${({ theme }) => theme.spacing.xs};
 `;
 
-const AchievementDescription = styled.p`
+// 1行だけ。長い説明は書かない（詳細は Research / 外部記事へ）
+const AchievementLine = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
   line-height: 1.7;
@@ -87,25 +78,17 @@ const AchievementsSection = () => (
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: index * 0.08 }}
         >
-          <AchievementIcon>{item.icon}</AchievementIcon>
-          <AchievementContent>
-            <AchievementTitle>{item.title}</AchievementTitle>
-            <AchievementDescription>{item.description}</AchievementDescription>
-            {toLinkList(item).length > 0 && (
-              <AchievementLinks>
-                {toLinkList(item).map((l) => (
-                  <AchievementLink
-                    key={l.url}
-                    href={l.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {l.label} →
-                  </AchievementLink>
-                ))}
-              </AchievementLinks>
-            )}
-          </AchievementContent>
+          <AchievementTitle>{item.title}</AchievementTitle>
+          <AchievementLine>{item.line}</AchievementLine>
+          {toLinkList(item).length > 0 && (
+            <AchievementLinks>
+              {toLinkList(item).map((l) => (
+                <AchievementLink key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">
+                  {l.label} →
+                </AchievementLink>
+              ))}
+            </AchievementLinks>
+          )}
         </AchievementCard>
       ))}
     </AchievementsGrid>

@@ -10,7 +10,6 @@ import skills from '../../data/skills';
 // 残りのカテゴリは「Other Technologies」として1つに折りたたむ
 const coreGroups = skills.filter((group) => group.core);
 const otherGroups = skills.filter((group) => !group.core);
-const otherCount = otherGroups.reduce((n, group) => n + group.items.length, 0);
 
 const SkillsGrid = styled.div`
   display: grid;
@@ -136,7 +135,7 @@ const SkillsSection = () => (
     </SkillsGrid>
     {otherGroups.length > 0 && (
       <ExpandInPlace
-        label={`Other Technologies（${otherCount}項目）を見る`}
+        label="Other Technologies →"
         closeLabel="Other Technologies を閉じる ↑"
       >
         <OtherPanel>

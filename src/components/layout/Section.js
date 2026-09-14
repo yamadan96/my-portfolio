@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-// 上下余白は 6rem → 3.5rem（モバイル 4rem → 2.5rem）に詰め、
+// 上下余白は 6rem → 2.5rem（モバイル 4rem → 2rem）に詰め、
 // 詰めた分はセクション間の細い区切り線で境界を示す
 const StyledSection = styled.section`
   position: relative;
-  padding: 3.5rem ${({ theme }) => theme.spacing.xl};
+  padding: 2.5rem ${({ theme }) => theme.spacing.xl};
   max-width: 1200px;
   margin: 0 auto;
 
@@ -21,7 +21,7 @@ const StyledSection = styled.section`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 2.5rem ${({ theme }) => theme.spacing.md};
+    padding: 2rem ${({ theme }) => theme.spacing.md};
 
     & + &::before {
       left: ${({ theme }) => theme.spacing.md};

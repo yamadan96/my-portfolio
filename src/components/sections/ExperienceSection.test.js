@@ -29,10 +29,25 @@ describe('ExperienceSection', () => {
     expect(screen.queryByText(/長期・現職を中心とした/)).not.toBeInTheDocument();
   });
 
+  it('pulls the numbers out of the sentence and onto their own metric cards', () => {
+    renderSection();
+    expect(screen.getByText('57% → 86%')).toBeInTheDocument();
+    expect(screen.getByText('検索 Recall（7ケース）')).toBeInTheDocument();
+    // 行の本文には数字を入れない（数字は metric カードだけに出す）
+    expect(screen.getByText('業務システムを自律操作する LLM Agent の RAG 部分を設計・実装')).toBeInTheDocument();
+  });
+
+  it('drops the trailing duration from the period, keeping the data untouched', () => {
+    renderSection();
+    expect(screen.getByText('2026年2月〜3月')).toBeInTheDocument();
+    expect(screen.queryByText(/（2ヶ月）/)).not.toBeInTheDocument();
+    expect(experiences.find((e) => e.id === 'legalon').period).toBe('2026年2月〜3月（2ヶ月）');
+  });
+
   it('expands the remaining entries in place with a computed count', () => {
     renderSection();
     const toggle = screen.getByRole('button', {
-      name: `その他の実務・インターン経験（${rest.length}件）をすべて見る`,
+      name: `その他${rest.length}件の経験を見る →`,
     });
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
 

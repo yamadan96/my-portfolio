@@ -5,132 +5,81 @@ import Section from '../layout/Section';
 import SectionTitle from '../ui/SectionTitle';
 import education from '../../data/education';
 
-const TimelineWrapper = styled.div`
-  position: relative;
-  padding-left: ${({ theme }) => theme.spacing['2xl']};
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: ${({ theme }) => theme.colors.border};
-  }
-
-  @media (max-width: 768px) {
-    padding-left: 1.5rem;
-  }
+// 縦線とドットのタイムラインはやめ、Experience と同じ「期間 | 本文」の2カラムの行に揃える
+const List = styled.div`
+  display: grid;
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
-const TimelineItem = styled(motion.div)`
-  position: relative;
-  padding-bottom: ${({ theme }) => theme.spacing['2xl']};
+const Row = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => `${theme.spacing.md} 0`};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 
   &:last-child {
-    padding-bottom: 0;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: -${({ theme }) => theme.spacing['2xl']};
-    top: 6px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: ${({ theme }) => theme.colors.primary};
-    border: 3px solid ${({ theme }) => theme.colors.background};
-    z-index: 1;
-    margin-left: 0px;
-
-    @media (max-width: 768px) {
-      left: -1.5rem;
-      width: 12px;
-      height: 12px;
-    }
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.xs};
   }
 `;
 
 const Period = styled.span`
+  font-family: ${({ theme }) => theme.fonts.mono};
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.primary};
-  font-weight: 600;
+  color: ${({ theme }) => theme.colors.textMuted};
+  padding-top: 4px;
 `;
 
 const School = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: 700;
-  margin: ${({ theme }) => theme.spacing.xs} 0;
 `;
 
 const Faculty = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
-`;
-
-const Degree = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textMuted};
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const Description = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.textMuted};
   line-height: 1.7;
-  margin-top: ${({ theme }) => theme.spacing.sm};
+  margin-top: ${({ theme }) => theme.spacing.xs};
 `;
 
-// topPage: 'compact' の項目（高校）は「期間 · 学校 学科」の1行だけにする
-const CompactLine = styled.p`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
-const CompactSchool = styled.span`
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.text};
-`;
-
-// トップページには topPage: false 以外を出す（中学校は出さない）
+// トップページには topPage: false 以外を出す（高校・中学校は出さない）
 const visibleEducation = education.filter((item) => item.topPage !== false);
 
 const EducationSection = () => (
   <Section id="education">
     <SectionTitle title="Education" subtitle="学歴" />
-    <TimelineWrapper>
+    <List>
       {visibleEducation.map((item, index) => (
-        <TimelineItem
+        <Row
           key={item.id}
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: index * 0.1 }}
+          transition={{ duration: 0.35, delay: index * 0.08 }}
         >
-          {item.topPage === 'compact' ? (
-            <CompactLine>
-              <Period>{item.period}</Period>
-              <CompactSchool>{item.school}</CompactSchool>
-              {item.faculty && <span>{item.faculty}</span>}
-            </CompactLine>
-          ) : (
-            <>
-              <Period>{item.period}</Period>
-              <School>{item.school}</School>
-              <Faculty>{item.faculty}</Faculty>
-              {item.degree && <Degree>{item.degree}</Degree>}
-              {item.description && <Description>{item.description}</Description>}
-            </>
-          )}
-        </TimelineItem>
+          <Period>{item.period}</Period>
+          <div>
+            <School>{item.school}</School>
+            <Faculty>
+              {item.faculty}
+              {item.degree && ` · ${item.degree}`}
+            </Faculty>
+            {item.description && <Description>{item.description}</Description>}
+          </div>
+        </Row>
       ))}
-    </TimelineWrapper>
+    </List>
   </Section>
 );
 

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const TitleWrapper = styled.div`
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
+    margin-bottom: 1.25rem;
   }
 `;
 
