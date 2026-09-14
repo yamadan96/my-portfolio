@@ -296,7 +296,7 @@ const projects = [
     description:
       'キーボードを切り替えるだけで AI が会話の文脈を読み取り、3パターンの返信案を生成する iOS カスタムキーボード。シーン切替・性格プリセット・トーン調整スライダーを搭載。Gemini 2.5 Flash と Next.js バックエンド API を連携し、実機での動作まで確認済み。',
     tags: ['Swift', 'iOS', 'Keyboard Extension', 'Gemini API', 'Next.js'],
-    github: null,
+    github: 'https://github.com/yamadan96/MessageApp',
     demo: null,
     image: null,
     summary: {
@@ -324,6 +324,44 @@ const projects = [
   API --> GEM["Gemini 2.5 Flash"]
   GEM --> API -- "返信案 3パターン" --> KB
   KB -- "選んだ案を直接入力" --> FIELD`,
+    },
+  },
+  {
+    id: 'project-private-ocr-markdown',
+    featured: false,
+    category: 'product',
+    title: 'Private OCR to Markdown（ブラウザ内で完結する OCR）',
+    description:
+      '画像や PDF を Markdown に変換する Web アプリ。OCR も整形もブラウザ内で実行し、ファイルと認識結果を外部サーバーへ送らない設計。議事録・論文・請求書の用途別テンプレートを備える。Next.js + Tesseract.js + pdf.js で実装し、Vercel で公開中。',
+    tags: ['TypeScript', 'Next.js', 'Tesseract.js', 'pdf.js', 'Zustand'],
+    github: 'https://github.com/yamadan96/private-ocr-markdown',
+    demo: 'https://private-ocr-markdown.vercel.app/',
+    image: null,
+    summary: {
+      built: '写真や PDF の文字を読み取って、そのまま Markdown に整えるWebアプリ。',
+      problem: '紙の書類をテキスト化したいが、社外のサーバーにアップロードしたくない場面がある。',
+      role: 'OCR パイプライン・UI・出力テンプレートを実装し、公開まで担当。',
+      tech: 'ブラウザ上で動く OCR エンジン（Tesseract.js）と PDF 読み込み（pdf.js）を使い、サーバーへ送信せずに処理する。',
+      result: 'インストール不要で使える状態で公開中。見出し・箇条書き・表・コードブロックを自動整形し、Markdown のコピーとダウンロードに対応。',
+    },
+    technical: [
+      { label: 'ローカル処理', body: 'OCR と PDF 解析をすべてクライアント側で実行し、ファイルと認識結果をサーバーへ送らない構成にした。' },
+      { label: '出力テンプレート', body: '議事録／論文・レポート／請求書・帳票の3種類を用意し、用途に応じて見出しや表の整形ルールを切り替える。' },
+      { label: '認識設定', body: '日本語+英語／日本語のみ／英語のみを選択でき、複数ファイルの同時アップロードと処理中のキャンセルに対応。' },
+      { label: '制約', body: '初回は OCR エンジンの学習データ（約10〜20MB）を取得するため待ち時間が出る。手書き文字の認識精度は印刷文字より低い。' },
+    ],
+    diagram: {
+      alt: '画像やPDFをブラウザ内でOCRし、テンプレートに沿ってMarkdownへ整形する構成図',
+      caption: 'ファイルと認識結果はブラウザ内にとどまり、サーバーへ送られない',
+      chart: `flowchart LR
+  UP["画像 / PDF を<br/>アップロード"] --> BR
+  subgraph BR["ブラウザ内で完結（外部送信なし）"]
+    PDF["pdf.js<br/>PDF をページ画像へ"] --> OCR["Tesseract.js<br/>文字認識（日本語 / 英語）"]
+    OCR --> FMT["テンプレート整形<br/>議事録 / 論文 / 請求書"]
+  end
+  FMT --> OUT["Markdown プレビュー"]
+  OUT --> COPY["クリップボードへコピー"]
+  OUT --> DL[".md でダウンロード"]`,
     },
   },
   {
@@ -448,29 +486,29 @@ const projects = [
     category: 'tool',
     title: 'テニスコート予約自動化システム',
     description:
-      '市営テニスコートの空き状況を毎日自動チェックし、空き状況の確認・通知を自動化して予約作業を支援する仕組み。Selenium + SQLite + GitHub Actions（cache による DB 永続化）で構成し、家族が実際に日常利用している。実 DOM を probe してから実装する運用で、サイト構造変更にも追従。',
+      '市営テニスコートの空き状況を10分間隔で自動チェックし、空き状況の確認・通知を自動化して予約作業を支援する仕組み。Selenium + SQLite + GitHub Actions（cache による DB 永続化）で構成し、家族が実際に日常利用している。実 DOM を probe してから実装する運用で、サイト構造変更にも追従。',
     tags: ['Python', 'Selenium', 'SQLite', 'GitHub Actions', 'Automation'],
     github: null,
     demo: null,
     image: null,
     summary: {
-      built: '市営テニスコートの空き状況を毎日自動で確認・通知し、予約作業を支援する仕組み。家族が実際に日常的に使っている。',
-      problem: '人気のコートは公開直後に埋まる。毎日手で確認するのは現実的でない。',
+      built: '市営テニスコートの空き状況を10分間隔で自動確認・通知し、予約作業を支援する仕組み。家族が実際に日常的に使っている。',
+      problem: '人気のコートは公開直後に埋まる。手で張り付いて確認するのは現実的でない。',
       role: '設計・実装・運用を単独。利用者（家族）からの不具合報告を受けて修正を続けている。',
-      tech: 'ブラウザを自動操作して予約サイトを巡回し、結果をデータベースに記録。毎日の実行は GitHub Actions に任せている。',
+      tech: 'ブラウザを自動操作して予約サイトを巡回し、結果をデータベースに記録。定期実行は GitHub Actions に任せている。',
       result: '実運用中。予約サイトのHTML構造が変わっても追従できるよう、実際の構造を取得してから実装する手順を確立した。',
     },
     technical: [
-      { label: '構成', body: 'Selenium でサイトを巡回し、SQLite に予約状態を記録。GitHub Actions で日次実行し、cache 機構で DB ファイルを永続化している（CI は毎回クリーンな環境で起動するため、これがないと状態が残らない）。' },
+      { label: '構成', body: 'Selenium でサイトを巡回し、SQLite に予約状態を記録。GitHub Actions で10分間隔（22時〜翌13時台）に実行し、cache 機構で DB ファイルを永続化している（CI は毎回クリーンな環境で起動するため、これがないと状態が残らない）。' },
       { label: 'DOM 変更への対応', body: '推測でパーサーを書くと必ず外れるため、まず実際のページ構造を取得する probe スクリプトを用意し、それをコミットして資産化した。構造変更時の調査を短時間で再開できる。' },
       { label: '運用で見つけた問題', body: '施設×曜日ごとにルールが違うため、一律の条件判定では誤通知が出た。実利用者からの「平日に大量通知が来る」という報告を受けて、施設別ルールと時間帯除外を追加した。' },
       { label: '学んだこと', body: '外部サイトを相手にするコードは、ユニットテストでは壊れを検出できない。本番デプロイ後の挙動観察が唯一の検証手段になる場面がある。' },
     ],
     diagram: {
-      alt: 'GitHub Actionsが毎日予約サイトを巡回し条件に合う枠を通知する構成図',
+      alt: 'GitHub Actionsが定期的に予約サイトを巡回し条件に合う枠を通知する構成図',
       caption: 'CI は毎回クリーンな環境で起動するため、cache で DB を永続化している',
       chart: `flowchart LR
-  CRON["GitHub Actions<br/>日次実行"] --> SEL["Selenium<br/>予約サイトを巡回"]
+  CRON["GitHub Actions<br/>10分間隔で実行"] --> SEL["Selenium<br/>予約サイトを巡回"]
   SEL --> RULE["施設 × 曜日ごとの<br/>条件判定"]
   RULE --> DB["SQLite<br/>予約状態を記録"]
   DB --- CACHE["Actions cache<br/>で DB を永続化"]

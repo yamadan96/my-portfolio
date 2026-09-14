@@ -52,6 +52,15 @@ const openSource = {
       topics: ['SDXL', 'LoRA', 'Diffusers', 'Gradio'],
     },
     {
+      name: 'private-ocr-markdown',
+      url: 'https://github.com/yamadan96/private-ocr-markdown',
+      extraUrl: { label: 'Demo', url: 'https://private-ocr-markdown.vercel.app/' },
+      language: 'TypeScript',
+      description:
+        '画像・PDF をブラウザ内だけで Markdown に変換する Web アプリ。Tesseract.js と pdf.js を使い、ファイルを外部へ送らない。',
+      topics: ['Next.js', 'OCR', 'Client-side', 'Vercel'],
+    },
+    {
       name: 'paper-survey',
       url: 'https://github.com/yamadan96/paper-survey',
       extraUrl: { label: 'Site', url: 'https://yamadan96.github.io/paper-survey/' },
