@@ -83,6 +83,14 @@ const openSource = {
       description: '音声メモから日報・フォローアップメール・CRM エントリを生成するプロダクトデモ。',
       topics: ['React', 'Product Demo'],
     },
+    {
+      name: 'mnist-canvas',
+      url: 'https://github.com/yamadan96/mnist-canvas',
+      extraUrl: null,
+      language: 'Python',
+      description: 'ブラウザに描いた数字を自作の CNN で判定する Web アプリ。FastAPI で推論 API を作り、Docker 化した。',
+      topics: ['FastAPI', 'PyTorch', 'CNN', 'Docker'],
+    },
   ],
 };
 
