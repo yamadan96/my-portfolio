@@ -166,7 +166,7 @@ const experiences = [
           icon: '🧪',
           summary: '建築パース画像の補正、内視鏡画像の画質最適化、3D形状からの部品の穴・異常検出、PDFとOCRによる仕様書作成の自動化など、複数のPoC（試作検証）を担当した。',
           details: [
-            '建築パース（建物の完成予想図）画像の補正を自動化した。',
+            '建築パース（建物の完成予想図）画像の補正を自動化した。ControlNet と LoRA を用いた画像生成でライティング調整・空の置換に対応した。',
             '内視鏡画像の画質を決めるパラメータの最適化と、工業部品の3D形状データを解析して穴や異常を検出する処理を試作した。',
             'PDFを解析し、OCR（画像から文字を読み取る技術）で内容を取り出して仕様書を自動作成する仕組みを試作した。いずれもPoC段階で定量評価は未完了。',
           ],
@@ -183,6 +183,8 @@ const experiences = [
         'Azure (GPU VM)',
         'TensorBoard',
         'Roboflow / CVAT',
+        'LoRA',
+        'ControlNet',
         'Optuna',
         'Pandas / NumPy',
         'RAG / LLM-as-a-Judge',
