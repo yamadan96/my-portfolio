@@ -653,6 +653,42 @@ const projects = [
     },
   },
   {
+    id: 'planting-placement-poc',
+    featured: false,
+    category: 'product',
+    title: '建築図面の植栽を 3DCG に配置する仕組みの試作（Airion）',
+    description:
+      '建築・CG制作向けに、図面から植栽の記号と座標を読み取り、3DCG ソフト上へ自動配置する仕組みの PoC。読み取った座標を画面で確認・修正する Web UI の試作を担当した。',
+    evidence: '座標修正画面を React で試作 · 1枚の図面で 3DCG ソフトへの配置を確認 · 精度の定量評価は未実施',
+    tags: ['React', 'react-konva', 'PapaParse', 'CSV'],
+    github: null,
+    demo: null,
+    image: null,
+    experienceId: 'airion',
+    experienceLabel: '株式会社Airion',
+    summary: {
+      built: '図面から読み取った植栽の座標を、図面の画像に重ねて確認・修正し、CSV として保存する画面を試作した。',
+      problem: '建築パースの制作では、図面を見ながら植栽を1本ずつ手で配置しており、時間がかかっていた。',
+      role: 'チームの PoC のうち、座標を確認・修正する Web UI（React）の試作を担当。',
+      tech: '座標 CSV を読み込んで図面の上に点として描き、まとめてドラッグして位置を合わせてから CSV に書き出す。描画には react-konva、CSV の読み書きには PapaParse を使った。',
+      result: 'PoC として、1枚の図面で 3DCG ソフト上への自動配置まで確認した。精度の定量評価は行っていない。',
+    },
+    diagram: {
+      alt: '建築図面から植栽の記号と座標を読み取り、画面で位置を修正してから 3DCG ソフトへ配置する流れの図',
+      caption: '「担当」の枠が自分の担当範囲（座標を修正する画面）',
+      chart: `graph LR
+  A["建築図面"] --> B["植栽の記号と座標を読み取り"]
+  A --> C["凡例から樹種を読み取り"]
+  B --> D["座標 CSV"]
+  C --> D
+  subgraph MINE["担当"]
+    E["Web UI で図面に重ねて位置を修正"]
+  end
+  D --> E
+  E --> F["3DCG ソフトへ配置"]`,
+    },
+  },
+  {
     id: 'project-aws-three-tier',
     featured: false,
     category: 'product',
