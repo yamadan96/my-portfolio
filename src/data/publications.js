@@ -199,14 +199,14 @@ const publications = [
     description:
       '事故などの異常を動画から検知するタスクにおいて、従来手法が苦手とする長期的な背景変化や動作パターンの抽出を目的に、' +
       'Clockwork Variational Autoencoder（CW-VAE）を活用した手法を提案。' +
-      'OOPS!データセットを用いてConvLSTMとの定量比較を実施し、AUC・F1など複数指標で優れた結果を達成。',
+      'OOPS! データセットで ConvLSTM と定量比較し、ROC 曲線の AUC（SSIM）は ConvLSTM 0.534 に対し CW-VAE 0.726 と上回った（入力49フレーム）。',
     // 卒業論文は「解釈」に当たる記述が無いので detail に持たない（個別ページでは見出しごと出ない）
     detail: {
       question: '事故などの異常を動画から検知するとき、従来手法が苦手とする長期的な背景変化や動作パターンをどう捉えるか。',
       dataset: 'OOPS! データセット。',
       method: 'Clockwork Variational Autoencoder（CW-VAE）を活用したフレーム外挿モデル。動画の長期文脈を使って異常を検知する。',
-      experiments: 'OOPS! データセットで ConvLSTM と定量比較した。',
-      results: 'AUC・F1 など複数指標で ConvLSTM より優れた結果を達成。',
+      experiments: 'SSIM と PSNR による異常スコアで ROC 曲線の AUC と PR 曲線の AP を算出し、入力フレーム数を変えて ConvLSTM と比較した。',
+      results: 'ROC 曲線の AUC（SSIM）は ConvLSTM 0.534 に対し CW-VAE 0.726、PR 曲線の AP（SSIM）は 0.464 に対し 0.672（CW-VAE は入力49フレーム・時間的抽象化7）。',
     },
     tags: ['VAE', 'CW-VAE', 'Anomaly Detection', 'Video Analysis', 'ConvLSTM', 'OOPS!'],
     link: 'https://github.com/yamadan96/cwvae-anomaly-detection-thesis',
