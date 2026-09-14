@@ -895,7 +895,7 @@ const experiences = [
     role: 'MLエンジニア',
     period: '2025年7月〜8月（4日間）',
     description:
-      '求人検索サービスの実データを使い、課題の分析からAIによる解決策の実装、CTOへの発表までを4日間で実施。優秀者に選出。',
+      '求人検索サービスの実データを使い、課題の分析からAIによる解決策の実装、CTOへの発表までを4日間で実施。後日COO・CTOとの特別面談に招待された。',
     tags: ['Python', 'Machine Learning', 'Data Analysis'],
     url: 'https://jp.stanby.com/',
     blogUrl: null,
