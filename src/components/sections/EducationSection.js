@@ -53,7 +53,7 @@ const Description = styled.p`
   margin-top: ${({ theme }) => theme.spacing.xs};
 `;
 
-// トップページには topPage: false 以外を出す（高校・中学校は出さない）
+// トップページには topPage: false 以外を出す。'compact' の行は1行だけの簡略表示にする
 const visibleEducation = education.filter((item) => item.topPage !== false);
 
 const EducationSection = () => (
@@ -68,14 +68,17 @@ const EducationSection = () => (
           viewport={{ once: true }}
           transition={{ duration: 0.35, delay: index * 0.08 }}
         >
-          <Period>{item.period}</Period>
+          <Period>{item.topPeriod || item.period}</Period>
           <div>
-            <School>{item.school}</School>
+            <School>{item.topSchool || item.school}</School>
             <Faculty>
-              {item.faculty}
-              {item.degree && ` · ${item.degree}`}
+              {item.topPage === 'compact'
+                ? item.topDegree
+                : `${item.faculty}${item.degree ? ` · ${item.degree}` : ''}`}
             </Faculty>
-            {item.description && <Description>{item.description}</Description>}
+            {item.topPage !== 'compact' && item.description && (
+              <Description>{item.description}</Description>
+            )}
           </div>
         </Row>
       ))}
