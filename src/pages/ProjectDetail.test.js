@@ -33,7 +33,7 @@ describe('ProjectDetail (story shape)', () => {
     renderProject('steel-pipe-counting');
     const h1 = screen.getByRole('heading', { level: 1 });
     const strip = h1.nextElementSibling;
-    expect(strip.textContent).toMatch(/既存：束単位の成功率ほぼ0%・8秒\/枚/);
+    expect(strip.textContent).toMatch(/従来：撮影〜計算で1枚8秒・束単位の計数が不安定/);
     expect(strip.textContent).toMatch(/96\.6%・0\.2秒\/枚（社内評価）/);
   });
 
