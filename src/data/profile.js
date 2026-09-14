@@ -12,7 +12,7 @@ const profile = {
   title: 'AI Engineer — LLM Agents / RAG / Computer Vision',
   // Hero の1行。「何者か」を役割の広さ（研究・検証〜実運用）で言い切る
   // 2要素に分けてあるのは、モバイルでこの位置で改行させるため（PC では1行に繋がる）
-  tagline: ['LLM Agent・RAG・Computer Vision を、', '研究・検証から実運用まで一貫して実装。'],
+  tagline: ['LLM Agent・RAG・Computer Vision を中心に、', '研究・PoC から本番実装まで経験。'],
   // Hero の実績チップ3つ。数字は experiences.js の summary.result と一致させる。
   // experienceId は該当の経歴ページ（/experience/:id）へのリンク先
   proofPoints: [
