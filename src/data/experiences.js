@@ -3,45 +3,49 @@
 const experiences = [
   {
     id: 'dmm',
-    // トップページの職務経歴用（1行）
+    // トップページの職務経歴用（1行）。参画前なので担当はすべて「予定」で書く
     oneLiner:
-      '大規模エンタメサービス向けの自社 AI モデル開発を業務委託で支援。CTO 直下でアーキテクチャ選定・実装から評価パイプラインの設計までを担当',
+      '動画・音声・画像領域の AI モデル開発・改善を業務委託で支援予定。CTO 直下でモデル設計・実装から評価パイプライン設計までを担当予定',
     top: {
-      built: '大規模エンタメサービス向けの自社 AI モデル開発を業務委託で支援',
-      resultLine: 'CTO 直下でモデル選定から評価の仕組みづくりまでを担当',
-      roleLine: '週20時間・フルリモートの業務委託',
+      built: '動画・音声・画像領域の AI モデル開発・改善を支援予定',
+      resultLine: 'CTO 直下でモデル設計・実装から評価パイプライン設計までを担当予定',
+      roleLine: '業務委託',
       tags: ['LLM', 'Speech AI', 'Python'],
     },
+    // 参画前の案件は見出しを「予定」の言い方に差し替える（成果が出たら削除して通常の見出しに戻す）
+    summaryLabels: {
+      built: '何をするか',
+      tech: '使う技術',
+      result: 'ステータス',
+    },
     summary: {
-      built: '動画・音声・画像を扱うサービス向けに、自社で持つAIモデルの開発と改善を支援する。',
-      problem: '案件票では、モデルの選び方から評価の仕組みづくりまでを担う人員が求められている。',
-      role: 'CTO直下で、モデルのアーキテクチャ選定と実装、評価パイプラインの設計、学習データ収集を担当する。',
-      tech: '言語・音声・画像・動画のモデルを対象とし、必要に応じて追加学習（SFT・強化学習・LoRA）も行う。',
-      result: '2026年9月16日開始の案件のため、成果はこれから。',
+      built: '動画・音声・画像領域におけるAIモデルの開発・改善を支援予定。',
+      problem: '案件ごとに、モデル選定から評価までを担うAI人材が求められている。',
+      role: 'CTO直下で、モデル設計・実装、評価パイプライン設計、学習データ収集・整備などを担当予定。',
+      tech: '案件に応じてSFT・強化学習・LoRA等を活用予定。',
+      result: '2026年9月16日参画予定。',
     },
     company: '合同会社DMM.com',
     role: 'AIエンジニア / データサイエンティスト（業務委託）',
     period: '2026年9月〜2026年11月',
     description:
-      '大規模エンタメサービス向けの自社AIモデル開発を支援。CTO直下で、言語・音声・画像・動画のモデル選定と実装、評価パイプラインの設計、学習データ収集を担当。',
+      '動画・音声・画像領域におけるAIモデルの開発・改善を業務委託で支援予定。CTO直下で、モデル設計・実装、評価パイプライン設計、学習データ収集・整備などを担当予定。',
     descriptionEn:
-      'Freelance AI engineer supporting in-house model development for a large entertainment service, reporting to the CTO.',
+      'Freelance AI engineer starting September 2026, planned to support AI model development for video, speech, and image services, reporting to the CTO.',
     tags: ['LLM', 'Speech AI', 'Computer Vision', 'Python'],
     url: 'https://dmm-corp.com/',
     blogUrl: null,
     hasDetail: true,
     details: {
       overview:
-        'レバテック経由の業務委託として、合同会社DMM.comのAI案件に参画。' +
-        'CTO直下で、自社AIモデル（言語・音声・画像・動画）のアーキテクチャ選定と実装、評価パイプラインの設計、学習データ収集を担当する。' +
-        '契約期間は2026年9月16日から2026年11月30日、週20時間のフルリモート。',
+        '業務委託として合同会社DMM.comのAI案件に参画予定。以下は参画前の担当予定で、実際に作業した内容から順に置き換える。',
       responsibilities: [
-        '自社AIモデルのアーキテクチャ選定と実装',
-        'モデルの良し悪しを測る評価パイプラインの設計',
-        '学習データの収集と、必要に応じた追加学習（SFT・強化学習・LoRA）の実行',
+        'モデル設計・実装（担当予定）',
+        '評価パイプラインの設計（担当予定）',
+        '学習データの収集・整備（担当予定）',
       ],
-      achievements:
-        '2026年9月16日に参画開始。契約は2026年11月30日まで、週20時間のフルリモート。成果はこれから。',
+      achievementsLabel: 'ステータス',
+      achievements: '2026年9月16日参画予定。契約期間は2026年11月30日まで。',
       techStack: ['Python', 'LLM', 'Speech AI', 'Computer Vision'],
     },
   },

@@ -620,7 +620,7 @@ const ExperienceDetail = () => {
               {SUMMARY_FIELDS.filter(([key]) => summaryKeys.includes(key)).map(([key, label]) =>
                 experience.summary[key] ? (
                   <React.Fragment key={key}>
-                    <SummaryTerm>{label}</SummaryTerm>
+                    <SummaryTerm>{experience.summaryLabels?.[key] || label}</SummaryTerm>
                     <SummaryDesc>{experience.summary[key]}</SummaryDesc>
                   </React.Fragment>
                 ) : null
@@ -646,7 +646,7 @@ const ExperienceDetail = () => {
 
         {!hasProjects && (
           <SectionBlock variants={itemVariants}>
-            <SectionLabel>成果</SectionLabel>
+            <SectionLabel>{details.achievementsLabel || '成果'}</SectionLabel>
             <Achievement>{details.achievements}</Achievement>
           </SectionBlock>
         )}
