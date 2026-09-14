@@ -450,7 +450,7 @@ const projects = [
     description:
       '市営テニスコートの空き状況を毎日自動チェックし、空き状況の確認・通知を自動化して予約作業を支援する仕組み。Selenium + SQLite + GitHub Actions（cache による DB 永続化）で構成し、家族が実際に日常利用している。実 DOM を probe してから実装する運用で、サイト構造変更にも追従。',
     tags: ['Python', 'Selenium', 'SQLite', 'GitHub Actions', 'Automation'],
-    github: 'https://github.com/yamadan96/Tennis-Court-Availability-Notification-System',
+    github: null,
     demo: null,
     image: null,
     summary: {
