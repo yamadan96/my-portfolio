@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import profile from '../../data/profile';
+import SocialIcons from '../ui/SocialIcons';
 
 // 著作権表示と外部プロフィール（GitHub / LinkedIn / Qiita / Zenn）。
-// SNS のアイコン列はどのセクションにも置かず、全ページ共通のここに1か所だけ文字リンクで置く
+// SNS はどのセクションにも置かず、全ページ共通のここに1か所だけアイコンで置く
 const FooterWrapper = styled.footer`
   border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
@@ -48,11 +49,7 @@ const Footer = () => (
         &copy; {new Date().getFullYear()} {profile.nameEn}
       </span>
       <FooterLinks aria-label="外部プロフィール">
-        {footerLinks.map((s) => (
-          <a key={s.platform} href={s.url} target="_blank" rel="noopener noreferrer">
-            {s.label}
-          </a>
-        ))}
+        <SocialIcons links={footerLinks} />
       </FooterLinks>
     </FooterInner>
   </FooterWrapper>
