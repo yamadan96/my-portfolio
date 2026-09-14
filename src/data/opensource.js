@@ -1,6 +1,6 @@
 // GitHub 上で公開しているリポジトリ。private の研究リポジトリは含めない。
 const openSource = {
-  githubUrl: 'https://github.com/yamadan96',
+  githubUrl: 'https://github.com/yamadan96?tab=repositories',
   summary:
     '論文実装・スクラッチ実装・研究成果のデモなど、実際に動かしたコードを公開している。',
   repositories: [
