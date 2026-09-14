@@ -632,7 +632,7 @@ const experiences = [
       '求人サイトを題材にした4日間のWebアプリ開発プログラム。画面からサーバーまで一通り実装。',
     tags: ['Python', 'Next.js', 'React', 'Docker', 'GitHub Flow'],
     url: 'https://corp.en-japan.com/',
-    blogUrl: null,
+    blogUrl: 'https://qiita.com/yamadan96/items/3ef87f47d552b3984ab6',
     hasDetail: true,
     details: {
       overview:
