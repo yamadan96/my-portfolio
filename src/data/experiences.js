@@ -212,6 +212,19 @@ const experiences = [
           techStack: ['LLM', 'RAG', 'LLM-as-a-Judge', 'PLCopen XML', 'IL / ST'],
         },
         {
+          name: 'PLC ラダー変換ライブラリへの方言対応と図の描画機能の追加',
+          client: '',
+          category: 'ツール開発',
+          period: '2026年4月〜6月',
+          icon: '🔁',
+          summary: 'ラダー図（XML）と IL / ST を相互変換する社内の TypeScript ライブラリに、主要メーカー3社の書き方の違い（方言）への対応と、ラダー図の描画機能を追加した。',
+          details: [
+            '初版は同僚が作成。自分はメーカーごとに異なる命令語の書き方を標準形式へ直す前処理を3社分実装し、方言ごとのテストを整備した（自分で作成したテストは456件）。',
+            '分岐の解析、直列・並列の木構造による配置計算、IL からラダー図を SVG で直接描く処理を追加し、社内プロダクトのラダー図表示に組み込んだ。',
+          ],
+          techStack: ['TypeScript', 'IEC 61131-3', 'PLCopen XML', 'SVG', 'Vitest'],
+        },
+        {
           name: '業務ソフトの画面をAIが自動操作するエージェント',
           projectId: 'gx-works-gui-agent',
           client: 'GX Works 3（Windowsの業務ソフト）向け',
