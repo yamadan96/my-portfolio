@@ -151,7 +151,10 @@ const publications = [
     shortTitle: 'LoRA による損傷度分類',
     finding: 'LoRA で DINOv2 の Macro F1 0.37 → 0.56',
     conditions: '能登半島地震 1,040枚 · 6クラス · 訓練832枚／評価208枚',
-    presentations: [{ venue: 'FIT2025 第24回情報科学技術フォーラム', type: '口頭' }],
+    presentations: [
+      { venue: 'FIT2025 第24回情報科学技術フォーラム', type: '口頭' },
+      { venue: '総合研究院フォーラム2025', type: 'ポスター' },
+    ],
     topNote: 'ConvNeXt の標準学習が最も安定',
     claim: 'LoRA で基盤モデル DINOv2 の精度は大きく上がるが、少量データでは ConvNeXt の標準学習が最も安定',
     resultCards: [
@@ -164,9 +167,9 @@ const publications = [
       { value: '1,040枚', label: '能登半島地震の自作データセット（6クラス）' },
     ],
     title: 'ファインチューニング手法に基づく被災建物画像の多クラス損傷度分類の精度改善',
-    venue: 'FIT2025 第24回情報科学技術フォーラム',
+    venue: 'FIT2025 第24回情報科学技術フォーラム（口頭）／東京理科大学 総合研究院フォーラム2025（ポスター、2025年11月21日・野田キャンパス）',
     year: 2025,
-    type: '学会発表（口頭）',
+    type: '学会発表（口頭・ポスター）',
     highlight: 'LoRA で基盤モデル DINOv2 の精度は大きく上がるが、少量データでは ConvNeXt の標準学習が最も安定',
     description:
       '地震・津波などの大規模災害直後の被災建物損傷度分類の自動化。' +

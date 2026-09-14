@@ -43,8 +43,9 @@ describe('ResearchSection (top page)', () => {
     expect(screen.getByText('第1回 知覚AIフォーラム · ポスター')).toBeInTheDocument();
     expect(screen.getByText('IEICE2026 電子情報通信学会 総合大会 · 口頭')).toBeInTheDocument();
     expect(screen.getByText('FIT2025 第24回情報科学技術フォーラム · 口頭')).toBeInTheDocument();
+    expect(screen.getByText('総合研究院フォーラム2025 · ポスター')).toBeInTheDocument();
     // 1つの研究を複数会場で発表するため、会場数はデータから数える
-    expect(screen.getByText(/3件の研究を4会場で発表 · IWAIT 2027 投稿済み（査読中）/)).toBeInTheDocument();
+    expect(screen.getByText(/3件の研究を5会場で発表 · IWAIT 2027 投稿済み（査読中）/)).toBeInTheDocument();
     // 正式な発表題目も各行に出す
     expect(
       screen.getByText(/発表題目：視覚基盤モデルによる小・中規模被災建物画像データセットの分類性能の比較/)

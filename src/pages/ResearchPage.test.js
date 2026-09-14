@@ -43,8 +43,8 @@ describe('ResearchPage (level 2 list)', () => {
 
   it('derives the presentation badge from the type', () => {
     renderPage();
-    expect(screen.getByText('Oral / Poster')).toBeInTheDocument();
-    expect(screen.getAllByText('Oral')).toHaveLength(2);
+    expect(screen.getAllByText('Oral / Poster')).toHaveLength(2);
+    expect(screen.getAllByText('Oral')).toHaveLength(1);
   });
 
   it('shows three result cards per paper with the numbers of the data file', () => {
