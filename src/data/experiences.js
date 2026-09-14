@@ -847,9 +847,9 @@ const experiences = [
       result: '4日間のインターンシップで優秀者に選出された。',
     },
     short: true,
-    company: 'スタンバイ株式会社',
+    company: '株式会社スタンバイ',
     role: 'MLエンジニア',
-    period: '2025年7月（4日間）',
+    period: '2025年7月〜8月（4日間）',
     description:
       '求人検索サービスの実データを使い、課題の分析からAIによる解決策の実装、CTOへの発表までを4日間で実施。優秀者に選出。',
     tags: ['Python', 'Machine Learning', 'Data Analysis'],
