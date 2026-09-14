@@ -90,10 +90,10 @@ const experiences = [
     role: 'AI開発事業部 AIエンジニア',
     period: '2024年4月〜現在',
     description:
-      '音声合成・画像認識・文書処理・デスクトップGUI自動化など、複数のAI開発プロジェクトに従事。ロボット向け音声合成の成果はトヨタイムズに掲載。',
+      '音声合成・画像認識・文書処理・デスクトップGUI自動化など、複数のAI開発プロジェクトに従事。2026年9月からはロボット制御（フィジカルAI）にも参画。ロボット向け音声合成の成果はトヨタイムズに掲載。',
     descriptionEn:
-      'Built AI systems across voice synthesis (featured on Toyota Times), computer vision, document automation, and desktop GUI agents.',
-    tags: ['PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM Agent', 'Python'],
+      'Built AI systems across voice synthesis (featured on Toyota Times), computer vision, document automation, and desktop GUI agents. Joined the robotics (physical AI) team in September 2026.',
+    tags: ['PyTorch', 'YOLOv8', 'OpenCV', 'VITS2', 'LLM Agent', 'Python', 'ROS 2', 'VLA'],
     url: 'https://airion.co.jp/',
     mediaLinks: [
       { label: 'トヨタイムズ YouTube', url: 'https://www.youtube.com/watch?v=xsmQ9Slnvds' },
@@ -114,6 +114,20 @@ const experiences = [
       // 案件ごとの内訳（詳細ページのカード）。projectId があるカードは projects.js の個別ページ（/projects/:id）へ遷移し、
       // 取り組み内容・成果はそちら（story）に置くのでカードには持たせない。ないカードはモーダルで開く。新しい事実は含まない
       projects: [
+        {
+          name: 'ロボットを動かすフィジカル AI の研究開発',
+          client: '',
+          category: 'ロボティクス',
+          period: '2026年9月〜',
+          icon: '🤖',
+          summary:
+            '2026年9月からロボット部門に参画。カメラ画像・関節角度・言葉の指示から次の動作を出すモデル（VLA）による制御を担当する。',
+          details: [
+            '産業用マニピュレータを対象に、ROS 2 上でのシミュレーション操作と、順運動学・逆運動学といった制御の基礎から着手している。',
+            '社内勉強会で VLA の最新論文を紹介する担当。画像認識を用いた設備点検の案件にも参画予定。',
+          ],
+          techStack: ['Python', 'ROS 2', 'VLA'],
+        },
         {
           name: 'ロボットが人と話すためのリアルタイム音声合成',
           projectId: 'realtime-speech-synthesis',

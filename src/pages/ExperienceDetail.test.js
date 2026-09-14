@@ -46,7 +46,7 @@ describe('ExperienceDetail highlights layout (airion)', () => {
   it('renders exactly four blocks: role, highlights, projects, tech stack', () => {
     renderDetail('airion');
     const headings = screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
-    expect(headings).toEqual(['役割', '代表実績', 'プロジェクト一覧（5件）', '技術スタック']);
+    expect(headings).toEqual(['役割', '代表実績', 'プロジェクト一覧（6件）', '技術スタック']);
   });
 
   it('keeps the role block to "what" and "own role" only', () => {
